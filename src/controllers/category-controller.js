@@ -9,3 +9,18 @@ exports.getCategory = async (req, res) => {
     return res.status(500).json(err);
   }
 };
+
+exports.insertCategory = async (req, res) => {
+  try {
+    let result = await CategoryService.insertCategory(req.body.name);
+    if (result) {
+      res.status(200).json({
+        result,
+        message: "category saved",
+      });
+    }
+    return;
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
