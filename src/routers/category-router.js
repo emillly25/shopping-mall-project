@@ -1,9 +1,11 @@
 import { Router } from "express";
+import { categoryController } from "../controllers/category-controller.js";
 const categoryRouter = Router();
-const CategoryController = require("../controllers/category-controller.js");
 
-categoryRouter.get("/:categoryName", CategoryController.getCategory);
-categoryRouter.post("/", CategoryController.insertCategory);
-categoryRouter.post("/change-category-name", CategoryController.updateCategory);
+console.log(categoryRouter);
+categoryRouter.get("/:categoryName*?", categoryController.getCategory);
+categoryRouter.post("/", categoryController.insertCategory);
+categoryRouter.patch("/", categoryController.updateCategory);
+categoryRouter.delete("/", categoryController.deleteCategory);
 
 export { categoryRouter };
