@@ -22,4 +22,7 @@ userRouter.get('/userlist', loginRequired, usercontroller.getUserlist);
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch('/users/:userId',loginRequired,usercontroller.editUserData);
 
+// 사용자 탈퇴
+userRouter.delete('/users/:userId',loginRequired,usercontroller.deleteUserData);
+
 export { userRouter };

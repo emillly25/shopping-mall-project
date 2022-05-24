@@ -1,5 +1,6 @@
 import { userService } from '../services';
 
+// 회원가입
 const register = async (req, res, next) => {
     try {
       // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -50,6 +51,12 @@ const login = async function (req, res, next) {
       // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
       const userToken = await userService.getUserToken({ email, password });
   
+      // 쿠키에 토큰 저장
+      // res.cookie('user', userToken, {
+      //   httpOnly: true,
+      // });
+
+
       // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
       res.status(200).json(
         { status: 200,
@@ -125,4 +132,20 @@ const editUserData = async function (req, res, next) {
       next(error);
     }
   }
-export { register,login,getUserlist,editUserData };
+
+  const deleteUserData = async function (req, res, next) {
+    try {
+      // params로부터 id를 가져옴
+      const userId = req.params.userId;
+
+      // 유저 정보 삭제
+      const data = await userService.deleteUser(userId);
+
+      console.log(data)
+      // 성공 여부 프론트에 보냄
+      res.status(200).json({status:200,message:'성공',data});
+    } catch (error) {
+      next(error);
+    }
+  }
+export { register,login,getUserlist,editUserData,deleteUserData};
