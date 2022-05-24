@@ -23,75 +23,82 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="header.css">
-    <script src="home.js" type="module" defer></script>
-    <script src="header.js" defer></script>
+    <!-- <link rel="stylesheet" href="./home.css" /> -->
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./imageSlider.css" />
+    <link rel="stylesheet" href="../../../footer.css" />
+
+    <script src="./home.js" type="module" defer></script>
+    <script src="./header.js" defer></script>
+    <script src="./imageSlider.js" defer></script>
   </head>
   <body>
-    <!-- 헤더 -->
-    <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="info_header">
-        <div class="info_logo"><a href=""><h1>SHOP7</h1></a></div>
-        <ul class="info_menu">
-          <li><a href="">로그인</a></li>
-          <li><a href="">회원가입</a></li>
-          <li><a href=""><i class="fa-solid fa-user"></i></a></li>
-          <li>
-            <div id="cart">
-              <div id="cart_badge">0</div>
-              <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-            </div></li>
-          <li><a href=""><i class="fa-solid fa-heart"></i></a></li>
-        </ul>
+    <div class="container">
+      <!-- 헤더 -->
+      <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="info_header">
+            <li class="hamburger_list">
+              <a href=""><i class="fa-solid fa-bars"></i></a>
+            </li>
+            <div class="info_logo">
+              <h1><a>SHOP7</a></h1>
+            </div>
+            <div class="info_menu">
+              <ul>
+                <li><a href="">로그인</a></li>
+                <li><a href="">회원가입</a></li>
+                <li>
+                  <a href=""><i class="fa-solid fa-user"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                  <!-- <div id="cart">
+                    <div id="cart_badge">0</div>
+
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                  </div> -->
+                </li>
+                <li>
+                  <a href=""><i class="fa-solid fa-heart"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="menu_header">
+            <div class="hot_items">
+              <ul>
+                <li id="dropmenu">
+                  <a href="" id="li_hover">1번</a>
+                  <ul class="dropdown">
+                    <li><a href="">베스트 1</a></li>
+                    <li><a href="">베스트 2</a></li>
+                    <li><a href="">베스트 3</a></li>
+                  </ul>
+                </li>
+                <li><a href="" id="li_hover">2번</a></li>
+                <li><a href="" id="li_hover">3번</a></li>
+                <li><a href="" id="li_hover">4번</a></li>
+                <li><a href="" id="li_hover">5번</a></li>
+              </ul>
+            </div>
+
+            <div class="items">
+              <ul>
+                <li><a href="">1번</a></li>
+                <li><a href="">2번</a></li>
+                <li><a href="">3번</a></li>
+                <li><a href="">4번</a></li>
+                <li><a href="">5번</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="scroll_btn">
+        <div id="top_btn"><img src="top_btn.png" alt="top_btn" /></div>
+        <div id="bottom_btn"><img src="bottom_btn.png" alt="bottom_btn" /></div>
       </div>
-      <div class="menu_header">
-        <ul class="hot_items">
-          <li><a href=""><i class="fa-solid fa-bars"></i></a></li>
-          <li id="dropmenu">
-            <a href="" id="li_hover">베스트</a>
-            <ul class="dropdown">
-              <li><a href="">베스트 1</a></li>
-              <li><a href="">베스트 2</a></li>
-              <li><a href="">베스트 3</a></li>
-            </ul>
-          </li>
-          <li><a href="" id="li_hover">여름신상</a></li>
-          <li><a href="" id="li_hover">자체제작</a></li>
-          <li><a href="" id="li_hover">브랜드</a></li>
-          <li><a href="" id="li_hover">이벤트</a></li>
-        </ul>
-        <ul class="items">
-          <li><a href="">무료배송</a></li>
-          <li><a href="">원피스</a></li>
-          <li><a href="">블라우스</a></li>
-          <li><a href="">티셔츠</a></li>
-          <li><a href="">바지</a></li>
-          <li><a href="">스커트</a></li>
-          <li><a href="">악세사리</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-    <div class="scroll_btn">
-      <div id="top_btn"><img src="top_btn.png" alt="top_btn"></div>
-      <div id="bottom_btn"><img src="bottom_btn.png" alt="bottom_btn"></div>
     </div>
-
-
-
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
-      </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
-      </div>
-    </div>
-
-    <div style="height: 1000px">
-    </div>
-
   </body>
 </html>
