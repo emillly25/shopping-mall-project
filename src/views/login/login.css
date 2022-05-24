@@ -1,18 +1,76 @@
-.login-form-container {
+body{
+  box-sizing: border-box;
+  margin: 0;
+}
+.login_container{
+  margin: 100px auto;
+  width: 800px;
+  height: 800px;
+  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
 }
 
-.login-form-box {
-  width: 30rem;
-}
-
-.login-form-box .title {
+.login_container h1{
+  font-size: 48px;
+  color: white;
   text-align: center;
+  margin: 20px 0;
+
+}
+.field{
+  width: 400px;
 }
 
-.login-form-box .button {
-  font-weight: bold;
+.recSignup{
+  text-align: center;
+  color: #797979;
+  font-size: 16px;
+}
+
+.recSignup span{
+  cursor: pointer;
+}
+
+.recSignup span a{
+  text-decoration: none;
+  color: #fff;
+}
+
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px
+}
+
+.info_id{
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#saveId{
+  margin-right: 5px;
+}
+
+.info_id span a{
+  cursor: pointer;
+  color: #fff;
+}
+.info_id span a:hover{
+  border-bottom: 1px solid #fff;
+}
+
+.social_login{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.social_login i{
+  color: #fff;
+  font-size: 20px;
+  margin: 0 12px;
 }
