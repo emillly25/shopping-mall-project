@@ -158,8 +158,8 @@ nav {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 70%;
+  left: 25%;
   padding-left: 0;
   border: 1px solid #c8c8c8;
   background-color: rgba( 255, 255, 255, 0.4 );
