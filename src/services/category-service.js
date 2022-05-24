@@ -1,57 +1,69 @@
-const Category = require("../db");
+const { categoryModel } = require("../db");
 
-exports.getCategory = async (categoryName) => {
-  try {
-    let category = await Category.find({ name: categoryName });
-    return category;
-  } catch (err) {
-    console.log(err);
-    throw new Error(err);
+class CategoryService {
+  constructor(categoryModel) {
+    this.categoryModel = categoryModel;
   }
-};
 
-exports.insertCategory = async (name) => {
-  try {
-    console.log(name);
-    if (!name) {
-      throw new Error("유효한 값을 입력하세요.");
+  
+  async getAllCategory() {
+    try {
+      const category = await this.categoryModel.findAll();
+      return category;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
     }
-
-    if (this.getCategory(name)) {
-      throw new Error("중복된 이름입니다.");
+  }
+  async getCategory(name) {
+    try {
+      const category = await this.categoryModel.findByName(name);
+      return category;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
     }
-
-    const category = new Category({
-      name: name,
-    });
-    const result = await category.save();
-    return result;
-  } catch (error) {
-    console.log(error);
-    next(error);
   }
-};
 
-exports.updateCategory = async (currentCategoryName, name) => {
-  try {
-    const isExist = await Category.findOne({ name: currentCategoryName });
-    if (!isExist) {
-      throw new Error("변경할 주체 카테고리를 찾을 수 없습니다.");
+  async insertCategory(name) {
+    try {
+      const isExist = await this.categoryModel.findByName(name);
+      if (isExist) {
+        throw new Error("name is already exist.");
+      }
+
+      const result = this.categoryModel.create(name);
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
     }
-    await Category.updateOne({ name: currentCategoryName }, { name: name });
-    return;
-  } catch (error) {
-    console.log(error);
-    next(error);
   }
-};
 
-exports.deleteCategory = async (name) => {
-  try {
-    await Category.deleteOne({ name: name });
-    return;
-  } catch (error) {
-    console.log(error);
-    next(error);
+  async updateCategory(currentCategoryName, nameToChange) {
+    try {
+      const result = await this.categoryModel.update(
+        currentCategoryName,
+        nameToChange
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
-};
+
+  async deleteCategory(name) {
+    try {
+      await this.categoryModel.delete(name);
+      return;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+}
+
+const categoryService = new CategoryService(categoryModel);
+
+export { categoryService };
