@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired } from '../middlewares';
+import { loginRequired,registerRequired } from '../middlewares';
 import { userService } from '../services';
 import * as usercontroller from '../controller';
 // import { register,login,getUserlist,editUserData } from '../controller';
@@ -9,7 +9,7 @@ import * as usercontroller from '../controller';
 const userRouter = Router();
 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
-userRouter.post('/register',usercontroller.register);
+userRouter.post('/register',registerRequired,usercontroller.register);
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
 userRouter.post('/login', usercontroller.login);
