@@ -40,3 +40,16 @@ exports.updateCategory = async (req, res) => {
     return res.status(500).json(err);
   }
 };
+
+exports.deleteCategory = async (req, res) => {
+  try {
+    let result = await CategoryService.deleteCategory(req.body.name);
+    res.status(200).json({
+      result,
+      message: "category deleted",
+    });
+    return;
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
