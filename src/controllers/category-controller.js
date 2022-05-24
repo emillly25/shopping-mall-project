@@ -24,3 +24,19 @@ exports.insertCategory = async (req, res) => {
     return res.status(500).json(err);
   }
 };
+
+exports.updateCategory = async (req, res) => {
+  try {
+    let result = await CategoryService.updateCategory(
+      req.body.currentCategoryName,
+      req.body.categoryName
+    );
+    res.status(200).json({
+      result,
+      message: "category updated",
+    });
+    return;
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};

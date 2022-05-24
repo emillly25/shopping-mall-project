@@ -16,6 +16,7 @@ exports.insertCategory = async (name) => {
     if (!name) {
       throw new Error("유효한 값을 입력하세요.");
     }
+
     if (this.getCategory(name)) {
       throw new Error("중복된 이름입니다.");
     }
@@ -25,6 +26,20 @@ exports.insertCategory = async (name) => {
     });
     const result = await category.save();
     return result;
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+exports.updateCategory = async (currentCategoryName, name) => {
+  try {
+    const isExist = await Category.findOne({ name: currentCategoryName });
+    if (!isExist) {
+      throw new Error("변경할 주체 카테고리를 찾을 수 없습니다.");
+    }
+    await Category.updateOne({ name: currentCategoryName }, { name: name });
+    return;
   } catch (error) {
     console.log(error);
     next(error);
