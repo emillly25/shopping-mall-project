@@ -6,10 +6,13 @@ class Slider {
   #autoPlay = true;
   sliderWrapEl;
   sliderListEl;
+  sliderListLiEl;
+  sliderListImgEl;
   nextBtnEl;
   previousBtnEl;
   indicatorWrapEl;
   controlWrapEl;
+  containerEl;
 
   constructor() {
     this.assignElement();
@@ -24,8 +27,11 @@ class Slider {
 
   // element 가져오기
   assignElement() {
-    this.sliderWrapEl = document.getElementById('slider-wrap');
+    this.containerEl = document.querySelector('.container');
+    this.sliderWrapEl = document.querySelector('.slider-wrap');
     this.sliderListEl = this.sliderWrapEl.querySelector('#slider');
+    this.sliderListLiEl = this.sliderListEl.querySelectorAll('li');
+    this.sliderListImgEl = this.sliderListEl.querySelectorAll('img');
     this.nextBtnEl = this.sliderWrapEl.querySelector('#next');
     this.previousBtnEl = this.sliderWrapEl.querySelector('#previous');
     this.indicatorWrapEl = this.sliderWrapEl.querySelector('#indicator-wrap');
@@ -39,12 +45,23 @@ class Slider {
 
   // image slider 하나의 width
   initSlideWidth() {
-    this.#slideWidth = this.sliderListEl.clientWidth;
+    this.#slideWidth = this.containerEl.clientWidth;
+    console.log(this.containerEl.clientWidth);
   }
 
   // image slider 전체의 width
   initSliderListWidth() {
+    let paddingValue = window
+      .getComputedStyle(this.containerEl)
+      .getPropertyValue('padding-top');
+    this.sliderWrapEl.style.width = `${this.#slideNumber * this.#slideWidth}px`;
     this.sliderListEl.style.width = `${this.#slideNumber * this.#slideWidth}px`;
+    this.sliderListLiEl.forEach(
+      li => (li.style.width = `${this.#slideWidth}px`),
+    );
+    // this.sliderListImgEl.forEach(
+    //   li => (li.style.width = `${this.#slideWidth - paddingValue}px`),
+    // );
   }
 
   // 이전-다음 버튼 클릭 시 / indicator 클릭 시 / 재생-일시정지 버튼을 클릭 시의 이벤트
