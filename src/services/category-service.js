@@ -45,3 +45,13 @@ exports.updateCategory = async (currentCategoryName, name) => {
     next(error);
   }
 };
+
+exports.deleteCategory = async (name) => {
+  try {
+    await Category.deleteOne({ name: name });
+    return;
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
