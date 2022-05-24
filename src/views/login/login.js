@@ -6,3 +6,7 @@ const emailCheck = document.querySelector('#emailCheck');
 const passwordIcon = document.querySelector('#passwordIcon');
 
 
+if(emailInput.value){
+    console.log('ㅇ');
+}
+
