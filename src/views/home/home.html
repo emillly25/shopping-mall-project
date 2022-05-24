@@ -30,6 +30,7 @@
   </head>
   <body>
     <!-- 헤더 -->
+    <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="info_header">
         <div class="info_logo"><a href=""><h1>SHOP7</h1></a></div>
@@ -48,11 +49,18 @@
       <div class="menu_header">
         <ul class="hot_items">
           <li><a href=""><i class="fa-solid fa-bars"></i></a></li>
-          <li><a href="">베스트</a></li>
-          <li><a href="">여름신상</a></li>
-          <li><a href="">자체제작</a></li>
-          <li><a href="">브랜드</a></li>
-          <li><a href="">이벤트</a></li>
+          <li id="dropmenu">
+            <a href="" id="li_hover">베스트</a>
+            <ul class="dropdown">
+              <li><a href="">베스트 1</a></li>
+              <li><a href="">베스트 2</a></li>
+              <li><a href="">베스트 3</a></li>
+            </ul>
+          </li>
+          <li><a href="" id="li_hover">여름신상</a></li>
+          <li><a href="" id="li_hover">자체제작</a></li>
+          <li><a href="" id="li_hover">브랜드</a></li>
+          <li><a href="" id="li_hover">이벤트</a></li>
         </ul>
         <ul class="items">
           <li><a href="">무료배송</a></li>
@@ -65,7 +73,7 @@
         </ul>
       </div>
     </nav>
-
+  </header>
     <div class="scroll_btn">
       <div id="top_btn"><img src="top_btn.png" alt="top_btn"></div>
       <div id="bottom_btn"><img src="bottom_btn.png" alt="bottom_btn"></div>
@@ -82,7 +90,8 @@
       </div>
     </div>
 
-    <div style="height: 1000px"></div>
+    <div style="height: 1000px">
+    </div>
 
   </body>
 </html>

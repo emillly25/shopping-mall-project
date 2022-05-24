@@ -34,6 +34,17 @@ window.addEventListener('scroll',function(){
 })
 
 
+//dropdown menu
+const dropmenu = document.querySelector('#dropmenu');
+const dropdown = document.querySelector('.dropdown');
+
+dropmenu.addEventListener('mouseenter',function(){
+    dropdown.style.display='block';
+})
+
+dropmenu.addEventListener('mouseleave', function(){
+    dropdown.style.display='none';
+})
 
 
 
