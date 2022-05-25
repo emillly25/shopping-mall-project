@@ -6,7 +6,7 @@ const fullNameInput = document.querySelector('#fullNameInput');
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
-const submitButton = document.querySelector('#submitButton');
+const submitButton = document.querySelector('#submitBtn');
 
 addAllElements();
 addAllEvents();
