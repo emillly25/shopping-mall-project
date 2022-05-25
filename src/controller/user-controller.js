@@ -49,19 +49,17 @@ const login = async function (req, res, next) {
       const password = req.body.password;
   
       // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
-      const userToken = await userService.getUserToken({ email, password });
-  
-      // 쿠키에 토큰 저장
-      // res.cookie('user', userToken, {
-      //   httpOnly: true,
-      // });
+      const data = await userService.getUserToken({ email, password });
 
+      const token = data[0];
+      const role = data[1];
 
       // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
       res.status(200).json(
         { status: 200,
           message: '로그인 성공',
-           data:userToken }
+          data:{token,
+          role}}
         );
     } catch (error) {
       next(error);
