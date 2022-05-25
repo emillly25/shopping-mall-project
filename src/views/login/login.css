@@ -2,66 +2,75 @@ body{
   box-sizing: border-box;
   margin: 0;
 }
+
 .login_container{
-  margin: 100px auto;
-  width: 800px;
-  height: 800px;
-  background-color: black;
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-top: 250px;
 }
 
+.login_container #loginForm{
+  width: 390px;
+  height: 390px;
+  background-color: black;
+}
+
+
+
 .login_container h1{
-  font-size: 48px;
-  color: white;
+  font-size: 36px;
+  color: #fff;
   text-align: center;
   margin: 20px 0;
 
 }
+
 .field{
-  width: 400px;
+display:flex;
+justify-content: center;
 }
 
-.recSignup{
-  text-align: center;
-  color: #797979;
-  font-size: 16px;
+.field:nth-child(3){
+  margin-bottom: 15px;
 }
 
-.recSignup span{
-  cursor: pointer;
-}
-
-.recSignup span a{
-  text-decoration: none;
-  color: #fff;
+.control{
+  width: 300px;
 }
 
 
-.buttons{
-  display: flex;
-  justify-content: center;
-  margin-top: 10px
-}
 
 .info_id{
   color: #fff;
   font-size: 12px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 130px;
 }
 
-#saveId{
+
+#saveIdCheck{
   margin-right: 5px;
 }
 
-.info_id span a{
+.info_id div a{
   cursor: pointer;
   color: #fff;
 }
-.info_id span a:hover{
-  border-bottom: 1px solid #fff;
+.info_id div a:hover{
+  opacity: 0.7;
+}
+
+
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#submitBtn:hover{
+  background-color: pink;
 }
 
 .social_login{
@@ -73,4 +82,40 @@ body{
   color: #fff;
   font-size: 20px;
   margin: 0 12px;
+}
+
+
+.recSignup{
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+.recSignup span{
+  cursor: pointer;
+}
+
+.recSignup span a{
+  text-decoration: none;
+  color:pink;
+}
+
+.recSignup span a:hover{
+  opacity: 0.7;
+}
+
+
+
+/*반응형 */
+
+@media (min-width: 1000px){
+  .login_container #loginForm{
+    width: 600px;
+    height: 600px;
+  }
+  .login_container h1{
+    margin-top: 120px;
+    font-size: 48px;
+  }
+
 }

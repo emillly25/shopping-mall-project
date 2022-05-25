@@ -2,22 +2,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  height: 800px;
 }
 
 .register-user-form-box {
-  width: 30rem;
+  width: 390px;
+  height: 500px;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 30px;
+  background-color: black;
 }
 
-.register-user-form-box .title {
+h1{
   text-align: center;
 }
 
-.register-user-form-box .button {
-  font-weight: bold;
-}
 
 .register-user-form-box .input:focus {
   border-color: #00d1b2;
   box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+
+.label{
+  color: #fff;
+  font-weight: 200 ;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
 }
