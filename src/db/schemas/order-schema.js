@@ -28,6 +28,14 @@ const OrderSchema = new Schema(
             type: String,
             required: true,
         },
+        price:{
+            type:Number,
+            required: true,
+        },
+        quantity:{
+            type: Number,
+            required: true,
+        },
         request:{
             type: String,
             required: true,

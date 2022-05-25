@@ -32,6 +32,8 @@ const Order = async (req, res, next) => {
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
       const order_data = req.body.order_data;
+      const price = req.body.price;
+      const quantity = req.body.quantity;
       const request = req.body.request;
   
       // 위 데이터를 유저 db에 추가하기
@@ -41,6 +43,8 @@ const Order = async (req, res, next) => {
         address,
         phoneNumber,
         order_data,
+        price,
+        quantity,
         request
       });
   
