@@ -27,9 +27,11 @@
 .slider-wrap ul.slider li {
   float: left;
   width: 1000px;
-  height: 400px;
+  height: 100%;
 }
-
+.slider-wrap ul.slider li img {
+  height: 100%;
+}
 /* btn */
 
 .btn {
