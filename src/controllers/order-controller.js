@@ -1,7 +1,7 @@
 import {orderService} from '../services';
 import is from '@sindresorhus/is';
 
-const getOrderlist = async function (req, res, next) {
+const getOrderlist = async (req, res, next) =>  {
     try {
       // 전체 사용자 목록을 얻음
       const orders = await orderService.getOrders();
@@ -55,4 +55,21 @@ const Order = async (req, res, next) => {
       next(error);
     }
   }
-export {getOrderlist,Order};
+
+  // 사용자 주문 조회
+  const getOrder = async (req, res, next) => {
+    try {
+
+       // params로부터 id를 가져옴
+       const userId = req.params.userId;
+
+      // 사용자 주문 목록
+      const orders = await orderService.getOrdersById(userId);
+  
+      // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+      res.status(200).json({status:200,message:'성공',data:orders});
+    } catch (error) {
+      next(error);
+    }
+  }
+export {getOrderlist,Order,getOrder};

@@ -13,6 +13,11 @@ export class OrderModel {
         const createdNewOrder = await Order.create(orderInfo);
         return createdNewOrder;
     }
+
+    async findOrdersById(userId){
+      const orders = await Order.find({user_id:userId});
+      return orders;
+    }
 }
 
 const orderModel = new OrderModel();

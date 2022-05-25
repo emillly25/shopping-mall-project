@@ -12,12 +12,19 @@ class OrderService {
         return orders;
     }
 
-    // 주문
+    // 상품 주문
     async addOrder(orderInfo){
         // db에 저장
         const createdNewOrder = await this.orderModel.createOrder(orderInfo);
         return createdNewOrder;
     }
+
+     // 사용자 주문 목록 조회
+     async getOrdersById(userId){
+        const orders = await this.orderModel.findOrdersById(userId);
+        return orders;
+    }
+    
 }
 
 const orderService = new OrderService(orderModel);
