@@ -1,35 +1,71 @@
-.register-user-form-container {
+body{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.register_container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 800px;
+  margin-top: 120px;
 }
 
-.register-user-form-box {
-  width: 390px;
-  height: 500px;
-  font-size: 36px;
-  color: #fff;
-  margin-bottom: 30px;
+.register_container #registerForm{
+  width: 400px;
+  height: 580px;
   background-color: black;
 }
 
-h1{
+.register_container h1{
+  font-size: 36px;
+  color: #fff;
   text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 
-.register-user-form-box .input:focus {
+#registerForm .input:focus {
   border-color: #00d1b2;
   box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
 }
 
-.label{
-  color: #fff;
-  font-weight: 200 ;
+.field{
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control{
+  width: 350px;
 }
 
 .buttons{
   display: flex;
   justify-content: center;
+}
+
+#submitBtn:hover{
+  
+background:pink;
+
+}
+
+.label{
+  color: #fff;
+  font-weight: 200;
+  width: 350px;
+}
+
+@media (min-width: 1000px) {
+  .register_container #registerForm{
+    width: 700px;
+    height: 700px;
+  }
+  .register_container h1{
+    font-size: 48px;
+    margin-top: 70px;
+  }
 }
