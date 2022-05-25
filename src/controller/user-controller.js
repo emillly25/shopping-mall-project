@@ -53,13 +53,13 @@ const login = async function (req, res, next) {
 
       const token = data[0];
       const role = data[1];
+      const id = data[2];
 
       // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
       res.status(200).json(
         { status: 200,
           message: '로그인 성공',
-          data:{token,
-          role}}
+          data:{token,role,id}}
         );
     } catch (error) {
       next(error);
