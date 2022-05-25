@@ -24,6 +24,11 @@ class OrderService {
         const orders = await this.orderModel.findOrdersById(userId);
         return orders;
     }
+
+    async deleteOrder(userId,orderId){
+        const del_orders = await this.orderModel.deleteOrdersById(userId,orderId);
+        return del_orders;
+    }
     
 }
 

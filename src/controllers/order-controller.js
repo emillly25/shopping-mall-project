@@ -72,4 +72,21 @@ const Order = async (req, res, next) => {
       next(error);
     }
   }
-export {getOrderlist,Order,getOrder};
+
+  const deleteOrder = async(req,res,next) =>{
+    try {
+      // params로부터 id를 가져옴
+      const userId = req.params.userId;
+      const orderId = req.params.orderId;
+
+      // 유저 정보 삭제
+      const data = await orderService.deleteOrder(userId,orderId);
+
+      // 성공 여부 프론트에 보냄
+      res.status(200).json({status:200,message:'주문 취소 성공'});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+export {getOrderlist,Order,getOrder,deleteOrder};

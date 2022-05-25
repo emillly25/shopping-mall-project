@@ -12,4 +12,7 @@ orderRouter.post('/:userId',Ordercontroller.Order);
 // 상품 주문
 orderRouter.get('/:userId',Ordercontroller.getOrder);
 
+// 주문 취소
+orderRouter.delete('/:userId/:orderId',Ordercontroller.deleteOrder);
+
 export { orderRouter };
