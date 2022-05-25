@@ -2,7 +2,6 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired,registerRequired } from '../middlewares';
-import { userService } from '../services';
 import * as usercontroller from '../controllers';
 // import { register,login,getUserlist,editUserData } from '../controller';
 

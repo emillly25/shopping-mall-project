@@ -1,11 +1,12 @@
 import { userService } from '../services';
+import is from '@sindresorhus/is';
 
 // 회원가입
 const register = async (req, res, next) => {
     try {
       // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
       // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (!(req.body)) {
+      if (is.emptyObject(req.body)) {
         throw new Error(
           'headers의 Content-Type을 application/json으로 설정해주세요'
         );
@@ -38,7 +39,7 @@ const register = async (req, res, next) => {
 const login = async function (req, res, next) {
     try {
       // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (!(req.body)) {
+      if (is.emptyObject(req.body)) {
         throw new Error(
           'headers의 Content-Type을 application/json으로 설정해주세요'
         );
@@ -82,7 +83,7 @@ const editUserData = async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
       // 설정 안 하고 요청하면, body가 비어 있게 됨.
-      if (!(req.body)) {
+      if (is.emptyObject(req.body)) {
         throw new Error(
           'headers의 Content-Type을 application/json으로 설정해주세요'
         );
