@@ -5,7 +5,7 @@ function errorHandler(error, req, res, next) {
   console.log('\x1b[33m%s\x1b[0m', error.stack);
 
   // 에러 상태 코드의 JSON 형태로 프론트에 전달됨
-  res.status(error.status).json({ status:error.status, result: 'error', reason: error.message });
+  res.status(400).json({ status:400, result: 'error', reason: error.message });
 }
 
 export { errorHandler };

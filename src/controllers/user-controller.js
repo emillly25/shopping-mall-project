@@ -137,8 +137,11 @@ const editUserData = async function (req, res, next) {
       // params로부터 id를 가져옴
       const userId = req.params.userId;
 
+      // body data 로부터 비밀번호 추출.
+      const userPw = req.body.password;
+
       // 유저 정보 삭제
-      const data = await userService.deleteUser(userId);
+      const data = await userService.deleteUser(userId,userPw);
 
       console.log(data)
       // 성공 여부 프론트에 보냄
