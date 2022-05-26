@@ -20,14 +20,14 @@ class ProductController {
 
   async insertProduct(req, res) {
     try {
-      let categoryName = req.body.categoryName;
-      let name = req.body.name;
-      let price = req.body.price;
-      let information = req.body.information;
-      let author = req.body.author;
-      let publisher = req.body.publisher;
-      let publishedDate = req.body.publishedDate;
-      let orderCount = req.body.orderCount;
+      const categoryName = req.body.categoryName;
+      const name = req.body.name;
+      const price = req.body.price;
+      const information = req.body.information;
+      const author = req.body.author;
+      const publisher = req.body.publisher;
+      const publishedDate = req.body.publishedDate;
+      const orderCount = req.body.orderCount;
 
       const category = await categoryService.getCategory(categoryName);
       if (!category) {
@@ -45,7 +45,10 @@ class ProductController {
         orderCount,
       ];
 
-      let result = await productService.insertProduct(productInfo);
+      const result = await productService.insertProduct(
+        productInfo,
+        req.currentUserId
+      );
       if (result) {
         res.status(200).json({
           result,
@@ -60,15 +63,15 @@ class ProductController {
 
   async updateProduct(req, res) {
     try {
-      let productId = req.body.productId;
+      const productId = req.body.productId;
 
-      let categoryName = req.body.categoryName;
-      let name = req.body.name;
-      let price = req.body.price;
-      let information = req.body.information;
-      let author = req.body.author;
-      let publisher = req.body.publisher;
-      let publishedDate = req.body.publishedDate;
+      const categoryName = req.body.categoryName;
+      const name = req.body.name;
+      const price = req.body.price;
+      const information = req.body.information;
+      const author = req.body.author;
+      const publisher = req.body.publisher;
+      const publishedDate = req.body.publishedDate;
 
       const category = await categoryService.getCategory(categoryName);
       if (!category) {
@@ -85,7 +88,11 @@ class ProductController {
         publishedDate,
       ];
 
-      let result = await productService.updateProduct(productInfo, productId);
+      const result = await productService.updateProduct(
+        productInfo,
+        productId,
+        req.currentUserId
+      );
       res.status(200).json({
         result,
         message: "product updated",
@@ -98,7 +105,10 @@ class ProductController {
 
   async deleteProduct(req, res) {
     try {
-      let result = await productService.deleteProduct(req.body.productId);
+      const result = await productService.deleteProduct(
+        req.body.productId,
+        req.currentUserId
+      );
       res.status(200).json({
         result,
         message: "product deleted",
