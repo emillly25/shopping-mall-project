@@ -38,7 +38,7 @@ body{
 
 .bookCheck{
     /* border: 1px solid red; */
-    transform: translateY(9px);
+    transform: translateY(-5px);
     margin-right: 8px;
 }
 
@@ -55,7 +55,7 @@ body{
 
 
 .bookInfo{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     display: flex;
     flex-direction: column;
     width: 700px;
@@ -88,7 +88,7 @@ body{
     /* border: 1px solid purple; */
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
 
 }
 
@@ -100,4 +100,5 @@ body{
     border: none;
     font-size: 16px;
     cursor: pointer;
+    margin: 10px 0; 
 }
