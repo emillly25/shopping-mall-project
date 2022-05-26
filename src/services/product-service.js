@@ -1,8 +1,9 @@
-const { productModel } = require("../db");
+const { productModel, userModel } = require("../db");
 
 class ProductService {
-  constructor(productModel) {
+  constructor(productModel, userModel) {
     this.productModel = productModel;
+    this.userModel = userModel;
   }
 
   async getAllProduct() {
@@ -25,8 +26,9 @@ class ProductService {
     }
   }
 
-  async insertProduct(productInfo) {
+  async insertProduct(productInfo, userId) {
     try {
+      await this.checkIsAdministrator(userId);
       const result = this.productModel.create(productInfo);
       return result;
     } catch (error) {
@@ -35,8 +37,9 @@ class ProductService {
     }
   }
 
-  async updateProduct(productInfo, productId) {
+  async updateProduct(productInfo, productId, userId) {
     try {
+      await this.checkIsAdministrator(userId);
       const result = await this.productModel.update(productInfo, productId);
       return result;
     } catch (error) {
@@ -44,8 +47,9 @@ class ProductService {
       next(error);
     }
   }
-  async deleteProduct(productId) {
+  async deleteProduct(productId, userId) {
     try {
+      await this.checkIsAdministrator(userId);
       const result = await this.productModel.delete(productId);
       return result;
     } catch (error) {
@@ -53,7 +57,15 @@ class ProductService {
       next(error);
     }
   }
+
+  async checkIsAdministrator(userId) {
+    const ObjectId = require("mongodb").ObjectId;
+    const user = await this.userModel.findById(ObjectId(userId));
+    if (user.role !== "admin") {
+      throw new Error("Request is not allowed. The user is not administrator.");
+    }
+  }
 }
-const productService = new ProductService(productModel);
+const productService = new ProductService(productModel, userModel);
 
 export { productService };
