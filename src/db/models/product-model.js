@@ -16,6 +16,34 @@ export class ProductModel {
     const products = await Product.find({}).populate("category", "name");
     return products;
   }
+
+  async create(productInfo) {
+    const [
+      category,
+      name,
+      price,
+      information,
+      author,
+      publisher,
+      publishedDate,
+      orderCount,
+    ] = productInfo;
+
+    const createdNewProduct = new Product({
+      category: category,
+      name: name,
+      price: price,
+      information: information,
+      author: author,
+      publisher: publisher,
+      publishedDate: publishedDate,
+      orderCount: orderCount,
+    });
+    await createdNewProduct.save();
+    return createdNewProduct;
+
+
+  }
 }
 
 const productModel = new ProductModel();
