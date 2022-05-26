@@ -24,6 +24,16 @@ class ProductService {
       throw new Error(err);
     }
   }
+
+  async insertProduct(productInfo) {
+    try {
+      const result = this.productModel.create(productInfo);
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }
 const productService = new ProductService(productModel);
 
