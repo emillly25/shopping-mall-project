@@ -5,8 +5,8 @@ const categoryRouter = Router();
 
 console.log(categoryRouter);
 categoryRouter.get("/:categoryName*?", categoryController.getCategory);
-categoryRouter.post("/:userId", loginRequired, categoryController.insertCategory);
-categoryRouter.patch("/:userId", loginRequired, categoryController.updateCategory);
-categoryRouter.delete("/:userId", loginRequired, categoryController.deleteCategory);
+categoryRouter.post("/", loginRequired, categoryController.insertCategory);
+categoryRouter.patch("/", loginRequired, categoryController.updateCategory);
+categoryRouter.delete("/", loginRequired, categoryController.deleteCategory);
 
 export { categoryRouter };
