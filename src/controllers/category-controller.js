@@ -20,7 +20,10 @@ class CategoryController {
 
   async insertCategory(req, res) {
     try {
-      let result = await categoryService.insertCategory(req.body.name);
+      let result = await categoryService.insertCategory(
+        req.body.name,
+        req.params.userId
+      );
       if (result) {
         res.status(200).json({
           result,
@@ -37,7 +40,8 @@ class CategoryController {
     try {
       let result = await categoryService.updateCategory(
         req.body.currentCategoryName,
-        req.body.nameToChange
+        req.body.nameToChange,
+        req.params.userId
       );
       res.status(200).json({
         result,
@@ -51,7 +55,10 @@ class CategoryController {
 
   async deleteCategory(req, res) {
     try {
-      let result = await categoryService.deleteCategory(req.body.name);
+      let result = await categoryService.deleteCategory(
+        req.body.name,
+        req.params.userId
+      );
       res.status(200).json({
         result,
         message: "category deleted",
@@ -61,21 +68,7 @@ class CategoryController {
       return res.status(500).json(err);
     }
   }
-};
-
-exports.deleteCategory = async (req, res) => {
-  try {
-    let result = await CategoryService.deleteCategory(req.body.name);
-    res.status(200).json({
-      result,
-      message: "category deleted",
-    });
-    return;
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-};
-
+}
 
 const categoryController = new CategoryController();
 
