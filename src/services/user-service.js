@@ -156,7 +156,7 @@ class UserService {
        );
      }
 
-     // 비밀번호 확인 후 사용자 
+     // 비밀번호 확인 후 사용자 삭제
      return await this.userModel.deleteById(toDeleteId);
     
   }

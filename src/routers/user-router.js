@@ -18,9 +18,10 @@ userRouter.get('/userlist',adminRequired, usercontroller.getUserlist);
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
-userRouter.patch('/users/:userId',loginRequired,usercontroller.editUserData);
+userRouter.patch('/users',loginRequired,usercontroller.editUserData);
 
 // 사용자 탈퇴
-userRouter.delete('/users/:userId',loginRequired,usercontroller.deleteUserData);
+// userRouter.delete('/users/:userId',loginRequired,usercontroller.deleteUserData);
+userRouter.delete('/users',loginRequired,usercontroller.deleteUserData);
 
 export { userRouter };

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 function loginRequired(req, res, next) {
   // request 헤더로부터 authorization bearer 토큰을 받음.
   const userToken = req.headers['authorization']?.split(' ')[1];
-
+  
   // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열이거나, undefined임.
   // 토큰이 "null" 일 경우, login_required 가 필요한 서비스 사용을 제한함.
   if (!userToken || userToken === 'null') {
@@ -21,12 +21,29 @@ function loginRequired(req, res, next) {
   try {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
-
+    // console.log('jwtDecoded',jwtDecoded)
     const userId = jwtDecoded.userId;
 
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
     req.currentUserId = userId;
 
+    /*
+    console.log('req.params.userId',req.params.userId)
+    console.log('userId',userId)
+
+    // 토큰 일치 여부 확인
+    if(req.params.userId!==userId){
+      console.log('토큰이 일치하지 않습니다.');
+      res.status(403).json({
+        status: 403,
+        result: 'forbidden-approach',
+        reason: '토큰이 일치하지 않습니다.',
+      });
+  
+      return;
+    }
+    */
+   
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.

@@ -25,7 +25,8 @@ const Order = async (req, res, next) => {
       }
   
       // params로부터 id를 가져옴
-      const userId = req.params.userId;
+      // const userId = req.params.userId;
+      const userId = req.currentUserId;
       
       // req (request)의 body 에서 데이터 가져오기
       const fullName = req.body.fullName;
@@ -63,9 +64,16 @@ const Order = async (req, res, next) => {
   // 사용자 주문 조회
   const getOrder = async (req, res, next) => {
     try {
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요'
+        );
+      }
 
-       // params로부터 id를 가져옴
-       const userId = req.params.userId;
+      // params로부터 id를 가져옴
+      //const userId = req.params.userId;
+      const userId = req.currentUserId;
 
       // 사용자 주문 목록
       const orders = await orderService.getOrdersById(userId);
@@ -79,8 +87,17 @@ const Order = async (req, res, next) => {
 
   const deleteOrder = async(req,res,next) =>{
     try {
+
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요'
+        );
+      }
+
       // params로부터 id를 가져옴
-      const userId = req.params.userId;
+      // const userId = req.params.userId;
+      const userId = req.currentUserId;
       const orderId = req.params.orderId;
 
       // 유저 정보 삭제

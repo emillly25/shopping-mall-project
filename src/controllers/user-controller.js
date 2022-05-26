@@ -90,7 +90,8 @@ const editUserData = async function (req, res, next) {
       }
 
       // params로부터 id를 가져옴
-      const userId = req.params.userId;
+      // const userId = req.params.userId;
+      const userId = req.currentUserId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const fullName = req.body.fullName;
@@ -134,9 +135,17 @@ const editUserData = async function (req, res, next) {
 
   const deleteUserData = async function (req, res, next) {
     try {
-      // params로부터 id를 가져옴
-      const userId = req.params.userId;
 
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요'
+        );
+      }
+      
+      // params로부터 id를 가져옴
+      //const userId = req.params.userId;
+      const userId = req.currentUserId;
       // body data 로부터 비밀번호 추출.
       const userPw = req.body.password;
 
