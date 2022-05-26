@@ -4,4 +4,5 @@ const productRouter = Router();
 
 productRouter.get("/:productName*?", productController.getProduct);
 productRouter.post("/", productController.insertProduct);
+productRouter.patch("/", productController.updateProduct);
 export { productRouter };

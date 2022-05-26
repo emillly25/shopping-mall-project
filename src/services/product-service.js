@@ -34,6 +34,16 @@ class ProductService {
       next(error);
     }
   }
+
+  async updateProduct(productInfo, productId) {
+    try {
+      const result = await this.productModel.update(productInfo, productId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }
 const productService = new ProductService(productModel);
 
