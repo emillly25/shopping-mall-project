@@ -95,6 +95,19 @@ class ProductController {
       return res.status(500).json(err);
     }
   }
+
+  async deleteProduct(req, res) {
+    try {
+      let result = await productService.deleteProduct(req.body.productId);
+      res.status(200).json({
+        result,
+        message: "product deleted",
+      });
+      return;
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  }
 }
 
 const productController = new ProductController();

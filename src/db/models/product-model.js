@@ -68,6 +68,11 @@ export class ProductModel {
     );
     return updatedProduct;
   }
+
+  async delete(productId) {
+    await Product.deleteOne({ _id: productId });
+    return;
+  }
 }
 
 const productModel = new ProductModel();
