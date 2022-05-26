@@ -44,6 +44,15 @@ class ProductService {
       next(error);
     }
   }
+  async deleteProduct(productId) {
+    try {
+      const result = await this.productModel.delete(productId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }
 const productService = new ProductService(productModel);
 
