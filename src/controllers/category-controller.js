@@ -20,9 +20,9 @@ class CategoryController {
 
   async insertCategory(req, res) {
     try {
-      let result = await categoryService.insertCategory(
+      const result = await categoryService.insertCategory(
         req.body.name,
-        req.params.userId
+        req.currentUserId
       );
       if (result) {
         res.status(200).json({
@@ -38,10 +38,10 @@ class CategoryController {
 
   async updateCategory(req, res) {
     try {
-      let result = await categoryService.updateCategory(
+      const result = await categoryService.updateCategory(
         req.body.currentCategoryName,
         req.body.nameToChange,
-        req.params.userId
+        req.currentUserId
       );
       res.status(200).json({
         result,
@@ -55,9 +55,9 @@ class CategoryController {
 
   async deleteCategory(req, res) {
     try {
-      let result = await categoryService.deleteCategory(
+      const result = await categoryService.deleteCategory(
         req.body.name,
-        req.params.userId
+        req.currentUserId
       );
       res.status(200).json({
         result,
