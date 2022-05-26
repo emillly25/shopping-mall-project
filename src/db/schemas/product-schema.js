@@ -2,8 +2,9 @@ const { Schema } = require("mongoose");
 
 const ProductSchema = new Schema(
   {
-    categoryName: {
-      type: String,
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
     },
     name: {
