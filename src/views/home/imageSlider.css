@@ -54,7 +54,7 @@
 }
 
 .next {
-  right: -50px;
+  /* right: -50px; */
   border-radius: 7px 0px 0px 7px;
   color: white;
 }
@@ -66,7 +66,7 @@
 }
 
 .slider-wrap:hover .next {
-  right: 0px;
+  /* right: 0px; */
 }
 
 .slider-wrap:hover .previous {
@@ -77,8 +77,8 @@
 .indicator-wrap {
   min-width: 20px;
   margin-top: 350px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   height: 15px;
   position: relative;
   text-align: center;

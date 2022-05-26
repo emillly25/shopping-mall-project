@@ -59,9 +59,9 @@ class Slider {
     this.sliderListLiEl.forEach(
       li => (li.style.width = `${this.#slideWidth}px`),
     );
-    // this.sliderListImgEl.forEach(
-    //   li => (li.style.width = `${this.#slideWidth - paddingValue}px`),
-    // );
+    this.sliderListImgEl.forEach(
+      img => (img.style.width = `${this.#slideWidth}px`),
+    );
   }
 
   // 이전-다음 버튼 클릭 시 / indicator 클릭 시 / 재생-일시정지 버튼을 클릭 시의 이벤트
@@ -70,7 +70,8 @@ class Slider {
     // 1. 이전-다음 버튼 클릭 시
     this.nextBtnEl.addEventListener('click', this.moveToRight.bind(this));
     this.previousBtnEl.addEventListener('click', this.moveToLeft.bind(this));
-
+    // indicator width 조정
+    this.indicatorWrapEl.style.width = `${this.#slideWidth}px`;
     // 2. indicator 클릭 시
     this.indicatorWrapEl.addEventListener(
       'click',
@@ -169,4 +170,20 @@ class Slider {
   }
 }
 
+const nextBtn = document.querySelector('.next');
+nextBtn.style.left = `${document.querySelector('.container').clientWidth}px`;
+document
+  .querySelector('.slider-wrap')
+  .addEventListener('mouseover', function () {
+    nextBtn.style.left = `${
+      document.querySelector('.container').clientWidth - nextBtn.clientWidth
+    }px`;
+  });
+document
+  .querySelector('.slider-wrap')
+  .addEventListener('mouseout', function () {
+    nextBtn.style.left = `${
+      document.querySelector('.container').clientWidth
+    }px`;
+  });
 const slider = new Slider();

@@ -38,26 +38,45 @@
       <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="info_header">
-            <li class="hamburger_list">
-              <a href=""><i class="fa-solid fa-bars"></i></a>
-            </li>
             <div class="info_logo">
-              <h1><a>SHOP7</a></h1>
+              <a href=""><h1>Book Store 7</h1></a>
             </div>
-            <div class="info_menu">
-              <ul>
-                <li><a href="">로그인</a></li>
-                <li><a href="">회원가입</a></li>
+          </div>
+
+          <div class="menu_header">
+            <ul class="category">
+              <li id="dropmenu">
+                <a href="" id="li_hover">국내도서</a>
+                <ul class="dropdown">
+                  <li><a href="">소설</a></li>
+                  <li><a href="">경영/경제</a></li>
+                  <li><a href="">에세이</a></li>
+                </ul>
+              </li>
+              <li><a href="" id="li_hover">해외도서</a></li>
+              <li><a href="" id="li_hover">eBook</a></li>
+              <li><a href="" id="li_hover">음반</a></li>
+              <li><a href="" id="li_hover">이벤트</a></li>
+            </ul>
+            <div class="search_bar_info_menu">
+              <div class="search_bar">
+                <input class="searchInput" type="search" placeholder="검색" />
+                <div id="searching">
+                  <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+              </div>
+
+              <ul class="info_menu">
+                <li><a href="/register">회원가입</a></li>
+                <li><a href="/login">로그인</a></li>
                 <li>
                   <a href=""><i class="fa-solid fa-user"></i></a>
                 </li>
                 <li>
-                  <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                  <!-- <div id="cart">
+                  <div id="cart">
                     <div id="cart_badge">0</div>
-
                     <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                  </div> -->
+                  </div>
                 </li>
                 <li>
                   <a href=""><i class="fa-solid fa-heart"></i></a>
@@ -65,39 +84,13 @@
               </ul>
             </div>
           </div>
-          <div class="menu_header">
-            <div class="hot_items">
-              <ul>
-                <li id="dropmenu">
-                  <a href="" id="li_hover">1번</a>
-                  <!-- <ul class="dropdown">
-                    <li><a href="">베스트 1</a></li>
-                    <li><a href="">베스트 2</a></li>
-                    <li><a href="">베스트 3</a></li>
-                  </ul> -->
-                </li>
-                <li><a href="" id="li_hover">2번</a></li>
-                <li><a href="" id="li_hover">3번</a></li>
-                <li><a href="" id="li_hover">4번</a></li>
-                <li><a href="" id="li_hover">5번</a></li>
-              </ul>
-            </div>
-
-            <div class="items">
-              <ul>
-                <li><a href="">1번</a></li>
-                <li><a href="">2번</a></li>
-                <li><a href="">3번</a></li>
-                <li><a href="">4번</a></li>
-                <li><a href="">5번</a></li>
-              </ul>
-            </div>
-          </div>
         </nav>
       </header>
       <div class="scroll_btn">
-        <div id="top_btn"><img src="top_btn.png" alt="top_btn" /></div>
-        <div id="bottom_btn"><img src="bottom_btn.png" alt="bottom_btn" /></div>
+        <div id="top_btn"><img src="./img/top_btn.png" alt="top_btn" /></div>
+        <div id="bottom_btn">
+          <img src="./img/bottom_btn.png" alt="bottom_btn" />
+        </div>
       </div>
 
       <!-- image-slider -->
@@ -142,6 +135,7 @@
       <!-- <div id="wrap">
         <section></section>
       </div> -->
+      <div style="width: 100px; height: 2000px; background-color: red"></div>
       <footer>
         <div class="first">
           <a href="#">Index</a>
