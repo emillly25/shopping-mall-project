@@ -64,12 +64,6 @@ const Order = async (req, res, next) => {
   // 사용자 주문 조회
   const getOrder = async (req, res, next) => {
     try {
-      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
 
       // params로부터 id를 가져옴
       //const userId = req.params.userId;
@@ -88,13 +82,6 @@ const Order = async (req, res, next) => {
   const deleteOrder = async(req,res,next) =>{
     try {
 
-      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
-
       // params로부터 id를 가져옴
       // const userId = req.params.userId;
       const userId = req.currentUserId;
@@ -110,4 +97,21 @@ const Order = async (req, res, next) => {
     }
   }
 
-export {getOrderlist,Order,getOrder,deleteOrder};
+  const deleteOrderByAdmin = async(req,res,next) => {
+    try {
+
+      
+      const orderId = req.params.orderId;
+      const userId = await orderService.findIdByorderId(orderId);
+
+      // 유저 정보 삭제
+      const data = await orderService.deleteOrder(userId,orderId);
+
+      // 성공 여부 프론트에 보냄
+      res.status(200).json({status:200,message:'주문 취소 성공'});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+export {getOrderlist,Order,getOrder,deleteOrder,deleteOrderByAdmin};

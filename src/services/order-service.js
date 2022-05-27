@@ -25,9 +25,15 @@ class OrderService {
         return orders;
     }
 
+    // 주문 취소
     async deleteOrder(userId,orderId){
         const del_orders = await this.orderModel.deleteOrdersById(userId,orderId);
         return del_orders;
+    }
+
+    async findIdByorderId(orderId){
+        const userId = await this.orderModel.finduserId(orderId);
+        return userId;
     }
     
 }

@@ -23,6 +23,11 @@ export class OrderModel {
       const orders = await Order.findOneAndDelete({user_id:userId,_id:orderId});
       return orders;
     }
+
+    async finduserId(orderId){
+      const id = await Order.find({_id:orderId});
+      return id[0].user_id;
+    }
 }
 
 const orderModel = new OrderModel();

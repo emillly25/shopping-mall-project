@@ -21,7 +21,6 @@ function adminRequired(req, res, next) {
   try {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
-    console.log('jwtDecoded',jwtDecoded)
     const role = jwtDecoded.role;
 
     // 관리자 확인
