@@ -1,0 +1,211 @@
+[33mcommit 271aa6d0ccb473c7c7ead41cb637eb3b0661025a[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-b-product-read[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Wed May 25 20:20:25 2022 +0900
+
+    reafactor: modify product schema culumns
+
+[33mcommit 84378bdc8199876b4257761b51e1cf7f863575c2[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Merge: 33b5727 1c27fba
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Tue May 24 13:44:05 2022 +0000
+
+    Merge branch 'feature-b-category-refactor' into 'dev'
+    
+    카테고리 리팩토링
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!8
+
+[33mcommit 1c27fba90580dd7bd5129769c6081b7a2f476933[m[33m ([m[1;31morigin/feature-b-category-refactor[m[33m, [m[1;32mfeature-b-category-refactor[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:28:40 2022 +0900
+
+    reafactor: category controller layer
+
+[33mcommit 570fe4f5f7301ea7f2ddcc305d6f1baef4c22ace[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:28:25 2022 +0900
+
+    refactor: category service layer
+
+[33mcommit 112609fced27f6a0b6b8c87c5ad30c36f4790944[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:27:52 2022 +0900
+
+    refactor: change expression
+
+[33mcommit bc4a83675b4fa1ff33a6bde867abe9405e4b9cd4[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:27:30 2022 +0900
+
+    refactor: change expression of export
+
+[33mcommit c81073118189f4ffb79d645d3bc9220692a73294[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:27:08 2022 +0900
+
+    refactor: change expression of export
+
+[33mcommit 128e44072bb81c79b8ff10b2e9a058a3f710a1cd[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:26:09 2022 +0900
+
+    refactor: modify category-get method to optional uri
+
+[33mcommit 92ee1c51f8816dea185e4d9124261522546db27b[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 22:25:35 2022 +0900
+
+    refactor: change router uri
+
+[33mcommit 33b5727bf24a4e26c5c9f21fcf8f3509a158792a[m
+Merge: 893cba0 d5e3403
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Tue May 24 20:28:36 2022 +0900
+
+    Merge branch 'dev' of https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project/team7/shopping-mall-racer into dev
+
+[33mcommit 893cba026977ca57c0a575888c440e3dca8b2c34[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Tue May 24 20:28:20 2022 +0900
+
+    .env 파일 push
+
+[33mcommit 022f258bc17a49993138eba866674beb1450bba2[m[33m ([m[1;32mfeat-b-category-delete[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 17:06:30 2022 +0900
+
+    feat: add delete category api
+
+[33mcommit d5e34033893f8fc0573a53094e825456682290b6[m[33m ([m[1;31morigin/feature-b-category-update[m[33m, [m[1;32mfeature-b-category-update[m[33m)[m
+Merge: d579199 de2b741
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Tue May 24 08:01:06 2022 +0000
+
+    Merge branch 'feature-b-category-update' into 'dev'
+    
+    카테고리 수정
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!6
+
+[33mcommit de2b741950222025cbab5be9ec94af4c37374f1f[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Tue May 24 16:58:54 2022 +0900
+
+    feat: add update category api
+
+[33mcommit d579199822a53645953d054877c6ec11a10ebe3a[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Tue May 24 10:44:38 2022 +0900
+
+     index.js 의 process.env.PORT 를 process.env.SERVER_PORT 로 변경
+
+[33mcommit c76c42a9336b280ab4994c5e0b6a3f111dd59bca[m
+Merge: 61d19be d818ee5
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Mon May 23 13:53:56 2022 +0000
+
+    Merge branch 'feature-b-category-create' into 'dev'
+    
+    카테고리 추가
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!5
+
+[33mcommit d818ee56e9af026bf9f41995e66869ce7b056182[m[33m ([m[1;31morigin/feature-b-category-create[m[33m, [m[1;32mfeature-b-category-create[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Mon May 23 22:49:15 2022 +0900
+
+    feat: add creating category api
+
+[33mcommit 61d19be2f74e2b1527bcca73ec59a8a924c66f91[m
+Merge: 7d17a4b d1a4d0f
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Mon May 23 13:48:46 2022 +0000
+
+    Merge branch 'feature-b-category-read' into 'dev'
+    
+    카테고리 조회
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!4
+
+[33mcommit d1a4d0fd0c23c8e8a2c02f7f185c8b38c070a389[m[33m ([m[1;31morigin/feature-b-category-read[m[33m, [m[1;32mfeature-b-category-read[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Mon May 23 22:40:28 2022 +0900
+
+    feat: add reading category api
+
+[33mcommit 7d17a4bc223163af03a19ba42684c34dc161c23e[m
+Merge: b6a7a6a de21c77
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Mon May 23 09:16:24 2022 +0000
+
+    Merge branch 'feature-b-category-schema' into 'dev'
+    
+    카테고리 스키마 생성, 상품 스키마에 카테고리 추가
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!3
+
+[33mcommit de21c77e00da0a0121963c9a7dba051222122b4e[m[33m ([m[1;31morigin/feature-b-category-schema[m[33m, [m[1;32mfeature-b-category-schema[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Mon May 23 18:12:53 2022 +0900
+
+    feat: add Category schema
+
+[33mcommit b6a7a6a6880b483c568f63a9d30e61dd20e10009[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 18:11:16 2022 +0900
+
+    김광태 튜터님 지시사항 반영 - 수정 완료!
+
+[33mcommit 173fe20235be20514c2e8986b2b0e0ddca541766[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 18:07:56 2022 +0900
+
+    김광태 튜터님 지시사항 반영 - localStorage, sessionStorage 통일
+
+[33mcommit 631a278153001fe877d5dcb4716aa9d9b4256edf[m[33m ([m[1;32mfeature-b-product-schema-refactor[m[33m)[m
+Merge: 5b18cb9 e192951
+Author: [SW2/서울/2반] 김범석 <xfrnk2@gmail.com>
+Date:   Mon May 23 08:33:05 2022 +0000
+
+    Merge branch 'feature-b-product-schema' into 'dev'
+    
+    상품 스키마 생성
+    
+    See merge request sw_track/class_02_seoul/web_project/team7/shopping-mall-racer!2
+
+[33mcommit e192951c1b8fd56bded47e738f7005a73c942721[m[33m ([m[1;31morigin/feature-b-product-schema[m[33m, [m[1;32mfeature-b-product-schema[m[33m)[m
+Author: xfrnk2 <xfrnk2@gmail.com>
+Date:   Mon May 23 17:07:07 2022 +0900
+
+    feat: add Product schema
+
+[33mcommit 5b18cb9a9be656c22e5f1d21f5287c09239708cb[m[33m ([m[1;32mmaster[m[33m)[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 14:36:39 2022 +0900
+
+    fix2
+
+[33mcommit 7be19fc45c7d6f5be31e49661db3fbbd9aef8dec[m
+Merge: 527dd54 10e3fb2
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 14:34:18 2022 +0900
+
+    fix
+
+[33mcommit 527dd54a3fa8de3c52c6b7c0d66880629638e1a1[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 14:28:46 2022 +0900
+
+    .env 파일 gitignore 재시도
+
+[33mcommit 10e3fb204d7102c02ead0a49d3a5888a2090dcbd[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 14:22:52 2022 +0900
+
+    dev 브랜치에 .gitignore 폴더 추가
+
+[33mcommit 9b9a01a95c4b2095c921a18b33efa158debdb327[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/2-[m[33m)[m
+Author: shinbian11 <shinbian11@gmail.com>
+Date:   Mon May 23 12:25:36 2022 +0900
+
+    Initial commit

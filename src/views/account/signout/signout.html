@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="./signout.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="account-page-title">
+        <h1><strong>회원 탈퇴</strong></h1>
+      </div>
+      <form class="account-page-body">
+        <div class="delete-my-account">
+          <span class="title">삭제를 진행합니다.</span>
+          <span class="password-input-field">
+            <label class="label" for="passwordInput">현재 비밀번호</label>
+            <input
+              type="password"
+              id="passwordInput"
+              placeholder="카카오 로그인의 경우 'kakao'를 입력해주세요"
+            />
+          </span>
+
+          <button class="button is-danger" id="deleteBtn">
+            회원정보 안전하게 삭제하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
