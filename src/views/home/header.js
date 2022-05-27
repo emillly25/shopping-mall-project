@@ -70,6 +70,7 @@ if (user) {
 const logoutBtn = document.getElementById('logout');
 logoutBtn.addEventListener('click', () => {
   if (confirm('로그아웃 하시겠습니까?')) {
+    alert('로그아웃 되었습니다.');
     sessionStorage.removeItem('token');
     window.location.href = '/';
   }
