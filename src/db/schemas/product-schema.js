@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema } = require('mongoose');
 
 const ProductSchema = new Schema(
   {
@@ -13,6 +13,10 @@ const ProductSchema = new Schema(
     },
     price: {
       type: Number,
+      required: true,
+    },
+    imgUrl: {
+      type: String,
       required: true,
     },
     information: {
@@ -38,7 +42,7 @@ const ProductSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export { ProductSchema };
