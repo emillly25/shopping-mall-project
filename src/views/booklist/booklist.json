@@ -1,7 +1,7 @@
 {
     "categoryName": "테스",
     "name": "예시제목",
-    "price": "16000",
+    "price": 15000,
     "author": "작가",
     "information": "예시책설명입니다.",
     "publisher": "출판사",
