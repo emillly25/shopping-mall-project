@@ -43,3 +43,34 @@ dropmenu.addEventListener('mouseenter', function () {
 dropmenu.addEventListener('mouseleave', function () {
   dropdown.style.display = 'none';
 });
+
+// 로그인 상태 : '계정관리' , '로그아웃' 보여주기
+// 비로그인 상태 : '회원가입' , '로그인' 보여주기
+
+const info_menu = document.querySelector('.info_menu');
+const user = sessionStorage.getItem('token');
+console.log('user의 token : ', user);
+if (user) {
+  if (info_menu.hasChildNodes()) {
+    let children = info_menu.children;
+    for (let i = 0; i < 4; i++) {
+      if (children[i].classList.contains('show')) {
+        children[i].classList.remove('show');
+        children[i].classList.add('none');
+      } else {
+        children[i].classList.remove('none');
+        children[i].classList.add('show');
+      }
+    }
+  }
+  // console.log(info_menu.children);
+}
+
+// 로그아웃
+const logoutBtn = document.getElementById('logout');
+logoutBtn.addEventListener('click', () => {
+  if (confirm('로그아웃 하시겠습니까?')) {
+    sessionStorage.removeItem('token');
+    window.location.href = '/';
+  }
+});
