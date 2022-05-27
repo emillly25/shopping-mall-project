@@ -25,28 +25,15 @@
         <div class="cart_list">
             <div id="choice"><input type="checkbox"><span class="Rborder">전체선택</span><span>선택삭제</span></div>
             <ul id="items">
-                <li class="item">
-                    <div class="checkbox"><input type="checkbox"></div>
-                    <div class="itemImg"><img src="https://image.aladin.co.kr/product/29045/74/cover500/k192836746_3.jpg" width="100px" height="100px" alt=""></div>
-                    <div class="itemName">불편한 편의점</div>
-                    <div class="itemCalc">
-                        <span id="itemPrice">16000</span>
-                        <span><i class="fa-solid fa-xmark"></i></span>
-                        <span id="itemQaun">2</span>
-                        <span><i class="fa-solid fa-equals"></i></span>
-                        <span id="itemTotalPrice">32000</span>
-                    </div>
-
-                </li>
             </ul>
         </div>
         <div class="cart_pay">
             <h2><span>결제상세</span></h2>
             <div class="cart_price">
-                <div>상품금액 <span>0</span> 원</div>
-                <div>배송비 <span>0</span> 원</div>
+                <div>상품금액 <span id="productPrice"></span> 원</div>
+                <div>배송비 <span id="deliveryPrice"></span> 원</div>
             </div>
-            <div class="cart_total_price">총 결제금액 <span> 0 </span>원</div>
+            <div class="cart_total_price">총 결제금액 <span id="finalPrice"></span> 원</div>
         </div>
         <div class="cart_buy_btn buttons"><a href="/order"><input class="button is-primary" type="button" value="구매하기"></a></div>
     </div>

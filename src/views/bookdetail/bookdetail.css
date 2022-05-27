@@ -25,10 +25,6 @@ body{
     font-weight: bold;
 }
 
-.book_title span{
-    font-size: 15px;
-    font-weight: 500;
-}
 
 .book_info{
     /* border: 2px solid aqua; */
@@ -134,6 +130,11 @@ body{
     align-items: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .qty{
     width: 150px;
     /* border: 1px solid red; */
