@@ -26,6 +26,25 @@ body{
     padding-bottom: 10px;
 }
 
+.cart_list #choice{
+    padding: 8px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    border-bottom: 1px solid lightgray;
+}
+
+
+.cart_list #choice span{
+    display: inline-block;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
+.cart_list #choice .Rborder{
+    margin-left: 5px;
+    margin-right: 5px;
+    border-right: 1px solid lightgray;
+}
 .cart_list .item{
     list-style: none;
     padding-left: 0;
