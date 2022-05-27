@@ -79,6 +79,19 @@ const Order = async (req, res, next) => {
     }
   }
 
+  const getOrderByAdmin = async(req,res,next)=>{
+    try{
+      const userId =req.params.userId;
+      const orders = await orderService.getOrdersById(userId);
+  
+      // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+      res.status(200).json({status:200,message:'성공',data:orders});
+
+    }catch(error){
+      next(error);
+    }
+  }
+
   const deleteOrder = async(req,res,next) =>{
     try {
 
@@ -99,7 +112,6 @@ const Order = async (req, res, next) => {
 
   const deleteOrderByAdmin = async(req,res,next) => {
     try {
-
       
       const orderId = req.params.orderId;
       const userId = await orderService.findIdByorderId(orderId);
@@ -114,4 +126,4 @@ const Order = async (req, res, next) => {
     }
   }
 
-export {getOrderlist,Order,getOrder,deleteOrder,deleteOrderByAdmin};
+export {getOrderlist,Order,getOrder,getOrderByAdmin,deleteOrder,deleteOrderByAdmin};

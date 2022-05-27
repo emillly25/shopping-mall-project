@@ -14,7 +14,7 @@ userRouter.post('/login', usercontroller.login);
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 adminRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get('/userlist',adminRequired, usercontroller.getUserlist);
+userRouter.get('/admin/userlist',adminRequired, usercontroller.getUserlist);
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
