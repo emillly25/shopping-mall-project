@@ -1,26 +1,46 @@
-const nowPrice = Number(document.querySelector('#nowPrice').textContent)
-const total = document.querySelector('#total');
+
+const minus = document.querySelector('.minus');  //minus Btn
+const plus = document.querySelector('.plus');   //plus Btn
+const num = document.querySelector('#num');  //input(number)
+
+const nowPrice = document.querySelector('#nowPrice'); //현재판매가
+const totalPrice = document.querySelector('#total');  //총 결제금액(span태그)
 
 
-const minus = document.querySelector('.minus');
-const plus = document.querySelector('.plus');
-const num = document.querySelector('#num');
 
-total.innerText = nowPrice
-plus.addEventListener('click', plusHandler)
-minus.addEventListener('click', minusHandler)
+plus.addEventListener('click', ()=>{
+    num.stepUp();
+    const quantity = Number(num.value); 
+    const price = quantity * Number(nowPrice.textContent);
+    totalPrice.innerText = price;
+    
 
-function plusHandler(){
-    const quantity = Number(num.textContent);
-    num.innerText = quantity + 1    
-    total.innerText = `${nowPrice * Number(num.textContent)}`
+})
+minus.addEventListener('click', ()=>{
+    num.stepDown();
+    const quantity = Number(num.value); 
+    const price = quantity * Number(nowPrice.textContent);
+    totalPrice.innerText = price;
+})
+
+const getBookInfo = async function(){
+    const res = await fetch('../booklist/booklist.json');
+    const data = await res.json();
+    const  {name, author, price, information } = data;
+    nowPrice.innerText = price;
+    totalPrice.innerText = price;
+
 }
 
-function minusHandler(e){
-    const quantity = Number(num.textContent);
-    num.innerText = quantity - 1
-    total.innerText = `${nowPrice * Number(num.textContent)}`
-}
+getBookInfo()
+
+
+
+
+
+
+
+
 
 
 

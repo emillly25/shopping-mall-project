@@ -134,6 +134,11 @@ body{
     align-items: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .qty{
     width: 150px;
     /* border: 1px solid red; */

@@ -49,7 +49,7 @@
                 </li>
                 <li>
                     <div class="Litem">판매가</div>
-                    <div class="Ritem"><span id="nowPrice">16020</span> 원 (10%, 1,780원 할인)</div>  
+                    <div class="Ritem"><span id="nowPrice"></span> 원 (10%, 1,780원 할인)</div>  
                 </li>
                 <li>
                     <div class="Litem">배송료</div>
@@ -60,10 +60,14 @@
                     
     <div class="qty">
         <input class="minus" type="button" value="-">
-        <span id="num">1</span>
+        <input id ="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
         <input class="plus" type="button" value="+">
     </div>
-                    <div class="Ritem total_price">총 상품금액 <span id="total">0</span>원</div>
+                    <div class="Ritem total_price">총 상품금액 <span id="total"></span>원</div>
+                </li>
+                <li>
+                    <div class="Litem">책 소개</div>
+                    <div class="Ritem">책 설명입니다 자세한건 </div>  
                 </li>
                 <li class="btn">
                     <div class="cartBtn"><a href="/cart"><input id="cartBtn" type="button" value="장바구니"></a></div>
