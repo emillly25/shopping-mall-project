@@ -123,23 +123,17 @@ nav {
 
 /*회원가입 관련 */
 .info_menu {
-  /* border: 1px solid green; */
   height: 60px;
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
   font-size: 15px;
-  /* padding: 0 10px; */
 }
 
 .info_menu li {
   margin: 0 10px;
 }
-
-/* .info_menu li i {
-  font-size: 20px;
-} */
 
 .info_menu li a {
   text-decoration: none;
@@ -147,10 +141,19 @@ nav {
 }
 
 .info_menu li:nth-child(1) a:hover,
-.info_menu li:nth-child(2) a:hover {
+.info_menu li:nth-child(2) a:hover,
+.info_menu li:nth-child(3) a:hover,
+.info_menu li:nth-child(4) a:hover {
   border-bottom: 1px solid #9c9c9c;
 }
 
+.info_menu li.show {
+  display: inline;
+}
+.info_menu li.none {
+  display: none;
+  /* background-color: yellow; */
+}
 #cart {
   position: relative;
 }
@@ -213,21 +216,23 @@ nav {
   .info_logo h1 {
     padding: 0;
   }
-  .info_menu {
+  /* .info_menu {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 13px;
   }
-  .info_menu ul {
+
+  .info_menu {
     position: static;
     width: 100%;
     margin-right: 0;
   }
-  .info_menu ul li {
+  .info_menu li {
     text-align: center;
-  }
+  } */
+
   .menu_header {
     margin-top: 20px;
     height: 80px;
