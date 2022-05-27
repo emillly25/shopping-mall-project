@@ -1,19 +1,19 @@
-import { model } from "mongoose";
-import { ProductSchema } from "../schemas/product-schema";
-const Product = model("Product", ProductSchema);
+import { model } from 'mongoose';
+import { ProductSchema } from '../schemas/product-schema';
+const Product = model('Product', ProductSchema);
 
 export class ProductModel {
   async findByName(name) {
     console.log(3);
     const product = await Product.findOne({ name }).populate(
-      "category",
-      "name"
+      'category',
+      'name',
     );
     console.log(product);
     return product;
   }
   async findAll() {
-    const products = await Product.find({}).populate("category", "name");
+    const products = await Product.find({}).populate('category', 'name');
     return products;
   }
 
@@ -22,6 +22,7 @@ export class ProductModel {
       category,
       name,
       price,
+      imgUrl,
       information,
       author,
       publisher,
@@ -33,6 +34,7 @@ export class ProductModel {
       category: category,
       name: name,
       price: price,
+      imgUrl: imgUrl,
       information: information,
       author: author,
       publisher: publisher,
@@ -48,6 +50,7 @@ export class ProductModel {
       category,
       name,
       price,
+      imgUrl,
       information,
       author,
       publisher,
@@ -60,11 +63,12 @@ export class ProductModel {
         category: category,
         name: name,
         price: price,
+        imgUrl: imgUrl,
         information: information,
         author: author,
         publisher: publisher,
         publishedDate: publishedDate,
-      }
+      },
     );
     return updatedProduct;
   }

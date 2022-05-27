@@ -1,5 +1,5 @@
-const { productService } = require("../services/product-service");
-const { categoryService } = require("../services/category-service");
+const { productService } = require('../services/product-service');
+const { categoryService } = require('../services/category-service');
 
 class ProductController {
   async getProduct(req, res) {
@@ -17,12 +17,15 @@ class ProductController {
       return res.status(500).json(err);
     }
   }
-
+  // upload.single('img');
+  // const imgUrl = `https://eliceteam7-s3-bucket.s3.ap-northeast-2.amazonaws.com/archive/${req.file.filename}`;
+  // console.log(imgUrl);
   async insertProduct(req, res) {
     try {
       const categoryName = req.body.categoryName;
       const name = req.body.name;
       const price = req.body.price;
+      const imgUrl = req.file.location;
       const information = req.body.information;
       const author = req.body.author;
       const publisher = req.body.publisher;
@@ -38,6 +41,7 @@ class ProductController {
         category._id,
         name,
         price,
+        imgUrl,
         information,
         author,
         publisher,
@@ -47,12 +51,12 @@ class ProductController {
 
       const result = await productService.insertProduct(
         productInfo,
-        req.currentUserId
+        req.currentUserId,
       );
       if (result) {
         res.status(200).json({
           result,
-          message: "Product created",
+          message: 'Product created',
         });
       }
       return;
@@ -68,6 +72,7 @@ class ProductController {
       const categoryName = req.body.categoryName;
       const name = req.body.name;
       const price = req.body.price;
+      const imgUrl = req.file.location;
       const information = req.body.information;
       const author = req.body.author;
       const publisher = req.body.publisher;
@@ -82,6 +87,7 @@ class ProductController {
         category._id,
         name,
         price,
+        imgUrl,
         information,
         author,
         publisher,
@@ -91,11 +97,11 @@ class ProductController {
       const result = await productService.updateProduct(
         productInfo,
         productId,
-        req.currentUserId
+        req.currentUserId,
       );
       res.status(200).json({
         result,
-        message: "product updated",
+        message: 'product updated',
       });
       return;
     } catch (err) {
@@ -107,11 +113,11 @@ class ProductController {
     try {
       const result = await productService.deleteProduct(
         req.body.productId,
-        req.currentUserId
+        req.currentUserId,
       );
       res.status(200).json({
         result,
-        message: "product deleted",
+        message: 'product deleted',
       });
       return;
     } catch (err) {

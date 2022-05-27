@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { categoryModel, userModel } = require("../db");
+const mongoose = require('mongoose');
+const { categoryModel, userModel } = require('../db');
 
 class CategoryService {
   constructor(categoryModel, userModel) {
@@ -30,7 +30,7 @@ class CategoryService {
     try {
       const isExist = await this.categoryModel.findByName(name);
       if (isExist) {
-        throw new Error("name is already exist.");
+        throw new Error('name is already exist.');
       }
       await this.checkIsAdministrator(userId);
 
@@ -48,7 +48,7 @@ class CategoryService {
 
       const result = await this.categoryModel.update(
         currentCategoryName,
-        nameToChange
+        nameToChange,
       );
       return result;
     } catch (error) {
@@ -69,10 +69,10 @@ class CategoryService {
   }
 
   async checkIsAdministrator(userId) {
-    const ObjectId = require("mongodb").ObjectId;
+    const ObjectId = require('mongodb').ObjectId;
     const user = await this.userModel.findById(ObjectId(userId));
-    if (user.role !== "admin") {
-      throw new Error("Request is not allowed. The user is not administrator.");
+    if (user.role !== 'admin') {
+      throw new Error('Request is not allowed. The user is not administrator.');
     }
   }
 }

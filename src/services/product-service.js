@@ -1,4 +1,4 @@
-const { productModel, userModel } = require("../db");
+const { productModel, userModel } = require('../db');
 
 class ProductService {
   constructor(productModel, userModel) {
@@ -28,6 +28,7 @@ class ProductService {
 
   async insertProduct(productInfo, userId) {
     try {
+    
       await this.checkIsAdministrator(userId);
       const result = this.productModel.create(productInfo);
       return result;
@@ -59,10 +60,10 @@ class ProductService {
   }
 
   async checkIsAdministrator(userId) {
-    const ObjectId = require("mongodb").ObjectId;
+    const ObjectId = require('mongodb').ObjectId;
     const user = await this.userModel.findById(ObjectId(userId));
-    if (user.role !== "admin") {
-      throw new Error("Request is not allowed. The user is not administrator.");
+    if (user.role !== 'admin') {
+      throw new Error('Request is not allowed. The user is not administrator.');
     }
   }
 }
