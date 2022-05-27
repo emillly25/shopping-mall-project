@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
+    <title>쇼핑-7팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/elice-rabbit-favicon.png"
+      href="../elice-rabbit-favicon.png"
     />
     <!-- bulma css -->
     <link
@@ -23,58 +23,144 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="home.css" />
-    <script src="home.js" type="module" defer></script>
+    <!-- <link rel="stylesheet" href="./home.css" /> -->
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./imageSlider.css" />
+    <link rel="stylesheet" href="./footer.css" />
+
+    <script src="./home.js" type="module" defer></script>
+    <script src="./header.js" defer></script>
+    <script src="./imageSlider.js" defer></script>
   </head>
   <body>
-    <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
-          </a>
-
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-            <ul id="navbar">
-              <li><a href="/login">로그인</a></li>
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="#cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
+    <div class="container">
+      <!-- 헤더 -->
+      <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="info_header">
+            <div class="info_logo">
+              <a href=""><h1>Book Store 7</h1></a>
+            </div>
           </div>
+
+          <div class="menu_header">
+            <ul class="category">
+              <li id="dropmenu">
+                <a href="" id="li_hover">국내도서</a>
+                <ul class="dropdown">
+                  <li><a href="">소설</a></li>
+                  <li><a href="">경영/경제</a></li>
+                  <li><a href="">에세이</a></li>
+                </ul>
+              </li>
+              <li><a href="" id="li_hover">해외도서</a></li>
+              <li><a href="" id="li_hover">eBook</a></li>
+              <li><a href="" id="li_hover">음반</a></li>
+              <li><a href="" id="li_hover">이벤트</a></li>
+            </ul>
+            <div class="search_bar_info_menu">
+              <div class="search_bar">
+                <input class="searchInput" type="search" placeholder="검색" />
+                <div id="searching">
+                  <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+              </div>
+
+              <ul class="info_menu">
+                <li><a href="/register">회원가입</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li>
+                  <a href=""><i class="fa-solid fa-user"></i></a>
+                </li>
+                <li>
+                  <div id="cart">
+                    <div id="cart_badge">0</div>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                  </div>
+                </li>
+                <li>
+                  <a href=""><i class="fa-solid fa-heart"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="scroll_btn">
+        <div id="top_btn"><img src="./img/top_btn.png" alt="top_btn" /></div>
+        <div id="bottom_btn">
+          <img src="./img/bottom_btn.png" alt="bottom_btn" />
         </div>
       </div>
-    </nav>
 
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
+      <!-- image-slider -->
+
+      <div class="slider-wrap" id="slider-wrap">
+        <ul class="slider" id="slider">
+          <li>
+            <img src="./img/red.jpeg" />
+          </li>
+          <li>
+            <img src="./img/orange.jpeg" />
+          </li>
+          <li>
+            <img src="./img/yellow.jpeg" />
+          </li>
+          <li>
+            <img src="./img/green.jpeg" />
+          </li>
+          <li>
+            <img src="./img/blue.jpeg" />
+          </li>
+        </ul>
+
+        <div class="btn next" id="next">
+          <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="btn previous" id="previous">
+          <i class="fa fa-arrow-left"></i>
+        </div>
+
+        <div class="indicator-wrap" id="indicator-wrap">
+          <ul></ul>
+        </div>
+
+        <div class="control-wrap play" id="control-wrap">
+          <i class="fa fa-pause" id="pause" data-status="pause"></i>
+          <i class="fa fa-play" id="play" data-status="play"></i>
+        </div>
       </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
-      </div>
+
+      <!-- footer -->
+      <!-- <div id="wrap">
+        <section></section>
+      </div> -->
+      <div style="width: 100px; height: 2000px; background-color: red"></div>
+      <footer>
+        <div class="first">
+          <a href="#">Index</a>
+          <nav>
+            <a href="www.google.co.kr" target="_blank">구글</a>
+            <a href="https://swtrack.lms.elice.io/" target="_blank">엘리스</a>
+          </nav>
+          <p>
+            <span>작성자: 7조</span>
+            <span>연락처: 010-1234-5678</span>
+            <span>저작권</span>
+          </p>
+        </div>
+        <div class="second">
+          <div>
+            <h1>FOOTER ELEMENT</h1>
+            <h2>FOOTER ELEMENT 2</h2>
+            <h3>FOOTER ELEMENT 3</h3>
+            <p>Copyright @2022 엘리스 소프트웨어</p>
+          </div>
+          <a href="#">Index</a>
+          <p>Copyright @2022 Elice SWtrack - #7</p>
+          <address></address>
+        </div>
+      </footer>
     </div>
-
   </body>
 </html>
