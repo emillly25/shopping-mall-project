@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="./accountInfo.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="account-page-title">
+        <h1><strong>회원정보</strong></h1>
+      </div>
+      <form class="account-page-body">
+        <div class="my-info">
+          <span class="my-info-field">
+            <label class="label" for="username">이름</label>
+            <input type="text" id="username" />
+          </span>
+          <span class="my-info-field">
+            <label class="label" for="userPassword">비밀번호</label>
+            <input type="text" id="userPassword" />
+          </span>
+          <span class="my-info-field">
+            <label class="label" for="userPasswordCheck">비밀번호 확인</label>
+            <input type="text" id="userPasswordCheck" />
+          </span>
+          <span class="my-info-field">
+            <label class="label">주소</label>
+            <input type="text" id="postcode" />
+            <input type="text" id="mainAddress" />
+            <input type="text" id="subAddress" />
+          </span>
+          <span class="my-info-field">
+            <label class="label" for="userPhoneNo">전화번호</label>
+            <input type="text" id="userPhoneNo" />
+          </span>
+          <button class="button is-success" id="deleteBtn">
+            회원정보 저장하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

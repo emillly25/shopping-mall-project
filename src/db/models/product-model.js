@@ -41,8 +41,37 @@ export class ProductModel {
     });
     await createdNewProduct.save();
     return createdNewProduct;
+  }
 
+  async update(productInfo, productId) {
+    const [
+      category,
+      name,
+      price,
+      information,
+      author,
+      publisher,
+      publishedDate,
+    ] = productInfo;
 
+    let updatedProduct = await Product.findOneAndUpdate(
+      { _id: productId },
+      {
+        category: category,
+        name: name,
+        price: price,
+        information: information,
+        author: author,
+        publisher: publisher,
+        publishedDate: publishedDate,
+      }
+    );
+    return updatedProduct;
+  }
+
+  async delete(productId) {
+    await Product.deleteOne({ _id: productId });
+    return;
   }
 }
 

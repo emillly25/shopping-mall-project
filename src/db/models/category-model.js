@@ -4,8 +4,13 @@ import { CategorySchema } from "../schemas/category-schema";
 const Category = model("Category", CategorySchema);
 
 export class CategoryModel {
+  async findByUserId(userId) {
+    const category = await Category.findOne({ _id: userId });
+    return category;
+  }
+
   async findByName(name) {
-    const category = await Category.findOne({ name });
+    const category = await Category.findOne({ name: name });
     return category;
   }
   async findAll() {
