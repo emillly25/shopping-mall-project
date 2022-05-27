@@ -11,6 +11,7 @@ export class UserModel {
 
   async findById(userId) {
     const user = await User.findOne({ _id: userId });
+    console.log(user)
     return user;
   }
 
@@ -30,6 +31,11 @@ export class UserModel {
 
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
+  }
+
+  async deleteById(userId) {
+    const user = await User.findOneAndDelete({ _id: userId });
+    return user;
   }
 }
 

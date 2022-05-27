@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="bookdetail.css" />
+    <script src="bookdetail.js" type="module" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+    <div class="book_container">
+        <div class="book_head">
+            <div class="book_title">얼음에 남은 지문 <span> - 과거로부터 온 미래 기후의 증거</span></div>
+            <div class="book_info">
+                <span id="author">데이비드 아처</span>
+                <span id="publish">성림원북스</span>
+                <span id="pubDate">2022-05-23</span>
+            </div>
+        </div>
+
+        <div class="book_body">
+            <div class="book_img"><img src="https://image.aladin.co.kr/product/29445/74/cover500/k692837627_1.jpg" alt=""></div>
+
+            <ul class="book_details">
+                <li>
+                    <div class="Litem">정가</div>
+                    <div class="Ritem">17,800원</div>    
+                </li>
+                <li>
+                    <div class="Litem">판매가</div>
+                    <div class="Ritem"><span id="nowPrice">16020</span> 원 (10%, 1,780원 할인)</div>  
+                </li>
+                <li>
+                    <div class="Litem">배송료</div>
+                    <div class="Ritem">3,000원 (12,000원 이상 무료배송) </div> 
+                </li>
+                <li class="quan">
+                    <div class="Litem">수량</div>
+                    
+    <div class="qty">
+        <input class="minus" type="button" value="-">
+        <span id="num">1</span>
+        <input class="plus" type="button" value="+">
+    </div>
+                    <div class="Ritem total_price">총 상품금액 <span id="total">0</span>원</div>
+                </li>
+                <li class="btn">
+                    <div class="cartBtn"><a href="/cart"><input id="cartBtn" type="button" value="장바구니"></a></div>
+                    <div class="buyBtn"><a href="/order"><input id="buyBtn" type="button" value="바로구매"></a></div> 
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

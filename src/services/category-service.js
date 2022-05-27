@@ -1,47 +1,82 @@
-const Category = require("../db");
+const mongoose = require("mongoose");
+const { categoryModel, userModel } = require("../db");
 
-exports.getCategory = async (categoryName) => {
-  try {
-    let category = await Category.find({ name: categoryName });
-    return category;
-  } catch (err) {
-    console.log(err);
-    throw new Error(err);
+class CategoryService {
+  constructor(categoryModel, userModel) {
+    this.categoryModel = categoryModel;
+    this.userModel = userModel;
   }
-};
 
-exports.insertCategory = async (name) => {
-  try {
-    console.log(name);
-    if (!name) {
-      throw new Error("유효한 값을 입력하세요.");
+  async getAllCategory() {
+    try {
+      const category = await this.categoryModel.findAll();
+      return category;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
     }
-
-    if (this.getCategory(name)) {
-      throw new Error("중복된 이름입니다.");
-    }
-
-    const category = new Category({
-      name: name,
-    });
-    const result = await category.save();
-    return result;
-  } catch (error) {
-    console.log(error);
-    next(error);
   }
-};
-
-exports.updateCategory = async (currentCategoryName, name) => {
-  try {
-    const isExist = await Category.findOne({ name: currentCategoryName });
-    if (!isExist) {
-      throw new Error("변경할 주체 카테고리를 찾을 수 없습니다.");
+  async getCategory(name) {
+    try {
+      const category = await this.categoryModel.findByName(name);
+      return category;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
     }
-    await Category.updateOne({ name: currentCategoryName }, { name: name });
-    return;
-  } catch (error) {
-    console.log(error);
-    next(error);
   }
-};
+
+  async insertCategory(name, userId) {
+    try {
+      const isExist = await this.categoryModel.findByName(name);
+      if (isExist) {
+        throw new Error("name is already exist.");
+      }
+      await this.checkIsAdministrator(userId);
+
+      const result = this.categoryModel.create(name);
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async updateCategory(currentCategoryName, nameToChange, userId) {
+    try {
+      this.checkIsAdministrator(userId);
+
+      const result = await this.categoryModel.update(
+        currentCategoryName,
+        nameToChange
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async deleteCategory(name, userId) {
+    try {
+      this.checkIsAdministrator(userId);
+      await this.categoryModel.delete(name);
+      return;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async checkIsAdministrator(userId) {
+    const ObjectId = require("mongodb").ObjectId;
+    const user = await this.userModel.findById(ObjectId(userId));
+    if (user.role !== "admin") {
+      throw new Error("Request is not allowed. The user is not administrator.");
+    }
+  }
+}
+
+const categoryService = new CategoryService(categoryModel, userModel);
+
+export { categoryService };
