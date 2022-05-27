@@ -30,38 +30,53 @@ const plus = document.querySelector('.plus');   //plus Btn
 const num = document.querySelector('#num');  //input(number)
 const itemQaun = document.querySelector('#itemQaun'); //제품 수량(span)
 const itemTotalPrice = document.querySelector('#itemTotalPrice') //최종가격
+const productPrice = document.querySelector('#productPrice');
+const deliveryPrice = document.querySelector('#deliveryPrice')
+const finalPrice= document.querySelector('#finalPrice');
 
 itemQaun.innerText = Number(num.value);
 itemTotalPrice.innerText = Number(num.value) * price;
+productPrice.innerText = price;
+if(price >=12000){
+    deliveryPrice.innerText = 0
+}else{
+    deliveryPrice.innerText = 3000
+}
+finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
 
 plus.addEventListener('click', ()=>{
     num.stepUp();
     itemQaun.innerText = Number(num.value);
     itemTotalPrice.innerText = price *  Number(num.value)
+    productPrice.innerText = itemTotalPrice.textContent;
+    if(Number(productPrice.textContent) >=12000){
+        deliveryPrice.innerText = 0
+    }else{
+        deliveryPrice.innerText = 3000
+    }
+    const result = Number(deliveryPrice.textContent)+ Number(productPrice.textContent)
+    finalPrice.innerText = result;
+   
 
 })
 minus.addEventListener('click', ()=>{
     num.stepDown();
     itemQaun.innerText = Number(num.value);
     itemTotalPrice.innerText = price *  Number(num.value)
+    productPrice.innerText = itemTotalPrice.textContent;
+    if(Number(productPrice.textContent) >=12000){
+        deliveryPrice.innerText = 0
+    }else{
+        deliveryPrice.innerText = 3000
+    }
+    
+    const result = Number(deliveryPrice.textContent)+ Number(productPrice.textContent)
+    finalPrice.innerText = result;
 })
 
-const productPrice = document.querySelector('#productPrice');
-const deliveryPrice = document.querySelector('#deliveryPrice')
-const finalPrice= document.querySelector('#finalPrice');
 
 
-productPrice.innerText = itemTotalPrice.textContent;
-console.log(productPrice)
 
-if(Number(productPrice.textContent) >=12000){
-    deliveryPrice.innerText = 0
-}else{
-    deliveryPrice.innerText = 3000
-}
-
-const result = Number(deliveryPrice) + Number(productPrice);
-console.log(result)
 
 
 
