@@ -1,0 +1,128 @@
+body{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.cart_container{
+    width: 800px;
+    border: 3px solid blue;
+}
+
+.cart_head{
+    width: 100%;
+}
+
+.cart_head h1{
+    margin: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}
+.cart_list{
+    /* border: 1px solid orange; */
+    width: 100%;
+    font-size: 24px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+
+.cart_list .item{
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.item .checkbox{
+    margin-left: 10px;
+    margin-right: 10px;
+    transform: translateY(-65px);
+}
+
+.item .itemImg{
+    width: 100px;
+    margin-right: 10px;
+}
+
+.item .itemName{
+    width: 200px;
+    /* border: 1px solid blue; */
+    text-align: center;
+    margin-right: 50px;
+}
+
+.item .itemCalc{
+    width: 500px;
+    padding: 0 50px;
+    /* border: 1px solid greenyellow; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.item .itemCalc span{
+    display: inline-block;
+}
+
+
+.item .itemCalc #itemPrice,.item .itemCalc #itemQaun, .item .itemCalc #itemTotalPrice{
+    /* border: 1px solid red; */
+    font-size: 30px;
+    color: grey;
+}
+
+.item .itemCalc #itemTotalPrice{
+    font-weight: bold;
+    color: black;
+}
+
+.item .itemCalc span i{
+   display: inline-block;
+   /* background-color: yellowgreen; */
+   font-size: 36px;
+}
+
+
+
+
+
+.cart_pay{
+    margin-top: 20px;
+    /* border: 3px solid yellow; */
+    width: 100%;
+}
+
+.cart_pay h2{
+    /* border: 1px solid blueviolet; */
+    margin: 20px;
+    font-size: 24px;
+}
+.cart_pay h2 span{
+    border-bottom: 1px solid lightgray;
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+.cart_pay .cart_price{
+    /* border: 1px solid hotpink; */
+    margin: 10px;
+}
+
+.cart_pay .cart_price div{
+    padding: 15px;
+}
+
+.cart_pay .cart_total_price{
+    /* border: 1px solid black; */
+    margin: 10px;
+    padding: 15px;
+}
+
+.cart_buy_btn{
+    /* border: 1px solid green; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
