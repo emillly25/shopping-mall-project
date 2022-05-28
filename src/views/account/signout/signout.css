@@ -1,0 +1,56 @@
+.container {
+  width: 1000px;
+  height: 700px;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container .account-page-title {
+  border-bottom: 1px solid #ddd;
+  /* background-color: red; */
+  font-size: 30px;
+  /* margin-bottom: 100px; */
+}
+
+.container .account-page-body {
+  width: 100%;
+  height: 400px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+}
+.container .account-page-body .delete-my-account {
+  width: 50%;
+  height: 250px;
+  background-color: #f0f2f5;
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.container .account-page-body .delete-my-account .title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+.container
+  .account-page-body
+  .delete-my-account
+  .password-input-field
+  #passwordInput {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.container .account-page-body .delete-my-account #deleteBtn {
+}

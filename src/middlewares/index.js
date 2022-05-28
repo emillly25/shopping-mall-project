@@ -3,3 +3,5 @@
 
 export * from './error-handler';
 export * from './login-required';
+export * from "./register-required";
+export * from "./admin-required";

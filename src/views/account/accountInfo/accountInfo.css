@@ -1,0 +1,48 @@
+.container {
+  width: 1000px;
+  height: 1000px;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container .account-page-title {
+  border-bottom: 1px solid #ddd;
+  /* background-color: red; */
+  font-size: 30px;
+  /* margin-bottom: 100px; */
+}
+
+.container .account-page-body {
+  width: 100%;
+  height: 80%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* background-color: red; */
+}
+.container .account-page-body .my-info {
+  width: 50%;
+  height: 700px;
+  background-color: #f0f2f5;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.container .account-page-body .my-info .my-info-field #username,
+.container .account-page-body .my-info .my-info-field #userPassword,
+.container .account-page-body .my-info .my-info-field #userPasswordCheck,
+.container .account-page-body .my-info .my-info-field #postcode,
+.container .account-page-body .my-info .my-info-field #mainAddress,
+.container .account-page-body .my-info .my-info-field #subAddress,
+.container .account-page-body .my-info .my-info-field #userPhoneNo {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px;
+}

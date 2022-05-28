@@ -14,7 +14,6 @@ async function get(endpoint, params = '') {
   if (!res.ok) {
     const errorContent = await res.json();
     const { reason } = errorContent;
-
     throw new Error(reason);
   }
 

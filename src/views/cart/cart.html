@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="cart.css" />
+    <script src="cart.js" type="module" defer></script>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <div class="cart_container">
+        <div class="cart_head">
+            <h1>장바구니</h1>
+        </div>
+        <div class="cart_list">
+            <div id="choice"><input type="checkbox"><span class="Rborder">전체선택</span><span>선택삭제</span></div>
+            <ul id="items">
+            </ul>
+        </div>
+        <div class="cart_pay">
+            <h2><span>결제상세</span></h2>
+            <div class="cart_price">
+                <div>상품금액 <span id="productPrice"></span> 원</div>
+                <div>배송비 <span id="deliveryPrice"></span> 원</div>
+            </div>
+            <div class="cart_total_price">총 결제금액 <span id="finalPrice"></span> 원</div>
+        </div>
+        <div class="cart_buy_btn buttons"><a href="/order"><input class="button is-primary" type="button" value="구매하기"></a></div>
+    </div>
+
+</body>
+
+</html>

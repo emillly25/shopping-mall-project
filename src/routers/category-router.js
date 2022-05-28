@@ -1,10 +1,12 @@
 import { Router } from "express";
+import { categoryController } from "../controllers/category-controller.js";
+import { loginRequired } from "../middlewares";
 const categoryRouter = Router();
-const CategoryController = require("../controllers/category-controller.js");
 
-categoryRouter.get("/:categoryName", CategoryController.getCategory);
-categoryRouter.post("/", CategoryController.insertCategory);
-categoryRouter.post("/change-category-name", CategoryController.updateCategory);
-categoryRouter.post("/delete-category", CategoryController.deleteCategory);
+console.log(categoryRouter);
+categoryRouter.get("/:categoryName*?", categoryController.getCategory);
+categoryRouter.post("/", loginRequired, categoryController.insertCategory);
+categoryRouter.patch("/", loginRequired, categoryController.updateCategory);
+categoryRouter.delete("/", loginRequired, categoryController.deleteCategory);
 
 export { categoryRouter };

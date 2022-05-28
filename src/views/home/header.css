@@ -1,0 +1,265 @@
+/* 이 파일에서 25일날 수정할 부분 .dropdown, .scroll_btn, #top_btn image, #bottom_img btn  + 코드 리팩토링 */
+/* 모바일 창에서부터 가장 큰 창 순서로 반응형 작업해보기 */
+body {
+  box-sizing: border-box;
+}
+.container {
+  overflow: hidden;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info_header {
+  /* border: 1px solid black; */
+  height: 100px;
+  width: 100%;
+  position: relative;
+}
+
+.info_logo h1 {
+  position: absolute;
+  top: 14px;
+  left: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #333333;
+  padding: 5px;
+}
+
+.menu_header {
+  background-color: #fff;
+  height: 60px;
+  width: 100%;
+  /* border: 1px solid blue; */
+  display: flex;
+  /* justify-content: space-between; */
+  /* justify-content: center; */
+  align-items: center;
+  /* position: relative; */
+}
+
+.category {
+  position: relative;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  /* width: 500px; */
+  flex-grow: 1;
+  height: 60px;
+  /* border: 3px solid blue; */
+  /* transform: translateX(100px); */
+}
+
+.category li {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  font-size: 15px;
+}
+
+.category li a {
+  text-decoration: none;
+  color: #ff9995;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  border: 1px solid #c8c8c8;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 120px;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 0;
+  display: none;
+}
+
+.dropdown li {
+  padding: 8px 0;
+}
+
+#dropmenu:hover .dropdown {
+  display: block;
+}
+
+.search_bar_info_menu {
+  display: flex;
+
+  flex-grow: 1;
+}
+.search_bar {
+  height: 60px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 2;
+  align-items: center;
+  /* border: 3px solid hotpink; */
+  /* margin-left: 100px; */
+}
+
+.searchInput {
+  border-radius: 10px;
+  width: 80%;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.search_bar i {
+  position: absolute;
+  right: 8px;
+  top: 22px;
+}
+
+/*회원가입 관련 */
+.info_menu {
+  height: 60px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.info_menu li {
+  margin: 0 10px;
+}
+
+.info_menu li a {
+  text-decoration: none;
+  color: #9c9c9c;
+}
+
+.info_menu li:nth-child(1) a:hover,
+.info_menu li:nth-child(2) a:hover,
+.info_menu li:nth-child(3) a:hover,
+.info_menu li:nth-child(4) a:hover {
+  border-bottom: 1px solid #9c9c9c;
+}
+
+.info_menu li.show {
+  display: inline;
+}
+.info_menu li.none {
+  display: none;
+  /* background-color: yellow; */
+}
+#cart {
+  position: relative;
+}
+
+#cart_badge {
+  text-align: center;
+  position: absolute;
+  left: 11px;
+  bottom: 10px;
+  border-radius: 50%;
+  background-color: plum;
+  color: white;
+  width: 15px;
+  height: 15px;
+  font-size: 2px;
+  padding-bottom: 15px;
+}
+
+/* top버튼과 bottom 버튼 */
+.scroll_btn {
+  /* border: 3px solid black; */
+  width: 50px;
+  height: 110px;
+  display: none;
+  position: fixed;
+  right: 10px;
+  bottom: 5px;
+}
+
+#top_btn img,
+#bottom_btn img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  /* 모바일 */
+  .container {
+    width: 95vw;
+  }
+  .info_header {
+    flex-direction: column;
+    height: 80px;
+    margin: 0;
+  }
+  .search_bar {
+    flex-grow: 0;
+    width: 30%;
+    height: 100%;
+  }
+  .searchInput {
+    width: 90%;
+  }
+  .info_logo {
+    width: 100%;
+    height: 100%;
+    /* padding: 20px; */
+  }
+  .info_logo h1 {
+    padding: 0;
+  }
+  /* .info_menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .info_menu {
+    position: static;
+    width: 100%;
+    margin-right: 0;
+  }
+  .info_menu li {
+    text-align: center;
+  } */
+
+  .menu_header {
+    margin-top: 20px;
+    height: 80px;
+    /* line-height: 40px; */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+  }
+  .hot_items,
+  .items {
+    width: 100%;
+    height: 50%;
+  }
+  .hot_items ul,
+  .items ul {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .hot_items ul li,
+  .items ul li {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .scroll_btn {
+    display: block;
+    left: 10px;
+  }
+}

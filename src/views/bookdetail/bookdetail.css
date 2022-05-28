@@ -1,0 +1,154 @@
+body{
+    box-sizing: border-box;
+    margin:0;
+}
+
+.book_container{
+    border: 3px solid blue;
+    width: 1270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book_head{
+    /* border: 3px solid red; */
+    padding-top: 20px;
+    width: 1060px;
+    border-bottom: 1px solid lightgray;
+}
+
+.book_title{
+    /* border: 2px solid greenyellow; */
+    padding: 5px ;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+
+.book_info{
+    /* border: 2px solid aqua; */
+    padding: 10px ;
+    padding-bottom: 20px;
+    font-size: 14px;
+}
+
+.book_info span{
+    display: inline-block;
+    /* border: 1px solid red; */
+    padding-right: 10px;
+    border-right: 1px solid lightgray;
+    text-align: center;
+}
+
+.book_info span:nth-child(2), .book_info span:nth-child(3){
+    padding-left: 10px;
+}
+
+.book_body{
+    margin-top: 30px;
+    border: 3px solid pink;
+    width: 1060px;
+    display: flex;
+}
+
+.book_img{
+    width: 500px;
+    height: 700px;
+    border: 1px solid red;
+}
+
+.book_img img{
+    width: 500px;
+    height: 700px;
+}
+
+.book_details{
+    padding-left: 0;
+    list-style: none;
+    border: 2px solid blue;
+    width: 560px;
+
+}
+
+
+.book_details li{
+    border: 1px solid red;
+    padding: 35px 20px;
+    display: flex;
+    gap: 50px;
+    font-size: 17px;
+}
+
+
+.book_details li .Litem{
+    /* border: 1px solid hotpink; */
+    width: 100px;
+    text-align: left;
+}
+
+.book_details li .Ritem{
+    /* border: 1px solid indigo; */
+
+}
+
+.book_details li .Ritem #nowPrice{
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
+
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+#cartBtn, #buyBtn{
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: pink;
+    border: none;
+    font-size: 16px;
+}
+
+
+
+.total_price{
+    width: 250px;
+}
+
+.total_price span{
+    color: hotpink;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.quan{
+    display: flex;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.qty{
+    width: 150px;
+    /* border: 1px solid red; */
+    transform: translateX(20px)
+}
+
+.qty span{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.qty .minus, .qty .plus{
+    width: 30px;
+    height: 30px;
+}
+
+
