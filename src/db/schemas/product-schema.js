@@ -4,7 +4,7 @@ const ProductSchema = new Schema(
   {
     category: {
       type: Schema.Types.ObjectId,
-      ref: "Category",
+      ref: 'Category',
       required: true,
     },
     name: {
@@ -17,11 +17,11 @@ const ProductSchema = new Schema(
     },
     imgUrl: {
       type: String,
-      required: true,
+      default: null,
     },
     information: {
       type: String,
-      required: null,
+      required: true,
     },
     author: {
       type: String,
@@ -29,7 +29,7 @@ const ProductSchema = new Schema(
     },
     publisher: {
       type: String,
-      default: null,
+      required: true,
     },
     publishedDate: {
       type: String,
