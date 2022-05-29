@@ -7,9 +7,9 @@ import {
 
 class ProductController {
   async getProduct(req, res) {
-    const { productName } = req.params;
+    const { productId } = req.params;
     try {
-      const product = await productService.getProduct(productName);
+      const product = await productService.getProduct(productId);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product loaded successfully',

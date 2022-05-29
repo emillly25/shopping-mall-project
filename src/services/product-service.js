@@ -12,30 +12,20 @@ class ProductService {
   }
 
   async getAllProduct() {
-    try {
       const product = await this.productModel.findAll();
       return product;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
   }
 
-  async getProductOne(name) {
-    try {
-      const product = await this.productModel.findByName(name);
+  async getProductOne(productId) {
+      const product = await this.productModel.findById(productId);
       return product;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
   }
 
-  async getProduct(name) {
-    if (!name) {
+  async getProduct(productId) {
+    if (!productId) {
       return await productService.getAllProduct();
     }
-    return await productService.getProductOne(name);
+    return await productService.getProductOne(productId);
   }
 
   async insertProduct(productInfo, imgUrl, userId) {
