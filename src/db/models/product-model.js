@@ -3,13 +3,11 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('Product', ProductSchema);
 
 export class ProductModel {
-  async findByName(name) {
-    console.log(3);
-    const product = await Product.findOne({ name }).populate(
+  async findById(productId) {
+    const product = await Product.findOne({ _id: productId }).populate(
       'category',
       'name',
     );
-    console.log(product);
     return product;
   }
   async findAll() {
