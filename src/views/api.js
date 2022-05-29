@@ -1,6 +1,7 @@
 // api 로 GET 요청 (/endpoint/params 형태로 요청함)
 async function get(endpoint, params = '') {
   const apiUrl = `${endpoint}/${params}`;
+
   console.log(`%cGET 요청: ${apiUrl} `, 'color: #a25cd1;');
 
   const res = await fetch(apiUrl, {
@@ -55,8 +56,8 @@ async function post(endpoint, data) {
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
 async function patch(endpoint, params = '', data) {
-  const apiUrl = `${endpoint}/${params}`;
-
+  // const apiUrl = `${endpoint}/${params}`;
+  const apiUrl = endpoint;
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
   // 예시: {name: "Kim"} => {"name": "Kim"}
   const bodyData = JSON.stringify(data);
@@ -88,7 +89,8 @@ async function patch(endpoint, params = '', data) {
 // 아래 함수명에 관해, delete 단어는 자바스크립트의 reserved 단어이기에,
 // 여기서는 우선 delete 대신 del로 쓰고 아래 export 시에 delete로 alias 함.
 async function del(endpoint, params = '', data = {}) {
-  const apiUrl = `${endpoint}/${params}`;
+  // const apiUrl = `${endpoint}/${params}`;
+  const apiUrl = endpoint;
   const bodyData = JSON.stringify(data);
 
   console.log(`DELETE 요청 ${apiUrl}`);

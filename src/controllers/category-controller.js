@@ -1,4 +1,4 @@
-const { categoryService } = require("../services/category-service");
+const { categoryService } = require('../services/category-service');
 
 class CategoryController {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -22,12 +22,12 @@ class CategoryController {
     try {
       const result = await categoryService.insertCategory(
         req.body.name,
-        req.currentUserId
+        req.currentUserId,
       );
       if (result) {
         res.status(200).json({
           result,
-          message: "category created",
+          message: 'category created',
         });
       }
       return;
@@ -41,11 +41,11 @@ class CategoryController {
       const result = await categoryService.updateCategory(
         req.body.currentCategoryName,
         req.body.nameToChange,
-        req.currentUserId
+        req.currentUserId,
       );
       res.status(200).json({
         result,
-        message: "category updated",
+        message: 'category updated',
       });
       return;
     } catch (err) {
@@ -57,11 +57,11 @@ class CategoryController {
     try {
       const result = await categoryService.deleteCategory(
         req.body.name,
-        req.currentUserId
+        req.currentUserId,
       );
       res.status(200).json({
         result,
-        message: "category deleted",
+        message: 'category deleted',
       });
       return;
     } catch (err) {
