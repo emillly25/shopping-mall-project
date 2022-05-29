@@ -72,8 +72,7 @@ class UserService {
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
     const role = user.role;
-    const id = user.id;
-    const data = [token,role,id]
+    const data = [token,role]
     
     return data;
   }
