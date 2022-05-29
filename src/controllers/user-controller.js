@@ -75,6 +75,21 @@ const getUserlist = async function (req, res, next) {
     }
   }
 
+const getUserData = async function (req, res, next) {
+  try {
+
+    const userId = req.currentUserId;
+
+    // 사용자 정보를 얻음
+    const user = await userService.getUser(userId);
+  
+    // 사용자 정보를 JSON 형태로 프론트에 보냄
+    res.status(200).json({status:200,message:'성공',data:user});
+  } catch (error) {
+      next(error);
+  }
+}
+
 const editUserData = async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
@@ -136,7 +151,7 @@ const editUserData = async function (req, res, next) {
       }
       
       const userId = req.currentUserId;
-      
+
       // body data 로부터 비밀번호 추출.
       const userPw = req.body.password;
 
@@ -150,4 +165,4 @@ const editUserData = async function (req, res, next) {
       next(error);
     }
   }
-export { register,login,getUserlist,editUserData,deleteUserData};
+export { register,login,getUserlist,getUserData,editUserData,deleteUserData};

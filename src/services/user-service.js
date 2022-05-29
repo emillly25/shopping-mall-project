@@ -83,6 +83,16 @@ class UserService {
     return users;
   }
 
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+    
+    return user;
+  }
+
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
