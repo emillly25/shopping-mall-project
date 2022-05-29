@@ -16,7 +16,6 @@ export class ProductModel {
     const products = await Product.find({}).populate('category', 'name');
     return products;
   }
-
   async create(productInfo) {
     const [
       category,
@@ -30,7 +29,7 @@ export class ProductModel {
       orderCount,
     ] = productInfo;
 
-    const createdNewProduct = new Product({
+    const createdProduct = new Product({
       category: category,
       name: name,
       price: price,
@@ -41,8 +40,8 @@ export class ProductModel {
       publishedDate: publishedDate,
       orderCount: orderCount,
     });
-    await createdNewProduct.save();
-    return createdNewProduct;
+    await createdProduct.save();
+    return createdProduct;
   }
 
   async update(productInfo, productId) {
@@ -55,9 +54,10 @@ export class ProductModel {
       author,
       publisher,
       publishedDate,
+      orderCount,
     ] = productInfo;
 
-    let updatedProduct = await Product.findOneAndUpdate(
+    const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
       {
         category: category,
@@ -68,6 +68,7 @@ export class ProductModel {
         author: author,
         publisher: publisher,
         publishedDate: publishedDate,
+        orderCount: orderCount,
       },
     );
     return updatedProduct;
