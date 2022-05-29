@@ -25,61 +25,73 @@ const addList = async function(){
     </div>
 </li>`
 
+
 const minus = document.querySelector('.minus');  //minus Btn
 const plus = document.querySelector('.plus');   //plus Btn
 const num = document.querySelector('#num');  //input(number)
+
 const itemQaun = document.querySelector('#itemQaun'); //제품 수량(span)
 const itemTotalPrice = document.querySelector('#itemTotalPrice') //최종가격
+
 const productPrice = document.querySelector('#productPrice');
 const deliveryPrice = document.querySelector('#deliveryPrice')
 const finalPrice= document.querySelector('#finalPrice');
 
+// 기본 랜더링
 itemQaun.innerText = Number(num.value);
 itemTotalPrice.innerText = Number(num.value) * price;
-productPrice.innerText = price;
-if(price >=12000){
+productPrice.innerText = Number(itemTotalPrice.textContent) ;
+if(productPrice.textContent >=12000){
     deliveryPrice.innerText = 0
 }else{
     deliveryPrice.innerText = 3000
 }
 finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
 
-plus.addEventListener('click', ()=>{
-    num.stepUp();
-    itemQaun.innerText = Number(num.value);
-    itemTotalPrice.innerText = price *  Number(num.value)
-    productPrice.innerText = itemTotalPrice.textContent;
-    if(Number(productPrice.textContent) >=12000){
-        deliveryPrice.innerText = 0
-    }else{
-        deliveryPrice.innerText = 3000
+
+//수량버튼에 따른 결과 랜더링
+function handleUpdateQuantity(e) {
+    if (e.target.classList.contains('minus')) {
+        num.stepDown()
+        getInfo()
+        getPrice()
+    } else {
+        num.stepUp()
+        getInfo()
+        getPrice()
     }
-    const result = Number(deliveryPrice.textContent)+ Number(productPrice.textContent)
-    finalPrice.innerText = result;
-   
+}
 
-})
-minus.addEventListener('click', ()=>{
-    num.stepDown();
+
+plus.addEventListener('click', handleUpdateQuantity)
+minus.addEventListener('click', handleUpdateQuantity)
+
+function getInfo(){
     itemQaun.innerText = Number(num.value);
-    itemTotalPrice.innerText = price *  Number(num.value)
-    productPrice.innerText = itemTotalPrice.textContent;
-    if(Number(productPrice.textContent) >=12000){
-        deliveryPrice.innerText = 0
-    }else{
-        deliveryPrice.innerText = 3000
-    }
-    
-    const result = Number(deliveryPrice.textContent)+ Number(productPrice.textContent)
-    finalPrice.innerText = result;
-})
+    itemTotalPrice.innerText = Number(num.value) * price;
+}
 
-
-
-
-
-
+function getPrice(){
+    productPrice.innerText = Number(itemTotalPrice.textContent) ;
+if(productPrice.textContent >=12000){
+    deliveryPrice.innerText = 0
+}else{
+    deliveryPrice.innerText = 3000
+}
+finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
+}
 
 
 }
+
 addList();
+
+
+
+
+
+
+
+
+
+
