@@ -1,4 +1,4 @@
-const orderBtn = document.getElementById('orderButton');
+const payBtn = document.querySelector('#payBtn');
 const btn = document.getElementById('searchAddressButton');
 const receiverNameInput = document.querySelector('#receiverName');
 const receiverPhoneNumberInput = document.querySelector('#receiverPhoneNumber');
@@ -9,7 +9,49 @@ const address2Input = document.querySelector('#address2');
 const requestSelectBox = document.querySelector('#requestSelectBox');
 
 btn.addEventListener('click', addressSearch);
-orderBtn.addEventListener('click', orderHandler);
+payBtn.addEventListener('click', orderHandler );
+
+const price = document.querySelector('#price');
+const quan = document.querySelector('#quan');
+const productPrice = document.querySelector('#productPrice');
+const deliveryPrice = document.querySelector('#deliveryPrice');
+const totalPrice = document.querySelector('#totalPrice');
+
+
+const minus = document.querySelector('.minus');  //minus Btn
+const plus = document.querySelector('.plus');   //plus Btn
+const num = document.querySelector('#num');  //input(number)
+
+//기본랜더링
+calPrice()
+
+
+function handleUpdateQuantity(e) {
+  if (e.target.classList.contains('minus')) {
+      num.stepDown()
+  } else {
+      num.stepUp()
+  }
+  price.innerText = (num.value) * 12000 // 변경 데이터 
+  calPrice()
+}
+
+
+plus.addEventListener('click', handleUpdateQuantity)
+minus.addEventListener('click', handleUpdateQuantity)
+
+
+async function calPrice(){
+  productPrice.innerText = Number(price.textContent);
+  if(Number(productPrice.textContent) >=12000){
+    deliveryPrice.innerText = 0
+  }else{
+    deliveryPrice.innerText = 3000
+  }
+  totalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent);
+  
+}
+
 
 
 async function addressSearch(){
@@ -85,5 +127,4 @@ async function orderHandler(){
     return alert('주문에 실패하였습니다..')
   }
 
-    
 }   

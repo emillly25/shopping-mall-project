@@ -1,3 +1,4 @@
+
 const bookName = document.querySelector('.bookName')
 const bookAuthor = document.querySelector('.book_info #author')
 const bookPublish = document.querySelector('.book_info #publish')
@@ -19,13 +20,13 @@ const fixedPrice = document.querySelector('#fixedPrice span'); //정가
 const getBookInfo = async function(){
     const res = await fetch('../booklist/booklist.json');
     const data = await res.json();
-    const  {name, author, price, information, imgUrl, publisher, publishedDate } = data;
-    bookName.innerText = name;
-    bookAuthor.innerText = author;
-    bookPublish.innerText = publisher;
-    bookPubDate.innerText = publishedDate;
-    bookImg.setAttribute('src', imgUrl);
-    bookInformation.innerText = information;
+    const book = data[1]  //index = req.params 이용해서 수정해야....
+    bookName.innerText = book.name;
+    bookAuthor.innerText = book.author;
+    bookPublish.innerText = book.publisher;
+    bookPubDate.innerText = book.publishedDate;
+    bookImg.setAttribute('src', book.imgUrl);
+    bookInformation.innerText = book.information;
 
 }
 
@@ -33,20 +34,19 @@ const getBookInfo = async function(){
 const getPrice = async function(){
     const res = await fetch('../booklist/booklist.json');
     const data = await res.json();
-    const  { price } = data;
-    nowPrice.innerText = price;
+    const book = data[1]    //index 수정해야함....
+    nowPrice.innerText = book.price;
     if(Number(nowPrice.textContent) >=12000){
         deliveryPrice.innerText = 0
     }else{
         deliveryPrice.innerText = 3000
     }
-    if(price >=12000){
-        totalPrice.innerText = price;
+    if(book.price >=12000){
+        totalPrice.innerText = book.price;
     }else{
-        totalPrice.innerText = Number(price) + Number(deliveryPrice.textContent)
+        totalPrice.innerText = Number(book.price) + Number(deliveryPrice.textContent)
     }
-   
-    fixedPrice.innerText = Math.floor(Math.round(price/0.9)/100)*100
+    fixedPrice.innerText = Math.floor(Math.round((book.price)/0.9)/100)*100
 }
 
 getBookInfo();

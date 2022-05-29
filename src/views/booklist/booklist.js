@@ -13,7 +13,7 @@ const getBookInfo = async function(){
     const data = await res.json()
     data.map(({id, name, price, author,information, imgUrl })=>{
         items.innerHTML += `<div class="bookList"><div class="bookCheck"><input type="checkbox"></div>
-        <div class="bookImg"><a href="/bookdetail"><img src="${imgUrl}"></a></div>
+        <div class="bookImg"><a href="/bookdetail/${id}"><img src="${imgUrl}"></a></div>
         <div class="bookInfo"> 
             <div class="bookName"><span><a href="/bookdetail">${name}</a></span></div>
             <div class="bookAuthor"><span>${author}</span></div>
