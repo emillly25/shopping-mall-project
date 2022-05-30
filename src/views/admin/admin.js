@@ -165,7 +165,7 @@ readOrdersBtn.addEventListener('click', async () => {
     else if (params && !res) alert(`${params} 라는 제품은 없습니다.`);
     else alert('orders read 완료');
 
-    console.log('모든 orders 데이터', res.data);
+    console.log('모든 orders 데이터', res.result);
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
