@@ -14,13 +14,15 @@ const bookImg = document.querySelector('.bookImg img');  //책사진
 
 //json에서 데이터 받아오는 함수
 const getBookInfo = async function(){
-    const res = await fetch('./booklist.json');
-    const data = await res.json()
-    data.map(({id, name, price, author,information, imgUrl })=>{
+    const res = await Api.get('/api/product')
+    const data = res.result
+    console.log(data)
+    data.map(({_id, name, price, author,information, imgUrl })=>{
+
         items.innerHTML += `<div class="bookList"><div class="bookCheck"><input type="checkbox"></div>
-        <div class="bookImg"><a href="/bookdetail/${id}"><img src="${imgUrl}"></a></div>
+        <div class="bookImg" id="url"><a href="/bookdetail/?productId=${_id}"><img src="${imgUrl}"></a></div>
         <div class="bookInfo"> 
-            <div class="bookName"><span><a href="/bookdetail">${name}</a></span></div>
+            <div class="bookName"><span><a href="/bookdetail/?productId=${_id}">${name}</a></span></div>
             <div class="bookAuthor"><span>${author}</span></div>
             <div class="bookPrice"><span>${price}</span></div>
             <div class=" bookInformation"><span>${information}</span></div>
@@ -31,11 +33,14 @@ const getBookInfo = async function(){
             <div class="cartBtn"><input id="cartBtn" type="button" value="장바구니" onClick="location.href='/cart'"></div>
         </div></div>` 
 
+   
+
     })
-    
+
+ 
+  
 
 
-    
 }
 
 getBookInfo()

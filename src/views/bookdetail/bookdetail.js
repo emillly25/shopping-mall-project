@@ -1,4 +1,4 @@
-
+import * as Api from '/api.js';
 const bookName = document.querySelector('.bookName')
 const bookAuthor = document.querySelector('.book_info #author')
 const bookPublish = document.querySelector('.book_info #publish')
@@ -16,17 +16,23 @@ const totalPrice = document.querySelector('#total');  //총 결제금액(span태
 const fixedPrice = document.querySelector('#fixedPrice span'); //정가
 
 
+
+
+
+
+
 // json 데이터 불러와서 랜더링
 const getBookInfo = async function(){
-    const res = await fetch('../booklist/booklist.json');
-    const data = await res.json();
-    const book = data[1]  //index = req.params 이용해서 수정해야....
-    bookName.innerText = book.name;
-    bookAuthor.innerText = book.author;
-    bookPublish.innerText = book.publisher;
-    bookPubDate.innerText = book.publishedDate;
-    bookImg.setAttribute('src', book.imgUrl);
-    bookInformation.innerText = book.information;
+        const productId = (window.location.href).split('=')[1]
+    const res = await Api.get('/api/product', productId)
+    console.log(res)
+    const book = res.result;
+        bookName.innerText = book.name;
+        bookAuthor.innerText = book.author;
+        bookPublish.innerText = book.publisher;
+        bookPubDate.innerText = book.publishedDate;
+        bookImg.setAttribute('src', book.imgUrl);
+        bookInformation.innerText = book.information;
 
 }
 
@@ -71,10 +77,6 @@ function handleUpdateQuantity(e) {
 
 plus.addEventListener('click', handleUpdateQuantity)
 minus.addEventListener('click', handleUpdateQuantity)
-
-
-
-
 
 
 
