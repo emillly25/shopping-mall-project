@@ -3,20 +3,17 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('Product', ProductSchema);
 
 export class ProductModel {
-  async findByName(name) {
-    console.log(3);
-    const product = await Product.findOne({ name }).populate(
+  async findById(productId) {
+    const product = await Product.findOne({ _id: productId }).populate(
       'category',
       'name',
     );
-    console.log(product);
     return product;
   }
   async findAll() {
     const products = await Product.find({}).populate('category', 'name');
     return products;
   }
-
   async create(productInfo) {
     const [
       category,
@@ -30,7 +27,7 @@ export class ProductModel {
       orderCount,
     ] = productInfo;
 
-    const createdNewProduct = new Product({
+    const createdProduct = new Product({
       category: category,
       name: name,
       price: price,
@@ -41,8 +38,8 @@ export class ProductModel {
       publishedDate: publishedDate,
       orderCount: orderCount,
     });
-    await createdNewProduct.save();
-    return createdNewProduct;
+    await createdProduct.save();
+    return createdProduct;
   }
 
   async update(productInfo, productId) {
@@ -55,9 +52,10 @@ export class ProductModel {
       author,
       publisher,
       publishedDate,
+      orderCount,
     ] = productInfo;
 
-    let updatedProduct = await Product.findOneAndUpdate(
+    const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId },
       {
         category: category,
@@ -68,6 +66,7 @@ export class ProductModel {
         author: author,
         publisher: publisher,
         publishedDate: publishedDate,
+        orderCount: orderCount,
       },
     );
     return updatedProduct;

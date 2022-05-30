@@ -4,7 +4,7 @@ import { loginRequired } from '../middlewares';
 const productRouter = Router();
 const upload = require('../middlewares/imageUploader');
 
-productRouter.get('/:productName*?', productController.getProduct);
+productRouter.get('/:productId*?', productController.getProduct);
 productRouter.post(
   '/',
   [loginRequired, upload.single('img')],

@@ -40,7 +40,7 @@ readBtn.addEventListener('click', async () => {
     if (!params && !res) alert('카테고리가 없습니다.');
     else if (params && !res) alert(`${params} 라는 카테고리는 없습니다.`);
     else alert('read 완료');
-    console.log('res : ', res);
+    // console.log('res : ', res);
     // 로그인 페이지 이동
     window.location.href = '/admin';
   } catch (err) {
@@ -60,18 +60,16 @@ updateBtn.addEventListener('click', async () => {
   const nameToChange = change.value;
   try {
     const data = { currentCategoryName, nameToChange };
-    console.log('data : ', data);
+    // console.log('data : ', data);
     const res = await Api.patch('/api/category', data);
 
-    // 질문 1) params 필요 없지 않음? api.js 의 58이 아니라 59번째 줄 처럼 params 없애니까 되던데?
-    // 질문 2) update가 아니라 updateOneAndUpdate는 안됨? 지금 상황에서는 Update가 안되는데, 그 이유가 궁금함!
     alert('update 완료');
-    console.log('res : ', res); // update 메소드는 return 값이 없어서, res 출력해보면, message 만 도착함!
-    // // 로그인 페이지 이동
-    // window.location.href = '/admin';
+
+    // 로그인 페이지 이동
+    window.location.href = '/admin';
   } catch (err) {
     alert(err);
-    // 질문 3) error 메세지 어떻게 따오지?
+    // error 메세지 어떻게 따오지?
   }
 });
 
@@ -84,16 +82,13 @@ const deleteBtn = del.querySelector('#btn');
 deleteBtn.addEventListener('click', async () => {
   const name = deleteName.value;
   try {
-    // const data = { name };
-    console.log('name : ', name);
-    const res = await Api.delete('/api/category', name);
-    // 질문 1) delete 도 deleteOne이나, 이런 걸로 하지 않은 이유 여쭤보기
-    // 질문 2) 이것도 patch 처럼 왜 params 를 넣었는지 여쭤보기 (api.js 91, 92줄)
-    // 질문 3) 여기서도 update 때와 마찬가지로, 삭제가 제대로 되지 않는다! params 넣는 것과 관계가 있는지?!
+    const data = { name };
+    const res = await Api.delete('/api/category', data);
+
     alert(`${name} category deleted`);
-    console.log(res);
+
     // 로그인 페이지 이동
-    // window.location.href = '/admin';
+    window.location.href = '/admin';
   } catch (err) {
     alert(err);
     // error 메세지 어떻게 따오지?
@@ -120,7 +115,6 @@ const insertOrderBtn = insertOrder.querySelector('#btn');
 insertOrderBtn.addEventListener('click', async () => {
   try {
     const data = {
-      // 질문) user_id, address 의 _id는 저절로 생기는 거 그냥 냅두면 되는건지?!
       fullName: fullName.value,
       address: {
         postalCode: postalCode.value,
@@ -138,7 +132,7 @@ insertOrderBtn.addEventListener('click', async () => {
     const res = await Api.post('/api/order', data);
 
     alert(res.message);
-    console.log(res.data);
+    // console.log(res.data);
 
     // 로그인 페이지 이동
     // window.location.href = '/admin';
@@ -181,12 +175,25 @@ readOrdersBtn.addEventListener('click', async () => {
 
 // Orders delete (category delete 부분 문제 해결 후 한번에 같이 해결하기)
 
-// category delete 하는 back 부분(범석님이 구현),
-// order delete 하는 back 부분(은지님이 구현),
-// 그리고 frontEnd api.js 쪽에서 delete 하는 부분 (del 함수)
-// 이 셋의 형식이 일치해야 한다!
+const delOrder = document.querySelector('.o_delete');
+const deleteOrderName = delOrder.querySelector('#name');
+const deleteOrderBtn = delOrder.querySelector('#btn');
 
-// 주문은 추가, 조회, 취소만 하면 된다!
+deleteOrderBtn.addEventListener('click', async () => {
+  const orderId = deleteOrderName.value;
+  try {
+    const data = { orderId };
+    const res = await Api.delete('/api/order/admin/', data);
+
+    alert(`${name} category deleted`);
+
+    // 로그인 페이지 이동
+    window.location.href = '/admin';
+  } catch (err) {
+    alert(err);
+    // error 메세지 어떻게 따오지?
+  }
+});
 
 // ==================== <Product> ====================
 
