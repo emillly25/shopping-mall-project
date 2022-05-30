@@ -17,9 +17,9 @@ orderRouter.get('/',loginRequired,Ordercontroller.getOrder);
 orderRouter.get('/admin/:userId',adminRequired,Ordercontroller.getOrderByAdmin);
 
 // 주문 취소
-orderRouter.delete('/:orderId',loginRequired,Ordercontroller.deleteOrder);
+orderRouter.delete('/',loginRequired,Ordercontroller.deleteOrder);
 
 // 주문 취소 (관리자)
-orderRouter.delete('/admin/:orderId',adminRequired,Ordercontroller.deleteOrderByAdmin);
+orderRouter.delete('/admin',adminRequired,Ordercontroller.deleteOrderByAdmin);
 
 export { orderRouter };

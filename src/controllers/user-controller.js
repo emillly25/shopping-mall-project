@@ -24,11 +24,12 @@ const register = async (req, res, next) => {
   
       // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
       // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-      res.status(201).json(
-        { status: 201,
-          message: '회원가입 성공',
-          data: newUser}
-        );
+      res.status(201).json({
+        isSuccess: true,
+        message: 'Sign Up successfully',
+        status: 201,
+        result: newUser
+        });
     } catch (error) {
       next(error);
     }
@@ -53,11 +54,12 @@ const login = async function (req, res, next) {
       const role = data[1];
 
       // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-      res.status(200).json(
-        { status: 200,
-          message: '로그인 성공',
-          data:{token,role}}
-        );
+      res.status(200).json({
+        isSuccess: true,
+        message: 'Sign In successfully',
+        status: 200,
+        result: {token,role}
+        });
     } catch (error) {
       next(error);
     }
@@ -69,7 +71,12 @@ const getUserlist = async function (req, res, next) {
       const users = await userService.getUsers();
   
       // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-      res.status(200).json({status:200,message:'성공',data:users});
+      res.status(200).json({
+        isSuccess: true,
+        message: 'Users loaded successfully',
+        status: 200,
+        result: users
+      });
     } catch (error) {
       next(error);
     }
@@ -84,7 +91,12 @@ const getUserData = async function (req, res, next) {
     const user = await userService.getUser(userId);
   
     // 사용자 정보를 JSON 형태로 프론트에 보냄
-    res.status(200).json({status:200,message:'성공',data:user});
+    res.status(200).json({
+      isSuccess: true,
+      message: 'User loaded successfully',
+      status: 200,
+      result: user
+    });
   } catch (error) {
       next(error);
   }
@@ -134,7 +146,12 @@ const editUserData = async function (req, res, next) {
       );
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-      res.status(200).json({status:200,message:'성공',data:updatedUserInfo});
+      res.status(200).json({
+        isSuccess: true,
+        message: 'User updated successfully',
+        status: 200,
+        result: updatedUserInfo
+      });
     } catch (error) {
       next(error);
     }
@@ -160,7 +177,12 @@ const editUserData = async function (req, res, next) {
 
       console.log(data)
       // 성공 여부 프론트에 보냄
-      res.status(200).json({status:200,message:'성공',data});
+      res.status(200).json({
+        isSuccess: true,
+        message: 'User deleted successfully',
+        status: 200,
+        result: data
+      });
     } catch (error) {
       next(error);
     }
