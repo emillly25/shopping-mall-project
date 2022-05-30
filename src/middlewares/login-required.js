@@ -21,7 +21,6 @@ function loginRequired(req, res, next) {
   try {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
-    // console.log('jwtDecoded',jwtDecoded)
     const userId = jwtDecoded.userId;
 
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
@@ -30,7 +29,7 @@ function loginRequired(req, res, next) {
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
-    // 403 코드로 JSON 형태로 프론트에 전달함.
+    // 401 코드로 JSON 형태로 프론트에 전달함.
     res.status(401).json({
       status: 401,
       result: 'forbidden-approach',
