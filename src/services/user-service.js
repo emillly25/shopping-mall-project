@@ -72,8 +72,7 @@ class UserService {
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
     const role = user.role;
-    const id = user.id;
-    const data = [token,role,id]
+    const data = [token,role]
     
     return data;
   }
@@ -82,6 +81,16 @@ class UserService {
   async getUsers() {
     const users = await this.userModel.findAll();
     return users;
+  }
+
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+    
+    return user;
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.

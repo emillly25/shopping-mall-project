@@ -1,126 +1,131 @@
 const { productService } = require('../services/product-service');
-const { categoryService } = require('../services/category-service');
+
+import {
+  ValueIsNullError,
+  CategoryDoesNotExistsError,
+} from '../error/value-error';
 
 class ProductController {
   async getProduct(req, res) {
-    let { productName } = req.params;
+
+
+    const { productId } = req.params;
+
     try {
-      let product;
-      if (!productName) {
-        product = await productService.getAllProduct();
-      } else {
-        product = await productService.getProduct(productName);
-      }
-      return res.json(product);
+      const product = await productService.getProduct(productId);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product loaded successfully',
+        status: 200,
+        result: product,
+      });
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json({
+        isSuccess: false,
+        message: err.message,
+        status: 500,
+        result: null,
+      });
     }
   }
-  // upload.single('img');
-  // const imgUrl = `https://eliceteam7-s3-bucket.s3.ap-northeast-2.amazonaws.com/archive/${req.file.filename}`;
-  // console.log(imgUrl);
+
   async insertProduct(req, res) {
+    const imgUrl = req.file.location;
     try {
-      const categoryName = req.body.categoryName;
-      const name = req.body.name;
-      const price = req.body.price;
-      const imgUrl = req.file.location;
-      const information = req.body.information;
-      const author = req.body.author;
-      const publisher = req.body.publisher;
-      const publishedDate = req.body.publishedDate;
-      const orderCount = req.body.orderCount;
-
-      const category = await categoryService.getCategory(categoryName);
-      if (!category) {
-        throw new Error("CategoryName doesn't exist in Category Schema");
-      }
-
-      const productInfo = [
-        category._id,
-        name,
-        price,
+      const product = await productService.insertProduct(
+        req.body,
         imgUrl,
-        information,
-        author,
-        publisher,
-        publishedDate,
-        orderCount,
-      ];
-
-      const result = await productService.insertProduct(
-        productInfo,
         req.currentUserId,
       );
-      if (result) {
-        res.status(200).json({
-          result,
-          message: 'Product created',
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product inserted successfully',
+        status: 200,
+        result: product,
+      });
+    } catch (err) {
+      if (
+        err instanceof ValueIsNullError ||
+        err instanceof CategoryDoesNotExistsError
+      ) {
+        return res.status(400).json({
+          isSuccess: false,
+          message: err.message,
+          status: 400,
+          result: null,
         });
       }
-      return;
-    } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json({
+        isSuccess: false,
+        message: err.message,
+        status: 500,
+        result: null,
+      });
     }
   }
 
   async updateProduct(req, res) {
+    const imgUrl = req.file.location;
     try {
-      const productId = req.body.productId;
-
-      const categoryName = req.body.categoryName;
-      const name = req.body.name;
-      const price = req.body.price;
-      const imgUrl = req.file.location;
-      const information = req.body.information;
-      const author = req.body.author;
-      const publisher = req.body.publisher;
-      const publishedDate = req.body.publishedDate;
-
-      const category = await categoryService.getCategory(categoryName);
-      if (!category) {
-        throw new Error("CategoryName doesn't exist in Category Schema");
-      }
-
-      const productInfo = [
-        category._id,
-        name,
-        price,
+      const product = await productService.updateProduct(
+        req.body,
         imgUrl,
-        information,
-        author,
-        publisher,
-        publishedDate,
-      ];
-
-      const result = await productService.updateProduct(
-        productInfo,
+        req.currentUserId,
+      );
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product updated successfully',
+        status: 200,
+        result: product,
+      });
+    } catch (err) {
+      if (
+        err instanceof ValueIsNullError ||
+        err instanceof CategoryDoesNotExistsError
+      ) {
+        return res.status(400).json({
+          isSuccess: false,
+          message: err.message,
+          status: 400,
+          result: null,
+        });
+      }
+      return res.status(500).json({
+        isSuccess: false,
+        message: err.message,
+        status: 500,
+        result: null,
+      });
+    }
+  }
+  async deleteProduct(req, res) {
+    const productId = req.body.productId;
+    try {
+      const deletedProduct = await productService.deleteProduct(
         productId,
         req.currentUserId,
       );
-      res.status(200).json({
-        result,
-        message: 'product updated',
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product deleted successfully',
+        status: 200,
+        result: deletedProduct,
       });
-      return;
     } catch (err) {
-      return res.status(500).json(err);
-    }
-  }
-
-  async deleteProduct(req, res) {
-    try {
-      const result = await productService.deleteProduct(
-        req.body.productId,
-        req.currentUserId,
-      );
-      res.status(200).json({
-        result,
-        message: 'product deleted',
+      if (err instanceof ValueIsNullError) {
+        return res.status(400).json({
+          isSuccess: false,
+          message: err.message,
+          status: 400,
+          result: null,
+        });
+      }
+      return res.status(500).json({
+        isSuccess: false,
+        message: err.message,
+        status: 500,
+        result: null,
       });
-      return;
-    } catch (err) {
-      return res.status(500).json(err);
     }
   }
 }
