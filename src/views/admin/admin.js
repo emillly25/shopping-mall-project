@@ -205,7 +205,7 @@ const insertProduct = document.querySelector('.p_insert');
 const categoryName = insertProduct.querySelector('#categoryName');
 const name = insertProduct.querySelector('#name');
 const Productprice = insertProduct.querySelector('#price');
-const img = insertProduct.querySelector('#img');
+
 const information = insertProduct.querySelector('#information');
 const author = insertProduct.querySelector('#author');
 const publisher = insertProduct.querySelector('#publisher');
@@ -214,7 +214,14 @@ const orderCount = insertProduct.querySelector('#orderCount');
 const insertProductBtn = insertProduct.querySelector('#btn');
 
 insertProductBtn.addEventListener('click', async () => {
-  console.log('file은? ', img.files[0]);
+  const formData = new FormData(document.getElementById('testForm'));
+  const fileInput = document.querySelector('#fileInput');
+  // console.log('files 내부 : ', fileInput.files[0]);
+  formData.append('img', fileInput.files[0]);
+
+  for (var pair of formData.entries()) {
+    console.log(pair[0] + ', ' + pair[1]);
+  }
   try {
     const data = {
       // categoryName: categoryName.value,
@@ -229,7 +236,7 @@ insertProductBtn.addEventListener('click', async () => {
       categoryName: '국내도서',
       name: '책6',
       price: 2,
-      img: img.files[0],
+      img: formData,
       information: '정보',
       author: '저자',
       publisher: '퍼블리셔',
