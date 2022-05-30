@@ -24,19 +24,12 @@ const Order = async (req, res, next) => {
         );
       }
   
-      // params로부터 id를 가져옴
-      // const userId = req.params.userId;
-      const userId = req.currentUserId;
       
+      const userId = req.currentUserId;
+
       // req (request)의 body 에서 데이터 가져오기
-      const fullName = req.body.fullName;
-      const address = req.body.address;
-      const phoneNumber = req.body.phoneNumber;
-      const order_data = req.body.order_data;
-      const price = req.body.price;
-      const quantity = req.body.quantity;
-      const request = req.body.request;
-  
+      const {fullName, address, phoneNumber, order_data, price, quantity, request} = req.body;
+      
       // 위 데이터를 유저 db에 추가하기
       const newOrder = await orderService.addOrder({
         user_id:userId,
@@ -65,8 +58,6 @@ const Order = async (req, res, next) => {
   const getOrder = async (req, res, next) => {
     try {
 
-      // params로부터 id를 가져옴
-      //const userId = req.params.userId;
       const userId = req.currentUserId;
 
       // 사용자 주문 목록
@@ -95,16 +86,16 @@ const Order = async (req, res, next) => {
   const deleteOrder = async(req,res,next) =>{
     try {
 
-      // params로부터 id를 가져옴
-      // const userId = req.params.userId;
       const userId = req.currentUserId;
+
+      // params로부터 id를 가져옴
       const orderId = req.params.orderId;
 
-      // 유저 정보 삭제
+      // 주문 정보 삭제
       const data = await orderService.deleteOrder(userId,orderId);
 
       // 성공 여부 프론트에 보냄
-      res.status(200).json({status:200,message:'주문 취소 성공'});
+      res.status(200).json({status:200,message:'주문 취소 성공',data});
     } catch (error) {
       next(error);
     }
@@ -116,11 +107,11 @@ const Order = async (req, res, next) => {
       const orderId = req.params.orderId;
       const userId = await orderService.findIdByorderId(orderId);
 
-      // 유저 정보 삭제
+      // 주문 정보 삭제
       const data = await orderService.deleteOrder(userId,orderId);
 
       // 성공 여부 프론트에 보냄
-      res.status(200).json({status:200,message:'주문 취소 성공'});
+      res.status(200).json({status:200,message:'주문 취소 성공',data});
     } catch (error) {
       next(error);
     }
