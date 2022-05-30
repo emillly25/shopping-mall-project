@@ -7,7 +7,12 @@ const getOrderlist = async (req, res, next) => {
     const orders = await orderService.getOrders();
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json({ status: 200, message: '성공', data: orders });
+    res.status(200).json({
+      isSuccess: true,
+      message: 'Orders loaded successfully',
+      status: 200,
+      result: orders,
+    });
   } catch (error) {
     next(error);
   }
@@ -39,7 +44,7 @@ const Order = async (req, res, next) => {
 
     // 위 데이터를 유저 db에 추가하기
     const newOrder = await orderService.addOrder({
-      user_id: userId,
+      userId,
       fullName,
       address,
       phoneNumber,
@@ -51,49 +56,20 @@ const Order = async (req, res, next) => {
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-    res.status(200).json({ status: 200, message: '주문 성공', data: newOrder });
+    res.status(200).json({
+      isSuccess: true,
+      message: 'Order inserted successfully',
+      status: 200,
+      result: newOrder,
+    });
   } catch (error) {
     next(error);
   }
-
-  //   // params로부터 id를 가져옴
-  //   // const userId = req.params.userId;
-  //   const userId = req.currentUserId;
-
-  //   // req (request)의 body 에서 데이터 가져오기
-  //   const fullName = req.body.fullName;
-  //   const address = req.body.address;
-  //   const phoneNumber = req.body.phoneNumber;
-  //   const order_data = req.body.order_data;
-  //   const price = req.body.price;
-  //   const quantity = req.body.quantity;
-  //   const request = req.body.request;
-
-  //   // 위 데이터를 유저 db에 추가하기
-  //   const newOrder = await orderService.addOrder({
-  //     user_id: userId,
-  //     fullName,
-  //     address,
-  //     phoneNumber,
-  //     order_data,
-  //     price,
-  //     quantity,
-  //     request,
-  //   });
-
-  //   // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
-  //   // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-  //   res.status(200).json({ status: 200, message: '주문 성공', data: newOrder });
-  // } catch (error) {
-  //   next(error);
-  // }
 };
 
 // 사용자 주문 조회
 const getOrder = async (req, res, next) => {
   try {
-    // params로부터 id를 가져옴
-    //const userId = req.params.userId;
     const userId = req.currentUserId;
 
     // 사용자 주문 목록
@@ -112,7 +88,12 @@ const getOrderByAdmin = async (req, res, next) => {
     const orders = await orderService.getOrdersById(userId);
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json({ status: 200, message: '성공', data: orders });
+    res.status(200).json({
+      isSuccess: true,
+      message: 'Orders loaded successfully',
+      status: 200,
+      result: orders,
+    });
   } catch (error) {
     next(error);
   }
@@ -120,16 +101,21 @@ const getOrderByAdmin = async (req, res, next) => {
 
 const deleteOrder = async (req, res, next) => {
   try {
-    // params로부터 id를 가져옴
-    // const userId = req.params.userId;
     const userId = req.currentUserId;
-    const orderId = req.params.orderId;
 
-    // 유저 정보 삭제
+    // body로부터 id를 가져옴
+    const orderId = req.body.orderId;
+
+    // 주문 정보 삭제
     const data = await orderService.deleteOrder(userId, orderId);
 
     // 성공 여부 프론트에 보냄
-    res.status(200).json({ status: 200, message: '주문 취소 성공' });
+    res.status(200).json({
+      isSuccess: true,
+      message: 'Order canceled successfully',
+      status: 200,
+      result: data,
+    });
   } catch (error) {
     next(error);
   }
@@ -137,14 +123,19 @@ const deleteOrder = async (req, res, next) => {
 
 const deleteOrderByAdmin = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
+    const orderId = req.body.orderId;
     const userId = await orderService.findIdByorderId(orderId);
 
     // 주문 정보 삭제
     const data = await orderService.deleteOrder(userId, orderId);
 
     // 성공 여부 프론트에 보냄
-    res.status(200).json({ status: 200, message: '주문 취소 성공', data });
+    res.status(200).json({
+      isSuccess: true,
+      message: 'Order canceled successfully',
+      status: 200,
+      result: data,
+    });
   } catch (error) {
     next(error);
   }
