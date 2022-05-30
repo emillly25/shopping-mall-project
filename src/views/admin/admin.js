@@ -216,8 +216,8 @@ const insertProductBtn = insertProduct.querySelector('#btn');
 insertProductBtn.addEventListener('click', async () => {
   const formData = new FormData(document.getElementById('testForm'));
   const fileInput = document.querySelector('#fileInput');
-  // console.log('files 내부 : ', fileInput.files[0]);
-  formData.append('img', fileInput.files[0]);
+  console.log('files 내부 : ', fileInput.files[0]);
+  formData.append('fileInput', fileInput.files[0]);
 
   for (var pair of formData.entries()) {
     console.log(pair[0] + ', ' + pair[1]);
