@@ -205,7 +205,7 @@ const insertProduct = document.querySelector('.p_insert');
 const categoryName = insertProduct.querySelector('#categoryName');
 const name = insertProduct.querySelector('#name');
 const Productprice = insertProduct.querySelector('#price');
-const imgUrl = insertProduct.querySelector('#imgUrl');
+const img = insertProduct.querySelector('#img');
 const information = insertProduct.querySelector('#information');
 const author = insertProduct.querySelector('#author');
 const publisher = insertProduct.querySelector('#publisher');
@@ -214,17 +214,27 @@ const orderCount = insertProduct.querySelector('#orderCount');
 const insertProductBtn = insertProduct.querySelector('#btn');
 
 insertProductBtn.addEventListener('click', async () => {
+  console.log('file은? ', img.files[0]);
   try {
     const data = {
-      categoryName: categoryName.value,
-      name: name.value,
-      price: Productprice.value,
-      imgUrl: imgUrl.value,
-      information: information.value,
-      author: author.value,
-      publisher: publisher.value,
-      publishedDate: publishedDate.value,
-      orderCount: orderCount.value,
+      // categoryName: categoryName.value,
+      // name: name.value,
+      // price: Number(Productprice.value),
+      // img: img.files[0],
+      // information: information.value,
+      // author: author.value,
+      // publisher: publisher.value,
+      // publishedDate: publishedDate.value,
+      // orderCount: Number(orderCount.value),
+      categoryName: '국내도서',
+      name: '책6',
+      price: 2,
+      img: img.files[0],
+      information: '정보',
+      author: '저자',
+      publisher: '퍼블리셔',
+      publishedDate: '2022-02-02',
+      orderCount: 3,
     };
 
     // console.log('data : ', data);

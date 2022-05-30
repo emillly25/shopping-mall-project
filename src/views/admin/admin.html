@@ -102,7 +102,10 @@
             <button id="btn">submit</button>
           </div>
           <div class="o_delete">
-            <div>주문 취소</div>
+            <div>
+              주문 취소(order-router.js 부분 :orderId -> params 부분 수정되면
+              재실험)
+            </div>
             <input type="text" id="name" />
             <button id="btn">submit</button>
           </div>
@@ -119,7 +122,10 @@
               <input type="text" id="categoryName" placeholder="categoryName" />
               <input type="text" id="name" placeholder="name" />
               <input type="text" id="price" placeholder="price" />
-              <input type="text" id="imgUrl" placeholder="imgUrl" />
+              <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
+              <form id="testForm">
+                <input type="file" id="img" placeholder="imgUrl" />
+              </form>
               <input type="text" id="information" placeholder="information" />
               <input type="text" id="author" placeholder="author" />
               <input type="text" id="publisher" placeholder="publisher" />
