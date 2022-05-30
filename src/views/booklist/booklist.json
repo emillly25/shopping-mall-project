@@ -1,5 +1,5 @@
 [{
-    "id": 1,
+   
     "categoryName": "테스",
     "name": "1번도서",
     "price": 11000,
@@ -10,7 +10,7 @@
     "imgUrl": "https://image.aladin.co.kr/product/29464/15/cover/k892837234_1.jpg"
 },
 {
-    "id": 2,
+    
     "categoryName": "테스",
     "name": "2번도서",
     "price": 12000,
@@ -21,7 +21,7 @@
     "imgUrl": "https://image.aladin.co.kr/product/29509/33/cover/k832837243_1.jpg"
 },
 {
-    "id": 3,
+   
     "categoryName": "테스",
     "name": "3번도서",
     "price": 13000,
@@ -32,7 +32,7 @@
     "imgUrl": "https://image.aladin.co.kr/product/29483/52/cover/8932922365_2.jpg"
 },
 {
-    "id": 4,
+    
     "categoryName": "테스",
     "name": "4번도서",
     "price": 14000,
@@ -43,7 +43,7 @@
     "imgUrl": "https://image.aladin.co.kr/product/29445/77/cover/k942837738_2.jpg"
 },
 {
-    "id": 5,
+   
     "categoryName": "테스",
     "name": "5번도서",
     "price": 15000,

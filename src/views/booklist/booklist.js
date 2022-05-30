@@ -1,9 +1,14 @@
+import * as Api from '/api.js';
+
 const items = document.querySelector('.items');
 const bookName = document.querySelector('.bookName span'); //책제목 
 const bookAuthor = document.querySelector('.bookAuthor span');  //저자
 const bookPrice = document.querySelector('.bookPrice span');  //판매가격
 const bookInformation = document.querySelector('.bookInformation span'); //책설명
 const bookImg = document.querySelector('.bookImg img');  //책사진
+
+
+
 
 
 
@@ -34,6 +39,8 @@ const getBookInfo = async function(){
 }
 
 getBookInfo()
+
+
 
 
 

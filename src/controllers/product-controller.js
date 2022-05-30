@@ -4,7 +4,6 @@ const { categoryService } = require('../services/category-service');
 class ProductController {
   async getProduct(req, res) {
     let { productName } = req.params;
-
     try {
       let product;
       if (!productName) {

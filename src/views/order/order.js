@@ -1,3 +1,5 @@
+import * as Api from '/api.js';
+
 const payBtn = document.querySelector('#payBtn');
 const btn = document.getElementById('searchAddressButton');
 const receiverNameInput = document.querySelector('#receiverName');
@@ -8,9 +10,13 @@ const address1Input = document.querySelector('#address1');
 const address2Input = document.querySelector('#address2');
 const requestSelectBox = document.querySelector('#requestSelectBox');
 
+//배송지 주소 검색
 btn.addEventListener('click', addressSearch);
+
+//최종 구매버튼 post 요청
 payBtn.addEventListener('click', orderHandler );
 
+const name = document.querySelector('#name');
 const price = document.querySelector('#price');
 const quan = document.querySelector('#quan');
 const productPrice = document.querySelector('#productPrice');
@@ -108,17 +114,18 @@ async function orderHandler(){
   }
 
 
- const jsonData = {
-    receiverName, receiverPhoneNumber, postalCode, address1, address2, request
- }
+const deliveryData = {
+    receiverName, receiverPhoneNumber, postalCode, address1, address2, request,
+}
 
 
-  const res = await fetch(`https://${window.location.hostname}:8190/api/order`,{
+
+  const res = await fetch(`/api/order`,{
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify(jsonData),
+    body: JSON.stringify(deliveryData),
   });
   
   if(res.status === 201){
