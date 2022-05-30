@@ -135,3 +135,11 @@ const deliveryData = {
   }
 
 }   
+
+
+// async function getData(productId){
+//   const res = await Api.get(`/api/product/${productId}`);
+//   console.log(res)
+// }
+
+// export { getData }

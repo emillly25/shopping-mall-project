@@ -23,9 +23,8 @@ const fixedPrice = document.querySelector('#fixedPrice span'); //정가
 
 // json 데이터 불러와서 랜더링
 const getBookInfo = async function(){
-        const productId = (window.location.href).split('=')[1]
+    const productId = (window.location.href).split('=')[1]
     const res = await Api.get('/api/product', productId)
-    console.log(res)
     const book = res.result;
         bookName.innerText = book.name;
         bookAuthor.innerText = book.author;
@@ -38,9 +37,9 @@ const getBookInfo = async function(){
 
 // json에서 가격 데이터 받아와서 handling
 const getPrice = async function(){
-    const res = await fetch('../booklist/booklist.json');
-    const data = await res.json();
-    const book = data[1]    //index 수정해야함....
+    const productId = (window.location.href).split('=')[1]
+    const res = await Api.get('/api/product', productId)
+    const book = res.result
     nowPrice.innerText = book.price;
     if(Number(nowPrice.textContent) >=12000){
         deliveryPrice.innerText = 0
