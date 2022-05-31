@@ -23,20 +23,27 @@
             <h1>장바구니</h1>
         </div>
         <div class="cart_list">
-            <div id="choice"><input type="checkbox"><span class="Rborder">전체선택</span><span>선택삭제</span></div>
+            <div id="choice">
+                <input id="allCheckBtn" type="checkbox">
+                <div class="Rborder all" style="cursor:pointer">전체선택</div>
+                <div class="some" style="cursor:pointer" >선택삭제</div>
+            </div>
             <ul id="items">
+                <!--cart.js에서 랜더링-->
             </ul>
         </div>
         <div class="cart_pay">
             <h2><span>결제상세</span></h2>
             <div class="cart_price">
-                <div>상품금액 <span id="productPrice"></span> 원</div>
-                <div>배송비 <span id="deliveryPrice"></span> 원</div>
+                <div>상품가격 <span id="productPrice"></span> 원</div>
+                <div>배송비 <span id="deliveryPrice"></span> 원 (12,000원 이상 무료배송)</div>
             </div>
             <div class="cart_total_price">총 결제금액 <span id="finalPrice"></span> 원</div>
         </div>
-        <div class="cart_buy_btn buttons"><a href="/order"><input class="button is-primary" type="button" value="구매하기"></a></div>
+        <div class="cart_buy_btn buttons"><input class="button is-primary" type="button" value="구매하기" onClick="location.href='/order'"></div>
+     
     </div>
+
 
 </body>
 

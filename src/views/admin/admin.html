@@ -114,45 +114,80 @@
         <div class="product">
           <h1 class="subtitle">상품 CRUD</h1>
           <div class="p_insert">
-            <div>
-              상품 추가 (왜 안될까..? 입력하는 데이터 형식이 달라서..? 물어보기)
-            </div>
+            <div>상품 추가</div>
             <div class="p_insert_inputs">
-              <input type="text" id="categoryName" placeholder="categoryName" />
-              <input type="text" id="name" placeholder="name" />
-              <input type="text" id="price" placeholder="price" />
-              <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
-              <form id="testForm">
+              <form id="testForm" enctype="multipart/form-data">
+                <input
+                  type="text"
+                  id="categoryName"
+                  placeholder="categoryName"
+                />
+                <input type="text" id="name" placeholder="name" />
+                <input type="text" id="price" placeholder="price" />
+                <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
+
                 <input type="file" id="fileInput" placeholder="imgUrl" />
+
+                <input type="text" id="information" placeholder="information" />
+                <input type="text" id="author" placeholder="author" />
+                <input type="text" id="publisher" placeholder="publisher" />
+                <input
+                  type="text"
+                  id="publishedDate"
+                  placeholder="publishedDate"
+                />
+                <input type="text" id="orderCount" placeholder="orderCount" />
               </form>
-              <input type="text" id="information" placeholder="information" />
-              <input type="text" id="author" placeholder="author" />
-              <input type="text" id="publisher" placeholder="publisher" />
-              <input
-                type="text"
-                id="publishedDate"
-                placeholder="publishedDate"
-              />
-              <input type="text" id="orderCount" placeholder="orderCount" />
             </div>
+
             <button id="btn">submit</button>
           </div>
-          <!-- <div class="p_get">
-            <div>주문 조회 (질문 해결 후 구현 마무리하기)</div>
+          <div class="p_get">
+            <div>
+              상품 조회 (현재는 읽어와서 콘솔창에 출력함, product_id 넣어야됨)
+            </div>
             <input
               type="text"
               id="name"
-              placeholder="비워놓으면 모든 주문 조회"
+              placeholder="비워놓으면 모든 상품 조회"
             />
             <button id="btn">submit</button>
           </div>
-          <div class="p_delete">
-            <div>
-              주문 취소 (카테고리 삭제 부분 질문 해결 이후, 같이 해결하기)
+          <div class="p_update">
+            <div>상품 업데이트</div>
+            <div class="p_update_inputs">
+              <form id="updateForm" enctype="multipart/form-data">
+                <input type="text" id="p_id" placeholder="p_id" />
+                <input
+                  type="text"
+                  id="categoryName"
+                  placeholder="categoryName"
+                />
+                <input type="text" id="name" placeholder="name" />
+                <input type="text" id="price" placeholder="price" />
+                <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
+
+                <input type="file" id="updateFileInput" placeholder="imgUrl" />
+
+                <input type="text" id="information" placeholder="information" />
+                <input type="text" id="author" placeholder="author" />
+                <input type="text" id="publisher" placeholder="publisher" />
+                <input
+                  type="text"
+                  id="publishedDate"
+                  placeholder="publishedDate"
+                />
+                <input type="text" id="orderCount" placeholder="orderCount" />
+              </form>
             </div>
+
+            <button id="btn">submit</button>
+          </div>
+          <div class="p_delete">
+            <div>상품 삭제</div>
             <input type="text" id="name" />
             <button id="btn">submit</button>
-          </div> -->
+          </div>
         </div>
       </div>
     </section>

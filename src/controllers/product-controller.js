@@ -8,6 +8,7 @@ import {
 class ProductController {
   async getProduct(req, res) {
     const { productId } = req.params;
+
     try {
       const product = await productService.getProduct(productId);
       return res.status(200).json({
@@ -27,7 +28,10 @@ class ProductController {
   }
 
   async insertProduct(req, res) {
-    const imgUrl = req.file.location;
+    let imgUrl = null;
+    if (req.file) {
+      imgUrl = req.file.location;
+    }
     try {
       const product = await productService.insertProduct(
         req.body,
@@ -62,7 +66,10 @@ class ProductController {
   }
 
   async updateProduct(req, res) {
-    const imgUrl = req.file.location;
+    let imgUrl = null;
+    if (req.file) {
+      imgUrl = req.file.location;
+    }
     try {
       const product = await productService.updateProduct(
         req.body,
