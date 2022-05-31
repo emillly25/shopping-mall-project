@@ -7,7 +7,10 @@ import {
 
 class ProductController {
   async getProduct(req, res) {
+
+
     const { productId } = req.params;
+
     try {
       const product = await productService.getProduct(productId);
       return res.status(200).json({

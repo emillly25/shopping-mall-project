@@ -18,7 +18,7 @@ body{
     border-bottom: 1px solid lightgray;
 }
 
-.book_title{
+.bookName{
     /* border: 2px solid greenyellow; */
     padding: 5px ;
     font-size: 26px;
@@ -52,13 +52,13 @@ body{
     display: flex;
 }
 
-.book_img{
+.bookImg{
     width: 500px;
     height: 700px;
     border: 1px solid red;
 }
 
-.book_img img{
+.bookImg img{
     width: 500px;
     height: 700px;
 }
