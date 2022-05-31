@@ -33,7 +33,6 @@ if (res.result.address) {
 
 // fullName, password, address, phoneNumber,role
 async function updateUserData(e) {
-  // 해결과제2) 비번 바꾸고 싶지 않을때도 체크!
   e.preventDefault();
 
   if (userPassword.value !== userPasswordCheck.value) {
@@ -43,16 +42,20 @@ async function updateUserData(e) {
     return;
   }
 
+  const address = {};
+  address.postalCode = postcode.value ? postcode.value : postcode.placeholder;
+  address.address1 = mainAddress.value
+    ? mainAddress.value
+    : mainAddress.placeholder;
+  address.address2 = subAddress.value
+    ? subAddress.value
+    : subAddress.placeholder;
+
   const data = {
     fullName: username.value,
     currentPassword: currentPassword.value,
     password: userPassword.value,
-    // 해결과제1) address 에는 입력하지 않는 text가 있더라도, 초기화되지 않게 하기!
-    address: {
-      postalCode: postcode.value,
-      address1: mainAddress.value,
-      address2: subAddress.value,
-    },
+    address: address,
     phoneNumber: userPhoneNo.value,
   };
   console.log(data);
@@ -60,7 +63,7 @@ async function updateUserData(e) {
     const res = await Api.patch('/api/user', data);
     console.log(res);
     alert('성공적인 업데이트!');
-    window.location.href = '/';
+    window.location.href = '/account';
   } catch (err) {
     alert(err.message);
   }
@@ -68,3 +71,6 @@ async function updateUserData(e) {
 
 let deleteBtn = document.getElementById('deleteBtn');
 deleteBtn.addEventListener('click', updateUserData);
+
+// 해결과제1) id, pw 자동완성 설정하면, 회원정보란에 자동으로 값이 붙는 문제 해결하기
+// 해결과제2) 비번 바꿀 때 3자리만 써도 ok 된다! 여기서도 비번 유효값 검사해야됨!
