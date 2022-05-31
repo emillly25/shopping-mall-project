@@ -85,8 +85,12 @@ async function a(){
 
     //전체삭제 (localStroage에서도 삭제)
     all.addEventListener('click',function(){
+        for(let i = 0; i < checkBox.length; i++){
+            if(checkBox[i].checked){
+                checkBox[i].parentElement.parentElement.remove()
+            }
+        }
         window.localStorage.clear();
-        window.location.reload()
     })
 
     //선택삭제
