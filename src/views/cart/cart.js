@@ -22,7 +22,7 @@ async function a(){
         const data = res.result
         const items = document.querySelector('#items')  
         const htmlCode =`<li class="item">
-       <div class="checkbox"><input type="checkbox"></div>
+       <div><input class="checkbox" type="checkbox"></div>
        <div class="itemImg"><a href="/bookdetail/?productId=${data._id}"><img src="${data.imgUrl}" width="100px" height="100px" alt=""></a></div>
        <div class="itemName">
            <div id="title"><a href="/bookdetail/?productId=${data._id}">${data.name}</a></div>
@@ -57,11 +57,31 @@ async function a(){
     const itemQuan = document.querySelectorAll('.itemQuan'); //제품 수량(span)
     const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') //최종가격
 
+    // 체크박스 관련
+    const allCheckBtn = document.querySelector('#allCheckBtn') //전체선택 버튼
+    const all = document.querySelector('.all')  //전체선택 글자(span)
+    const some = document.querySelector('.some') //선택삭제 글자(span)
+    const checkBox = document.querySelectorAll('.checkbox')  // 제품 옆에 있는 모든 체크박스
+
     // NodeList to Arr
     const numArr = Array.prototype.slice.call(num); 
     const itemQuanArr = Array.prototype.slice.call(itemQuan); 
     const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
     const itemPriceArr = Array.prototype.slice.call(itemPrice); 
+    const checkBoxArr = Array.prototype.slice.call(checkBox); 
+
+
+
+    allCheckBtn.addEventListener('change',function(){
+        console.log('체크했습니다.')
+        checkBoxArr.forEach(el=> el.checked = true)
+        all.innerText = '전체삭제'
+    })
+
+    all.addEventListener('click',function(){
+        window.localStorage.clear();
+        window.location.reload()
+    })
 
 
 
