@@ -10,11 +10,15 @@ import {
 import { errorHandler } from './middlewares';
 
 const app = express();
-
 // CORS 에러 방지
 app.use(cors());
 
-//  아래 세줄 임시
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./modules/swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 const upload = require('./middlewares/imageUploader');
 
 app.post('/single', upload.single('img'), (req, res, next) => {
