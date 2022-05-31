@@ -15,6 +15,10 @@ const register = async (req, res, next) => {
     // req (request)의 body 에서 데이터 가져오기
     const { fullName, email, password } = req.body;
 
+    if (!fullName || !email || !password) {
+      throw new Error('check the requested body again');
+    }
+
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
@@ -46,6 +50,10 @@ const login = async function (req, res, next) {
 
     // req (request) 에서 데이터 가져오기
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new Error('check the requested body again');
+    }
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const data = await userService.getUserToken({ email, password });
@@ -111,8 +119,6 @@ const editUserData = async function (req, res, next) {
       );
     }
 
-    // params로부터 id를 가져옴
-    // const userId = req.params.userId;
     const userId = req.currentUserId;
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.
@@ -170,6 +176,10 @@ const deleteUserData = async function (req, res, next) {
     // body data 로부터 비밀번호 추출.
     const userPw = req.body.password;
 
+    if (!userPw) {
+      throw new Error('check the requested body again');
+    }
+
     // 유저 정보 삭제
     const data = await userService.deleteUser(userId, userPw);
 
@@ -196,8 +206,12 @@ const resetPassword = async function (req, res, next) {
     // body data 로부터 이메일 추출.
     const email = req.body.email;
 
+    if (!email) {
+      throw new Error('check the requested body again');
+    }
+
     const data = await userService.resetPw(email);
-    console.log('data', data);
+
     res.status(200).json({
       isSuccess: true,
       message: 'Password reseted successfully',
