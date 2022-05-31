@@ -1,21 +1,14 @@
 import * as Api from '/api.js';
 
-
-
-
+// localStorage에서 productId 받아오기
 const pId = JSON.parse(window.localStorage.getItem('productId'))
 const productId = []
 pId.map(({_id})=>{
     productId.push(_id)
 })
 
- //결제 부분에 보여지는 가격(html에서 가져옴)
-const productPrice = document.querySelector('#productPrice');
-const deliveryPrice = document.querySelector('#deliveryPrice')
-const finalPrice= document.querySelector('#finalPrice');
 
-
-async function a(){
+async function cartRendering(){
     const addList = async function(id){
         const res = await Api.get('/api/product', id)
         console.log('res',res)
@@ -57,6 +50,12 @@ async function a(){
     const itemQuan = document.querySelectorAll('.itemQuan'); //제품 수량(span)
     const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') //최종가격
 
+    
+    //결제 부분에 보여지는 가격(html에서 가져옴)
+    const productPrice = document.querySelector('#productPrice');
+    const deliveryPrice = document.querySelector('#deliveryPrice')
+    const finalPrice= document.querySelector('#finalPrice');
+
     // 체크박스 관련
     const allCheckBtn = document.querySelector('#allCheckBtn') //전체선택 버튼
     const all = document.querySelector('#choice .all')  //전체선택 글자(div)
@@ -69,6 +68,7 @@ async function a(){
     const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
     const itemPriceArr = Array.prototype.slice.call(itemPrice); 
     const checkBoxArr = Array.prototype.slice.call(checkBox); 
+
 
 
     //전체선택 (checkbox)
@@ -90,6 +90,7 @@ async function a(){
                 checkBox[i].parentElement.parentElement.remove()
             }
         }
+        window.location.reload()
         window.localStorage.clear();
     })
 
@@ -102,6 +103,7 @@ async function a(){
                 CheckedId.push(checkBox[i].dataset.id) //각 제품의 _id
                 
             }
+            
         }
         console.log('선택된 id',CheckedId) //삭제 예정 _id 모아둔 배열
         const arr = JSON.parse(window.localStorage.getItem('productId'))
@@ -109,16 +111,13 @@ async function a(){
         const newArr = arr.filter(el=>{
             return CheckedId.findIndex(e=> e === el._id) === -1
         })
+        window.location.reload()
         window.localStorage.setItem('productId',JSON.stringify(newArr))
-    
     })
-
-
 
     //기본 랜더링
     function firstView(){
         const rendering = JSON.parse(window.localStorage.getItem('productId'))
-
         numArr.forEach(num=>{
             const id= num.dataset.id
             const q = itemQuanArr.find(el=> el.dataset.id === id)
@@ -129,7 +128,6 @@ async function a(){
             q.innerText = r.quantity;
             t.innerText = Number(p.textContent) * Number(r.quantity)
         })
-
         let s = 0;
         itemTotalPriceArr.forEach(el=> {
             s += Number(el.textContent)
@@ -141,12 +139,8 @@ async function a(){
             deliveryPrice.innerText = 3000
         }
         finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
-
     }
     firstView()
-
-
-
 
     //수량버튼에 따른 결과 랜더링
     function handleUpdateQuantity(e) {
@@ -190,14 +184,8 @@ async function a(){
 }
 
 
+cartRendering()
 
-
-
-
-a()
-
-
-    
 
 
 

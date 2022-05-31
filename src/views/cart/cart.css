@@ -35,8 +35,7 @@ body{
 }
 
 
-.cart_list #choice span{
-    display: inline-block;
+#choice div{
     padding: 0 5px;
     font-size: 12px;
 }
