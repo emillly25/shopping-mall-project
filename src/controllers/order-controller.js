@@ -53,7 +53,6 @@ const Order = async (req, res, next) => {
       phoneNumber,
       order_data,
       price,
-      quantity,
       request,
     });
 

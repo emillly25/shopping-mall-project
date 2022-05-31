@@ -27,14 +27,10 @@ const OrderSchema = new Schema(
       required: true,
     },
     order_data: {
-      type: String,
+      type: Object,
       required: true,
     },
     price: {
-      type: Number,
-      required: true,
-    },
-    quantity: {
       type: Number,
       required: true,
     },
@@ -44,6 +40,7 @@ const OrderSchema = new Schema(
     },
   },
   {
+    collection: 'orders',
     timestamps: true,
   },
 );
