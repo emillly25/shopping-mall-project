@@ -2,8 +2,8 @@
   "swagger": "2.0",
 "info": {
   "version": "1.0.0",
-  "title": "Product and Category API details",
-  "description": "Open API docs with Swagger",
+  "title": "team7 api 명세서",
+  "description": "Category와 Product에 대한 API 명세서입니다.",
   "license": {
     "name": "Apache 2.0",
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
