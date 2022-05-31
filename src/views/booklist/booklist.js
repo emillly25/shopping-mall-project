@@ -1,5 +1,6 @@
 import * as Api from '/api.js';
 
+
 const items = document.querySelector('.items');
 const bookName = document.querySelector('.bookName span'); //책제목 
 const bookAuthor = document.querySelector('.bookAuthor span');  //저자

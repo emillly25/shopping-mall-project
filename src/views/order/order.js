@@ -4,6 +4,7 @@ const payBtn = document.querySelector('#payBtn');
 const btn = document.getElementById('searchAddressButton');
 const receiverNameInput = document.querySelector('#receiverName');
 const receiverPhoneNumberInput = document.querySelector('#receiverPhoneNumber');
+const receiverEmailInput = document.querySelector('#receiverEmail');
 const postalCodeInput = document.querySelector('#postalCode');
 const searchAddressButton = document.querySelector('#searchAddressButton');
 const address1Input = document.querySelector('#address1');
@@ -38,7 +39,7 @@ function handleUpdateQuantity(e) {
   } else {
       num.stepUp()
   }
-  price.innerText = (num.value) * 12000 // 변경 데이터 
+  price.innerText = (num.value) * 12000 
   calPrice()
 }
 
@@ -61,7 +62,7 @@ async function calPrice(){
 
 
 async function addressSearch(){
-     new daum.Postcode({
+    new daum.Postcode({
     oncomplete: function (data) {
       let addr = '';
       let extraAddr = '';
@@ -93,9 +94,6 @@ async function addressSearch(){
       address2Input.focus();
     },
   }).open();
-
-   
-
 }
 
 
@@ -103,19 +101,19 @@ async function addressSearch(){
 async function orderHandler(){
     const receiverName = receiverNameInput.value;
     const receiverPhoneNumber = receiverPhoneNumberInput.value;
+    const receiverEmail = receiverEmailInput.value;
     const postalCode = postalCodeInput.value;
     const address1 = address1Input.value;
     const address2 = address2Input.value;
     const request = requestSelectBox.value;
 
-  if (!receiverName || !receiverPhoneNumber || !postalCode || !address2) {
-   return alert("배송지 정보를 모두 입력해 주세요.")
-   
+  if (!receiverName || !receiverPhoneNumber|| !receiverEmail || !postalCode || !address2) {
+    return alert("배송지 정보를 모두 입력해 주세요.")
   }
 
 
 const deliveryData = {
-    receiverName, receiverPhoneNumber, postalCode, address1, address2, request,
+    receiverName, receiverPhoneNumber, receiverEmail, postalCode, address1, address2, request,
 }
 
 
@@ -137,9 +135,3 @@ const deliveryData = {
 }   
 
 
-// async function getData(productId){
-//   const res = await Api.get(`/api/product/${productId}`);
-//   console.log(res)
-// }
-
-// export { getData }
