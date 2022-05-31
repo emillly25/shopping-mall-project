@@ -23,12 +23,10 @@ async function get(endpoint, params = '') {
   return result;
 }
 
-// api 로 POST 요청 (/endpoint 로, JSON 데이터 형태로 요청함)
+// api 로 POST 요청 (JSON 데이터 형태로 요청함)
 async function post(endpoint, data) {
   const apiUrl = endpoint;
-  // for (var pair of data.entries()) {
-  //   console.log(pair[0] + ', ' + pair[1]);
-  // }
+
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
   // 예시: {name: "Kim"} => {"name": "Kim"}
   const bodyData = JSON.stringify(data);
@@ -60,7 +58,40 @@ async function post(endpoint, data) {
   return result;
 }
 
-// api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
+// api 로 POST 요청 (FormData 데이터 형태로 요청함)
+async function postFormData(endpoint, data) {
+  const apiUrl = endpoint;
+
+  // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
+  // 예시: {name: "Kim"} => {"name": "Kim"}
+
+  console.log(`%cPOST 요청: ${apiUrl}`, 'color: #296aba;');
+  console.log(`%cPOST 요청 데이터: ${data}`, 'color: #296aba;');
+
+  const res = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      // 'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+    body: data,
+    // body: bodyData,
+  });
+  // 응답 코드가 4XX 계열일 때 (400, 403 등)
+  if (!res.ok) {
+    const errorContent = await res.json();
+    throw new Error(errorContent.message);
+    // const { reason } = errorContent;
+    // throw new Error(reason);
+  }
+
+  const result = await res.json();
+
+  return result;
+}
+
+// api 로 PATCH 요청 (JSON 데이터 형태로 요청함)
 async function patch(endpoint, data) {
   // const apiUrl = `${endpoint}/${params}`;
   const apiUrl = endpoint;
@@ -85,6 +116,41 @@ async function patch(endpoint, data) {
     const { reason } = errorContent;
 
     throw new Error(reason);
+  }
+
+  const result = await res.json();
+
+  return result;
+}
+
+// api 로 PATCH 요청 (FormData 데이터 형태로 요청함)
+async function patchFormData(endpoint, data) {
+  // const apiUrl = `${endpoint}/${params}`;
+  const apiUrl = endpoint;
+  // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
+  // 예시: {name: "Kim"} => {"name": "Kim"}
+  const bodyData = JSON.stringify(data);
+  console.log(`%cPATCH 요청: ${apiUrl}`, 'color: #059c4b;');
+  console.log(`%cPATCH 요청 데이터: ${bodyData}`, 'color: #059c4b;');
+
+  const res = await fetch(apiUrl, {
+    method: 'PATCH',
+    headers: {
+      // 'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+    // body: bodyData,
+    body: data,
+  });
+
+  // 응답 코드가 4XX 계열일 때 (400, 403 등)
+  if (!res.ok) {
+    const errorContent = await res.json();
+    console.log('patchFormData의 errorContent : ', errorContent);
+    // throw new Error(errorContent);
+    const { message } = errorContent;
+    throw new Error(message);
   }
 
   const result = await res.json();
@@ -125,4 +191,4 @@ async function del(endpoint, data) {
 }
 
 // 아래처럼 export하면, import * as Api 로 할 시 Api.get, Api.post 등으로 쓸 수 있음.
-export { get, post, patch, del as delete };
+export { get, post, postFormData, patch, patchFormData, del as delete };

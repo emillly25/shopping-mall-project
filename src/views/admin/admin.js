@@ -216,54 +216,41 @@ const insertProductBtn = insertProduct.querySelector('#btn');
 insertProductBtn.addEventListener('click', async e => {
   const formData = new FormData(document.getElementById('testForm'));
   const fileInput = document.querySelector('#fileInput');
+
   // console.log('files 내부 : ', fileInput.files[0]);
-  formData.append('fileInput', fileInput.files[0]);
-  formData.append('categoryName', '국내도서');
-  formData.append('name', '책6');
-  formData.append('price', '2');
-  formData.append('information', '정보');
-  formData.append('author', '저자');
-  formData.append('publisher', '퍼블리셔');
-  formData.append('publishedDate', '국내도서');
-  formData.append('categoryName', '2022-02-02');
-  formData.append('orderCount', '3');
+  // 하드코딩
+  // formData.append('img', fileInput.files[0]);
+  // formData.append('categoryName', '국내도서323132');
+  // formData.append('name', '책7');
+  // formData.append('price', '10000');
+  // formData.append('information', '정보7');
+  // formData.append('author', '저자7');
+  // formData.append('publisher', '퍼블리셔7');
+  // formData.append('publishedDate', '2022-02-02');
+  // formData.append('orderCount', '3');
   // for (var pair of formData.entries()) {
   //   console.log(pair[0] + ', ' + pair[1]);
   // }
   try {
-    // const data = formData;
-    // {
-    // categoryName: categoryName.value,
-    // name: name.value,
-    // price: Number(Productprice.value),
-    // img: img.files[0],
-    // information: information.value,
-    // author: author.value,
-    // publisher: publisher.value,
-    // publishedDate: publishedDate.value,
-    // orderCount: Number(orderCount.value),
-    //==================
-    // categoryName: '국내도서',
-    // name: '책6',
-    // price: 2,
-    // img: formData,
-    // information: '정보',
-    // author: '저자',
-    // publisher: '퍼블리셔',
-    // publishedDate: '2022-02-02',
-    // orderCount: 3,
-    // };
+    formData.append('img', fileInput.files[0]);
+    formData.append('categoryName', categoryName.value);
+    formData.append('name', name.value);
+    formData.append('price', Number(Productprice.value));
+    formData.append('information', information.value);
+    formData.append('author', author.value);
+    formData.append('publisher', publisher.value);
+    formData.append('publishedDate', publishedDate.value);
+    formData.append('orderCount', Number(orderCount.value));
 
-    // console.log('data : ', data);
-    const res = await Api.post('/api/product', formData);
+    const res = await Api.postFormData('/api/product', formData);
 
     alert(res.message);
-    console.log(res);
+    console.log(res.data);
 
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    alert(err);
+    alert(err.message);
   }
 });
 
@@ -290,9 +277,63 @@ readProductsBtn.addEventListener('click', async () => {
   }
 });
 
-// Product update (product read 문제 해결 후 같이 해결하기)
+// Product update
+// patchFormData
 
-// to be continued..
+const updateProduct = document.querySelector('.p_update');
+const productId = document.querySelector('#p_id');
+const updateCategoryName = updateProduct.querySelector('#categoryName');
+const updateName = updateProduct.querySelector('#name');
+const updateProductprice = updateProduct.querySelector('#price');
+
+const updateInformation = updateProduct.querySelector('#information');
+const updateAuthor = updateProduct.querySelector('#author');
+const updatePublisher = updateProduct.querySelector('#publisher');
+const updatePublishedDate = updateProduct.querySelector('#publishedDate');
+const updateOrderCount = updateProduct.querySelector('#orderCount');
+const updateProductBtn = updateProduct.querySelector('#btn');
+
+updateProductBtn.addEventListener('click', async e => {
+  const updateFormData = new FormData(document.getElementById('updateForm'));
+  const fileInput = document.querySelector('#updateFileInput');
+
+  // console.log('files 내부 : ', fileInput.files[0]);
+  // 하드코딩
+  // formData.append('img', fileInput.files[0]);
+  // formData.append('categoryName', '국내도서323132');
+  // formData.append('name', '책7');
+  // formData.append('price', '10000');
+  // formData.append('information', '정보7');
+  // formData.append('author', '저자7');
+  // formData.append('publisher', '퍼블리셔7');
+  // formData.append('publishedDate', '2022-02-02');
+  // formData.append('orderCount', '3');
+  // for (var pair of formData.entries()) {
+  //   console.log(pair[0] + ', ' + pair[1]);
+  // }
+  try {
+    updateFormData.append('productId', productId.value);
+    updateFormData.append('img', fileInput.files[0]);
+    updateFormData.append('categoryName', updateCategoryName.value);
+    updateFormData.append('name', updateName.value);
+    updateFormData.append('price', Number(updateProductprice.value));
+    updateFormData.append('information', updateInformation.value);
+    updateFormData.append('author', updateAuthor.value);
+    updateFormData.append('publisher', updatePublisher.value);
+    updateFormData.append('publishedDate', updatePublishedDate.value);
+    updateFormData.append('orderCount', Number(updateOrderCount.value));
+
+    const res = await Api.patchFormData('/api/product', updateFormData);
+
+    alert(res.message);
+    console.log(res.data);
+
+    // 로그인 페이지 이동
+    // window.location.href = '/admin';
+  } catch (err) {
+    alert(err);
+  }
+});
 
 // Product delete
 
