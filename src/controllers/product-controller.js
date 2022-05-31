@@ -27,38 +27,39 @@ class ProductController {
   }
 
   async insertProduct(req, res) {
-    const imgUrl = req.file.location;
-    try {
-      const product = await productService.insertProduct(
-        req.body,
-        imgUrl,
-        req.currentUserId,
-      );
-      return res.status(200).json({
-        isSuccess: true,
-        message: 'Product inserted successfully',
-        status: 200,
-        result: product,
-      });
-    } catch (err) {
-      if (
-        err instanceof ValueIsNullError ||
-        err instanceof CategoryDoesNotExistsError
-      ) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
-    }
+    console.log('req는? ', req.body);
+    // const imgUrl = req.file.location;
+    // try {
+    //   const product = await productService.insertProduct(
+    //     req.body,
+    //     imgUrl,
+    //     req.currentUserId,
+    //   );
+    //   return res.status(200).json({
+    //     isSuccess: true,
+    //     message: 'Product inserted successfully',
+    //     status: 200,
+    //     result: product,
+    //   });
+    // } catch (err) {
+    //   if (
+    //     err instanceof ValueIsNullError ||
+    //     err instanceof CategoryDoesNotExistsError
+    //   ) {
+    //     return res.status(400).json({
+    //       isSuccess: false,
+    //       message: err.message,
+    //       status: 400,
+    //       result: null,
+    //     });
+    //   }
+    //   return res.status(500).json({
+    //     isSuccess: false,
+    //     message: err.message,
+    //     status: 500,
+    //     result: null,
+    //   });
+    // }
   }
 
   async updateProduct(req, res) {

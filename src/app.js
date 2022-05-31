@@ -29,10 +29,10 @@ app.post('/multipart', upload.array('img'), (req, res, next) => {
 });
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
-app.use(express.json());
+app.use(express.json({ limit: '100mb' }));
 
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ limit: '100mb', extended: false }));
 
 // html, css, js 라우팅
 app.use(viewsRouter);

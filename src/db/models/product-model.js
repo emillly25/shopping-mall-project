@@ -73,8 +73,8 @@ export class ProductModel {
   }
 
   async delete(productId) {
-    await Product.deleteOne({ _id: productId });
-    return;
+    const deletedProduct = await Product.deleteOne({ _id: productId });
+    return deletedProduct;
   }
 }
 
