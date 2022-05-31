@@ -22,7 +22,7 @@ async function a(){
         const data = res.result
         const items = document.querySelector('#items')  
         const htmlCode =`<li class="item">
-       <div><input class="checkbox" type="checkbox"></div>
+       <div><input data-id="${data._id}" class="checkbox" type="checkbox"></div>
        <div class="itemImg"><a href="/bookdetail/?productId=${data._id}"><img src="${data.imgUrl}" width="100px" height="100px" alt=""></a></div>
        <div class="itemName">
            <div id="title"><a href="/bookdetail/?productId=${data._id}">${data.name}</a></div>
@@ -59,8 +59,8 @@ async function a(){
 
     // 체크박스 관련
     const allCheckBtn = document.querySelector('#allCheckBtn') //전체선택 버튼
-    const all = document.querySelector('.all')  //전체선택 글자(span)
-    const some = document.querySelector('.some') //선택삭제 글자(span)
+    const all = document.querySelector('#choice .all')  //전체선택 글자(div)
+    const some = document.querySelector('#choice .some') //선택삭제 글자(div)
     const checkBox = document.querySelectorAll('.checkbox')  // 제품 옆에 있는 모든 체크박스
 
     // NodeList to Arr
@@ -71,16 +71,42 @@ async function a(){
     const checkBoxArr = Array.prototype.slice.call(checkBox); 
 
 
-
-    allCheckBtn.addEventListener('change',function(){
-        console.log('체크했습니다.')
-        checkBoxArr.forEach(el=> el.checked = true)
-        all.innerText = '전체삭제'
+    //전체선택 (checkbox)
+    allCheckBtn.addEventListener('change',function(e){
+        if(e.target.checked === true){
+            checkBoxArr.forEach(el=> el.checked = true)
+            all.innerText = '전체삭제'
+        }else{
+            checkBoxArr.forEach(el=> el.checked = false)
+            all.innerText = '전체선택'
+        }
+        
     })
 
+    //전체삭제 (localStroage에서도 삭제)
     all.addEventListener('click',function(){
         window.localStorage.clear();
         window.location.reload()
+    })
+
+    //선택삭제
+    some.addEventListener('click',function(){
+        let CheckedId = []
+        for(let i = 0; i < checkBox.length; i++){
+            if(checkBox[i].checked){
+                checkBox[i].parentElement.parentElement.remove()
+                CheckedId.push(checkBox[i].dataset.id) //각 제품의 _id
+                
+            }
+        }
+        console.log('선택된 id',CheckedId) //삭제 예정 _id 모아둔 배열
+        const arr = JSON.parse(window.localStorage.getItem('productId'))
+        //선택삭제하고 남은 배열은 다시 localStorage에 보내야.
+        const newArr = arr.filter(el=>{
+            return CheckedId.findIndex(e=> e === el._id) === -1
+        })
+        window.localStorage.setItem('productId',JSON.stringify(newArr))
+    
     })
 
 
