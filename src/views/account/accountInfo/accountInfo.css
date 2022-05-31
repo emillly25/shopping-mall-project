@@ -35,6 +35,7 @@
 }
 
 .container .account-page-body .my-info .my-info-field #username,
+.container .account-page-body .my-info .my-info-field #currentPassword,
 .container .account-page-body .my-info .my-info-field #userPassword,
 .container .account-page-body .my-info .my-info-field #userPasswordCheck,
 .container .account-page-body .my-info .my-info-field #postcode,

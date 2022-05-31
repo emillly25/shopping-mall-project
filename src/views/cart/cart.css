@@ -31,11 +31,11 @@ body{
     margin-bottom: 20px;
     margin-left: 5px;
     border-bottom: 1px solid lightgray;
+    display: flex;
 }
 
 
-.cart_list #choice span{
-    display: inline-block;
+#choice div{
     padding: 0 5px;
     font-size: 12px;
 }
