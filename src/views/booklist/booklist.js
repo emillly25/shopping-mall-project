@@ -33,49 +33,17 @@ const getBookInfo = async function(){
     const cartBtn = document.querySelectorAll('#cartBtn')
     const saveBooks = []
 
-    cartBtn[0].addEventListener('click',(e)=>{
-        const id = e.target.dataset.id
-        const obj = {};
-        obj._id = id
-        saveBooks.push(obj)
-        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
+    cartBtn.forEach(el=>{
+        el.addEventListener('click',(e)=>{
+            const id = e.target.dataset.id
+            const obj = {};
+            obj._id = id
+            saveBooks.push(obj)
+            window.localStorage.setItem('productId', JSON.stringify(saveBooks))
+        })
     })
 
-    cartBtn[1].addEventListener('click',(e)=>{
-        const id = e.target.dataset.id
-        const obj = {};
-        obj._id = id
-        saveBooks.push(obj)
-        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
-    })
 
-    cartBtn[2].addEventListener('click',(e)=>{
-        const id = e.target.dataset.id
-        const obj = {};
-        obj._id = id
-        saveBooks.push(obj)
-        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
-    })
-
-    cartBtn[3].addEventListener('click',(e)=>{
-        const id = e.target.dataset.id
-        const obj = {};
-        obj._id = id
-        saveBooks.push(obj)
-        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
-    })
-
-    cartBtn[4].addEventListener('click',(e)=>{
-        const id = e.target.dataset.id
-        const obj = {};
-        obj._id = id
-        saveBooks.push(obj)
-        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
-    })
-   
-    
- 
-    
 
 
 }
