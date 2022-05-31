@@ -23,9 +23,9 @@ async function a(){
         const items = document.querySelector('#items')  
         const htmlCode =`<li class="item">
        <div class="checkbox"><input type="checkbox"></div>
-       <div class="itemImg"><img src="${data.imgUrl}" width="100px" height="100px" alt=""></div>
+       <div class="itemImg"><a href="/bookdetail/?productId=${data._id}"><img src="${data.imgUrl}" width="100px" height="100px" alt=""></a></div>
        <div class="itemName">
-           <div id="title">${data.name}</div>
+           <div id="title"><a href="/bookdetail/?productId=${data._id}">${data.name}</a></div>
            <div class="qty">
                <input data-id="${data._id}" class="minus" type="button" value="-">
                <input data-id="${data._id}" class="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
@@ -64,16 +64,22 @@ async function a(){
     const itemPriceArr = Array.prototype.slice.call(itemPrice); 
 
 
+
     //기본 랜더링
     function firstView(){
+        const rendering = JSON.parse(window.localStorage.getItem('productId'))
+
         numArr.forEach(num=>{
             const id= num.dataset.id
             const q = itemQuanArr.find(el=> el.dataset.id === id)
             const p = itemPriceArr.find(el=> el.dataset.id === id)
             const t = itemTotalPriceArr.find(el=> el.dataset.id === id)
-            q.innerText = num.value;
-            t.innerText = Number(p.textContent) * Number(q.textContent)
+            const r = rendering.find(el=> el._id === id)
+            num.value = r.quantity;
+            q.innerText = r.quantity;
+            t.innerText = Number(p.textContent) * Number(r.quantity)
         })
+
         let s = 0;
         itemTotalPriceArr.forEach(el=> {
             s += Number(el.textContent)

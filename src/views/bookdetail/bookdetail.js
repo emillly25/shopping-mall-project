@@ -8,20 +8,16 @@ const bookInformation =  document.querySelector('.bookInformation')
 
 const minus = document.querySelector('.minus');  //minus Btn
 const plus = document.querySelector('.plus');   //plus Btn
-const num = document.querySelector('#num');  //input(number) 수량 값
+const num = document.querySelector('#num');    //수량 
 
+const fixedPrice = document.querySelector('#fixedPrice span'); //정가
 const nowPrice = document.querySelector('#nowPrice'); //현재판매가
 const deliveryPrice = document.querySelector('#deliveryPrice'); //배송비
-const totalPrice = document.querySelector('#total');  //총 결제금액(span태그)
-const fixedPrice = document.querySelector('#fixedPrice span'); //정가
+const totalPrice = document.querySelector('#total');  //총 결제금액
 
+const cartBtn = document.querySelector('#cartBtn');
 
-
-
-
-
-
-// json 데이터 불러와서 랜더링
+// DB데이터 불러와서 랜더링
 const getBookInfo = async function(){
     const productId = (window.location.href).split('=')[1]
     const res = await Api.get('/api/product', productId)
@@ -35,7 +31,7 @@ const getBookInfo = async function(){
 
 }
 
-// json에서 가격 데이터 받아와서 handling
+
 const getPrice = async function(){
     const productId = (window.location.href).split('=')[1]
     const res = await Api.get('/api/product', productId)
@@ -67,9 +63,11 @@ function handleUpdateQuantity(e) {
     const quantity = Number(num.value); //수량 값
     const price = quantity * Number(nowPrice.textContent);
     if(price >= 12000){
-        totalPrice.innerText = price;
+        deliveryPrice.innerText = 0
+        totalPrice.innerText = Number(deliveryPrice.textContent) + price
     }else{
-        totalPrice.innerText = price + Number(deliveryPrice.textContent);
+        deliveryPrice.innerText = 3000
+        totalPrice.innerText = Number(deliveryPrice.textContent) +  price
     }
     
 }
@@ -77,10 +75,39 @@ function handleUpdateQuantity(e) {
 plus.addEventListener('click', handleUpdateQuantity)
 minus.addEventListener('click', handleUpdateQuantity)
 
+async function addToCart(){
+    const productId = (window.location.href).split('=')[1]
+    const obj={}
+    obj._id = productId
+    obj.quantity = Number(num.value)
+    obj.price = Number(totalPrice.textContent)
+    const localCart = JSON.parse(window.localStorage.getItem('productId'))
+    if(localCart === null){
+        let saveBooks = []
+        saveBooks.push(obj)
+        window.localStorage.setItem('productId', JSON.stringify(saveBooks))
+    }else{
+        localCart.push(obj)
+        window.localStorage.setItem('productId', JSON.stringify(localCart))
+    }
+    //중복제거
+    const getBooksList = JSON.parse(window.localStorage.getItem('productId'))
+    console.log('책 다고름 이제 중복 제거 ㄱㄱ', getBooksList)
+    const newArr = getBooksList.filter((arr,idx, callback) => idx === callback.findIndex(t => t._id === arr._id))
+    window.localStorage.setItem('productId', JSON.stringify(newArr))
+    console.log('중복제거됨', window.localStorage.getItem('prductId'))
+    moveCart()
+}
+
+cartBtn.addEventListener('click', addToCart)
 
 
-
-
+function moveCart(){
+    if(confirm(`장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까? `)){
+        location.href = '/cart' 
+    }
+    
+}
 
 
 
