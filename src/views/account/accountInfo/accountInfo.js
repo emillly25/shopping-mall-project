@@ -35,6 +35,17 @@ if (res.result.address) {
 async function updateUserData(e) {
   e.preventDefault();
 
+  // 잘 입력했는지 확인
+  let isFullNameValid = true;
+  let isPasswordValid = true;
+
+  if (username.value) isFullNameValid = username.value.length >= 2;
+  if (userPassword.value) isPasswordValid = userPassword.value.length >= 4;
+
+  if (!isFullNameValid || !isPasswordValid) {
+    return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
+  }
+
   if (userPassword.value !== userPasswordCheck.value) {
     alert(
       '변경하고자 하는 비밀번호와 변경하고 싶은 비밀번호 확인이 일치하지 않음',
@@ -73,4 +84,3 @@ let deleteBtn = document.getElementById('deleteBtn');
 deleteBtn.addEventListener('click', updateUserData);
 
 // 해결과제1) id, pw 자동완성 설정하면, 회원정보란에 자동으로 값이 붙는 문제 해결하기
-// 해결과제2) 비번 바꿀 때 3자리만 써도 ok 된다! 여기서도 비번 유효값 검사해야됨!
