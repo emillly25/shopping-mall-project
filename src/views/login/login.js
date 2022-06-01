@@ -1,7 +1,6 @@
 import * as Api from '/api.js';
 import { validateEmail } from '/useful-functions.js';
 
-
 const emailInput = document.querySelector('.emailInput');
 const passwordInput = document.querySelector('.passwordInput');
 const submitBtn = document.querySelector('#submitBtn');

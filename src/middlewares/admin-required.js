@@ -24,14 +24,14 @@ function adminRequired(req, res, next) {
     const role = jwtDecoded.role;
 
     // 관리자 확인
-    if(role !== 'admin'){
+    if (role !== 'admin') {
       console.log('관리자 계정이 아닙니다.');
       res.status(403).json({
         status: 403,
         result: 'forbidden-approach',
         reason: '관리자 계정이 아닙니다.',
       });
-  
+
       return;
     }
 
