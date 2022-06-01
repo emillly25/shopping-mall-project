@@ -40,9 +40,10 @@ readBtn.addEventListener('click', async () => {
     if (!params && !res) alert('카테고리가 없습니다.');
     else if (params && !res) alert(`${params} 라는 카테고리는 없습니다.`);
     else alert('read 완료'); // 거기서 넘겨지는 MESSAGE 출력하기
-    // console.log('res : ', res);
+
+    console.log('res : ', res.result);
     // 로그인 페이지 이동
-    window.location.href = '/admin';
+    // window.location.href = '/admin';
   } catch (err) {
     alert(err);
   }
@@ -185,7 +186,7 @@ deleteOrderBtn.addEventListener('click', async () => {
     const data = { orderId };
     const res = await Api.delete('/api/order/admin/', data);
 
-    alert(`${name} category deleted`);
+    alert(`${name} order deleted`);
 
     // 로그인 페이지 이동
     window.location.href = '/admin';
