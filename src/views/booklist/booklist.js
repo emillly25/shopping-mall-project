@@ -2,7 +2,7 @@ import * as Api from '/api.js';
 const items = document.querySelector('.items');
 
 async function booksRendering(){
-    //DB에 있는 전체 책 정보 가져오기
+    //1. DB에 있는 책 정보 가져오기
     const getBookInfo = async function(){
         const res = await Api.get('/api/product')
         const data = res.result
@@ -32,6 +32,8 @@ async function booksRendering(){
     }
     await getBookInfo()
 
+    //현재,, html코드가 붙여넣어진 상황!! 
+    
     // 책 정보 element
     const bookName = document.querySelector('.bookName span'); //책제목 
     const bookAuthor = document.querySelector('.bookAuthor span');  //저자
