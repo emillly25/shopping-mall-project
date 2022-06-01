@@ -1,6 +1,5 @@
 import * as Api from '/api.js';
 import { validateEmail } from '/useful-functions.js';
-import { insertHeader } from '../home/header.js'
 
 
 const emailInput = document.querySelector('.emailInput');
