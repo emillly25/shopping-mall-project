@@ -204,13 +204,14 @@ const resetPassword = async function (req, res, next) {
     }
 
     // body data 로부터 이메일 추출.
-    const email = req.body.email;
+    // const email = req.body.email;
 
-    if (!email) {
+    const { email, phoneNumber } = req.body;
+    if (!email || !phoneNumber) {
       throw new Error('check the requested body again');
     }
 
-    const data = await userService.resetPw(email);
+    const data = await userService.resetPw(email, phoneNumber);
 
     res.status(200).json({
       isSuccess: true,

@@ -168,8 +168,8 @@ class UserService {
     return await this.userModel.deleteById(toDeleteId);
   }
 
-  async resetPw(email) {
-    let user = await this.userModel.findByEmail(email);
+  async resetPw(email, phoneNumber) {
+    let user = await this.userModel.findByEmailandPhone(email, phoneNumber);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
