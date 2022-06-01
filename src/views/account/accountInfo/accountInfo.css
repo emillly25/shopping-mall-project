@@ -1,4 +1,4 @@
-.container {
+/*  .container {
   width: 1000px;
   height: 1000px;
   background-color: white;
@@ -6,16 +6,24 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
-.container .account-page-title {
+.account {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 100px auto;
+  /* border: 1px solid red; */
+}
+.account-page-title {
   border-bottom: 1px solid #ddd;
   /* background-color: red; */
   font-size: 30px;
   /* margin-bottom: 100px; */
 }
 
-.container .account-page-body {
+.account-page-body {
   width: 100%;
   height: 80%;
   margin-top: 40px;
@@ -24,7 +32,7 @@
   /* align-items: center; */
   /* background-color: red; */
 }
-.container .account-page-body .my-info {
+.account-page-body .my-info {
   width: 50%;
   height: 700px;
   background-color: #f0f2f5;
@@ -34,14 +42,14 @@
   gap: 25px;
 }
 
-.container .account-page-body .my-info .my-info-field #username,
-.container .account-page-body .my-info .my-info-field #currentPassword,
-.container .account-page-body .my-info .my-info-field #userPassword,
-.container .account-page-body .my-info .my-info-field #userPasswordCheck,
-.container .account-page-body .my-info .my-info-field #postcode,
-.container .account-page-body .my-info .my-info-field #mainAddress,
-.container .account-page-body .my-info .my-info-field #subAddress,
-.container .account-page-body .my-info .my-info-field #userPhoneNo {
+.account-page-body .my-info .my-info-field #username,
+.account-page-body .my-info .my-info-field #currentPassword,
+.account-page-body .my-info .my-info-field #userPassword,
+.account-page-body .my-info .my-info-field #userPasswordCheck,
+.account-page-body .my-info .my-info-field #postcode,
+.account-page-body .my-info .my-info-field #mainAddress,
+.account-page-body .my-info .my-info-field #subAddress,
+.account-page-body .my-info .my-info-field #userPhoneNo {
   width: 100%;
   height: 40px;
   border-radius: 5px;
