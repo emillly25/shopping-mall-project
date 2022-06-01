@@ -125,7 +125,7 @@ async function buyNow(){
             obj.price = Number(price)
             buyArr.push(obj)
             window.localStorage.setItem('buyProductId', JSON.stringify(buyArr))
-            window.location.href = '/order'
+            window.location.href = '/oneorder'
         })
 }
 buyNow()
