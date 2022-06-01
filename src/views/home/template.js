@@ -173,8 +173,8 @@ const body = document.querySelector('body');
 const scroll_btn = document.querySelector('.scroll_btn');
 
 scroll_btn.innerHTML = `
-<div id="top_btn"><img src="./img/top_btn.png" alt="top_btn" /></div>
-<div id="bottom_btn"><img src="./img/bottom_btn.png" alt="bottom_btn" /></div>
+<div id="top_btn"><img src="../img/top_btn.png" alt="top_btn" /></div>
+<div id="bottom_btn"><img src="../img/bottom_btn.png" alt="bottom_btn" /></div>
 `;
 
 window.addEventListener('scroll', function () {

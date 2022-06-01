@@ -4,19 +4,19 @@ const imageSliderEl = document.querySelector('.slider-wrap');
 imageSliderEl.innerHTML = `
 <ul class="slider" id="slider">
       <li>
-        <img src="./img/red.jpeg" />
+        <img src="../img/red.jpeg" />
       </li>
       <li>
-        <img src="./img/orange.jpeg" />
+        <img src="../img/orange.jpeg" />
       </li>
       <li>
-        <img src="./img/yellow.jpeg" />
+        <img src="../img/yellow.jpeg" />
       </li>
       <li>
-        <img src="./img/green.jpeg" />
+        <img src="../img/green.jpeg" />
       </li>
       <li>
-        <img src="./img/blue.jpeg" />
+        <img src="../img/blue.jpeg" />
       </li>
     </ul>
 
