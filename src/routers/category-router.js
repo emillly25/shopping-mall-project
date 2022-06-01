@@ -7,6 +7,7 @@ console.log(categoryRouter);
 categoryRouter.get('/:categoryName*?', categoryController.getCategory);
 categoryRouter.post('/', loginRequired, categoryController.insertCategory);
 categoryRouter.patch('/', loginRequired, categoryController.updateCategory);
+
 categoryRouter.delete('/', loginRequired, categoryController.deleteCategory);
 
 export { categoryRouter };

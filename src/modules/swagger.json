@@ -1,210 +1,37 @@
 {
-    "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "team7 api 명세서",
-    "description": "Category와 Product에 대한 API 명세서입니다.",
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  },
-  "host": "localhost:5000",
-  "basePath": "/",
-  "tags": [
-    {
-        "name": "category-controller",
-        "description": "카테고리 CRUD"
-    },
-    {
-      "name": "product-controller",
-      "description": "상품 CRUD"
+  "swagger": "2.0",
+"info": {
+  "version": "1.0.0",
+  "title": "team7 api 명세서",
+  "description": "Category와 Product에 대한 API 명세서입니다.",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
   }
-  ],
-  "schemes": [
-    "http"
-  ],
-  
-  "paths": {
-    "api/category/": {
-        "get": {
-            "tags": [
-                "category-controller"
-            ],
-            "summary": "카테고리 조회",
-            "consumes": [
-              "application/json"
-          ],
-          "produces": [
-              "application/json"
-          ],
-          "parameters": [
-              {
-                  "name": "",
-                  "in": "query",
-                  "description": "모든 카테고리를 조회합니다.",
-                  "style": "simple"
-              },
-              {
-                  "name": "categoryName",
-                  "in": "query",
-                  "description": "이름을 가지는 카테고리를 조회합니다.",
-                  "required": false,
-                  "type": "string"
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "OK"
-              }
-          },
-          "deprecated": false
-        },
-        "post": {
-          "tags": [
-              "category-controller"
-          ],
-          "summary": "카테고리 추가",
-          "consumes": [
-              "application/json"
-            ],
-            "produces": [
-              "application/json"
-            ],
-          "parameters": [
-              {
-                  "in": "header",
-                  "name": "bearer {token}",
-                  "description": "jwt 토큰, bearer {token}의 형태로 입력",
-                  "schema": {
-                      "type": "string",
-                      "required": true
-                  }
-                  
-              },
-              {
-                  "in": "body",
-                  "name": "body",
-                  "description": "추가할 카테고리의 이름을 입력",
-                  "schema": {
-                      "type": "object",
-                      "required": "userName",
-                      "properties":
-                      {
-                            "name":{
-                              "type": "string",
-                              "required" : true}
-                      }
-                  }
-                  
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "Register Success"
-              }
-          }
-      },
-      "patch": {
-          "tags": [
-              "category-controller"
-          ],
-          "summary": "카테고리 수정",
-          "consumes": [
-              "application/json"
-            ],
-            "produces": [
-              "application/json"
-            ],
-          "parameters": [
-              {
-                  "in": "header",
-                  "name": "bearer {token}",
-                  "description": "jwt 토큰, bearer {token}의 형태로 입력",
-                  "schema": {
-                      "type": "string",
-                      "required": true
-                  }
-                  
-              },
-              {
-                  "in": "body",
-                  "name": "body",
-                  "description": "currentCategoryName(현재 이름)과 nameToChange(바꿀 이름)을 입력",
-                  "schema": {
-                      "type": "object",
-                      "required": "userName",
-                      "properties":
-                      {
-                            "currentCategoryName":{
-                              "type": "string",
-                              "required" : true},
-                            "nameToChange":{
-                              "type": "string",
-                              "required" : true}
-                      }
-                  }
-                  
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "Register Success"
-              }
-          }
-      },
-      "delete": {
-          "tags": [
-              "category-controller"
-          ],
-          "summary": "카테고리 삭제",
-          "consumes": [
-              "application/json"
-            ],
-            "produces": [
-              "application/json"
-            ],
-          "parameters": [
-              {
-                  "in": "header",
-                  "name": "bearer {token}",
-                  "description": "jwt 토큰, bearer {token}의 형태로 입력",
-                  "schema": {
-                      "type": "string",
-                      "required": true
-                  }
-                  
-              },
-              {
-                  "in": "body",
-                  "name": "body",
-                  "description": "삭제할 카테고리 이름을 입력",
-                  "schema": {
-                      "type": "object",
-                      "required": "userName",
-                      "properties":
-                      {
-                            "name":{
-                              "type": "string",
-                              "required" : true}
-                      }
-                  }
-                  
-              }
-      ],
-          "responses": {
-              "200": {
-                  "description": "Register Success"
-              }
-          }
-      }
-    },
-    "api/product/": {
+},
+"host": "localhost:5000",
+"basePath": "/",
+"tags": [
+  {
+      "name": "category-controller",
+      "description": "카테고리 CRUD"
+  },
+  {
+    "name": "product-controller",
+    "description": "상품 CRUD"
+}
+],
+"schemes": [
+  "http"
+],
+
+"paths": {
+  "api/category/": {
       "get": {
           "tags": [
-              "product-controller"
+              "category-controller"
           ],
-          "summary": "상품 조회",
+          "summary": "카테고리 조회",
           "consumes": [
             "application/json"
         ],
@@ -215,13 +42,13 @@
             {
                 "name": "",
                 "in": "query",
-                "description": "모든 상품을 조회합니다.",
+                "description": "모든 카테고리를 조회합니다.",
                 "style": "simple"
             },
             {
-                "name": "productId",
+                "name": "categoryName",
                 "in": "query",
-                "description": "id를 가지는상품을 조회합니다.",
+                "description": "이름을 가지는 카테고리를 조회합니다.",
                 "required": false,
                 "type": "string"
             }
@@ -235,61 +62,38 @@
       },
       "post": {
         "tags": [
-            "product-controller"
+            "category-controller"
         ],
-        "summary": "상품 추가",
+        "summary": "카테고리 추가",
         "consumes": [
-          "form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
         "parameters": [
-          {
-              "in": "header",
-              "name": "bearer {token}",
-              "description": "jwt 토큰, bearer {token}의 형태로 입력",
-              "schema": {
-                  "type": "string",
-                  "required": true
-              }
-              
-          },
+            {
+                "in": "header",
+                "name": "bearer {token}",
+                "description": "jwt 토큰, bearer {token}의 형태로 입력",
+                "schema": {
+                    "type": "string",
+                    "required": true
+                }
+                
+            },
             {
                 "in": "body",
                 "name": "body",
-                "description": "추가할 상품의 정보 입력",
+                "description": "currentCategoryName(현재 이름)과 nameToChange(바꿀 이름)을 입력",
                 "schema": {
                     "type": "object",
                     "required": "userName",
                     "properties":
                     {
-                          "categoryName":{
+                          "name":{
                             "type": "string",
-                            "required" : true},
-                           "name":{
-                            "type": "string",
-                            "required" : true},
-                          "price":{
-                            "type": "number",
-                            "required" : true},
-                          "information":{
-                            "type": "string",
-                            "required" : true},
-                          "author":{
-                            "type": "string",
-                            "required" : false},
-                          "publisher":{
-                            "type": "string",
-                            "required" : true},
-                          "publishedDate":{
-                            "type": "string",
-                            "required" : true},
-                          "img":{
-                              "type": "file",
-                              "required" : false}
-                          
-  
+                            "required" : true}
                     }
                 }
                 
@@ -302,10 +106,138 @@
         }
     },
     "patch": {
+        "tags": [
+            "category-controller"
+        ],
+        "summary": "카테고리 수정",
+        "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+        "parameters": [
+            {
+                "in": "header",
+                "name": "bearer {token}",
+                "description": "jwt 토큰, bearer {token}의 형태로 입력",
+                "schema": {
+                    "type": "string",
+                    "required": true
+                }
+                
+            },
+            {
+                "in": "body",
+                "name": "body",
+                "description": "currentCategoryName(현재 이름)과 nameToChange(바꿀 이름)을 입력",
+                "schema": {
+                    "type": "object",
+                    "required": "userName",
+                    "properties":
+                    {
+                          "currentCategoryName":{
+                            "type": "string",
+                            "required" : true},
+                          "nameToChange":{
+                            "type": "string",
+                            "required" : true}
+                    }
+                }
+                
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Register Success"
+            }
+        }
+    },
+    "delete": {
+        "tags": [
+            "category-controller"
+        ],
+        "summary": "카테고리 삭제",
+        "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+        "parameters": [
+            {
+                "in": "header",
+                "name": "bearer {token}",
+                "description": "jwt 토큰, bearer {token}의 형태로 입력",
+                "schema": {
+                    "type": "string",
+                    "required": true
+                }
+                
+            },
+            {
+                "in": "body",
+                "name": "body",
+                "description": "currentCategoryName(현재 이름)과 nameToChange(바꿀 이름)을 입력",
+                "schema": {
+                    "type": "object",
+                    "required": "userName",
+                    "properties":
+                    {
+                          "name":{
+                            "type": "string",
+                            "required" : true}
+                    }
+                }
+                
+            }
+    ],
+        "responses": {
+            "200": {
+                "description": "Register Success"
+            }
+        }
+    }
+  },
+  "api/product/": {
+    "get": {
+        "tags": [
+            "product-controller"
+        ],
+        "summary": "상품 조회",
+        "consumes": [
+          "application/json"
+      ],
+      "produces": [
+          "application/json"
+      ],
+      "parameters": [
+          {
+              "name": "",
+              "in": "query",
+              "description": "모든 상품을 조회합니다.",
+              "style": "simple"
+          },
+          {
+              "name": "productId",
+              "in": "query",
+              "description": "id를 가지는상품을 조회합니다.",
+              "required": false,
+              "type": "string"
+          }
+      ],
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      },
+      "deprecated": false
+    },
+    "post": {
       "tags": [
           "product-controller"
       ],
-      "summary": "상품 수정",
+      "summary": "상품 추가",
       "consumes": [
         "form-data"
       ],
@@ -313,28 +245,25 @@
         "application/json"
       ],
       "parameters": [
-          {
-              "in": "header",
-              "name": "bearer {token}",
-              "description": "jwt 토큰, bearer {token}의 형태로 입력",
-              "schema": {
-                  "type": "string",
-                  "required": true
-              }
-              
-          },
+        {
+            "in": "header",
+            "name": "bearer {token}",
+            "description": "jwt 토큰, bearer {token}의 형태로 입력",
+            "schema": {
+                "type": "string",
+                "required": true
+            }
+            
+        },
           {
               "in": "body",
               "name": "body",
-              "description": "수정할 상품의 정보 입력",
+              "description": "추가할 상품의 정보 입력",
               "schema": {
                   "type": "object",
                   "required": "userName",
                   "properties":
-                  {   
-                        "productId":{
-                          "type": "string",
-                          "required" : true},
+                  {
                         "categoryName":{
                           "type": "string",
                           "required" : true},
@@ -360,7 +289,7 @@
                             "type": "file",
                             "required" : false}
                         
-  
+
                   }
               }
               
@@ -372,107 +301,178 @@
           }
       }
   },
-    
-    "delete": {
-        "tags": [
-            "product-controller"
-        ],
-        "summary": "상품 삭제",
-        "parameters": [
-          {
-              "in": "header",
-              "name": "bearer {token}",
-              "description": "jwt 토큰, bearer {token}의 형태로 입력",
-              "schema": {
-                  "type": "string",
-                  "required": true
-              }
-              
-          },
-            {
-                "in": "body",
-                "name": "body",
-                "description": "삭제할 상품 id를 입력",
-                "schema": {
-                    "type": "object",
-                    "required": "productId",
-                    "properties":
-                    {
-                          "productId":{
-                            "type": "string",
-                            "required" : true}
-                    }
-                }
-                
-            }
+  "patch": {
+    "tags": [
+        "product-controller"
     ],
-        "responses": {
-            "200": {
-                "description": "Register Success"
+    "summary": "상품 수정",
+    "consumes": [
+      "form-data"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "parameters": [
+        {
+            "in": "header",
+            "name": "bearer {token}",
+            "description": "jwt 토큰, bearer {token}의 형태로 입력",
+            "schema": {
+                "type": "string",
+                "required": true
             }
+            
+        },
+        {
+            "in": "body",
+            "name": "body",
+            "description": "수정할 상품의 정보 입력",
+            "schema": {
+                "type": "object",
+                "required": "userName",
+                "properties":
+                {   
+                      "productId":{
+                        "type": "string",
+                        "required" : true},
+                      "categoryName":{
+                        "type": "string",
+                        "required" : true},
+                       "name":{
+                        "type": "string",
+                        "required" : true},
+                      "price":{
+                        "type": "number",
+                        "required" : true},
+                      "information":{
+                        "type": "string",
+                        "required" : true},
+                      "author":{
+                        "type": "string",
+                        "required" : false},
+                      "publisher":{
+                        "type": "string",
+                        "required" : true},
+                      "publishedDate":{
+                        "type": "string",
+                        "required" : true},
+                      "img":{
+                          "type": "file",
+                          "required" : false}
+                      
+
+                }
+            }
+            
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "Register Success"
         }
     }
-  }
-    
-  },
-  "definitions": {
-    "category": {
-      "properties": {
-          "_id": {
-              "type": "ObjectId"
-          },
-          "name": {
-              "type": "string"
-      },
-          "createdAt": {
-              "type": "Date"
+},
   
-          },
-          "updatedAt": {
-              "type": "Date"
+  "delete": {
+      "tags": [
+          "product-controller"
+      ],
+      "summary": "상품 삭제",
+      "parameters": [
+        {
+            "in": "header",
+            "name": "bearer {token}",
+            "description": "jwt 토큰, bearer {token}의 형태로 입력",
+            "schema": {
+                "type": "string",
+                "required": true
+            }
+            
+        },
+          {
+              "in": "body",
+              "name": "body",
+              "description": "삭제할 상품 id를 입력",
+              "schema": {
+                  "type": "object",
+                  "required": "productId",
+                  "properties":
+                  {
+                        "productId":{
+                          "type": "string",
+                          "required" : true}
+                  }
+              }
+              
           }
-     
-  }
-  },
-   "product": {
-      "properties": {
-          "_id": {
-              "type": "ObjectId"
-          },
-          "category": {
-              "type": "Schema.Types.ObjectId"
-          },
-          "name": {
-              "type": "string"
-          },
-          "price": {
-              "type": "number"
-          },
-          "imgUrl": {
-              "type": "string"
-          },
-          "information": {
-              "type": "string"
-          },
-          "author": {
-              "type": "string"
-          },
-          "publisher": {
-              "type": "string"
-          },
-          "publishedDate": {
-              "type": "string"
-          },
-          "orderCount": {
-              "type": "number"
-          },
-          "createdAt": {
-              "type": "Date"
-  
-          },
-          "updatedAt": {
-              "type": "Date"
+  ],
+      "responses": {
+          "200": {
+              "description": "Register Success"
           }
       }
   }
-  }}
+}
+  
+},
+"definitions": {
+  "category": {
+    "properties": {
+        "_id": {
+            "type": "ObjectId"
+        },
+        "name": {
+            "type": "string"
+    },
+        "createdAt": {
+            "type": "Date"
+
+        },
+        "updatedAt": {
+            "type": "Date"
+        }
+   
+}
+},
+ "product": {
+    "properties": {
+        "_id": {
+            "type": "ObjectId"
+        },
+        "category": {
+            "type": "Schema.Types.ObjectId"
+        },
+        "name": {
+            "type": "string"
+        },
+        "price": {
+            "type": "number"
+        },
+        "imgUrl": {
+            "type": "string"
+        },
+        "information": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string"
+        },
+        "publisher": {
+            "type": "string"
+        },
+        "publishedDate": {
+            "type": "string"
+        },
+        "orderCount": {
+            "type": "number"
+        },
+        "createdAt": {
+            "type": "Date"
+
+        },
+        "updatedAt": {
+            "type": "Date"
+        }
+    }
+}
+}}
