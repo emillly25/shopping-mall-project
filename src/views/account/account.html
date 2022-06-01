@@ -24,58 +24,69 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="./account.css" />
+    <script defer src="../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../home/template.css" />
   </head>
   <body>
     <div class="container">
-      <div class="account-page-title">
-        <h1><strong>계정관리</strong></h1>
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+
+      <div class="account">
+        <div class="account-page-title">
+          <h1><strong>계정관리</strong></h1>
+        </div>
+        <div class="account-page-menu-container">
+          <a class="menu-card" href="./orders/orders.html">
+            <div class="menu-icon">
+              <img src="../elice-rabbit.png" alt="" />
+            </div>
+            <div class="menu-body">
+              <span class="title">주문 조회</span>
+              <span class="subtitle">
+                지난 주문 내역을 확인, 취소할 수 있습니다.
+              </span>
+            </div>
+          </a>
+          <a class="menu-card" href="./accountInfo/accountInfo.html">
+            <div class="menu-icon">
+              <img src="../elice-rabbit.png" alt="" />
+            </div>
+            <div class="menu-body">
+              <span class="title">회원정보 관리</span>
+              <span class="subtitle">
+                회원 정보를 확인, 수정할 수 있습니다.
+              </span>
+            </div>
+          </a>
+          <a class="menu-card" href="./initialize/initialize.html">
+            <div class="menu-icon">
+              <img src="../elice-rabbit.png" alt="" />
+            </div>
+            <div class="menu-body">
+              <span class="title">비밀번호 초기화</span>
+              <span class="subtitle">
+                이메일을 입력하면, 새로운 비밀번호가 전송됩니다.
+              </span>
+            </div>
+          </a>
+          <a class="menu-card" href="./signout/signout.html">
+            <div class="menu-icon">
+              <img src="../elice-rabbit.png" alt="" />
+            </div>
+            <div class="menu-body">
+              <span class="title">회원 탈퇴</span>
+              <span class="subtitle">
+                모든 정보를 안전하게 삭제한 후 탈퇴할 수 있습니다.
+              </span>
+            </div>
+          </a>
+        </div>
       </div>
-      <div class="account-page-menu-container">
-        <a class="menu-card" href="./orders/orders.html">
-          <div class="menu-icon">
-            <img src="../elice-rabbit.png" alt="" />
-          </div>
-          <div class="menu-body">
-            <span class="title">주문 조회</span>
-            <span class="subtitle">
-              지난 주문 내역을 확인, 취소할 수 있습니다.
-            </span>
-          </div>
-        </a>
-        <a class="menu-card" href="./accountInfo/accountInfo.html">
-          <div class="menu-icon">
-            <img src="../elice-rabbit.png" alt="" />
-          </div>
-          <div class="menu-body">
-            <span class="title">회원정보 관리</span>
-            <span class="subtitle">
-              회원 정보를 확인, 수정할 수 있습니다.
-            </span>
-          </div>
-        </a>
-        <a class="menu-card" href="./initialize/initialize.html">
-          <div class="menu-icon">
-            <img src="../elice-rabbit.png" alt="" />
-          </div>
-          <div class="menu-body">
-            <span class="title">비밀번호 초기화</span>
-            <span class="subtitle">
-              이메일을 입력하면, 새로운 비밀번호가 전송됩니다.
-            </span>
-          </div>
-        </a>
-        <a class="menu-card" href="./signout/signout.html">
-          <div class="menu-icon">
-            <img src="../elice-rabbit.png" alt="" />
-          </div>
-          <div class="menu-body">
-            <span class="title">회원 탈퇴</span>
-            <span class="subtitle">
-              모든 정보를 안전하게 삭제한 후 탈퇴할 수 있습니다.
-            </span>
-          </div>
-        </a>
-      </div>
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
     </div>
   </body>
 </html>

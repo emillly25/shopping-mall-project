@@ -82,5 +82,3 @@ async function updateUserData(e) {
 
 let deleteBtn = document.getElementById('deleteBtn');
 deleteBtn.addEventListener('click', updateUserData);
-
-// 해결과제1) id, pw 자동완성 설정하면, 회원정보란에 자동으로 값이 붙는 문제 해결하기

@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 1000px;
   height: 700px;
   background-color: white;
@@ -6,16 +6,24 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
-.container .account-page-title {
+.account {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 100px auto;
+  /* border: 1px solid red; */
+}
+.account-page-title {
   border-bottom: 1px solid #ddd;
   /* background-color: red; */
   font-size: 30px;
   /* margin-bottom: 100px; */
 }
 
-.container .account-page-body {
+.account-page-body {
   width: 100%;
   height: 400px;
   margin-top: 40px;
@@ -24,7 +32,7 @@
   align-items: center;
   /* background-color: red; */
 }
-.container .account-page-body .delete-my-account {
+.account-page-body .delete-my-account {
   width: 50%;
   height: 250px;
   background-color: #f0f2f5;
@@ -33,7 +41,7 @@
   flex-direction: column;
   gap: 25px;
 }
-.container .account-page-body .delete-my-account .title {
+.account-page-body .delete-my-account .title {
   font-size: 20px;
   text-align: center;
   margin-top: 10px;
@@ -41,16 +49,13 @@
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
-.container
-  .account-page-body
-  .delete-my-account
-  .password-input-field
-  #passwordInput {
+
+.account-page-body .delete-my-account .password-input-field #passwordInput {
   width: 100%;
   height: 40px;
   border-radius: 5px;
   padding: 5px;
 }
 
-.container .account-page-body .delete-my-account #deleteBtn {
+.account-page-body .delete-my-account #deleteBtn {
 }

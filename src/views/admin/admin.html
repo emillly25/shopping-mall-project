@@ -25,14 +25,25 @@
     <!-- 커스텀 css, js -->
     <script defer src="./admin.js" type="module"></script>
     <link rel="stylesheet" href="./admin.css" />
+
+    <script defer src="../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../home/template.css" />
   </head>
   <body>
-    <section class="section">
-      <div class="title">Admin page</div>
+    <div class="container">
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+
+      <div class="scroll_btn">
+        <!-- 여기에 scroll_btn 삽입됨 -->
+      </div>
+
+      <!-- <div class="title">Admin page</div> -->
 
       <div class="crud">
         <!-- category -->
-        <div class="category">
+        <div class="category-list">
           <h1 class="subtitle">카테고리 CRUD</h1>
           <div class="c_insert">
             <div>카테고리 추가</div>
@@ -190,6 +201,10 @@
           </div>
         </div>
       </div>
-    </section>
+
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
+    </div>
   </body>
 </html>
