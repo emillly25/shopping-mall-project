@@ -110,7 +110,7 @@ const getOrder = async (req, res, next) => {
 
     // 사용자 주문 목록
     const orders = await orderService.getOrdersById(userId);
-
+    // console.log('orders', orders);
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json({
       isSuccess: true,
