@@ -23,7 +23,7 @@ async function booksRendering(){
             </div>
         
             <div class="bookBuy">
-                <div class="buyBtn"><input data-id="${_id}" id="buyBtn" type="button" value="구매하기"></div>
+                <div class="buyBtn"><input data-id="${_id}" id="buyBtn" type="button" value="바로구매"></div>
                 <div class="cartBtn"><input data-id="${_id}" id="cartBtn" type="button" value="장바구니"></div>
             </div></div>` 
             items.innerHTML += htmlInfo 
@@ -143,7 +143,7 @@ async function booksRendering(){
                 obj.price = Number(price.textContent)
                 buyArr.push(obj)
                 window.localStorage.setItem('buyProductId', JSON.stringify(buyArr))
-                window.location.href = '/order'
+                window.location.href = '/oneorder'
             })
 
         })

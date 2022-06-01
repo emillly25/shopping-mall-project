@@ -12,6 +12,7 @@ viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/booklist', serveStatic('booklist'));
 viewsRouter.use('/bookdetail', serveStatic('bookdetail'));
 viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/oneorder', serveStatic('oneorder'));
 viewsRouter.use('/order-complete', serveStatic('order-complete'));
 viewsRouter.use('/cart', serveStatic('cart'));
 viewsRouter.use('/account', serveStatic('account'));
