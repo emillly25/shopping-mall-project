@@ -1,0 +1,24 @@
+/* top버튼과 bottom 버튼 */
+.scroll_btn {
+  /* border: 3px solid black; */
+  width: 50px;
+  height: 110px;
+  display: none;
+  position: fixed;
+  right: 10px;
+  bottom: 5px;
+}
+
+#top_btn img,
+#bottom_btn img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .scroll_btn {
+    display: block;
+    left: 10px;
+  }
+}

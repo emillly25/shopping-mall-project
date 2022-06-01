@@ -25,9 +25,18 @@
     <!-- 커스텀 css, js -->
     <script defer src="./admin.js" type="module"></script>
     <link rel="stylesheet" href="./admin.css" />
+
+    <script defer src="../home/header.js" type="module"></script>
+    <script defer src="../home/footer.js" type="module"></script>
+    <link rel="stylesheet" href="../home/header.css" />
+    <link rel="stylesheet" href="../home/footer.css" />
   </head>
   <body>
-    <section class="section">
+    <div class="container">
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+
       <div class="title">Admin page</div>
 
       <div class="crud">
@@ -190,6 +199,9 @@
           </div>
         </div>
       </div>
-    </section>
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
+    </div>
   </body>
 </html>
