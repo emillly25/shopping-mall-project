@@ -28,7 +28,7 @@ async function handleSubmit(e) {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
-  const phoneNumberInput = phoneNumberInput.value;
+  const phoneNumber = phoneNumberInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -50,7 +50,7 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password, phoneNumberInput };
+    const data = { fullName, email, password, phoneNumber };
 
     await Api.post('/api/register', data);
 
