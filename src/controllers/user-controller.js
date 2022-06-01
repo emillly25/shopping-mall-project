@@ -13,9 +13,9 @@ const register = async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, phoneNumber } = req.body;
 
-    if (!fullName || !email || !password) {
+    if (!fullName || !email || !password || !phoneNumber) {
       throw new Error('check the requested body again');
     }
 
@@ -24,6 +24,7 @@ const register = async (req, res, next) => {
       fullName,
       email,
       password,
+      phoneNumber,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -204,13 +205,14 @@ const resetPassword = async function (req, res, next) {
     }
 
     // body data 로부터 이메일 추출.
-    const email = req.body.email;
+    // const email = req.body.email;
 
-    if (!email) {
+    const { email, phoneNumber } = req.body;
+    if (!email || !phoneNumber) {
       throw new Error('check the requested body again');
     }
 
-    const data = await userService.resetPw(email);
+    const data = await userService.resetPw(email, phoneNumber);
 
     res.status(200).json({
       isSuccess: true,
