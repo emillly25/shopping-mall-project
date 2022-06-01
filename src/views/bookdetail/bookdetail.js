@@ -117,7 +117,7 @@ async function buyNow(){
         buyBtn.addEventListener('click',function(e){
             // 해당 제품의 아이디, 가격, 수량을 로컬스토리지에 저장하고 구매페이지로 이동
             const id = (window.location.href).split('=')[1]
-            const q = num.value
+            const q = Number(num.value)
             const price = totalPrice.textContent
             const obj = {};
             obj._id = id

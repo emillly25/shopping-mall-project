@@ -125,7 +125,7 @@ async function cartRendering(){
             const t = itemTotalPriceArr.find(el=> el.dataset.id === id)
             const r = rendering.find(el=> el._id === id)
             num.value = r.quantity;
-            q.innerText = r.quantity;
+            q.innerText = Number(r.quantity);
             t.innerText = Number(p.textContent) * Number(r.quantity)
         })
         let s = 0;
@@ -151,8 +151,16 @@ async function cartRendering(){
             const totalPrice = itemTotalPriceArr.find(el=> el.dataset.id === minusId)
             const itemPrice =  itemPriceArr.find(el=> el.dataset.id === minusId)
             result.stepDown()
-            quan.innerText = result.value
+            quan.innerText = Number(result.value)
             totalPrice.innerText =  Number(quan.textContent) * Number(itemPrice.textContent)
+            const localItems = JSON.parse(window.localStorage.getItem('productId'))
+            const idx = localItems.findIndex(el=> el._id === minusId)
+            localItems[idx].quantity = Number(quan.textContent)
+            localItems[idx].price = Number(itemPrice.textContent)
+            window.localStorage.setItem('productId', JSON.stringify(localItems))
+            console.log(window.localStorage.getItem('productId'))
+
+            
             
         } else {
             const plusId = e.target.dataset.id
@@ -161,8 +169,7 @@ async function cartRendering(){
             const totalPrice = itemTotalPriceArr.find(el=> el.dataset.id === plusId)
             const itemPrice =  itemPriceArr.find(el=> el.dataset.id === plusId)
             result.stepUp()
-            quan.innerText = result.value
-            quan.innerText = result.value
+            quan.innerText = Number(result.value)
             totalPrice.innerText = Number(quan.textContent) * Number(itemPrice.textContent)
             
         }
@@ -186,7 +193,8 @@ async function cartRendering(){
 
 cartRendering()
 
-
+// 체크된 상품들만 구매하기 - 체크된 상품들만 로컬스토리지에 저장하고 넘겨주기
+// 아이디, 수량, 가격
 
 
 

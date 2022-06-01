@@ -137,7 +137,7 @@ async function booksRendering(){
                 const num = numArr.find(el=> el.dataset.id === id)
                 const obj = {};
                 obj._id = id
-                obj.quantity = num.value
+                obj.quantity = Number(num.value)
                 obj.price = Number(price.textContent)
                 buyArr.push(obj)
                 window.localStorage.setItem('buyProductId', JSON.stringify(buyArr))
