@@ -24,35 +24,80 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="./accountInfo.css" />
+    <script defer src="./accountInfo.js" type="module"></script>
   </head>
   <body>
     <div class="container">
       <div class="account-page-title">
         <h1><strong>회원정보</strong></h1>
       </div>
-      <form class="account-page-body">
+      <form class="account-page-body" autocomplete="no">
         <div class="my-info">
           <span class="my-info-field">
             <label class="label" for="username">이름</label>
-            <input type="text" id="username" />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="이름을 입력하세요"
+            />
           </span>
           <span class="my-info-field">
-            <label class="label" for="userPassword">비밀번호</label>
-            <input type="text" id="userPassword" />
+            <label class="label" for="currentPassword"
+              >현재 비밀번호 (필수 입력)</label
+            >
+            <input
+              type="password"
+              name="currentPassword"
+              id="currentPassword"
+              autocomplete="new-password"
+            />
           </span>
           <span class="my-info-field">
-            <label class="label" for="userPasswordCheck">비밀번호 확인</label>
-            <input type="text" id="userPasswordCheck" />
+            <label class="label" for="userPassword">
+              변경하고 싶은 비밀번호</label
+            >
+            <input type="password" name="userPassword" id="userPassword" />
+          </span>
+          <span class="my-info-field">
+            <label class="label" for="userPasswordCheck"
+              >변경하고 싶은 비밀번호 확인</label
+            >
+            <input
+              type="password"
+              name="userPasswordCheck"
+              id="userPasswordCheck"
+            />
           </span>
           <span class="my-info-field">
             <label class="label">주소</label>
-            <input type="text" id="postcode" />
-            <input type="text" id="mainAddress" />
-            <input type="text" id="subAddress" />
+            <input
+              type="text"
+              name="postcode"
+              id="postcode"
+              placeholder="우편번호를 입력하세요"
+            />
+            <input
+              type="text"
+              name="mainAddress"
+              id="mainAddress"
+              placeholder="메인주소를 입력하세요"
+            />
+            <input
+              type="text"
+              name="subAddress"
+              id="subAddress"
+              placeholder="서브주소를 입력하세요"
+            />
           </span>
           <span class="my-info-field">
             <label class="label" for="userPhoneNo">전화번호</label>
-            <input type="text" id="userPhoneNo" />
+            <input
+              type="text"
+              name="userPhoneNo"
+              id="userPhoneNo"
+              placeholder="전화번호를 입력하세요"
+            />
           </span>
           <button class="button is-success" id="deleteBtn">
             회원정보 저장하기

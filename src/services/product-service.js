@@ -1,4 +1,9 @@
+const { categoryService } = require('./category-service');
 const { productModel, userModel } = require('../db');
+import {
+  ValueIsNullError,
+  CategoryDoesNotExistsError,
+} from '../error/value-error';
 
 class ProductService {
   constructor(productModel, userModel) {
@@ -7,56 +12,115 @@ class ProductService {
   }
 
   async getAllProduct() {
-    try {
-      const product = await this.productModel.findAll();
-      return product;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
+    const product = await this.productModel.findAll();
+    return product;
   }
 
-  async getProduct(name) {
-    try {
-      const product = await this.productModel.findByName(name);
-      return product;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
+  async getProductOne(productId) {
+    const product = await this.productModel.findById(productId);
+    return product;
   }
 
-  async insertProduct(productInfo, userId) {
-    try {
-    
-      await this.checkIsAdministrator(userId);
-      const result = this.productModel.create(productInfo);
-      return result;
-    } catch (error) {
-      console.log(error);
-      next(error);
+  async getProduct(productId) {
+    if (!productId) {
+      return await productService.getAllProduct();
     }
+    return await productService.getProductOne(productId);
   }
 
-  async updateProduct(productInfo, productId, userId) {
-    try {
-      await this.checkIsAdministrator(userId);
-      const result = await this.productModel.update(productInfo, productId);
-      return result;
-    } catch (error) {
-      console.log(error);
-      next(error);
+  async insertProduct(productInfo, imgUrl, userId) {
+    const categoryName = productInfo.categoryName;
+    const name = productInfo.name;
+    const price = productInfo.price;
+    const information = productInfo.information;
+    const author = productInfo.author;
+    const publisher = productInfo.publisher;
+    const publishedDate = productInfo.publishedDate;
+    const orderCount = productInfo.orderCount;
+
+    if (
+      categoryName == null ||
+      name == null ||
+      price == null ||
+      information == null ||
+      publisher == null
+    ) {
+      throw new ValueIsNullError('required value is not allowed to be null');
     }
+
+    const category = await categoryService.getCategory(categoryName);
+    if (!category) {
+      throw new CategoryDoesNotExistsError(
+        "CategoryName doesn't exist in Category Schema",
+      );
+    }
+
+    const productData = [
+      category,
+      name,
+      price,
+      imgUrl,
+      information,
+      author,
+      publisher,
+      publishedDate,
+      orderCount,
+    ];
+
+    await this.checkIsAdministrator(userId);
+    const result = this.productModel.create(productData);
+    return result;
+  }
+
+  async updateProduct(productInfo, imgUrl, userId) {
+    const productId = productInfo.productId;
+    const categoryName = productInfo.categoryName;
+    const name = productInfo.name;
+    const price = productInfo.price;
+    const information = productInfo.information;
+    const author = productInfo.author;
+    const publisher = productInfo.publisher;
+    const publishedDate = productInfo.publishedDate;
+    const orderCount = productInfo.orderCount;
+
+    if (
+      productId == null ||
+      categoryName == null ||
+      name == null ||
+      price == null ||
+      information == null ||
+      publisher == null
+    ) {
+      throw new ValueIsNullError('required value is not allowed to be null');
+    }
+
+    const category = await categoryService.getCategory(categoryName);
+    if (!category) {
+      throw new CategoryDoesNotExistsError(
+        "CategoryName doesn't exist in Category Schema",
+      );
+    }
+
+    const productData = [
+      category,
+      name,
+      price,
+      imgUrl,
+      information,
+      author,
+      publisher,
+      publishedDate,
+      orderCount,
+    ];
+
+    await this.checkIsAdministrator(userId);
+    const result = await this.productModel.update(productData, productId);
+    return result;
   }
   async deleteProduct(productId, userId) {
-    try {
-      await this.checkIsAdministrator(userId);
-      const result = await this.productModel.delete(productId);
-      return result;
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
+    await this.checkIsAdministrator(userId);
+    const result = await this.productModel.delete(productId);
+    return result;
   }
 
   async checkIsAdministrator(userId) {

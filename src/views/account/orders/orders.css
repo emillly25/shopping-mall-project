@@ -30,6 +30,7 @@
   text-align: center;
   border-radius: 8px;
   border-bottom: 1px solid #ddd;
+  line-height: 40px;
 }
 .container .account-page-body .body-list .date {
   width: 15%;

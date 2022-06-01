@@ -1,7 +1,7 @@
 import { userModel } from '../db';
-
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { generateRandomPassword } from '../utils/generate-random-password';
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -12,13 +12,13 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password, phoneNumber } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
     if (user) {
       throw new Error(
-        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.'
+        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.',
       );
     }
 
@@ -27,7 +27,12 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = {
+      fullName,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+    };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -44,7 +49,7 @@ class UserService {
     const user = await this.userModel.findByEmail(email);
     if (!user) {
       throw new Error(
-        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
+        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
       );
     }
 
@@ -56,12 +61,12 @@ class UserService {
     // 매개변수의 순서 중요 (1번째는 프론트가 보내온 비밀번호, 2번쨰는 db에 있떤 암호화된 비밀번호)
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      correctPasswordHash
+      correctPasswordHash,
     );
 
     if (!isPasswordCorrect) {
       throw new Error(
-        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
       );
     }
 
@@ -72,9 +77,8 @@ class UserService {
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
     const role = user.role;
-    const id = user.id;
-    const data = [token,role,id]
-    
+    const data = [token, role];
+
     return data;
   }
 
@@ -82,6 +86,16 @@ class UserService {
   async getUsers() {
     const users = await this.userModel.findAll();
     return users;
+  }
+
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    return user;
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
@@ -103,12 +117,12 @@ class UserService {
     const correctPasswordHash = user.password;
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
-      correctPasswordHash
+      correctPasswordHash,
     );
 
     if (!isPasswordCorrect) {
       throw new Error(
-        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
       );
     }
 
@@ -131,34 +145,53 @@ class UserService {
     return user;
   }
 
-  async deleteUser(toDeleteId,toDeletePw) {
+  async deleteUser(toDeleteId, toDeletePw) {
+    // 우선 해당 id의 유저가 db에 있는지 확인
+    let user = await this.userModel.findById(toDeleteId);
 
-     // 우선 해당 id의 유저가 db에 있는지 확인
-     let user = await this.userModel.findById(toDeleteId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
 
-     // db에서 찾지 못한 경우, 에러 메시지 반환
-     if (!user) {
-       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
-     }
- 
-     // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
- 
-     // 비밀번호 일치 여부 확인
-     const correctPasswordHash = user.password;
-     const isPasswordCorrect = await bcrypt.compare(
-       toDeletePw,
-       correctPasswordHash
-     );
- 
-     if (!isPasswordCorrect) {
-       throw new Error(
-         '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
-       );
-     }
+    // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
 
-     // 비밀번호 확인 후 사용자 삭제
-     return await this.userModel.deleteById(toDeleteId);
-    
+    // 비밀번호 일치 여부 확인
+    const correctPasswordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+      toDeletePw,
+      correctPasswordHash,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+      );
+    }
+
+    // 비밀번호 확인 후 사용자 삭제
+    return await this.userModel.deleteById(toDeleteId);
+  }
+
+  async resetPw(email, phoneNumber) {
+    let user = await this.userModel.findByEmailandPhone(email, phoneNumber);
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    // 랜덤 패스워드 생성하기
+    const password = generateRandomPassword();
+
+    let newPasswordHash;
+    // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
+    if (password) {
+      newPasswordHash = await bcrypt.hash(password, 10);
+      //console.log('newPasswordHash', newPasswordHash);
+    }
+    // 업데이트 진행
+    user = await this.userModel.updatePw(email, password, newPasswordHash);
+
+    return user;
   }
 }
 
