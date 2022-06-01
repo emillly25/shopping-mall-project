@@ -1,5 +1,41 @@
 import * as Api from '/api.js';
 
+const items = document.querySelector('#items')
+const htmlCode = `<table border="1">
+<th colspan="2" width="400px" style="text-align:center">상품</th>
+<th style="text-align:center">수량</th>
+<th style="text-align:center">가격</th>
+<tr>
+    <td><img src="https://image.aladin.co.kr/product/29464/28/cover200/8954686788_1.jpg"></td>
+    <td id="name" style="text-align:center; vertical-align: middle;">상품이름</td>
+    <td id="quan" style="text-align:center; vertical-align: middle;">
+        <div class="qty">
+            <input class="minus" type="button" value="-">
+            <input id ="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
+            <input class="plus" type="button" value="+">
+        </div>
+    </td>
+    <td id="price" style="text-align:center; vertical-align: middle;">12000</td>
+</tr>
+</table>`
+
+// localStorage에서 productId 받아오기
+const pId = JSON.parse(window.localStorage.getItem('productId'))
+const productId = []
+pId.map(({_id})=>{
+    productId.push(_id)
+})
+console.log(productId)
+
+const addOrderList = async function(){
+  const res = await Api.get('/api/product', id)
+  const data = res.result
+}
+
+
+
+
+// 배송지 작성
 const payBtn = document.querySelector('#payBtn');
 const btn = document.getElementById('searchAddressButton');
 const receiverNameInput = document.querySelector('#receiverName');

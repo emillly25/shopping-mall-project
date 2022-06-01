@@ -23,7 +23,7 @@ async function booksRendering(){
             </div>
         
             <div class="bookBuy">
-                <div class="buyBtn"><input id="buyBtn" type="button" value="구매하기" onClick="location.href='/order'"></div>
+                <div class="buyBtn"><input data-id="${_id}" id="buyBtn" type="button" value="구매하기"></div>
                 <div class="cartBtn"><input data-id="${_id}" id="cartBtn" type="button" value="장바구니"></div>
             </div></div>` 
             items.innerHTML += htmlInfo 
@@ -47,6 +47,7 @@ async function booksRendering(){
     // NodeList to Arr
     const numArr = Array.prototype.slice.call(num); 
     const bookPriceArr = Array.prototype.slice.call(bookPrice); 
+    const showPriceArr = Array.prototype.slice.call(showPrice); 
 
     
     async function handleUpdateQuantity(e) {
@@ -79,7 +80,7 @@ async function booksRendering(){
     async function addToCart(){
         cartBtn.forEach(el=>{
             const showPrice = document.querySelectorAll('#showPrice')
-            const showPriceArr = Array.prototype.slice.call(showPrice); 
+            
             const localCart = window.localStorage.getItem('productId');
             el.addEventListener('click',(e)=>{
                 if(localCart === null){
@@ -123,6 +124,29 @@ async function booksRendering(){
         }
         
     }
+
+    const buyBtn = document.querySelectorAll('#buyBtn')
+    const buyArr = []
+    //바로 구매하기
+    async function buyNow(){
+        buyBtn.forEach(el=>{
+            el.addEventListener('click',function(e){
+                // 해당 제품의 아이디, 가격, 수량을 로컬스토리지에 저장하고 구매페이지로 이동
+                const id = e.target.dataset.id
+                const price = showPriceArr.find(el=> el.dataset.id === id)
+                const num = numArr.find(el=> el.dataset.id === id)
+                const obj = {};
+                obj._id = id
+                obj.quantity = num.value
+                obj.price = Number(price.textContent)
+                buyArr.push(obj)
+                window.localStorage.setItem('buyProductId', JSON.stringify(buyArr))
+                window.location.href = '/order'
+            })
+
+        })
+    }
+    buyNow()
     
 
 }

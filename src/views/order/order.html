@@ -24,23 +24,9 @@
             <h1>주문</h1>
             <div class="order_container">
                 <div class="order_list">
-                        <table border="1">
-                            <th colspan="2" width="400px" style="text-align:center">상품</th>
-                            <th style="text-align:center">수량</th>
-                            <th style="text-align:center">가격</th>
-                            <tr>
-                                <td><img src="https://image.aladin.co.kr/product/29464/28/cover200/8954686788_1.jpg"></td>
-                                <td id="name" style="text-align:center; vertical-align: middle;">상품이름</td>
-                                <td id="quan" style="text-align:center; vertical-align: middle;">
-                                    <div class="qty">
-                                        <input class="minus" type="button" value="-">
-                                        <input id ="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
-                                        <input class="plus" type="button" value="+">
-                                    </div>
-                                </td>
-                                <td id="price" style="text-align:center; vertical-align: middle;">12000</td>
-                            </tr>
-                        </table>
+                    <ul id="items" style="padding-left:0; list-style:none;">
+                        <!--order.js에서 랜더링-->
+                    </ul>
               
                     <div class="box delivery-info">
                         <!-- 배송지 정보 -->
