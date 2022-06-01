@@ -10,6 +10,7 @@ class CategoryService {
   async getAllCategory() {
     return await this.categoryModel.findAll();
   }
+
   async getCategoryOne(name) {
     return await this.categoryModel.findByName(name);
   }
