@@ -7,9 +7,8 @@ const bookInitializerRouter = Router();
 const request = require('request');
 bookInitializerRouter.post('/', async (req, res) => {
   try {
-    console.log(req.body);
     const { categoryName, size } = req.body;
-    const kakaoApiKey = '0868689c6d075e4d21db713cf240cca5';
+    const kakaoApiKey = req.headers['authorization'];
     const options = {
       uri: 'https://dapi.kakao.com/v3/search/book?target=title',
       method: 'GET',
@@ -22,8 +21,6 @@ bookInitializerRouter.post('/', async (req, res) => {
 
     request.post(options, async function (err, httpResponse, body) {
       const bookDatas = await JSON.parse(body);
-      console.log(bookDatas);
-      console.log(bookDatas.documents.length);
 
       for (let i = 0; i < bookDatas.documents.length; i++) {
         // console.log(bookDatas.documents[i]);
