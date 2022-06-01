@@ -24,6 +24,7 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="./signout.css" />
+    <script defer src="./signout.js" type="module"></script>
   </head>
   <body>
     <div class="container">
@@ -32,14 +33,10 @@
       </div>
       <form class="account-page-body">
         <div class="delete-my-account">
-          <span class="title">삭제를 진행합니다.</span>
+          <span class="title">회원 탈퇴를 진행합니다.</span>
           <span class="password-input-field">
             <label class="label" for="passwordInput">현재 비밀번호</label>
-            <input
-              type="password"
-              id="passwordInput"
-              placeholder="카카오 로그인의 경우 'kakao'를 입력해주세요"
-            />
+            <input type="password" id="passwordInput" />
           </span>
 
           <button class="button is-danger" id="deleteBtn">

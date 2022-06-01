@@ -12,13 +12,13 @@ class ProductService {
   }
 
   async getAllProduct() {
-      const product = await this.productModel.findAll();
-      return product;
+    const product = await this.productModel.findAll();
+    return product;
   }
 
   async getProductOne(productId) {
-      const product = await this.productModel.findById(productId);
-      return product;
+    const product = await this.productModel.findById(productId);
+    return product;
   }
 
   async getProduct(productId) {

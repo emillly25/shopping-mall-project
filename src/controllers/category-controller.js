@@ -1,6 +1,5 @@
-import { ValueIsNullError } from '../error/value-error';
-
 const { categoryService } = require('../services/category-service');
+import { ValueIsNullError } from '../error/value-error';
 
 class CategoryController {
   async getCategory(req, res) {
