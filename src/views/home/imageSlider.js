@@ -1,3 +1,41 @@
+// footer.js
+
+const imageSliderEl = document.querySelector('.slider-wrap');
+imageSliderEl.innerHTML = `
+<ul class="slider" id="slider">
+      <li>
+        <img src="./img/red.jpeg" />
+      </li>
+      <li>
+        <img src="./img/orange.jpeg" />
+      </li>
+      <li>
+        <img src="./img/yellow.jpeg" />
+      </li>
+      <li>
+        <img src="./img/green.jpeg" />
+      </li>
+      <li>
+        <img src="./img/blue.jpeg" />
+      </li>
+    </ul>
+
+    <div class="btn next" id="next">
+      <i class="fa fa-arrow-right"></i>
+    </div>
+    <div class="btn previous" id="previous">
+      <i class="fa fa-arrow-left"></i>
+    </div>
+
+    <div class="indicator-wrap" id="indicator-wrap">
+      <ul></ul>
+    </div>
+
+    <div class="control-wrap play" id="control-wrap">
+      <i class="fa fa-pause" id="pause" data-status="pause"></i>
+      <i class="fa fa-play" id="play" data-status="play"></i>
+    </div>
+`;
 class Slider {
   #currentPosition = 0;
   #slideNumber = 0;

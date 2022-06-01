@@ -1,3 +1,4 @@
+// header.js
 const headerEl = document.querySelector('header');
 headerEl.innerHTML = `
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -164,3 +165,63 @@ export const insertHeader = () => {
 </nav>`;
   header.insertAdjacentElement('beforebegin', headerTag);
 };
+
+// scrollBtn.js
+
+// scroll버튼
+const body = document.querySelector('body');
+const scroll_btn = document.querySelector('.scroll_btn');
+
+scroll_btn.innerHTML = `
+<div id="top_btn"><img src="./img/top_btn.png" alt="top_btn" /></div>
+<div id="bottom_btn"><img src="./img/bottom_btn.png" alt="bottom_btn" /></div>
+`;
+
+window.addEventListener('scroll', function () {
+  let y = window.pageYOffset;
+  if (y > 0) {
+    scroll_btn.style.display = 'block';
+  } else {
+    scroll_btn.style.display = 'none';
+  }
+});
+
+const top_btn = document.querySelector('#top_btn');
+const bottom_btn = document.querySelector('#bottom_btn');
+
+top_btn.addEventListener('click', function () {
+  scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+});
+bottom_btn.addEventListener('click', function () {
+  const endY = body.offsetHeight;
+  scrollTo({ top: endY, left: 0, behavior: 'smooth' });
+});
+
+// footer.js
+
+const footerEl = document.querySelector('footer');
+footerEl.innerHTML = `
+<div class="first">
+<a href="#">Index</a>
+<nav>
+  <a href="www.google.co.kr" target="_blank">구글</a>
+  <a href="https://swtrack.lms.elice.io/" target="_blank">엘리스</a>
+</nav>
+<p>
+  <span>작성자: 7조</span>
+  <span>연락처: 010-1234-5678</span>
+  <span>저작권</span>
+</p>
+</div>
+<div class="second">
+<div>
+  <h1>FOOTER ELEMENT</h1>
+  <h2>FOOTER ELEMENT 2</h2>
+  <h3>FOOTER ELEMENT 3</h3>
+  <p>Copyright @2022 엘리스 소프트웨어</p>
+</div>
+<a href="#">Index</a>
+<p>Copyright @2022 Elice SWtrack - #7</p>
+<address></address>
+</div>
+`;
