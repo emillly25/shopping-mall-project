@@ -102,3 +102,29 @@ body{
     cursor: pointer;
     margin: 10px 0; 
 }
+
+
+.quan{
+    display: flex;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.qty{
+    width: 150px;
+}
+
+.qty span{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.qty .minus, .qty .plus{
+    width: 30px;
+    height: 30px;
+}
+
