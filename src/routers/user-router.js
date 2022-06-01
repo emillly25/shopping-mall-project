@@ -34,5 +34,5 @@ userRouter.patch('/user', loginRequired, usercontroller.editUserData);
 userRouter.delete('/user', loginRequired, usercontroller.deleteUserData);
 
 // 비밀번호 초기화
-userRouter.post('/resetPassword', loginRequired, usercontroller.resetPassword);
+userRouter.post('/resetPassword', usercontroller.resetPassword);
 export { userRouter };
