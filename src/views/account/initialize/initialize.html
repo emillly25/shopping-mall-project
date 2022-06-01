@@ -25,42 +25,53 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="./initialize.css" />
     <script defer src="./initialize.js" type="module"></script>
+
+    <script defer src="../../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../../home/template.css" />
   </head>
   <body>
     <div class="container">
-      <div class="account-page-title">
-        <h1><strong>비밀번호 초기화</strong></h1>
-      </div>
-      <form class="account-page-body">
-        <div class="initialize-my-password">
-          <span class="title"
-            >초기화된 비밀번호를 받을 이메일을 입력하세요.</span
-          >
-          <span class="email-input-field">
-            <label class="label" for="emailInput"
-              >가입했을 때의 이메일 입력</label
-            >
-            <input
-              type="text"
-              id="emailInput"
-              placeholder="가입했을 때의 이메일 입력"
-            />
-          </span>
-          <span class="phoneNumber-input-field">
-            <label class="label" for="phoneNumberInput"
-              >가입했을 때의 전화번호 입력</label
-            >
-            <input
-              type="text"
-              id="phoneNumberInput"
-              placeholder="가입했을 때의 전화번호 입력"
-            />
-          </span>
-          <button class="button is-danger" id="sendEmailBtn">
-            비밀번호 초기화하기
-          </button>
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+      <div class="account">
+        <div class="account-page-title">
+          <h1><strong>비밀번호 초기화</strong></h1>
         </div>
-      </form>
+        <form class="account-page-body">
+          <div class="initialize-my-password">
+            <span class="title"
+              >초기화된 비밀번호를 받을 이메일을 입력하세요.</span
+            >
+            <span class="email-input-field">
+              <label class="label" for="emailInput"
+                >가입했을 때의 이메일 입력</label
+              >
+              <input
+                type="text"
+                id="emailInput"
+                placeholder="가입했을 때의 이메일 입력"
+              />
+            </span>
+            <span class="phoneNumber-input-field">
+              <label class="label" for="phoneNumberInput"
+                >가입했을 때의 전화번호 입력</label
+              >
+              <input
+                type="text"
+                id="phoneNumberInput"
+                placeholder="가입했을 때의 전화번호 입력"
+              />
+            </span>
+            <button class="button is-danger" id="sendEmailBtn">
+              비밀번호 초기화하기
+            </button>
+          </div>
+        </form>
+      </div>
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
     </div>
   </body>
 </html>
