@@ -2,12 +2,13 @@ import * as Api from '/api.js';
 
 const pId = JSON.parse(window.localStorage.getItem('buyProductId'))[0]
 const dataId = pId._id
+console.log(pId)
 
-async function addHtml(){
-  const res = await Api.get('/api/product', dataId)
-  const data = res.result
-  const items = document.querySelector('#items')
-  const htmlCode = `<table border="1">
+const res = await Api.get('/api/product', dataId)
+const data = res.result
+console.log(data)
+const items = document.querySelector('#items')
+const htmlCode = `<table border="1">
 <th colspan="2" width="400px" style="text-align:center">상품이름</th>
 <th style="text-align:center">수량</th>
 <th style="text-align:center">가격</th>
@@ -27,8 +28,7 @@ async function addHtml(){
 
 items.insertAdjacentHTML('afterbegin',htmlCode)
 
-}
-await addHtml()
+
 calcPay()
 controlQuantity()
 
@@ -90,13 +90,6 @@ const address1Input = document.querySelector('#address1');
 const address2Input = document.querySelector('#address2');
 const requestSelectBox = document.querySelector('#requestSelectBox');
 
-//배송지 주소 검색
-btn.addEventListener('click', addressSearch);
-
-//최종 구매버튼 post 요청
-payBtn.addEventListener('click', orderHandler );
-
-
 
 
 async function addressSearch(){
@@ -137,39 +130,36 @@ async function addressSearch(){
 
 
 async function orderHandler(){
-    const receiverName = receiverNameInput.value;
-    const receiverPhoneNumber = receiverPhoneNumberInput.value;
-    const receiverEmail = receiverEmailInput.value;
+    const fullName = receiverNameInput.value;
+    const email = receiverEmailInput.value;
+    const phoneNumber = receiverPhoneNumberInput.value;
     const postalCode = postalCodeInput.value;
     const address1 = address1Input.value;
     const address2 = address2Input.value;
     const request = requestSelectBox.value;
+    const address = { postalCode , address1 , address2 }
+    const order_data = [`${data.name}/${pId.quantity}`]
+    const price = pId.price
+    
 
-  if (!receiverName || !receiverPhoneNumber|| !receiverEmail || !postalCode || !address2) {
+  if (!fullName || !phoneNumber|| !email || !postalCode || !address2) {
     return alert("배송지 정보를 모두 입력해 주세요.")
   }
 
 
 const deliveryData = {
-    receiverName, receiverPhoneNumber, receiverEmail, postalCode, address1, address2, request,
+  fullName, email, address , phoneNumber, order_data, price,  request
 }
 
+console.log(deliveryData)
 
-
-  const res = await fetch(`/api/order`,{
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(deliveryData),
-  });
-  
-  if(res.status === 201){
-    return alert('주문에 성공하였습니다!')
-  }else{
-    return alert('주문에 실패하였습니다..')
-  }
+const res = await Api.post('/api/order', deliveryData)
+console.log(res)
 
 }   
 
+//배송지 주소 검색
+btn.addEventListener('click', addressSearch);
 
+//최종 구매버튼 post 요청
+payBtn.addEventListener('click', orderHandler );
