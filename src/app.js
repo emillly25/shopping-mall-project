@@ -6,6 +6,7 @@ import {
   categoryRouter,
   productRouter,
   orderRouter,
+  bookInitializerRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
 
@@ -17,7 +18,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./modules/swagger.json');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 const upload = require('./middlewares/imageUploader');
 
@@ -53,6 +53,9 @@ app.use('/api/product', productRouter);
 
 // order api 라우팅
 app.use('/api/order', orderRouter);
+
+// DB 삽입 api 라우팅
+app.use('/api/book-initializer', bookInitializerRouter);
 
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨

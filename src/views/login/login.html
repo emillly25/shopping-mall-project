@@ -23,59 +23,83 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="login.css" />
-    <script src="login.js" type="module" defer></script>
+    <link rel="stylesheet" href="../commonStyle.css" />
+    <link rel="stylesheet" href="./login.css" />
+    <script src="./login.js" type="module" defer></script>
+
+    <script defer src="../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../home/template.css" />
   </head>
   <body>
-    <!-- 헤더 -->
-    <header></header>
-    <!-- 로그인 폼(Form) -->
-    <div class="login_container">
-     
-      <form action="" method="POST" id="loginForm">
-        <h1>Login</h1>
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input is-normal emailInput" type="email" placeholder="Email">
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope" id="emailIcon"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check" id="emailCheck"></i>
-            </span>
+    <div class="container">
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+
+      <!-- 로그인 폼(Form) -->
+      <div class="login_container">
+        <form action="" method="POST" id="loginForm">
+          <h1>Login</h1>
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input
+                class="input is-normal emailInput"
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope" id="emailIcon"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-check" id="emailCheck"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input
+                class="input is-normal passwordInput"
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock" id="passwordIcon"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="info_id">
+            <div><input type="checkbox" id="saveIdCheck" />아이디 저장</div>
+            <div>
+              <a href="/account/initialize/initialize.html">Password 찾기</a>
+            </div>
+          </div>
+          <div class="buttons">
+            <input
+              type="submit"
+              value="Login"
+              id="submitBtn"
+              class="button is-light"
+              name="submitButton"
+            />
+          </div>
+
+          <div class="social_login">
+            <a href=""><i class="fa-brands fa-neos"></i></a>
+            <a href=""><i class="fa-brands fa-google"></i></a>
+            <a href=""><i class="fa-brands fa-twitter"></i></a>
+          </div>
+
+          <p class="recSignup">
+            Not a Memeber? &nbsp <span><a href="/register">Sign Up</a></span>
           </p>
-        </div>
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input is-normal passwordInput" type="password" placeholder="Password">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock" id="passwordIcon"></i>
-            </span>
-          </p>
-        </div>
-
-      <div class="info_id">
-        <div><input type="checkbox" id="saveIdCheck">아이디 저장</div>
-        <div><a href="">Id/Password 찾기</a></div>
+        </form>
       </div>
-      <div class="buttons">
-        <input type="submit" value="Login" id="submitBtn" class="button is-light" name="submitButton">
-      </div>
-    
-        <div class="social_login">
-          <a href=""><i class="fa-brands fa-neos"></i></a>
-          <a href=""><i class="fa-brands fa-google"></i></a>
-          <a href=""><i class="fa-brands fa-twitter"></i></a>
-        </div>
-
-        <p class="recSignup">Not a Memeber? &nbsp <span><a href="/register">Sign Up</a></span></p>
-
-
-      </form>
-   
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
     </div>
-   
-
-
   </body>
 </html>

@@ -16,7 +16,7 @@ const UserSchema = new Schema(
     },
     phoneNumber: {
       type: String,
-      required: false,
+      required: true,
     },
     address: {
       type: new Schema(
@@ -27,7 +27,7 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
@@ -40,7 +40,7 @@ const UserSchema = new Schema(
   {
     collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { UserSchema };

@@ -23,147 +23,34 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <!-- <link rel="stylesheet" href="./home.css" /> -->
-    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="../commonStyle.css" />
+    <script defer src="./imageSlider.js"></script>
     <link rel="stylesheet" href="./imageSlider.css" />
-    <link rel="stylesheet" href="./footer.css" />
 
-    <!-- <script src="./home.js" type="module" defer></script> -->
-
-    <script src="./imageSlider.js" defer></script>
+    <!-- template 파일에 header, scrollbtn, footer 모두 뿌려주는 코드 있음 -->
+    <script defer src="./template.js" type="module"></script>
+    <link rel="stylesheet" href="./template.css" />
   </head>
   <body>
     <div class="container">
-      <!-- 헤더 -->
-      <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-          <div class="info_header">
-            <div class="info_logo">
-              <a href=""><h1>Book Store 7</h1></a>
-            </div>
-          </div>
+      <div class="account">
+        <header>
+          <!-- 여기에 header 삽입됨 -->
+        </header>
 
-          <div class="menu_header">
-            <ul class="category">
-              <li id="dropmenu">
-                <a href="" id="li_hover">국내도서</a>
-                <ul class="dropdown">
-                  <li><a href="">소설</a></li>
-                  <li><a href="">경영/경제</a></li>
-                  <li><a href="">에세이</a></li>
-                </ul>
-              </li>
-              <li><a href="" id="li_hover">해외도서</a></li>
-              <li><a href="" id="li_hover">eBook</a></li>
-              <li><a href="" id="li_hover">음반</a></li>
-              <li><a href="" id="li_hover">이벤트</a></li>
-            </ul>
-            <div class="search_bar_info_menu">
-              <div class="search_bar">
-                <input class="searchInput" type="search" placeholder="검색" />
-                <div id="searching">
-                  <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                </div>
-              </div>
-
-              <ul class="info_menu">
-                <li class="show"><a href="/register">회원가입</a></li>
-                <li class="show"><a href="/login">로그인</a></li>
-                <li class="none"><a href="/account">계정관리</a></li>
-                <li class="none"><a href="" id="logout">로그아웃</a></li>
-                <li>
-                  <a href=""><i class="fa-solid fa-user"></i></a>
-                </li>
-                <li>
-                  <div id="cart">
-                    <div id="cart_badge">0</div>
-                    <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                  </div>
-                </li>
-                <li>
-                  <a href=""><i class="fa-solid fa-heart"></i></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <div class="scroll_btn">
-        <div id="top_btn"><img src="./img/top_btn.png" alt="top_btn" /></div>
-        <div id="bottom_btn">
-          <img src="./img/bottom_btn.png" alt="bottom_btn" />
+        <div class="scroll_btn">
+          <!-- 여기에 scroll_btn 삽입됨 -->
         </div>
+
+        <div class="slider-wrap" id="slider-wrap">
+          <!-- 여기에 image-slider 삽입됨 -->
+        </div>
+
+        <div style="width: 100px; height: 2000px; background-color: red"></div>
+        <footer>
+          <!-- 여기에 footer 삽입됨 -->
+        </footer>
       </div>
-
-      <!-- image-slider -->
-
-      <div class="slider-wrap" id="slider-wrap">
-        <ul class="slider" id="slider">
-          <li>
-            <img src="./img/red.jpeg" />
-          </li>
-          <li>
-            <img src="./img/orange.jpeg" />
-          </li>
-          <li>
-            <img src="./img/yellow.jpeg" />
-          </li>
-          <li>
-            <img src="./img/green.jpeg" />
-          </li>
-          <li>
-            <img src="./img/blue.jpeg" />
-          </li>
-        </ul>
-
-        <div class="btn next" id="next">
-          <i class="fa fa-arrow-right"></i>
-        </div>
-        <div class="btn previous" id="previous">
-          <i class="fa fa-arrow-left"></i>
-        </div>
-
-        <div class="indicator-wrap" id="indicator-wrap">
-          <ul></ul>
-        </div>
-
-        <div class="control-wrap play" id="control-wrap">
-          <i class="fa fa-pause" id="pause" data-status="pause"></i>
-          <i class="fa fa-play" id="play" data-status="play"></i>
-        </div>
-      </div>
-
-      <!-- footer -->
-      <!-- <div id="wrap">
-        <section></section>
-      </div> -->
-      <div style="width: 100px; height: 2000px; background-color: red"></div>
-      <footer>
-        <div class="first">
-          <a href="#">Index</a>
-          <nav>
-            <a href="www.google.co.kr" target="_blank">구글</a>
-            <a href="https://swtrack.lms.elice.io/" target="_blank">엘리스</a>
-          </nav>
-          <p>
-            <span>작성자: 7조</span>
-            <span>연락처: 010-1234-5678</span>
-            <span>저작권</span>
-          </p>
-        </div>
-        <div class="second">
-          <div>
-            <h1>FOOTER ELEMENT</h1>
-            <h2>FOOTER ELEMENT 2</h2>
-            <h3>FOOTER ELEMENT 3</h3>
-            <p>Copyright @2022 엘리스 소프트웨어</p>
-          </div>
-          <a href="#">Index</a>
-          <p>Copyright @2022 Elice SWtrack - #7</p>
-          <address></address>
-        </div>
-      </footer>
     </div>
-    <script src="header.js" type="module" defer></script>
   </body>
 </html>
