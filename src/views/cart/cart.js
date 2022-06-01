@@ -11,7 +11,6 @@ pId.map(({_id})=>{
 async function cartRendering(){
     const addList = async function(id){
         const res = await Api.get('/api/product', id)
-        console.log('res',res)
         const data = res.result
         const items = document.querySelector('#items')  
         const htmlCode =`<li class="item">
@@ -68,7 +67,6 @@ async function cartRendering(){
     const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
     const itemPriceArr = Array.prototype.slice.call(itemPrice); 
     const checkBoxArr = Array.prototype.slice.call(checkBox); 
-
 
 
     //전체선택 (checkbox)
@@ -156,12 +154,9 @@ async function cartRendering(){
             const localItems = JSON.parse(window.localStorage.getItem('productId'))
             const idx = localItems.findIndex(el=> el._id === minusId)
             localItems[idx].quantity = Number(quan.textContent)
-            localItems[idx].price = Number(itemPrice.textContent)
+            localItems[idx].price = Number(totalPrice.textContent)
             window.localStorage.setItem('productId', JSON.stringify(localItems))
-            console.log(window.localStorage.getItem('productId'))
 
-            
-            
         } else {
             const plusId = e.target.dataset.id
             const result = numArr.find(el=> el.dataset.id === plusId)
@@ -171,7 +166,11 @@ async function cartRendering(){
             result.stepUp()
             quan.innerText = Number(result.value)
             totalPrice.innerText = Number(quan.textContent) * Number(itemPrice.textContent)
-            
+            const localItems = JSON.parse(window.localStorage.getItem('productId'))
+            const idx = localItems.findIndex(el=> el._id === plusId)
+            localItems[idx].quantity = Number(quan.textContent)
+            localItems[idx].price = Number(totalPrice.textContent)
+            window.localStorage.setItem('productId', JSON.stringify(localItems))
         }
         let sum = 0
         itemTotalPriceArr.forEach(el=>{sum += Number(el.textContent)})
@@ -187,14 +186,57 @@ async function cartRendering(){
     plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity ))
     minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
 
+    //check 여부 확인
+    const tempArr = []
+    checkBoxArr.forEach(el=>{
+        el.addEventListener('click',(e)=>{
+            if(e.target.checked === true){
+                //체크되있을때 하고픈거
+                const dataId = e.target.dataset.id
+                const dataQuan = itemQuanArr.find(el=> el.dataset.id === dataId)
+                const dataPrice = itemTotalPriceArr.find(el=> el.dataset.id === dataId)
+                const obj = {}
+                obj._id = dataId
+                obj.quantity = Number(dataQuan.textContent) 
+                obj.price = Number(dataPrice.textContent)
+                tempArr.push(obj)
+                
+                
+            }else{
+                //체크해지되면 하고픈거
+                console.log('해지되었슴')
+                const i = tempArr.findIndex(el=>{
+                    return el._id === e.target.dataset.id
+                })
+                if(tempArr.length > 1){
+                    tempArr.splice(i,i)
+                }else{
+                    tempArr.pop()
+                }
+            }
+            console.log('최종', tempArr)
+            window.localStorage.setItem('cartToBuy', JSON.stringify(tempArr))
+
+        })
+        
+    })
+    
+
+        
+    
+
+
+
+
+
 
 }
 
 
 cartRendering()
 
-// 체크된 상품들만 구매하기 - 체크된 상품들만 로컬스토리지에 저장하고 넘겨주기
-// 아이디, 수량, 가격
+
+
 
 
 
