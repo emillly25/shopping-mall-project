@@ -66,7 +66,6 @@ const Order = async (req, res, next) => {
         },
       });
 
-      const amount = price * quantity;
       const mailOptions = {
         from: process.env.MAIL_ID,
         to: email,
@@ -79,8 +78,7 @@ const Order = async (req, res, next) => {
                   <div>
                     <p>주문 번호 : ${newOrder._id}</p>
                     <p>주문 상품 : ${order_data}</p>
-                    <p>상품 수 : ${quantity}</p>
-                    <p>결제금액 : ${amount}</p>
+                    <p>결제금액 : ${price}원</p>
                   </div>`,
         text: '확인 메일입니다.',
       };
