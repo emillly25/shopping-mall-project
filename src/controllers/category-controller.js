@@ -26,8 +26,7 @@ class CategoryController {
     const name = req.body.name;
     try {
       const addedCategory = await categoryService.addCategory(
-        name,
-        req.currentUserId,
+        name
       );
       return res.status(200).json({
         isSuccess: true,
@@ -59,8 +58,7 @@ class CategoryController {
     try {
       const editedCategory = await categoryService.setCategory(
         currentCategoryName,
-        nameToChange,
-        req.currentUserId,
+        nameToChange
       );
       return res.status(200).json({
         isSuccess: true,
@@ -90,8 +88,7 @@ class CategoryController {
     const name = req.body.name;
     try {
       const deletedCategory = await categoryService.deleteCategory(
-        name,
-        req.currentUserId,
+        name
       );
       return res.status(200).json({
         isSuccess: true,

@@ -33,11 +33,7 @@ class ProductController {
       imgUrl = req.file.location;
     }
     try {
-      const addedProduct = await productService.addProduct(
-        req.body,
-        imgUrl,
-        req.currentUserId,
-      );
+      const addedProduct = await productService.addProduct(req.body, imgUrl);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product inserted successfully',
@@ -71,11 +67,7 @@ class ProductController {
       imgUrl = req.file.location;
     }
     try {
-      const editedProduct = await productService.setProduct(
-        req.body,
-        imgUrl,
-        req.currentUserId,
-      );
+      const editedProduct = await productService.setProduct(req.body, imgUrl);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product updated successfully',
@@ -105,10 +97,7 @@ class ProductController {
   async deleteProduct(req, res) {
     const productId = req.body.productId;
     try {
-      const deletedProduct = await productService.deleteProduct(
-        productId,
-        req.currentUserId,
-      );
+      const deletedProduct = await productService.deleteProduct(productId);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product deleted successfully',

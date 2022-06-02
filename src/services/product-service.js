@@ -28,7 +28,7 @@ class ProductService {
     return await productService.getProductOne(productId);
   }
 
-  async addProduct(productInfo, imgUrl, userId) {
+  async addProduct(productInfo, imgUrl) {
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
     const price = productInfo.price;
@@ -67,12 +67,11 @@ class ProductService {
       orderCount,
     ];
 
-    await this.checkIsAdministrator(userId);
     const result = this.productModel.create(productData);
     return result;
   }
 
-  async setProduct(productInfo, imgUrl, userId) {
+  async setProduct(productInfo, imgUrl) {
     const productId = productInfo.productId;
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
@@ -100,7 +99,6 @@ class ProductService {
         "CategoryName doesn't exist in Category Schema",
       );
     }
-    console.log(category);
 
     const productData = [
       category,
@@ -114,22 +112,12 @@ class ProductService {
       orderCount,
     ];
 
-    await this.checkIsAdministrator(userId);
     const result = await this.productModel.update(productData, productId);
     return result;
   }
-  async deleteProduct(productId, userId) {
-    await this.checkIsAdministrator(userId);
+  async deleteProduct(productId) {
     const result = await this.productModel.delete(productId);
     return result;
-  }
-
-  async checkIsAdministrator(userId) {
-    const ObjectId = require('mongodb').ObjectId;
-    const user = await this.userModel.findById(ObjectId(userId));
-    if (user.role !== 'admin') {
-      throw new Error('Request is not allowed. The user is not administrator.');
-    }
   }
 }
 const productService = new ProductService(productModel, userModel);
