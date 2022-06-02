@@ -158,21 +158,23 @@ async function orderHandler(){
     const address2 = address2Input.value;
     const request = requestSelectBox.value;
     const address = { postalCode , address1 , address2 }
-    const data = JSON.parse(window.localStorage.getItem('productId'))
-    const id = data._id
-    const itemName =  document.querySelectorAll('.itemName')
-    const itemNameArr = Array.prototype.slice.call(itemName)
-    console.log(itemNameArr)
-    const title = itemNameArr.find(el=> el.dataset.id === id)
-    console.log(title)
-
     const order_data = []
+    let sum = 0
+    const price = sum 
+
+    const data = JSON.parse(window.localStorage.getItem('productId'))
+    
     for(let i = 0; i < data.length; i++){
-        const result = `${title.textContent}/${data.quantity}개`
+        const id = data[i]._id
+        const res = await Api.get('/api/product', data[i]._id)
+        const title = res.result.name
+        const result = `${title}/${data[i].quantity}개`
         order_data.push(result)
+        sum += Number(data[i].price)
     }
-    console.log(order_data)
-    const price = data.price
+
+    
+    
     
     if (!fullName || !phoneNumber|| !email || !postalCode || !address2) {
         return alert("배송지 정보를 모두 입력해 주세요.")
