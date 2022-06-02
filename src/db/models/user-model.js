@@ -1,7 +1,9 @@
 import { model } from 'mongoose';
 import { UserSchema } from '../schemas/user-schema';
+import { OrderSchema } from '../schemas/order-schema';
 
 const User = model('users', UserSchema);
+const Order = model('order', OrderSchema);
 
 export class UserModel {
   async findByEmail(email) {
@@ -39,6 +41,9 @@ export class UserModel {
 
   async deleteById(userId) {
     const user = await User.findOneAndDelete({ _id: userId });
+    const order = await Order.deleteMany({ userId });
+
+    console.log(order);
     return user;
   }
 
