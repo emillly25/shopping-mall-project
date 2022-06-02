@@ -1,9 +1,5 @@
 const { categoryService } = require('./category-service');
 const { productModel, userModel } = require('../db');
-import {
-  ValueIsNullError,
-  CategoryDoesNotExistsError,
-} from '../error/value-error';
 
 class ProductService {
   constructor(productModel, userModel) {
@@ -28,7 +24,7 @@ class ProductService {
     return await productService.getProductOne(productId);
   }
 
-  async insertProduct(productInfo, imgUrl, userId) {
+  async addProduct(productInfo, imgUrl) {
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
     const price = productInfo.price;
@@ -45,14 +41,12 @@ class ProductService {
       information == null ||
       publisher == null
     ) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const category = await categoryService.getCategory(categoryName);
     if (!category) {
-      throw new CategoryDoesNotExistsError(
-        "CategoryName doesn't exist in Category Schema",
-      );
+      throw new Error("CategoryName doesn't exist in Category Schema");
     }
 
     const productData = [
@@ -67,12 +61,11 @@ class ProductService {
       orderCount,
     ];
 
-    await this.checkIsAdministrator(userId);
     const result = this.productModel.create(productData);
     return result;
   }
 
-  async updateProduct(productInfo, imgUrl, userId) {
+  async setProduct(productInfo, imgUrl) {
     const productId = productInfo.productId;
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
@@ -91,14 +84,12 @@ class ProductService {
       information == null ||
       publisher == null
     ) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const category = await categoryService.getCategory(categoryName);
     if (!category) {
-      throw new CategoryDoesNotExistsError(
-        "CategoryName doesn't exist in Category Schema",
-      );
+      throw new Error("CategoryName doesn't exist in Category Schema");
     }
 
     const productData = [
@@ -113,22 +104,12 @@ class ProductService {
       orderCount,
     ];
 
-    await this.checkIsAdministrator(userId);
     const result = await this.productModel.update(productData, productId);
     return result;
   }
-  async deleteProduct(productId, userId) {
-    await this.checkIsAdministrator(userId);
+  async deleteProduct(productId) {
     const result = await this.productModel.delete(productId);
     return result;
-  }
-
-  async checkIsAdministrator(userId) {
-    const ObjectId = require('mongodb').ObjectId;
-    const user = await this.userModel.findById(ObjectId(userId));
-    if (user.role !== 'admin') {
-      throw new Error('Request is not allowed. The user is not administrator.');
-    }
   }
 }
 const productService = new ProductService(productModel, userModel);

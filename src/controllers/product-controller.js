@@ -1,9 +1,5 @@
+import is from '@sindresorhus/is';
 const { productService } = require('../services/product-service');
-
-import {
-  ValueIsNullError,
-  CategoryDoesNotExistsError,
-} from '../error/value-error';
 
 class ProductController {
   async getProduct(req, res) {
@@ -18,97 +14,64 @@ class ProductController {
         result: product,
       });
     } catch (err) {
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async insertProduct(req, res) {
-    let imgUrl = null;
-    if (req.file) {
-      imgUrl = req.file.location;
-    }
+  async addProduct(req, res, next) {
     try {
-      const product = await productService.insertProduct(
-        req.body,
-        imgUrl,
-        req.currentUserId,
-      );
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      let imgUrl = null;
+      if (req.file) {
+        imgUrl = req.file.location;
+      }
+      const addedProduct = await productService.addProduct(req.body, imgUrl);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product inserted successfully',
         status: 200,
-        result: product,
+        result: addedProduct,
       });
     } catch (err) {
-      if (
-        err instanceof ValueIsNullError ||
-        err instanceof CategoryDoesNotExistsError
-      ) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async updateProduct(req, res) {
-    let imgUrl = null;
-    if (req.file) {
-      imgUrl = req.file.location;
-    }
+  async editProduct(req, res, next) {
     try {
-      const product = await productService.updateProduct(
-        req.body,
-        imgUrl,
-        req.currentUserId,
-      );
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      let imgUrl = null;
+      if (req.file) {
+        imgUrl = req.file.location;
+      }
+      const editedProduct = await productService.setProduct(req.body, imgUrl);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product updated successfully',
         status: 200,
-        result: product,
+        result: editedProduct,
       });
     } catch (err) {
-      if (
-        err instanceof ValueIsNullError ||
-        err instanceof CategoryDoesNotExistsError
-      ) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
-  async deleteProduct(req, res) {
-    const productId = req.body.productId;
+  async deleteProduct(req, res, next) {
     try {
-      const deletedProduct = await productService.deleteProduct(
-        productId,
-        req.currentUserId,
-      );
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const productId = req.body.productId;
+      const deletedProduct = await productService.deleteProduct(productId);
       return res.status(200).json({
         isSuccess: true,
         message: 'Product deleted successfully',
@@ -116,20 +79,7 @@ class ProductController {
         result: deletedProduct,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 }
