@@ -255,9 +255,6 @@ function checkingStatus(){
                 })
                 tempArr.splice(idx,1)
             }
-            // window.localStorage.setItem('tempCart', JSON.stringify(tempArr))
-            // const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
-            // updateLocalStorage(e,tempCartArr)
             console.log('결과배열',tempArr)
         })
     })
@@ -278,30 +275,6 @@ function makingObj(e){
     return obj
 }
 
-//임시
-function preventRepeat(arr){
-    const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
-    if(tempCartArr !== null){
-        const tempId = []
-        tempCartArr.map(el=>{
-            tempId.push(el._id)
-        })
-        const arrId = []
-        arr.map(el=>{
-            arrId.push(el._id)
-        })
-    
-        const filtered = tempId.filter(x=> arrId.includes(x))
-        console.log('중복되서 넣으면 안되는애들',filtered)
-    
-        if(filtered.length === 0){
-            window.localStorage.setItem('tempCart',JSON.stringify(arr))
-        }else{
-            const newArr = arr.filter(el=> !filtered.includes(el._id))
-            window.localStorage.setItem('tempCart',JSON.stringify(newArr))
-        }
-    }
-}
 
 
 //함수 10. 주문정보 넘기기
@@ -348,16 +321,5 @@ cartRendering()
 
 
 
-// function preventBuy(){
-//     const buyBtn = document.querySelector('#buyBtn')
-//     const checkBox = document.querySelectorAll('.checkbox')
-//     const checkBoxArr = Array.prototype.slice.call(checkBox)
-//     buyBtn.addEventListener('click',function(){
-//         if(checkBoxArr.every(el=> el.checked === false)){
-//             buyBtn.disabled = true
-//             alert('주문하실 상품을 선택해주세요.')
-//         }
-//     })
-// }
 
 
