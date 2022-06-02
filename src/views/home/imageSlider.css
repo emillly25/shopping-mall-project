@@ -8,7 +8,7 @@
 .slider-wrap {
   width: 1000px;
   height: 400px;
-  margin: 50px auto;
+  margin: 20px 0 50px 0;
   position: relative;
   overflow: hidden;
 }
