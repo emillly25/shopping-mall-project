@@ -16,6 +16,7 @@ const deliveryPrice = document.querySelector('#deliveryPrice'); //배송비
 const totalPrice = document.querySelector('#total');  //총 결제금액
 
 const cartBtn = document.querySelector('#cartBtn');
+const buyBtn = document.querySelector('#buyBtn');
 
 // DB데이터 불러와서 랜더링
 const getBookInfo = async function(){
@@ -110,6 +111,24 @@ function moveCart(){
 }
 
 
+//바로 구매하기
+const buyArr = []
+async function buyNow(){
+        buyBtn.addEventListener('click',function(e){
+            // 해당 제품의 아이디, 가격, 수량을 로컬스토리지에 저장하고 구매페이지로 이동
+            const id = (window.location.href).split('=')[1]
+            const q = Number(num.value)
+            const price = totalPrice.textContent
+            const obj = {};
+            obj._id = id
+            obj.quantity = q
+            obj.price = Number(price)
+            buyArr.push(obj)
+            window.localStorage.setItem('buyProductId', JSON.stringify(buyArr))
+            window.location.href = '/oneorder'
+        })
+}
+buyNow()
 
 
 
