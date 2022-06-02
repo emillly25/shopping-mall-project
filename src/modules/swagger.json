@@ -1007,6 +1007,35 @@
                     }
                 }
             }
+        },
+        "api/product/categoryName/:name": {
+            "get": {
+                "tags": [
+                    "product-controller"
+                ],
+                "summary": "카테고리명에 해당하는 상품들을 조회",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name을 카테고리명으로 가지는 상품들을 조회합니다.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "deprecated": false
+            }
         }
     },
     "definitions": {
