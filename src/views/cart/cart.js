@@ -1,15 +1,17 @@
 import * as Api from '/api.js';
 
-// 1. localStorage에서 productId 받아오기
+// localStorage에서 productId 받아오기
 const pId = JSON.parse(window.localStorage.getItem('productId'))
-const productId = []
+const productId = []  //장바구니에 있는 아이템의 id배열
 pId.map(({_id})=>{
     productId.push(_id)
 })
 
-// 2. 받아온 productId로 db에 조회해서 해당 데이터들을 html코드로 랜더링
+
+
 async function cartRendering(){
-    const addList = async function(id){
+    // 함수0. localStorage의 id를 이용해 db에 접근해 데이터 불러와 html랜더링
+    async function addList(id){
         const res = await Api.get('/api/product', id)
         const data = res.result
         const items = document.querySelector('#items')  
@@ -35,15 +37,8 @@ async function cartRendering(){
     items.insertAdjacentHTML('afterbegin', htmlCode);
     }
 
-    for(let i=0 ; i < productId.length; i++){
-        await addList(productId[i])
-    }
-
-    //현재, html 코드는 다 붙여진 상황. 
 
     //수량 조절버튼 element 
-    const minus = document.querySelectorAll('.minus');  //minus Btn
-    const plus =  document.querySelectorAll('.plus');   //plus Btn
     const num =  document.querySelectorAll('.num');  //input(number)
     
     //각 제품별 수량과 최종 가격
@@ -69,47 +64,8 @@ async function cartRendering(){
     const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
     const itemPriceArr = Array.prototype.slice.call(itemPrice); 
     const checkBoxArr = Array.prototype.slice.call(checkBox); 
- 
 
 
-    //기본 랜더링
-    function firstView(){
-        const num =  document.querySelectorAll('.num'); 
-        const numArr = Array.prototype.slice.call(num); 
-        const rendering = JSON.parse(window.localStorage.getItem('productId'))
-        numArr.forEach(num=>{
-            const id= num.dataset.id
-            const q = itemQuanArr.find(el=> el.dataset.id === id)
-            const p = itemPriceArr.find(el=> el.dataset.id === id)
-            const t = itemTotalPriceArr.find(el=> el.dataset.id === id)
-            const r = rendering.find(el=> el._id === id)
-            num.value = r.quantity;
-            q.innerText = Number(r.quantity);
-            t.innerText = Number(p.textContent) * Number(r.quantity)
-        })
-        calcPay() 
-    }
-
-    //결제상세 내역 랜더링
-    function calcPay(){
-        const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') 
-        const productPrice = document.querySelector('#productPrice');
-        const deliveryPrice = document.querySelector('#deliveryPrice')
-        const finalPrice= document.querySelector('#finalPrice');
-        const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
-
-        let s = 0;
-        itemTotalPriceArr.forEach(el=> {
-            s += Number(el.textContent)
-        })
-        productPrice.innerText = s
-        if(Number(productPrice.textContent)>=12000){
-            deliveryPrice.innerText = 0
-        }else{
-            deliveryPrice.innerText = 3000
-        }
-        finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
-    }
 
     //전체선택 (checkbox)
     allCheckBtn.addEventListener('change',function(e){
@@ -165,53 +121,7 @@ async function cartRendering(){
 
 
 
-    //수량버튼에 따른 결과 랜더링
-    function handleUpdateQuantity(e) {
-        const dataId = e.target.dataset.id 
-        const num =  document.querySelectorAll('.num'); //수량버튼값
-        const itemPrice = document.querySelectorAll('.itemPrice'); 
-        const itemQuan = document.querySelectorAll('.itemQuan'); 
-        const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') 
-        const numArr = Array.prototype.slice.call(num); 
-        const itemQuanArr = Array.prototype.slice.call(itemQuan); 
-        const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
-        const itemPriceArr = Array.prototype.slice.call(itemPrice); 
 
-        const findNum = numArr.find(el=> el.dataset.id === dataId)
-        const findPrice = itemPriceArr.find(el=> el.dataset.id === dataId)
-        const findQuan = itemQuanArr.find(el=> el.dataset.id === dataId)
-        const findTotalPrice = itemTotalPriceArr.find(el=> el.dataset.id === dataId)
-
-        //localStorage(productId) 업데이트
-        function updateProductId(){
-            const itemQuan = document.querySelectorAll('.itemQuan'); 
-            const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') 
-            const itemQuanArr = Array.prototype.slice.call(itemQuan); 
-            const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
-            const findQuan = itemQuanArr.find(el=> el.dataset.id === dataId)
-            const findTotalPrice = itemTotalPriceArr.find(el=> el.dataset.id === dataId)
-            const localItems = JSON.parse(window.localStorage.getItem('productId'))
-            const idx = localItems.findIndex(el=> el._id === dataId)
-            localItems[idx].quantity = Number(findQuan.textContent)
-            localItems[idx].price = Number(findTotalPrice.textContent)
-            window.localStorage.setItem('productId', JSON.stringify(localItems))
-        }
-
-        // 위에까지는 변수랑 함수 선언한거고 여기부터가 실행부
-
-        if (e.target.classList.contains('minus')) {
-            findNum.stepDown()
-            findQuan.innerText = Number(findNum.value)
-            findTotalPrice.innerText = Number(findQuan.textContent) * Number(findPrice.textContent)
-            updateProductId()  //localStorage(productId) 업데이트
-        } else {
-            findNum.stepUp()
-            findQuan.innerText = Number(findNum.value)
-            findTotalPrice.innerText = Number(findQuan.textContent) * Number(findPrice.textContent)
-            updateProductId() //localStorage(productId) 업데이트
-        }
-        calcPay()
-    }
 
     //check 여부 확인해서 localStorage(checkBuy)에 업데이트하는 함수
     function checkingBox(){
@@ -254,20 +164,105 @@ async function cartRendering(){
         })
     }
 
+    
 
-    // 함수 실행
-    firstView()
-    calcPay()
+
+    //실행
+    // 1. 장바구니에 담긴 각 아이템들 html 랜더링
+    for(let i=0 ; i < productId.length; i++){
+        await addList(productId[i])
+    }
+    // 2. 첫화면 아이템별 가격정보 랜더링 
+    firstView()   // calcPay() 포함되어 있는디...?
+
+    // 3. 수량버튼
+    const minus = document.querySelectorAll('.minus');  
+    const plus = document.querySelectorAll('.plus');  
     plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
     minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
+
+    // 5. 체크박스 확인
     checkingBox()
 }
 
 
-cartRendering()
+ //함수1. 아이템 별 가격내역 초기화 랜더링
+function firstView(){
+    const num =  document.querySelectorAll('.num')
+    const numArr = Array.prototype.slice.call(num)
+    const itemPrice = document.querySelectorAll('.itemPrice')
+    const itemPriceArr = Array.prototype.slice.call(itemPrice)
+    const itemQuan = document.querySelectorAll('.itemQuan')
+    const itemQuanArr = Array.prototype.slice.call(itemQuan)
+    const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') 
+    const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice)
+    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))    
+    productIdArr.map(el=>{
+        const id = el._id
+        const quantity = el.quantity
+        const price = el.price
+        const n = numArr.find(q=>q.dataset.id === id)
+        const p = itemPriceArr.find(q=>q.dataset.id === id)
+        const q = itemQuanArr.find(q=>q.dataset.id === id)
+        const t = itemTotalPriceArr.find(q=>q.dataset.id === id)
+        n.value = Number(quantity)
+        p.innerText = Number(price/quantity)
+        q.innerText = Number(quantity)
+        t.innerText = Number(p.textContent) * Number(q.textContent)  
+    })
+    calcPay() 
+}
+
+//함수2. 결제상세 내역 랜더링
+function calcPay(){
+    const productPrice = document.querySelector('#productPrice');
+    const deliveryPrice = document.querySelector('#deliveryPrice')
+    const finalPrice= document.querySelector('#finalPrice');
+    const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') 
+    const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
+    let sum = 0;
+    itemTotalPriceArr.forEach(el=> {
+        sum += Number(el.textContent)
+    })
+    productPrice.innerText = sum
+    if(Number(productPrice.textContent)>=12000){
+        deliveryPrice.innerText = 0
+    }else{
+        deliveryPrice.innerText = 3000
+    }
+    finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
+}
+
+//함수3. 수량버튼에 따른 결과 랜더링
+function handleUpdateQuantity(e) {
+    const num =  document.querySelectorAll('.num') 
+    const numArr = Array.prototype.slice.call(num)
+    const n = numArr.find(el=> el.dataset.id === e.target.dataset.id)
+    if (e.target.classList.contains('minus')) {
+        n.stepDown()
+        updateProductId(e)
+    } else {
+        n.stepUp()
+        updateProductId(e)
+    }
+    firstView()
+}
+
+//함수 3-1. 수량버튼결과에 따른 localStorage 업데이트 함수
+function updateProductId(e){
+    const num =  document.querySelectorAll('.num') 
+    const numArr = Array.prototype.slice.call(num)
+    const n = numArr.find(el=> el.dataset.id === e.target.dataset.id)
+    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+    const idx = productIdArr.findIndex(el=> el._id === e.target.dataset.id)
+    const firstPrice = Number(productIdArr[idx].price)/ Number(productIdArr[idx].quantity)
+    productIdArr[idx].quantity = Number(n.value)
+    productIdArr[idx].price = Number(firstPrice) * Number(n.value)
+    window.localStorage.setItem('productId', JSON.stringify(productIdArr))
+}
 
 
-//주문정보 넘기기
+//함수. 주문정보 넘기기
 function order(){
     const buyBtn = document.querySelector('#buyBtn')
     const allCheckBtn = document.querySelector('#allCheckBtn') 
@@ -280,6 +275,13 @@ function order(){
     })
 }
 
+
+
+
+
+
+//최종 랜더링 및 주문
+cartRendering()
 order()
 
 
