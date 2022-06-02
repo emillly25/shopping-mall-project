@@ -1,5 +1,5 @@
+import is from '@sindresorhus/is';
 const { categoryService } = require('../services/category-service');
-import { ValueIsNullError } from '../error/value-error';
 
 class CategoryController {
   async getCategory(req, res) {
@@ -18,13 +18,18 @@ class CategoryController {
   }
 
   async addCategory(req, res, next) {
-    const name = req.body.name;
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const name = req.body.name;
       const addedCategory = await categoryService.addCategory(name);
       return res.status(200).json({
         isSuccess: true,
         message: 'Category inserted successfully',
-        status: 202,
+        status: 200,
         result: addedCategory,
       });
     } catch (err) {
@@ -33,9 +38,14 @@ class CategoryController {
   }
 
   async editCategory(req, res, next) {
-    const currentCategoryName = req.body.currentCategoryName;
-    const nameToChange = req.body.nameToChange;
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const currentCategoryName = req.body.currentCategoryName;
+      const nameToChange = req.body.nameToChange;
       const editedCategory = await categoryService.setCategory(
         currentCategoryName,
         nameToChange,
@@ -52,8 +62,13 @@ class CategoryController {
   }
 
   async deleteCategory(req, res, next) {
-    const name = req.body.name;
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const name = req.body.name;
       const deletedCategory = await categoryService.deleteCategory(name);
       return res.status(200).json({
         isSuccess: true,
