@@ -94,7 +94,7 @@
 
         <!-- orders -->
         <div class="order has-background-link-light">
-          <h1 class="subtitle">주문</h1>
+          <h1 class="subtitle">주문 조회 / 취소</h1>
           <div class="order-CRUD">
             <div class="CRUD-item o_insert" style="display: none">
               <div>
@@ -160,11 +160,8 @@
                 submit
               </button>
             </div>
-            <div class="CRUD-item o_get">
-              <div>
-                주문 조회 (전체 데이터 조회해서 기본적으로 보여주고, 클릭한 주문
-                삭제 가능하게 하기)
-              </div>
+            <div class="CRUD-item o_get" style="display: none">
+              <div>주문 조회</div>
               <input
                 type="text"
                 class="input is-primary is-normal"
@@ -174,6 +171,26 @@
               <button class="button is-success is-normal" id="btn">
                 submit
               </button>
+            </div>
+            <div class="CRUD-item o_display">
+              <div class="account-page-body">
+                <div class="body-list body-th">
+                  <div class="createdAt">날짜</div>
+                  <div class="fullName">구매인</div>
+                  <div class="email">이메일</div>
+                  <div class="phoneNumber">전화번호</div>
+                  <div class="order_data">주문 정보</div>
+                  <div class="price">총 가격</div>
+                  <div class="request">요청사항</div>
+                  <div class="cancel">주문 취소</div>
+                </div>
+                <!-- <div class="body-list body-tr">
+                  <div class="date">2022-02-02</div>
+                  <div class="product">아이보리 니트 / 1개</div>
+                  <div class="state">상품 준비중</div>
+                  <div class="apply">주문 취소</div>
+                </div> -->
+              </div>
             </div>
 
             <div class="CRUD-item o_delete" style="display: none">

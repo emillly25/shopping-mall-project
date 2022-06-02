@@ -27,7 +27,7 @@
   align-items: center; */
 }
 .category-CRUD,
-.order-CRUD,
+/* .order-CRUD, */
 .product-CRUD {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -77,6 +77,66 @@
   /* text-decoration: underline; */
 }
 
+.o_display {
+  width: 100%;
+  height: 400px;
+  overflow: scroll;
+  /* background-color: red; */
+}
+
+.account-page-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.account-page-body .body-list {
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  text-align: center;
+  border-radius: 8px;
+  border-bottom: 1px solid #ddd;
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.body-list .createdAt,
+.body-list .phoneNumber {
+  width: 10%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .fullName,
+.body-list .price,
+.body-list .cancel {
+  width: 7%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .email {
+  width: 13%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .request {
+  width: 16%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .order_data {
+  width: 30%;
+  padding: 0 5px;
+  overflow: auto;
+}
+
+.body-th {
+  background-color: #b8c5f5;
+}
+.body-tr {
+  background-color: #e1e6fa;
+}
 /*
 .category-list,
 .orders,
