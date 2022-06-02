@@ -1,8 +1,8 @@
+import is from '@sindresorhus/is';
 const { categoryService } = require('../services/category-service');
-import { ValueIsNullError } from '../error/value-error';
 
 class CategoryController {
-  async getCategory(req, res) {
+  async getCategory(req, res, next) {
     const { categoryName } = req.params;
     try {
       const category = await categoryService.getCategory(categoryName);
@@ -13,86 +13,63 @@ class CategoryController {
         result: category,
       });
     } catch (err) {
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async insertCategory(req, res) {
-    const name = req.body.name;
+  async addCategory(req, res, next) {
     try {
-      const insertedCategory = await categoryService.insertCategory(
-        name,
-        req.currentUserId,
-      );
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const name = req.body.name;
+      const addedCategory = await categoryService.addCategory(name);
       return res.status(200).json({
         isSuccess: true,
         message: 'Category inserted successfully',
-        status: 202,
-        result: insertedCategory,
+        status: 200,
+        result: addedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async updateCategory(req, res) {
-    const currentCategoryName = req.body.currentCategoryName;
-    const nameToChange = req.body.nameToChange;
+  async editCategory(req, res, next) {
     try {
-      const updatedCategory = await categoryService.updateCategory(
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const currentCategoryName = req.body.currentCategoryName;
+      const nameToChange = req.body.nameToChange;
+      const editedCategory = await categoryService.setCategory(
         currentCategoryName,
         nameToChange,
-        req.currentUserId,
       );
       return res.status(200).json({
         isSuccess: true,
         message: 'Category updated successfully',
         status: 200,
-        result: updatedCategory,
+        result: editedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async deleteCategory(req, res) {
-    const name = req.body.name;
+  async deleteCategory(req, res, next) {
     try {
-      const deletedCategory = await categoryService.deleteCategory(
-        name,
-        req.currentUserId,
-      );
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const name = req.body.name;
+      const deletedCategory = await categoryService.deleteCategory(name);
       return res.status(200).json({
         isSuccess: true,
         message: 'Category deleted successfully',
@@ -100,20 +77,7 @@ class CategoryController {
         result: deletedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 }

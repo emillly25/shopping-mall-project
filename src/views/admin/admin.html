@@ -23,177 +23,327 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="../commonStyle.css" />
     <script defer src="./admin.js" type="module"></script>
     <link rel="stylesheet" href="./admin.css" />
 
     <script defer src="../home/template.js" type="module"></script>
     <link rel="stylesheet" href="../home/template.css" />
   </head>
+  <!-- 카테고리 Read, 주문 Create, 주문 Delete, 상품 Read 는 display : none; 처리함 -->
   <body>
     <div class="container">
       <header>
         <!-- 여기에 header 삽입됨 -->
       </header>
 
-      <!-- <div class="title">Admin page</div> -->
-
+      <div class="title">Admin page</div>
       <div class="crud">
         <!-- category -->
-        <div class="category-list">
-          <h1 class="subtitle">카테고리 CRUD</h1>
-          <div class="c_insert">
-            <div>카테고리 추가</div>
-            <input type="text" id="name" />
-            <button id="btn">submit</button>
-          </div>
+        <div class="cate has-background-link-light">
+          <h1 class="subtitle">카테고리</h1>
+          <div class="category-CRUD">
+            <div class="CRUD-item c_insert">
+              <div>카테고리 추가</div>
+              <input type="text" class="input is-primary is-normal" id="name" />
+              <button class="button is-success is-outlined is-normal" id="btn">
+                submit
+              </button>
+            </div>
 
-          <div class="c_get">
-            <div>카테고리 읽어오기 (현재는 읽어와서 콘솔창에 출력함)</div>
-            <input
-              type="text"
-              id="name"
-              placeholder="비워놓으면 모든 카테고리 조회"
-            />
-            <button id="btn">submit</button>
-          </div>
+            <div class="c_get" style="display: none">
+              <div>카테고리 읽어오기 (현재는 읽어와서 콘솔창에 출력함)</div>
+              <input
+                type="text"
+                id="name"
+                placeholder="비워놓으면 모든 카테고리 조회"
+              />
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
+            </div>
 
-          <div class="c_update">
-            <div>카테고리 수정</div>
-            <input
-              type="text"
-              id="currentCategoryName"
-              placeholder="기존 카테고리명"
-            />
-            <input
-              type="text"
-              id="nameToChange"
-              placeholder="바꾸고 싶은 카테고리명"
-            />
-            <button id="btn">submit</button>
-          </div>
+            <div class="CRUD-item c_update">
+              <div>카테고리 수정</div>
+              <input
+                type="text"
+                class="input is-primary is-normal"
+                id="currentCategoryName"
+                placeholder="기존 카테고리명"
+              />
+              <input
+                type="text"
+                class="input is-primary is-normal"
+                id="nameToChange"
+                placeholder="바꾸고 싶은 카테고리명"
+              />
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
+            </div>
 
-          <div class="c_delete">
-            <div>카테고리 삭제</div>
-            <input type="text" id="name" />
-            <button id="btn">submit</button>
+            <div class="CRUD-item c_delete">
+              <div>카테고리 삭제</div>
+              <input type="text" class="input is-danger is-normal" id="name" />
+              <button class="button is-danger is-normal" id="btn">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- orders -->
-        <div class="orders">
-          <h1 class="subtitle">주문 CRUD</h1>
-          <div class="o_insert">
-            <div>
-              주문 추가 (주문 성공시 주문한 데이터는 콘솔에서 확인 가능)
+        <div class="order has-background-link-light">
+          <h1 class="subtitle">주문</h1>
+          <div class="order-CRUD">
+            <div class="CRUD-item o_insert" style="display: none">
+              <div>
+                주문 추가 (주문 성공시 주문한 데이터는 콘솔에서 확인 가능)
+              </div>
+              <div class="o_insert_inputs">
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="fullName"
+                  placeholder="fullName"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="postalCode"
+                  placeholder="postalCode"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="address1"
+                  placeholder="address1"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="address2"
+                  placeholder="address2"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="phoneNumber"
+                  placeholder="phoneNumber"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="order_data"
+                  placeholder="order_data"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="price"
+                  placeholder="price"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="quantity"
+                  placeholder="quantity"
+                />
+                <input
+                  type="text"
+                  class="input is-primary is-normal"
+                  id="request"
+                  placeholder="request"
+                />
+              </div>
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-            <div class="o_insert_inputs">
-              <input type="text" id="fullName" placeholder="fullName" />
-              <input type="text" id="postalCode" placeholder="postalCode" />
-              <input type="text" id="address1" placeholder="address1" />
-              <input type="text" id="address2" placeholder="address2" />
-              <input type="text" id="phoneNumber" placeholder="phoneNumber" />
-              <input type="text" id="order_data" placeholder="order_data" />
-              <input type="text" id="price" placeholder="price" />
-              <input type="text" id="quantity" placeholder="quantity" />
-              <input type="text" id="request" placeholder="request" />
+            <div class="CRUD-item o_get">
+              <div>
+                주문 조회 (전체 데이터 조회해서 기본적으로 보여주고, 클릭한 주문
+                삭제 가능하게 하기)
+              </div>
+              <input
+                type="text"
+                class="input is-primary is-normal"
+                id="name"
+                placeholder="비워놓으면 모든 주문 조회"
+              />
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-            <button id="btn">submit</button>
-          </div>
-          <div class="o_get">
-            <div>
-              주문 조회 (현재는 읽어와서 콘솔창에 출력함, user_id 넣어야됨)
+
+            <div class="CRUD-item o_delete" style="display: none">
+              <div>주문 취소</div>
+              <input type="text" class="input is-primary is-normal" id="name" />
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-            <input
-              type="text"
-              id="name"
-              placeholder="비워놓으면 모든 주문 조회"
-            />
-            <button id="btn">submit</button>
-          </div>
-          <div class="o_delete">
-            <div>주문 취소</div>
-            <input type="text" id="name" />
-            <button id="btn">submit</button>
           </div>
         </div>
 
         <!-- product -->
-        <div class="product">
-          <h1 class="subtitle">상품 CRUD</h1>
-          <div class="p_insert">
-            <div>상품 추가</div>
-            <div class="p_insert_inputs">
-              <form id="testForm" enctype="multipart/form-data">
-                <input
-                  type="text"
-                  id="categoryName"
-                  placeholder="categoryName"
-                />
-                <input type="text" id="name" placeholder="name" />
-                <input type="text" id="price" placeholder="price" />
-                <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
+        <div class="product has-background-link-light">
+          <h1 class="subtitle">상품</h1>
+          <div class="product-CRUD">
+            <div class="CRUD-item p_insert">
+              <div>상품 추가</div>
+              <div class="p_insert_inputs">
+                <form id="testForm" enctype="multipart/form-data">
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="categoryName"
+                    placeholder="categoryName"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="name"
+                    placeholder="name"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="price"
+                    placeholder="price"
+                  />
+                  <!-- <input type="text" class="input is-primary is-normal" id="imgUrl" placeholder="imgUrl" /> -->
 
-                <input type="file" id="fileInput" placeholder="imgUrl" />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="information"
+                    placeholder="information"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="author"
+                    placeholder="author"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="publisher"
+                    placeholder="publisher"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="publishedDate"
+                    placeholder="publishedDate"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="orderCount"
+                    placeholder="orderCount"
+                  />
+                  <input type="file" id="fileInput" placeholder="imgUrl" />
+                </form>
+              </div>
 
-                <input type="text" id="information" placeholder="information" />
-                <input type="text" id="author" placeholder="author" />
-                <input type="text" id="publisher" placeholder="publisher" />
-                <input
-                  type="text"
-                  id="publishedDate"
-                  placeholder="publishedDate"
-                />
-                <input type="text" id="orderCount" placeholder="orderCount" />
-              </form>
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-
-            <button id="btn">submit</button>
-          </div>
-          <div class="p_get">
-            <div>
-              상품 조회 (현재는 읽어와서 콘솔창에 출력함, product_id 넣어야됨)
+            <div class="CRUD-item p_get" style="display: none">
+              <div>
+                상품 조회 (현재는 읽어와서 콘솔창에 출력함, product_id 넣어야됨)
+              </div>
+              <input
+                type="text"
+                id="name"
+                placeholder="비워놓으면 모든 상품 조회"
+              />
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-            <input
-              type="text"
-              id="name"
-              placeholder="비워놓으면 모든 상품 조회"
-            />
-            <button id="btn">submit</button>
-          </div>
-          <div class="p_update">
-            <div>상품 업데이트</div>
-            <div class="p_update_inputs">
-              <form id="updateForm" enctype="multipart/form-data">
-                <input type="text" id="p_id" placeholder="p_id" />
-                <input
-                  type="text"
-                  id="categoryName"
-                  placeholder="categoryName"
-                />
-                <input type="text" id="name" placeholder="name" />
-                <input type="text" id="price" placeholder="price" />
-                <!-- <input type="text" id="imgUrl" placeholder="imgUrl" /> -->
+            <div class="CRUD-item p_update">
+              <div>상품 수정</div>
+              <div class="p_update_inputs">
+                <form id="updateForm" enctype="multipart/form-data">
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="p_id"
+                    placeholder="p_id"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="categoryName"
+                    placeholder="categoryName"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="name"
+                    placeholder="name"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="price"
+                    placeholder="price"
+                  />
+                  <!-- <input type="text" class="input is-primary is-normal" id="imgUrl" placeholder="imgUrl" /> -->
 
-                <input type="file" id="updateFileInput" placeholder="imgUrl" />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="information"
+                    placeholder="information"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="author"
+                    placeholder="author"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="publisher"
+                    placeholder="publisher"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="publishedDate"
+                    placeholder="publishedDate"
+                  />
+                  <input
+                    type="text"
+                    class="input is-primary is-normal"
+                    id="orderCount"
+                    placeholder="orderCount"
+                  />
+                  <input
+                    type="file"
+                    id="updateFileInput"
+                    placeholder="imgUrl"
+                  />
+                </form>
+              </div>
 
-                <input type="text" id="information" placeholder="information" />
-                <input type="text" id="author" placeholder="author" />
-                <input type="text" id="publisher" placeholder="publisher" />
-                <input
-                  type="text"
-                  id="publishedDate"
-                  placeholder="publishedDate"
-                />
-                <input type="text" id="orderCount" placeholder="orderCount" />
-              </form>
+              <button class="button is-success is-normal" id="btn">
+                submit
+              </button>
             </div>
-
-            <button id="btn">submit</button>
-          </div>
-          <div class="p_delete">
-            <div>상품 삭제</div>
-            <input type="text" id="name" />
-            <button id="btn">submit</button>
+            <div class="CRUD-item p_delete">
+              <div>상품 삭제</div>
+              <input type="text" class="input is-danger is-normal" id="name" />
+              <button class="button is-danger is-normal" id="btn">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
