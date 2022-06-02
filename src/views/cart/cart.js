@@ -67,36 +67,27 @@ async function cartRendering(){
 
 
 
-    //전체선택 (checkbox)
-    allCheckBtn.addEventListener('change',function(e){
-        const minus = document.querySelectorAll('.minus'); 
-        const minusArr = Array.prototype.slice.call(minus); 
-        const plus = document.querySelectorAll('.plus'); 
-        const plusArr = Array.prototype.slice.call(plus); 
-        if(e.target.checked === true){
-            checkBoxArr.forEach(el=> el.checked = true)
-            all.innerText = '전체삭제'
-            minusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
-            plusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
-        }else{
-            checkBoxArr.forEach(el=> el.checked = false)
-            all.innerText = '전체선택'
-            minusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
-            plusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
-        }
-    
-    })
 
-    //전체삭제 (localStroage에서도 삭제)
-    all.addEventListener('click',function(){  
-        for(let i = 0; i < checkBox.length; i++){
-            if(checkBox[i].checked){
-                checkBox[i].parentElement.parentElement.remove()
-            }
-        }
-        window.location.reload()
-        window.localStorage.clear();
-    })
+    // allCheckBtn.addEventListener('change',function(e){
+    //     const minus = document.querySelectorAll('.minus'); 
+    //     const minusArr = Array.prototype.slice.call(minus); 
+    //     const plus = document.querySelectorAll('.plus'); 
+    //     const plusArr = Array.prototype.slice.call(plus); 
+    //     if(e.target.checked === true){
+    //         checkBoxArr.forEach(el=> el.checked = true)
+    //         all.innerText = '전체삭제'
+    //         minusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
+    //         plusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
+    //     }else{
+    //         checkBoxArr.forEach(el=> el.checked = false)
+    //         all.innerText = '전체선택'
+    //         minusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
+    //         plusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
+    //     }
+    
+    // })
+
+
 
     //선택삭제
     some.addEventListener('click',function(){
@@ -181,8 +172,11 @@ async function cartRendering(){
     plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
     minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
 
+    someControlAll()
+    allControlSome()
+    allCheckDelete()
     // 5. 체크박스 확인
-    checkingBox()
+    // checkingBox()
 }
 
 
@@ -260,6 +254,68 @@ function updateProductId(e){
     productIdArr[idx].price = Number(firstPrice) * Number(n.value)
     window.localStorage.setItem('productId', JSON.stringify(productIdArr))
 }
+
+//함수 4. 체크박스 선택 여부에 따라 -> 전체선택 활성화/비활성화
+function someControlAll(){
+    const all = document.querySelector('#choice .all')
+    const allCheckBtn = document.querySelector('#allCheckBtn')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const checkBoxArr = Array.prototype.slice.call(checkBox)
+    checkBoxArr.forEach(el=>{
+        el.addEventListener('change',()=>{
+            if(checkBoxArr.every(el=>el.checked === true)){
+                console.log('모두선택됨')
+                allCheckBtn.checked = true;
+                all.innerText = '전체삭제'
+            }else{
+                console.log('체크해제된거 있네')
+                allCheckBtn.checked = false;
+                all.innerText = '전체선택'
+            }
+        })
+    })
+}
+
+//함수 4-1. 전체체크박스 상태에 따른  ->  선택체크박스 활성화/비활성화
+function allControlSome(){
+    const all = document.querySelector('#choice .all')
+    const allCheckBtn = document.querySelector('#allCheckBtn')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const checkBoxArr = Array.prototype.slice.call(checkBox)
+    allCheckBtn.addEventListener('change',function(e){
+        if(e.target.checked === true){
+            checkBoxArr.forEach(el=> el.checked = true)
+            all.innerText = '전체삭제'
+        }else{
+            checkBoxArr.forEach(el=> el.checked = false)
+            all.innerText = '전체선택'
+        }
+    })
+}
+
+//함수 5. 전체선택 삭제
+function allCheckDelete(){
+    const allCheckBtn = document.querySelector('#allCheckBtn')
+    const all = document.querySelector('#choice .all')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const productPrice = document.querySelector('#productPrice')
+    const deliveryPrice = document.querySelector('#deliveryPrice')
+    const finalPrice = document.querySelector('#finalPrice') 
+    all.addEventListener('click',function(){
+        if(allCheckBtn.checked === true){
+            for(let i = 0; i < checkBox.length; i++){
+                checkBox[i].parentElement.parentElement.remove()
+            }
+            window.localStorage.clear()
+            productPrice.innerText = 0
+            deliveryPrice.innerText = 0
+            finalPrice.innerText = 0
+            allCheckBtn.checked = false
+        }
+    })
+}
+
+
 
 
 //함수. 주문정보 넘기기
