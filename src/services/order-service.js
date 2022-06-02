@@ -56,6 +56,12 @@ class OrderService {
         },
       });
 
+      let data = '';
+      for (let i = 0; i < order_data.length; i++) {
+        data += order_data[i] + '개';
+        if (i != order_data.length - 1) data += ', ';
+      }
+
       const mailOptions = {
         from: process.env.MAIL_ID,
         to: email,
@@ -67,7 +73,7 @@ class OrderService {
                         <br>
                         <div>
                           <p>주문 번호 : ${createdNewOrder._id}</p>
-                          <p>주문 상품 : ${order_data}</p>
+                          <p>주문 상품 : ${data}</p>
                           <p>결제금액 : ${price}원</p>
                         </div>`,
         text: '확인 메일입니다.',
