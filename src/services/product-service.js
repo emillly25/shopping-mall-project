@@ -45,13 +45,7 @@ class ProductService {
     const publishedDate = productInfo.publishedDate;
     const orderCount = productInfo.orderCount;
 
-    if (
-      categoryName == null ||
-      name == null ||
-      price == null ||
-      information == null ||
-      publisher == null
-    ) {
+    if (!categoryName || !name || !price || !information || !publisher) {
       throw new Error('required value is not allowed to be null');
     }
 
@@ -88,12 +82,12 @@ class ProductService {
     const orderCount = productInfo.orderCount;
 
     if (
-      productId == null ||
-      categoryName == null ||
-      name == null ||
-      price == null ||
-      information == null ||
-      publisher == null
+      !productId ||
+      !categoryName ||
+      !name ||
+      !price ||
+      !information ||
+      !publisher
     ) {
       throw new Error('required value is not allowed to be null');
     }
@@ -126,3 +120,4 @@ class ProductService {
 const productService = new ProductService(productModel);
 
 export { productService };
+f=

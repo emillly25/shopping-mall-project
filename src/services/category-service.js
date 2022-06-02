@@ -26,7 +26,7 @@ class CategoryService {
       throw new Error('name is already exist.');
     }
 
-    if (name == null) {
+    if (!name) {
       throw new Error('required value is not allowed to be null');
     }
 
@@ -35,7 +35,7 @@ class CategoryService {
   }
 
   async setCategory(currentCategoryName, nameToChange) {
-    if (currentCategoryName == null || nameToChange == null) {
+    if (!currentCategoryName || !nameToChange) {
       throw new Error('required value is not allowed to be null');
     }
 
@@ -47,7 +47,7 @@ class CategoryService {
   }
 
   async deleteCategory(name) {
-    if (name == null) {
+    if (!name) {
       throw new Error('required value is not allowed to be null');
     }
     const category = await this.getCategoryOne(name);
