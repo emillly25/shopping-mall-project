@@ -1,5 +1,5 @@
 import { orderModel } from '../db';
-import nodemailer from 'nodemailer';
+import { sendMail } from '../utils/send-mail';
 
 class OrderService {
   constructor(orderModel) {
@@ -47,41 +47,20 @@ class OrderService {
     const createdNewOrder = await this.orderModel.createOrder(orderInfo);
 
     if (createdNewOrder) {
-      // 전송 옵션 설정
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail', // 이메일
-        auth: {
-          user: process.env.MAIL_ID, // 발송자 이메일
-          pass: process.env.MAIL_PASSWORD, // 발송자 비밀번호
-        },
-      });
-
-      let data = '';
-      for (let i = 0; i < order_data.length; i++) {
-        data += order_data[i] + '개';
-        if (i != order_data.length - 1) data += ', ';
-      }
-
-      const mailOptions = {
-        from: process.env.MAIL_ID,
-        to: email,
-        subject: '주문 확인',
-        html: `<h1>주문이 완료되었습니다.</h1>
-                        <div>
-                          ${fullName}님의 주문이 완료되었습니다.
-                        </div>
-                        <br>
-                        <div>
-                          <p>주문 번호 : ${createdNewOrder._id}</p>
-                          <p>주문 상품 : ${data}</p>
-                          <p>결제금액 : ${price}원</p>
-                        </div>`,
-        text: '확인 메일입니다.',
-      };
-
-      // 메일 전송하기
-      const info = await transporter.sendMail(mailOptions);
-      console.log(info);
+      await sendMail(
+        email,
+        '주문 확인',
+        `<h1>주문이 완료되었습니다.</h1>
+        <div>
+          ${fullName}님의 주문이 완료되었습니다.
+        </div>
+        <br>
+        <div>
+          <p>주문 번호 : ${createdNewOrder._id}</p>
+          <p>주문 상품 : ${order_data}</p>
+          <p>결제 금액 : ${price}원</p>
+        </div>`,
+      );
     }
 
     return createdNewOrder;
