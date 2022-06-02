@@ -144,37 +144,63 @@ insertOrderBtn.addEventListener('click', async () => {
 
 // Orders read
 
-// 유저명을 넣으면 user_id로 변환하는 부분이 필요하다
-// 지금은 user_id (예를 들면 628c82fa7f591f48de1d6f74) 를 넣어야 특정 사용자의 주문 조회가 가능하다!
-// elice 라는 fullName이 readOrdersName로 입력되면, elice를 628c82fa7f591f48de1d6f74로 바꿔줘야 한다.
-// 지금은 backend 단에서 user_id 가 일치하는지 여부를 보고 데이터를 가져오기 때문!
-// user_id가 일치하는지 여부를 보고 데이터를 가져오는 방식은 옳다! elice -> 628c82fa7f591f48de1d6f74가 자동으로 되는 부분을 만들어놨는지 여쭤보기
+const displayTotalOrders = document.querySelector(
+  '.o_display .account-page-body',
+);
 
-const readOrders = document.querySelector('.o_get');
-const readOrdersName = readOrders.querySelector('#name');
-const readOrdersBtn = readOrders.querySelector('#btn');
+try {
+  const params = '';
+  const res = await Api.get('/api/order/admin/orderlist', params);
 
-readOrdersBtn.addEventListener('click', async () => {
-  const params = readOrdersName.value;
-  try {
-    console.log('params : ', params);
-    let res;
-    if (!params) res = await Api.get('/api/order/admin/orderlist', params);
-    else res = await Api.get('/api/order/admin', params);
+  // console.log('모든 orders 데이터', res.result);
 
-    if (!params && !res) alert('제품이 없습니다.');
-    else if (params && !res) alert(`${params} 라는 제품은 없습니다.`);
-    else alert('orders read 완료');
+  res.result.forEach(row => {
+    const orderRow = `
+    <div class="body-list body-tr">
+      <div class="createdAt">${row.createdAt.substr(0, 10)}</div>
+      <div class="fullName">${row.fullName}</div>
+      <div class="email">${row.email}</div>
+      <div class="phoneNumber">${row.phoneNumber}</div>
+      
+      <div class="order_data">${row.order_data}</div>
+      <div class="price">${row.price}</div>
+      <div class="request">${row.request}</div>
+      <button class="cancel button is-danger is-small" data-oid = ${
+        row._id
+      } id="orderDeleteBtn">주문 취소</button>
+      
+    </div>
+    `;
+    displayTotalOrders.insertAdjacentHTML('beforeend', orderRow);
+  });
 
-    console.log('모든 orders 데이터', res.result);
-    // 로그인 페이지 이동
-    // window.location.href = '/admin';
-  } catch (err) {
-    alert(err);
-  }
-});
+  const orderDeleteBtn = displayTotalOrders.querySelectorAll('#orderDeleteBtn');
+  orderDeleteBtn.forEach(btn => {
+    btn.addEventListener('click', async e => {
+      if (confirm('주문 취소 하시겠습니까?')) {
+        const orderId = e.target.dataset.oid;
+        try {
+          const data = { orderId };
+          const res = await Api.delete('/api/order/admin', data);
+          console.log(res.result);
+          alert(`${res.result.order_data} ${res.message} `);
 
-// Orders delete (category delete 부분 문제 해결 후 한번에 같이 해결하기)
+          // 로그인 페이지 이동
+          window.location.href = '/admin';
+        } catch (err) {
+          alert(err);
+          // error 메세지 어떻게 따오지?
+        }
+      }
+    });
+  });
+  // 로그인 페이지 이동
+  // window.location.href = '/admin';
+} catch (err) {
+  alert(err);
+}
+
+// Orders delete
 
 const delOrder = document.querySelector('.o_delete');
 const deleteOrderName = delOrder.querySelector('#name');
