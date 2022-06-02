@@ -55,7 +55,7 @@ async function cartRendering(){
     // 체크박스 관련
     const allCheckBtn = document.querySelector('#allCheckBtn') //전체선택 버튼
     const all = document.querySelector('#choice .all')  //전체선택 글자(div)
-    const some = document.querySelector('#choice .some') //선택삭제 글자(div)
+    const selected = document.querySelector('#choice .selected') 
     const checkBox = document.querySelectorAll('.checkbox')  // 제품 옆에 있는 모든 체크박스
 
     // NodeList to Arr
@@ -67,48 +67,51 @@ async function cartRendering(){
 
 
 
-
-    // allCheckBtn.addEventListener('change',function(e){
-    //     const minus = document.querySelectorAll('.minus'); 
-    //     const minusArr = Array.prototype.slice.call(minus); 
-    //     const plus = document.querySelectorAll('.plus'); 
-    //     const plusArr = Array.prototype.slice.call(plus); 
-    //     if(e.target.checked === true){
-    //         checkBoxArr.forEach(el=> el.checked = true)
-    //         all.innerText = '전체삭제'
-    //         minusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
-    //         plusArr.forEach(el=>el.removeEventListener('click',handleUpdateQuantity))
-    //     }else{
-    //         checkBoxArr.forEach(el=> el.checked = false)
-    //         all.innerText = '전체선택'
-    //         minusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
-    //         plusArr.forEach(el=>el.addEventListener('click',handleUpdateQuantity))
-    //     }
-    
-    // })
-
-
-
-    //선택삭제
-    some.addEventListener('click',function(){
-        let CheckedId = []
-        for(let i = 0; i < checkBox.length; i++){
-            if(checkBox[i].checked){
-                checkBox[i].parentElement.parentElement.remove()
-                CheckedId.push(checkBox[i].dataset.id) //각 제품의 _id
-                
-            }
+    function selectedDelete(){
+        const selected = document.querySelector('#choice .selected')
+        const checkBox = document.querySelectorAll('.checkbox')
+        const checkBoxArr = Array.prototype.slice.call(checkBox) 
+        selected.addEventListener('click',function(e){
             
-        }
-        console.log('선택된 id',CheckedId) //삭제 예정 _id 모아둔 배열
-        const arr = JSON.parse(window.localStorage.getItem('productId'))
-        //선택삭제하고 남은 배열은 다시 localStorage에 보내야.
-        const newArr = arr.filter(el=>{
-            return CheckedId.findIndex(e=> e === el._id) === -1
+            for(let i = 0; i < checkBox.length; i++){
+                if(checkBox[i].checked){
+                    checkBox[i].parentElement.parentElement.remove()
+                    const nonSelected = checkBoxArr.filter(el=>{
+                        return el.checked === false
+                    })
+                    console.log(nonSelected)
+                    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+                    const updateArr = []
+                    nonSelected.map(el=>{
+                        const updateItem = productIdArr.filter(item => item._id === el.dataset.id)[0]
+                        updateArr.push(updateItem)
+                    })
+                    window.localStorage.setItem('productId', JSON.stringify(updateArr))
+                    firstView()
+                }
+            }
         })
-        window.location.reload()
-        window.localStorage.setItem('productId',JSON.stringify(newArr))
-    })
+    }
+
+    // //선택삭제
+    // some.addEventListener('click',function(){
+    //     let CheckedId = []
+    //     for(let i = 0; i < checkBox.length; i++){
+    //         if(checkBox[i].checked){
+    //             checkBox[i].parentElement.parentElement.remove()
+    //             CheckedId.push(checkBox[i].dataset.id) //각 제품의 _id
+                
+    //         }
+    //     }
+    //     console.log('선택된 id',CheckedId) //삭제 예정 _id 모아둔 배열
+    //     const arr = JSON.parse(window.localStorage.getItem('productId'))
+    //     //선택삭제하고 남은 배열은 다시 localStorage에 보내야.
+    //     const newArr = arr.filter(el=>{
+    //         return CheckedId.findIndex(e=> e === el._id) === -1
+    //     })
+    //     window.location.reload()
+    //     window.localStorage.setItem('productId',JSON.stringify(newArr))
+    // })
 
 
 
@@ -160,7 +163,7 @@ async function cartRendering(){
 
     //실행
     // 1. 장바구니에 담긴 각 아이템들 html 랜더링
-    for(let i=0 ; i < productId.length; i++){
+    for(let i = 0 ; i < productId.length; i++){
         await addList(productId[i])
     }
     // 2. 첫화면 아이템별 가격정보 랜더링 
@@ -175,6 +178,7 @@ async function cartRendering(){
     someControlAll()
     allControlSome()
     allCheckDelete()
+    selectedDelete()
     // 5. 체크박스 확인
     // checkingBox()
 }
@@ -244,15 +248,17 @@ function handleUpdateQuantity(e) {
 
 //함수 3-1. 수량버튼결과에 따른 localStorage 업데이트 함수
 function updateProductId(e){
+    const id = e.target.dataset.id
     const num =  document.querySelectorAll('.num') 
     const numArr = Array.prototype.slice.call(num)
-    const n = numArr.find(el=> el.dataset.id === e.target.dataset.id)
+    const n = numArr.find(el=> el.dataset.id === id)
     const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
-    const idx = productIdArr.findIndex(el=> el._id === e.target.dataset.id)
+    const idx = productIdArr.findIndex(el=> el._id === id)
     const firstPrice = Number(productIdArr[idx].price)/ Number(productIdArr[idx].quantity)
     productIdArr[idx].quantity = Number(n.value)
     productIdArr[idx].price = Number(firstPrice) * Number(n.value)
     window.localStorage.setItem('productId', JSON.stringify(productIdArr))
+    
 }
 
 //함수 4. 체크박스 선택 여부에 따라 -> 전체선택 활성화/비활성화
