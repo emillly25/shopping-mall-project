@@ -23,7 +23,7 @@ function errorHandler(error, req, res, next) {
         .status(406)
         .json({ status: 406, result: 'Not Acceptable', reason: error.message });
       break;
-    case 'check the requested body again':
+    case 'required value is not allowed to be null':
       res.status(400).json({
         status: 400,
         result: 'Bad Request',

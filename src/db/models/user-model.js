@@ -1,8 +1,9 @@
 import { model } from 'mongoose';
 import { UserSchema } from '../schemas/user-schema';
-import { sendMail } from '../../utils/send-mail';
+import { OrderSchema } from '../schemas/order-schema';
 
 const User = model('users', UserSchema);
+const Order = model('order', OrderSchema);
 
 export class UserModel {
   async findByEmail(email) {
@@ -40,23 +41,19 @@ export class UserModel {
 
   async deleteById(userId) {
     const user = await User.findOneAndDelete({ _id: userId });
+    const order = await Order.deleteMany({ userId });
+
+    console.log(order);
     return user;
   }
 
-  async updatePw(email, password, newPasswordHash) {
+  async updatePw(email, newPasswordHash) {
     const user = await User.findOneAndUpdate(
       { email },
       {
         // hashPassword 로 업데이트 하기
         password: newPasswordHash,
       },
-    );
-
-    // 패스워드 발송하기
-    await sendMail(
-      email,
-      '비밀번호가 변경되었습니다.',
-      `변경된 비밀번호는: ${password} 입니다.`,
     );
 
     return user;

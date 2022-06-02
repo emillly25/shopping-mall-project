@@ -1,6 +1,5 @@
 import { orderService } from '../services';
 import is from '@sindresorhus/is';
-import nodemailer from 'nodemailer';
 
 const getOrderlist = async (req, res, next) => {
   try {
@@ -32,61 +31,11 @@ const Order = async (req, res, next) => {
 
     const userId = req.currentUserId;
 
-    // req (request)의 body 에서 데이터 가져오기
-    const {
-      fullName,
-      email,
-      address,
-      phoneNumber,
-      order_data,
-      price,
-      quantity,
-      request,
-    } = req.body;
-
     // 위 데이터를 유저 db에 추가하기
     const newOrder = await orderService.addOrder({
       userId,
-      fullName,
-      email,
-      address,
-      phoneNumber,
-      order_data,
-      price,
-      request,
+      ...req.body,
     });
-
-    if (newOrder) {
-      // 전송 옵션 설정
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail', // 이메일
-        auth: {
-          user: process.env.MAIL_ID, // 발송자 이메일
-          pass: process.env.MAIL_PASSWORD, // 발송자 비밀번호
-        },
-      });
-
-      const mailOptions = {
-        from: process.env.MAIL_ID,
-        to: email,
-        subject: '주문 확인',
-        html: `<h1>주문이 완료되었습니다.</h1>
-                  <div>
-                    ${fullName}님의 주문이 완료되었습니다.
-                  </div>
-                  <br>
-                  <div>
-                    <p>주문 번호 : ${newOrder._id}</p>
-                    <p>주문 상품 : ${order_data}</p>
-                    <p>결제금액 : ${price}원</p>
-                  </div>`,
-        text: '확인 메일입니다.',
-      };
-
-      // 메일 전송하기
-      const info = await transporter.sendMail(mailOptions);
-      console.log(info);
-    }
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
@@ -108,7 +57,7 @@ const getOrder = async (req, res, next) => {
 
     // 사용자 주문 목록
     const orders = await orderService.getOrdersById(userId);
-    // console.log('orders', orders);
+
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json({
       isSuccess: true,

@@ -2,6 +2,7 @@ import { userModel } from '../db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { generateRandomPassword } from '../utils/generate-random-password';
+import { sendMail } from '../utils/send-mail';
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -12,13 +13,17 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, phoneNumber } = userInfo;
+    const { fullName, email, password, phoneNumber } = userInfo;
+
+    if (!fullName || !email || !password || !phoneNumber) {
+      throw new Error('required value is not allowed to be null');
+    }
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
     if (user) {
       throw new Error(
-        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.',
+        'This email is currently in use. Please enter another email.',
       );
     }
 
@@ -45,11 +50,15 @@ class UserService {
     // 객체 destructuring
     const { email, password } = loginInfo;
 
+    if (!email || !password) {
+      throw new Error('required value is not allowed to be null');
+    }
+
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
     if (!user) {
       throw new Error(
-        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+        'This email has no subscription history. Please check again.',
       );
     }
 
@@ -65,9 +74,7 @@ class UserService {
     );
 
     if (!isPasswordCorrect) {
-      throw new Error(
-        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
-      );
+      throw new Error('Current passwords do not match. Please check again.');
     }
 
     // 로그인 성공 -> JWT 웹 토큰 생성
@@ -92,7 +99,7 @@ class UserService {
     const user = await this.userModel.findById(userId);
 
     if (!user) {
-      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error('There is no subscription history. Please check again.');
     }
 
     return user;
@@ -108,7 +115,7 @@ class UserService {
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
-      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error('There is no subscription history. Please check again.');
     }
 
     // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
@@ -146,12 +153,16 @@ class UserService {
   }
 
   async deleteUser(toDeleteId, toDeletePw) {
+    if (!toDeletePw) {
+      throw new Error('check the requested body again');
+    }
+
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(toDeleteId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
-      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error('There is no subscription history. Please check again.');
     }
 
     // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
@@ -164,19 +175,22 @@ class UserService {
     );
 
     if (!isPasswordCorrect) {
-      throw new Error(
-        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
-      );
+      throw new Error('Current passwords do not match. Please check again.');
     }
 
     // 비밀번호 확인 후 사용자 삭제
     return await this.userModel.deleteById(toDeleteId);
   }
 
-  async resetPw(email, phoneNumber) {
+  async resetPw(userInfo) {
+    const { email, phoneNumber } = userInfo;
+    if (!email || !phoneNumber) {
+      throw new Error('required value is not allowed to be null');
+    }
+
     let user = await this.userModel.findByEmailandPhone(email, phoneNumber);
     if (!user) {
-      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error('There is no subscription history. Please check again.');
     }
 
     // 랜덤 패스워드 생성하기
@@ -186,10 +200,24 @@ class UserService {
     // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
     if (password) {
       newPasswordHash = await bcrypt.hash(password, 10);
-      //console.log('newPasswordHash', newPasswordHash);
     }
+
+    // 패스워드 발송하기
+    await sendMail(
+      email,
+      '비밀번호 변경',
+      `<h1>비밀번호가 변경되었습니다.</h1>
+      <br>
+      <div>
+        변경된 비밀번호는: <span style=" font: bold ; color: blue;">${password}</span> 입니다.
+      </div>
+      <div>
+        <p>변경된 비밀번호 입력 후 로그인해 주세요.</p>
+      </div>`,
+    );
+
     // 업데이트 진행
-    user = await this.userModel.updatePw(email, password, newPasswordHash);
+    user = await this.userModel.updatePw(email, newPasswordHash);
 
     return user;
   }
