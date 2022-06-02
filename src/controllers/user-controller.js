@@ -12,19 +12,9 @@ const register = async (req, res, next) => {
       );
     }
 
-    // req (request)의 body 에서 데이터 가져오기
-    const { fullName, email, password, phoneNumber } = req.body;
-
-    if (!fullName || !email || !password || !phoneNumber) {
-      throw new Error('check the requested body again');
-    }
-
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
-      fullName,
-      email,
-      password,
-      phoneNumber,
+      ...req.body,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -49,15 +39,8 @@ const login = async function (req, res, next) {
       );
     }
 
-    // req (request) 에서 데이터 가져오기
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      throw new Error('check the requested body again');
-    }
-
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
-    const data = await userService.getUserToken({ email, password });
+    const data = await userService.getUserToken({ ...req.body });
 
     const token = data[0];
     const role = data[1];
@@ -177,10 +160,6 @@ const deleteUserData = async function (req, res, next) {
     // body data 로부터 비밀번호 추출.
     const userPw = req.body.password;
 
-    if (!userPw) {
-      throw new Error('check the requested body again');
-    }
-
     // 유저 정보 삭제
     const data = await userService.deleteUser(userId, userPw);
 
@@ -204,15 +183,7 @@ const resetPassword = async function (req, res, next) {
       );
     }
 
-    // body data 로부터 이메일 추출.
-    // const email = req.body.email;
-
-    const { email, phoneNumber } = req.body;
-    if (!email || !phoneNumber) {
-      throw new Error('check the requested body again');
-    }
-
-    const data = await userService.resetPw(email, phoneNumber);
+    const data = await userService.resetPw({ ...req.body });
 
     res.status(200).json({
       isSuccess: true,

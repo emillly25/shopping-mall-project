@@ -12,7 +12,11 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, phoneNumber } = userInfo;
+    const { fullName, email, password, phoneNumber } = userInfo;
+
+    if (!fullName || !email || !password || !phoneNumber) {
+      throw new Error('check the requested body again');
+    }
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -44,6 +48,10 @@ class UserService {
   async getUserToken(loginInfo) {
     // 객체 destructuring
     const { email, password } = loginInfo;
+
+    if (!email || !password) {
+      throw new Error('check the requested body again');
+    }
 
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
@@ -146,6 +154,10 @@ class UserService {
   }
 
   async deleteUser(toDeleteId, toDeletePw) {
+    if (!toDeletePw) {
+      throw new Error('check the requested body again');
+    }
+
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(toDeleteId);
 
@@ -173,7 +185,12 @@ class UserService {
     return await this.userModel.deleteById(toDeleteId);
   }
 
-  async resetPw(email, phoneNumber) {
+  async resetPw(userInfo) {
+    const { email, phoneNumber } = userInfo;
+    if (!email || !phoneNumber) {
+      throw new Error('check the requested body again');
+    }
+
     let user = await this.userModel.findByEmailandPhone(email, phoneNumber);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
