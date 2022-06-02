@@ -14,6 +14,15 @@ export class ProductModel {
     const products = await Product.find({}).populate('category', 'name');
     return products;
   }
+
+  async findByCategory(category) {
+    const products = await Product.find({ category: category }).populate(
+      'category',
+      'name',
+    );
+    return products;
+  }
+
   async create(productInfo) {
     const [
       category,

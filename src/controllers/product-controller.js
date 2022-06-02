@@ -2,7 +2,7 @@ import is from '@sindresorhus/is';
 const { productService } = require('../services/product-service');
 
 class ProductController {
-  async getProduct(req, res) {
+  async getProduct(req, res, next) {
     const { productId } = req.params;
 
     try {
@@ -12,6 +12,22 @@ class ProductController {
         message: 'Product loaded successfully',
         status: 200,
         result: product,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getProductsByCategoryName(req, res, next) {
+    const { name } = req.params;
+
+    try {
+      const products = await productService.getProductsByCategoryName(name);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Products loaded successfully',
+        status: 200,
+        result: products,
       });
     } catch (err) {
       next(err);

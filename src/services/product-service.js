@@ -16,6 +16,18 @@ class ProductService {
     return product;
   }
 
+  async getProductsByCategoryName(categoryName) {
+    if (!categoryName) {
+      throw new Error('required value is not allowed to be null');
+    }
+    const category = await categoryService.getCategory(categoryName);
+    if (!category) {
+      throw new Error("CategoryName doesn't exist in Category Schema");
+    }
+    const products = await this.productModel.findByCategory(category);
+    return products;
+  }
+
   async getProduct(productId) {
     if (!productId) {
       return await productService.getAllProduct();

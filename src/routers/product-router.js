@@ -4,7 +4,12 @@ import { adminRequired } from '../middlewares';
 const productRouter = Router();
 const upload = require('../middlewares/imageUploader');
 
+productRouter.get(
+  '/categoryName/:name*?',
+  productController.getProductsByCategoryName,
+);
 productRouter.get('/:productId*?', productController.getProduct);
+
 productRouter.post(
   '/',
   [adminRequired, upload.single('img')],
