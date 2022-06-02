@@ -1,4 +1,3 @@
-import { ValueIsNullError, RoleIsNotAdminError } from '../error/value-error';
 const { categoryModel, userModel } = require('../db');
 
 class CategoryService {
@@ -28,7 +27,7 @@ class CategoryService {
     }
 
     if (name == null) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const result = this.categoryModel.create(name);
@@ -37,7 +36,7 @@ class CategoryService {
 
   async setCategory(currentCategoryName, nameToChange) {
     if (currentCategoryName == null || nameToChange == null) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const result = await this.categoryModel.update(
@@ -49,7 +48,7 @@ class CategoryService {
 
   async deleteCategory(name) {
     if (name == null) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     return await this.categoryModel.delete(name);

@@ -13,21 +13,14 @@ class CategoryController {
         result: category,
       });
     } catch (err) {
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async addCategory(req, res) {
+  async addCategory(req, res, next) {
     const name = req.body.name;
     try {
-      const addedCategory = await categoryService.addCategory(
-        name
-      );
+      const addedCategory = await categoryService.addCategory(name);
       return res.status(200).json({
         isSuccess: true,
         message: 'Category inserted successfully',
@@ -35,30 +28,17 @@ class CategoryController {
         result: addedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async editCategory(req, res) {
+  async editCategory(req, res, next) {
     const currentCategoryName = req.body.currentCategoryName;
     const nameToChange = req.body.nameToChange;
     try {
       const editedCategory = await categoryService.setCategory(
         currentCategoryName,
-        nameToChange
+        nameToChange,
       );
       return res.status(200).json({
         isSuccess: true,
@@ -67,29 +47,14 @@ class CategoryController {
         result: editedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async deleteCategory(req, res) {
+  async deleteCategory(req, res, next) {
     const name = req.body.name;
     try {
-      const deletedCategory = await categoryService.deleteCategory(
-        name
-      );
+      const deletedCategory = await categoryService.deleteCategory(name);
       return res.status(200).json({
         isSuccess: true,
         message: 'Category deleted successfully',
@@ -97,20 +62,7 @@ class CategoryController {
         result: deletedCategory,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 }

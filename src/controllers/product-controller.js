@@ -18,16 +18,11 @@ class ProductController {
         result: product,
       });
     } catch (err) {
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async addProduct(req, res) {
+  async addProduct(req, res, next) {
     let imgUrl = null;
     if (req.file) {
       imgUrl = req.file.location;
@@ -41,27 +36,11 @@ class ProductController {
         result: addedProduct,
       });
     } catch (err) {
-      if (
-        err instanceof ValueIsNullError ||
-        err instanceof CategoryDoesNotExistsError
-      ) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 
-  async editProduct(req, res) {
+  async editProduct(req, res, next) {
     let imgUrl = null;
     if (req.file) {
       imgUrl = req.file.location;
@@ -75,26 +54,10 @@ class ProductController {
         result: editedProduct,
       });
     } catch (err) {
-      if (
-        err instanceof ValueIsNullError ||
-        err instanceof CategoryDoesNotExistsError
-      ) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
-  async deleteProduct(req, res) {
+  async deleteProduct(req, res, next) {
     const productId = req.body.productId;
     try {
       const deletedProduct = await productService.deleteProduct(productId);
@@ -105,20 +68,7 @@ class ProductController {
         result: deletedProduct,
       });
     } catch (err) {
-      if (err instanceof ValueIsNullError) {
-        return res.status(400).json({
-          isSuccess: false,
-          message: err.message,
-          status: 400,
-          result: null,
-        });
-      }
-      return res.status(500).json({
-        isSuccess: false,
-        message: err.message,
-        status: 500,
-        result: null,
-      });
+      next(err);
     }
   }
 }

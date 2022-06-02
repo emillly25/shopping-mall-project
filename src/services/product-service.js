@@ -1,9 +1,5 @@
 const { categoryService } = require('./category-service');
 const { productModel, userModel } = require('../db');
-import {
-  ValueIsNullError,
-  CategoryDoesNotExistsError,
-} from '../error/value-error';
 
 class ProductService {
   constructor(productModel, userModel) {
@@ -45,14 +41,12 @@ class ProductService {
       information == null ||
       publisher == null
     ) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const category = await categoryService.getCategory(categoryName);
     if (!category) {
-      throw new CategoryDoesNotExistsError(
-        "CategoryName doesn't exist in Category Schema",
-      );
+      throw new Error("CategoryName doesn't exist in Category Schema");
     }
 
     const productData = [
@@ -90,14 +84,12 @@ class ProductService {
       information == null ||
       publisher == null
     ) {
-      throw new ValueIsNullError('required value is not allowed to be null');
+      throw new Error('required value is not allowed to be null');
     }
 
     const category = await categoryService.getCategory(categoryName);
     if (!category) {
-      throw new CategoryDoesNotExistsError(
-        "CategoryName doesn't exist in Category Schema",
-      );
+      throw new Error("CategoryName doesn't exist in Category Schema");
     }
 
     const productData = [
