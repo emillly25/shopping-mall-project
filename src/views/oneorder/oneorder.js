@@ -154,7 +154,7 @@ const deliveryData = {
 console.log(deliveryData)
 
 const res = await Api.post('/api/order', deliveryData)
-window.localStorage.remove()
+// window.localStorage.remove()
 
 }   
 

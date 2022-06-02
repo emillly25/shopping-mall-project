@@ -10,18 +10,11 @@ headerEl.innerHTML = `
 
 <div class="menu_header">
   <ul class="category">
-    <li id="dropmenu">
-      <a href="" id="li_hover">국내도서</a>
-      <ul class="dropdown">
-        <li><a href="">소설</a></li>
-        <li><a href="">경영/경제</a></li>
-        <li><a href="">에세이</a></li>
-      </ul>
-    </li>
-    <li><a href="" id="li_hover">해외도서</a></li>
-    <li><a href="" id="li_hover">eBook</a></li>
-    <li><a href="" id="li_hover">음반</a></li>
-    <li><a href="" id="li_hover">이벤트</a></li>
+    <li><a href="/bestseller" id="li_hover">베스트셀러</a></li>
+    <li><a href="/novel" id="li_hover">소설</a></li>
+    <li><a href="/poet" id="li_hover">시/에세이</a></li>
+    <li><a href="/self" id="li_hover">자기계발</a></li>
+    <li><a href="/economy" id="li_hover">경영/경제</a></li>
   </ul>
   <div class="search_bar_info_menu">
     <div class="search_bar">
