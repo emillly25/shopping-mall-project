@@ -28,7 +28,7 @@ headerEl.innerHTML = `
       <li class="show"><a href="/register">회원가입</a></li>
       <li class="show"><a href="/login">로그인</a></li>
       <li class="none"><a href="/account">계정관리</a></li>
-      <li class="none"><a href="" id="logout">로그아웃</a></li>
+      <li class="none"><a href="/" id="logout">로그아웃</a></li>
       <li>
         <a href=""><i class="fa-solid fa-user"></i></a>
       </li>
@@ -103,7 +103,7 @@ logoutBtn.addEventListener('click', () => {
   if (confirm('로그아웃 하시겠습니까?')) {
     alert('로그아웃 되었습니다.');
     sessionStorage.removeItem('token');
-    window.location.href = '/';
+    // window.location.href = '/';
   }
 });
 
