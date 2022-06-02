@@ -160,9 +160,7 @@ async function orderHandler(){
     const address = { postalCode , address1 , address2 }
     const order_data = []
     let sum = 0
-    const price = sum 
     const data = JSON.parse(window.localStorage.getItem('productId'))
-    
 
     for(let i = 0; i < data.length; i++){
         const id = data[i]._id
@@ -172,6 +170,8 @@ async function orderHandler(){
         order_data.push(result)
         sum += Number(data[i].price)
     }
+    const price = sum
+    
 
     
     
