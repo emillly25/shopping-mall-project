@@ -138,7 +138,7 @@ async function orderHandler(){
     const address2 = address2Input.value;
     const request = requestSelectBox.value;
     const address = { postalCode , address1 , address2 }
-    const order_data = [`${data.name}/${pId.quantity}`]
+    const order_data = [`${data.name}/${pId.quantity}개`]
     const price = pId.price
     
 

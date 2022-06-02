@@ -69,8 +69,6 @@ async function cartRendering(){
 
 
 
-
-
     //check 여부 확인해서 localStorage(checkBuy)에 업데이트하는 함수
     function checkingBox(){
         const checkBox = document.querySelectorAll('.checkbox') 
@@ -138,7 +136,7 @@ async function cartRendering(){
 }
 
 
- //함수1. 아이템 별 가격내역 초기화 랜더링
+ //함수 1. 아이템 별 가격내역 초기화 랜더링
 function firstView(){
     const num =  document.querySelectorAll('.num')
     const numArr = Array.prototype.slice.call(num)
@@ -165,7 +163,7 @@ function firstView(){
     calcPay() 
 }
 
-//함수2. 결제상세 내역 랜더링
+//함수 2. 결제상세 내역 랜더링
 function calcPay(){
     const productPrice = document.querySelector('#productPrice');
     const deliveryPrice = document.querySelector('#deliveryPrice')
@@ -185,7 +183,7 @@ function calcPay(){
     finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
 }
 
-//함수3. 수량버튼에 따른 결과 랜더링
+//함수 3. 수량버튼에 따른 결과 랜더링
 function handleUpdateQuantity(e) {
     const num =  document.querySelectorAll('.num') 
     const numArr = Array.prototype.slice.call(num)
@@ -268,6 +266,7 @@ function allCheckDelete(){
     })
 }
 
+// 함수 6. 장바구니가 비워지면 결제정보 모두 삭제
 function noMoreCartUpdatePay(){
     const allCheckBtn = document.querySelector('#allCheckBtn')
     const checkBox = document.querySelectorAll('.checkbox')
@@ -285,7 +284,7 @@ function noMoreCartUpdatePay(){
 }
 
 
-//함수 6. 선택삭제
+//함수 7. 선택삭제
 function selectedDelete(){
     const selected = document.querySelector('#choice .selected')
     const checkBox = document.querySelectorAll('.checkbox')
@@ -316,7 +315,7 @@ function selectedDelete(){
 
 
 
-//함수. 주문정보 넘기기
+//함수 8. 주문정보 넘기기
 function order(){
     const buyBtn = document.querySelector('#buyBtn')
     const allCheckBtn = document.querySelector('#allCheckBtn') 

@@ -43,6 +43,7 @@ async function booksRendering(){
     //3. 장바구니 버튼 활성화
     addToCart()
 
+
     //4. 바로구매 버튼 활성화
     buyNow()
 
@@ -102,6 +103,7 @@ async function addToCart(){
         })
     })
 }
+
 
 
 //3. 장바구니 이동여부 체크 함수

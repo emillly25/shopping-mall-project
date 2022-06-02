@@ -4,7 +4,7 @@ body{
 }
 .container{
     width: 1260px;
-    /* border: 3px solid red; */
+    border: 3px solid red;
 }
 .container h1{
     font-size: 36px;
@@ -12,41 +12,64 @@ body{
     font-weight: bold;
 }
 
-.order_container{
+.orderContainer{
     width: 100%;
-    /* border: solid 5px black; */
+    border: solid 5px black;
     display: flex;
 }
 
-.order_list{
+.orderList{
     width: 60%;
-    /* border: 4px solid blue; */
+    border: 4px solid blue;
 }
 
-table{
-    margin: 0 auto;
-}
-table th{
-    font-size: 18px;
-    height:40px;
-    padding-top: 6px;
+.productList{
+    width: 100%;
+    border: 1px solid greenyellow;
 }
 
-td{
-    width: 200px;
-    height: 100px;
+.tableHead{
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    border: 1px solid black;
+    border-bottom: none;
+    justify-content: space-between;
 }
 
-td img{
-    width: 200px;
-    height: 180px;
+.tableBody{
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.tableBody li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tableBody li div:nth-child(1){
+    width: 20%;
+    border: 1px solid pink;
+}
+.tableBody li div:nth-child(2){
+    width: 45%;
+    border: 1px solid pink;
+}
+
+.tableBody li div:nth-child(3), .tableBody li div:nth-child(4){
+    width: 15%;
+    border: 1px solid red;
 }
 
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 .qty{
     width: 150px;
@@ -121,40 +144,37 @@ input::-webkit-inner-spin-button {
 
 
 
-.cart_pay{
+.cartPay{
     margin: auto 0;
-    /* border: 3px solid yellow; */
+    border: 3px solid yellow;
     height: 350px;
     width: 40%;
 }
 
-.cart_pay h2{
-    /* border: 1px solid blueviolet; */
+.cartPay h2{
     margin: 20px;
     font-size: 24px;
 }
-.cart_pay h2 span{
+.cartPay h2 span{
     border-bottom: 1px solid lightgray;
     display: inline-block;
     padding-bottom: 6px;
 }
 
-.cart_pay .cart_price{
-    /* border: 1px solid hotpink; */
+.cartPrice{
     margin: 10px;
 }
 
-.cart_pay .cart_price div{
+.cartPrice div{
     padding: 15px;
 }
 
-.cart_pay .cart_total_price{
-    /* border: 1px solid black; */
+.cartTotalPrice{
     margin: 10px;
     padding: 15px;
 }
 
-.cart_buy_btn{
+.cartBuyBtn{
     /* border: 1px solid green; */
     width: 100%;
     display: flex;
