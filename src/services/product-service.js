@@ -1,10 +1,9 @@
 const { categoryService } = require('./category-service');
-const { productModel, userModel } = require('../db');
+const { productModel } = require('../db');
 
 class ProductService {
-  constructor(productModel, userModel) {
+  constructor(productModel) {
     this.productModel = productModel;
-    this.userModel = userModel;
   }
 
   async getAllProduct() {
@@ -112,6 +111,6 @@ class ProductService {
     return result;
   }
 }
-const productService = new ProductService(productModel, userModel);
+const productService = new ProductService(productModel);
 
 export { productService };
