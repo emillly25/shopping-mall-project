@@ -2,7 +2,7 @@ import is from '@sindresorhus/is';
 const { categoryService } = require('../services/category-service');
 
 class CategoryController {
-  async getCategory(req, res) {
+  async getCategory(req, res, next) {
     const { categoryName } = req.params;
     try {
       const category = await categoryService.getCategory(categoryName);
