@@ -163,10 +163,10 @@ async function orderHandler(){
     const price = sum 
 
     const data = JSON.parse(window.localStorage.getItem('productId'))
-    
+   
     for(let i = 0; i < data.length; i++){
         const id = data[i]._id
-        const res = await Api.get('/api/product', data[i]._id)
+        const res = await Api.get('/api/product', id)
         const title = res.result.name
         const result = `${title}/${data[i].quantity}개`
         order_data.push(result)
@@ -175,17 +175,17 @@ async function orderHandler(){
 
     
     
-    
     if (!fullName || !phoneNumber|| !email || !postalCode || !address2) {
         return alert("배송지 정보를 모두 입력해 주세요.")
     }
 
+    const userId = 1
     const deliveryData = {
-        fullName, email, address , phoneNumber, order_data, price,  request
+        userId, fullName, email, address , phoneNumber, order_data, price,  request
     }
     console.log(deliveryData)
     await Api.post('/api/order', deliveryData)
-
+    location.href = '/order-complete'
 }  
 
 
@@ -194,10 +194,8 @@ async function orderHandler(){
 btn.addEventListener('click', addressSearch);
 
 //최종 구매버튼 post 요청
-payBtn.addEventListener('click', orderHandler );
-// payBtn.addEventListener('click', function(){
-//     window.location.href = '/order-complete'
-// });
+payBtn.addEventListener('click', orderHandler);
+
 
 //최초 화면 랜더링
 orderRendering()

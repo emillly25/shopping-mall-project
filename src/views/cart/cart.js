@@ -58,9 +58,9 @@ async function cartRendering(){
     selectedDelete() //선택삭제
     checkingStatus() //체크여부에 따른 데이터 저장
 
-    function preventRepeat(){
-        
-    }
+
+    //5. 주문
+    order()
 }
 
  //함수 1. 아이템 별 가격내역 초기화 랜더링
@@ -115,30 +115,33 @@ function handleUpdateQuantity(e) {
     const num =  document.querySelectorAll('.num') 
     const numArr = Array.prototype.slice.call(num)
     const n = numArr.find(el=> el.dataset.id === e.target.dataset.id)
+    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
     if (e.target.classList.contains('minus')) {
         n.stepDown()
-        updateProductId(e)
+        updateLocalStorage(e,productIdArr)
     } else {
         n.stepUp()
-        updateProductId(e)
+        updateLocalStorage(e,productIdArr)
     }
     firstView()
 }
 
+
 //함수 3-1. 수량버튼결과에 따른 localStorage 업데이트 함수
-function updateProductId(e){
+function updateLocalStorage(e, localArr){
     const id = e.target.dataset.id
     const num =  document.querySelectorAll('.num') 
     const numArr = Array.prototype.slice.call(num)
     const n = numArr.find(el=> el.dataset.id === id)
-    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
-    const idx = productIdArr.findIndex(el=> el._id === id)
-    const firstPrice = Number(productIdArr[idx].price)/ Number(productIdArr[idx].quantity)
-    productIdArr[idx].quantity = Number(n.value)
-    productIdArr[idx].price = Number(firstPrice) * Number(n.value)
-    window.localStorage.setItem('productId', JSON.stringify(productIdArr))
+    const idx = localArr.findIndex(el=> el._id === id)
+    const firstPrice = Number(localArr[idx].price)/ Number(localArr[idx].quantity)
+    localArr[idx].quantity = Number(n.value)
+    localArr[idx].price = Number(firstPrice) * Number(n.value)
+    window.localStorage.setItem('productId', JSON.stringify(localArr))
     
 }
+
+
 
 //함수 4. 체크박스 선택 여부에 따라 -> 전체선택 활성화/비활성화
 function someControlAll(){
@@ -253,7 +256,9 @@ function checkingStatus(){
                 tempArr.splice(idx,1)
             }
             window.localStorage.setItem('tempCart', JSON.stringify(tempArr))
-            console.log(tempArr)
+            const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
+            updateLocalStorage(e,tempCartArr)
+            console.log('결과배열',tempArr)
         })
     })
 }
@@ -273,17 +278,48 @@ function makingObj(e){
     return obj
 }
 
+//임시
+function preventRepeat(arr){
+    const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
+    if(tempCartArr !== null){
+        const tempId = []
+        tempCartArr.map(el=>{
+            tempId.push(el._id)
+        })
+        const arrId = []
+        arr.map(el=>{
+            arrId.push(el._id)
+        })
+    
+        const filtered = tempId.filter(x=> arrId.includes(x))
+        console.log('중복되서 넣으면 안되는애들',filtered)
+    
+        if(filtered.length === 0){
+            window.localStorage.setItem('tempCart',JSON.stringify(arr))
+        }else{
+            const newArr = arr.filter(el=> !filtered.includes(el._id))
+            window.localStorage.setItem('tempCart',JSON.stringify(newArr))
+        }
+    }
+}
 
 
 //함수 10. 주문정보 넘기기
 function order(){
     const buyBtn = document.querySelector('#buyBtn')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const checkBoxArr = Array.prototype.slice.call(checkBox)
     const allCheckBtn = document.querySelector('#allCheckBtn') 
     buyBtn.addEventListener('click',function(){
+        console.log()
         if(allCheckBtn.checked === true){
-            window.localStorage.setItem('orderProductId','productId로 주문진행')
-        }else{
-            window.localStorage.setItem('orderCheckBuy','checkBuy로 주문진행')
+            console.log('모두체크했네 다 주문할게요')
+            location.href='/order'
+        }else if(checkBoxArr.some(el=>el.checked === true)){
+            
+            console.log('선택한거만 주문할게염')
+        }else if(checkBoxArr.every(el=>el.checked === false)){
+            alert('주문하실 상품을 선택해주세요.')
         }
     })
 }
@@ -291,11 +327,21 @@ function order(){
 
 //최종 랜더링 및 주문
 cartRendering()
-order()
 
 
 
 
 
+// function preventBuy(){
+//     const buyBtn = document.querySelector('#buyBtn')
+//     const checkBox = document.querySelectorAll('.checkbox')
+//     const checkBoxArr = Array.prototype.slice.call(checkBox)
+//     buyBtn.addEventListener('click',function(){
+//         if(checkBoxArr.every(el=> el.checked === false)){
+//             buyBtn.disabled = true
+//             alert('주문하실 상품을 선택해주세요.')
+//         }
+//     })
+// }
 
 
