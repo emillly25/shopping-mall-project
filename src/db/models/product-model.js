@@ -76,6 +76,11 @@ export class ProductModel {
     const deletedProduct = await Product.deleteOne({ _id: productId });
     return deletedProduct;
   }
+
+  async deleteMany(category) {
+    const deletedProduct = await Product.deleteMany({ category: category });
+    return deletedProduct;
+  }
 }
 
 const productModel = new ProductModel();

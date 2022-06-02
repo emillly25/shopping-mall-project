@@ -1,9 +1,10 @@
-const { categoryModel, userModel } = require('../db');
+const { categoryModel, userModel, productModel } = require('../db');
 
 class CategoryService {
-  constructor(categoryModel, userModel) {
+  constructor(categoryModel, userModel, productModel) {
     this.categoryModel = categoryModel;
     this.userModel = userModel;
+    this.productModel = productModel;
   }
 
   async getAllCategory() {
@@ -50,11 +51,19 @@ class CategoryService {
     if (name == null) {
       throw new Error('required value is not allowed to be null');
     }
-
-    return await this.categoryModel.delete(name);
+    const category = await this.getCategoryOne(name);
+    if (!category) {
+      throw new Error("CategoryName doesn't exist in Category Schema");
+    }
+    await this.categoryModel.delete(name);
+    return await this.productModel.deleteMany(category);
   }
 }
 
-const categoryService = new CategoryService(categoryModel, userModel);
+const categoryService = new CategoryService(
+  categoryModel,
+  userModel,
+  productModel,
+);
 
 export { categoryService };
