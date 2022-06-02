@@ -255,9 +255,9 @@ function checkingStatus(){
                 })
                 tempArr.splice(idx,1)
             }
-            window.localStorage.setItem('tempCart', JSON.stringify(tempArr))
-            const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
-            updateLocalStorage(e,tempCartArr)
+            // window.localStorage.setItem('tempCart', JSON.stringify(tempArr))
+            // const tempCartArr = JSON.parse(window.localStorage.getItem('tempCart'))
+            // updateLocalStorage(e,tempCartArr)
             console.log('결과배열',tempArr)
         })
     })
@@ -316,8 +316,24 @@ function order(){
             console.log('모두체크했네 다 주문할게요')
             location.href='/order'
         }else if(checkBoxArr.some(el=>el.checked === true)){
-            
+            const filtered = checkBoxArr.filter(el=> el.checked === true)
+            console.log('1',filtered) //체크된 애들 input
+            const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+            console.log('2',productIdArr)
+            const selectedBuy = []
+            for(let i = 0; i < filtered.length ; i++){
+                const selected = productIdArr.filter(el=>el._id === filtered[i].dataset.id)
+                selectedBuy.push(selected)
+            }
+            console.log(selectedBuy)
+            const result=[]
+            selectedBuy.map(el=>{
+                result.push(el[0])
+            })
+            console.log('최종',result)   
+            window.localStorage.setItem('checkedBuy',JSON.stringify(result))        
             console.log('선택한거만 주문할게염')
+            location.href='/someorder'
         }else if(checkBoxArr.every(el=>el.checked === false)){
             alert('주문하실 상품을 선택해주세요.')
         }
