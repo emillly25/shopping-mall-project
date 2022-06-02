@@ -67,52 +67,6 @@ async function cartRendering(){
 
 
 
-    function selectedDelete(){
-        const selected = document.querySelector('#choice .selected')
-        const checkBox = document.querySelectorAll('.checkbox')
-        const checkBoxArr = Array.prototype.slice.call(checkBox) 
-        selected.addEventListener('click',function(e){
-            
-            for(let i = 0; i < checkBox.length; i++){
-                if(checkBox[i].checked){
-                    checkBox[i].parentElement.parentElement.remove()
-                    const nonSelected = checkBoxArr.filter(el=>{
-                        return el.checked === false
-                    })
-                    console.log(nonSelected)
-                    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
-                    const updateArr = []
-                    nonSelected.map(el=>{
-                        const updateItem = productIdArr.filter(item => item._id === el.dataset.id)[0]
-                        updateArr.push(updateItem)
-                    })
-                    window.localStorage.setItem('productId', JSON.stringify(updateArr))
-                    firstView()
-                }
-            }
-        })
-    }
-
-    // //선택삭제
-    // some.addEventListener('click',function(){
-    //     let CheckedId = []
-    //     for(let i = 0; i < checkBox.length; i++){
-    //         if(checkBox[i].checked){
-    //             checkBox[i].parentElement.parentElement.remove()
-    //             CheckedId.push(checkBox[i].dataset.id) //각 제품의 _id
-                
-    //         }
-    //     }
-    //     console.log('선택된 id',CheckedId) //삭제 예정 _id 모아둔 배열
-    //     const arr = JSON.parse(window.localStorage.getItem('productId'))
-    //     //선택삭제하고 남은 배열은 다시 localStorage에 보내야.
-    //     const newArr = arr.filter(el=>{
-    //         return CheckedId.findIndex(e=> e === el._id) === -1
-    //     })
-    //     window.location.reload()
-    //     window.localStorage.setItem('productId',JSON.stringify(newArr))
-    // })
-
 
 
 
@@ -304,22 +258,60 @@ function allCheckDelete(){
     const allCheckBtn = document.querySelector('#allCheckBtn')
     const all = document.querySelector('#choice .all')
     const checkBox = document.querySelectorAll('.checkbox')
-    const productPrice = document.querySelector('#productPrice')
-    const deliveryPrice = document.querySelector('#deliveryPrice')
-    const finalPrice = document.querySelector('#finalPrice') 
     all.addEventListener('click',function(){
         if(allCheckBtn.checked === true){
             for(let i = 0; i < checkBox.length; i++){
                 checkBox[i].parentElement.parentElement.remove()
             }
-            window.localStorage.clear()
-            productPrice.innerText = 0
-            deliveryPrice.innerText = 0
-            finalPrice.innerText = 0
-            allCheckBtn.checked = false
+            noMoreCartUpdatePay()
         }
     })
 }
+
+function noMoreCartUpdatePay(){
+    const allCheckBtn = document.querySelector('#allCheckBtn')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const productPrice = document.querySelector('#productPrice')
+    const deliveryPrice = document.querySelector('#deliveryPrice')
+    const finalPrice = document.querySelector('#finalPrice') 
+    
+    if(checkBox.length === 0){
+        window.localStorage.clear()
+        productPrice.innerText = 0
+        deliveryPrice.innerText = 0
+        finalPrice.innerText = 0
+        allCheckBtn.checked = false
+    }
+}
+
+
+//함수 6. 선택삭제
+function selectedDelete(){
+    const selected = document.querySelector('#choice .selected')
+    const checkBox = document.querySelectorAll('.checkbox')
+    const checkBoxArr = Array.prototype.slice.call(checkBox) 
+    selected.addEventListener('click',function(e){
+        
+        for(let i = 0; i < checkBox.length; i++){
+            if(checkBox[i].checked){
+                checkBox[i].parentElement.parentElement.remove()
+                const nonSelected = checkBoxArr.filter(el=>{
+                    return el.checked === false
+                })
+                const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+                const updateArr = []
+                nonSelected.map(el=>{
+                    const updateItem = productIdArr.filter(item => item._id === el.dataset.id)[0]
+                    updateArr.push(updateItem)
+                })
+                window.localStorage.setItem('productId', JSON.stringify(updateArr))
+                firstView()
+                noMoreCartUpdatePay()
+            }
+        }
+    })
+}
+
 
 
 
