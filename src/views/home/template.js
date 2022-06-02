@@ -4,7 +4,7 @@ headerEl.innerHTML = `
 <nav class="navbar" role="navigation" aria-label="main navigation">
 <div class="info_header">
   <div class="info_logo">
-    <a href=""><h1>Book Store 7</h1></a>
+    <a href=""><h1>칠전팔기</h1></a>
   </div>
 </div>
 
