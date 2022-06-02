@@ -17,6 +17,8 @@
 
 .account-page-body {
   width: 100%;
+  height: 400px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
