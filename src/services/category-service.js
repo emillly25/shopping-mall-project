@@ -1,9 +1,8 @@
-const { categoryModel, userModel, productModel } = require('../db');
+const { categoryModel, productModel } = require('../db');
 
 class CategoryService {
-  constructor(categoryModel, userModel, productModel) {
+  constructor(categoryModel, productModel) {
     this.categoryModel = categoryModel;
-    this.userModel = userModel;
     this.productModel = productModel;
   }
 
@@ -60,10 +59,6 @@ class CategoryService {
   }
 }
 
-const categoryService = new CategoryService(
-  categoryModel,
-  userModel,
-  productModel,
-);
+const categoryService = new CategoryService(categoryModel, productModel);
 
 export { categoryService };
