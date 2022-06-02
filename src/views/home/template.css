@@ -285,8 +285,8 @@ nav {
 } */
 
 footer {
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
   display: flex;
   /* background-color: lightgray; */
   width: 100%;
