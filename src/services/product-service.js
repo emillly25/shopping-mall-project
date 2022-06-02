@@ -28,7 +28,7 @@ class ProductService {
     return await productService.getProductOne(productId);
   }
 
-  async insertProduct(productInfo, imgUrl, userId) {
+  async addProduct(productInfo, imgUrl, userId) {
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
     const price = productInfo.price;
@@ -72,7 +72,7 @@ class ProductService {
     return result;
   }
 
-  async updateProduct(productInfo, imgUrl, userId) {
+  async setProduct(productInfo, imgUrl, userId) {
     const productId = productInfo.productId;
     const categoryName = productInfo.categoryName;
     const name = productInfo.name;
@@ -100,6 +100,7 @@ class ProductService {
         "CategoryName doesn't exist in Category Schema",
       );
     }
+    console.log(category);
 
     const productData = [
       category,

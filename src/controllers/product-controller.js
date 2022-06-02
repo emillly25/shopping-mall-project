@@ -27,13 +27,13 @@ class ProductController {
     }
   }
 
-  async insertProduct(req, res) {
+  async addProduct(req, res) {
     let imgUrl = null;
     if (req.file) {
       imgUrl = req.file.location;
     }
     try {
-      const product = await productService.insertProduct(
+      const addedProduct = await productService.addProduct(
         req.body,
         imgUrl,
         req.currentUserId,
@@ -42,7 +42,7 @@ class ProductController {
         isSuccess: true,
         message: 'Product inserted successfully',
         status: 200,
-        result: product,
+        result: addedProduct,
       });
     } catch (err) {
       if (
@@ -65,13 +65,13 @@ class ProductController {
     }
   }
 
-  async updateProduct(req, res) {
+  async editProduct(req, res) {
     let imgUrl = null;
     if (req.file) {
       imgUrl = req.file.location;
     }
     try {
-      const product = await productService.updateProduct(
+      const editedProduct = await productService.setProduct(
         req.body,
         imgUrl,
         req.currentUserId,
@@ -80,7 +80,7 @@ class ProductController {
         isSuccess: true,
         message: 'Product updated successfully',
         status: 200,
-        result: product,
+        result: editedProduct,
       });
     } catch (err) {
       if (

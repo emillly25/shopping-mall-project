@@ -8,12 +8,12 @@ productRouter.get('/:productId*?', productController.getProduct);
 productRouter.post(
   '/',
   [loginRequired, upload.single('img')],
-  productController.insertProduct,
+  productController.addProduct,
 );
 productRouter.patch(
   '/',
   [loginRequired, upload.single('img')],
-  productController.updateProduct,
+  productController.editProduct,
 );
 productRouter.delete('/', loginRequired, productController.deleteProduct);
 export { productRouter };

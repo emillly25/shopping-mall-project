@@ -21,7 +21,7 @@ class CategoryService {
     return this.getCategoryOne(name);
   }
 
-  async insertCategory(name, userId) {
+  async addCategory(name, userId) {
     const isExist = await this.categoryModel.findByName(name);
     if (isExist) {
       throw new Error('name is already exist.');
@@ -35,7 +35,7 @@ class CategoryService {
     return result;
   }
 
-  async updateCategory(currentCategoryName, nameToChange, userId) {
+  async setCategory(currentCategoryName, nameToChange, userId) {
     if (currentCategoryName == null || nameToChange == null) {
       throw new ValueIsNullError('required value is not allowed to be null');
     }

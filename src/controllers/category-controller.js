@@ -22,10 +22,10 @@ class CategoryController {
     }
   }
 
-  async insertCategory(req, res) {
+  async addCategory(req, res) {
     const name = req.body.name;
     try {
-      const insertedCategory = await categoryService.insertCategory(
+      const addedCategory = await categoryService.addCategory(
         name,
         req.currentUserId,
       );
@@ -33,7 +33,7 @@ class CategoryController {
         isSuccess: true,
         message: 'Category inserted successfully',
         status: 202,
-        result: insertedCategory,
+        result: addedCategory,
       });
     } catch (err) {
       if (err instanceof ValueIsNullError) {
@@ -53,11 +53,11 @@ class CategoryController {
     }
   }
 
-  async updateCategory(req, res) {
+  async editCategory(req, res) {
     const currentCategoryName = req.body.currentCategoryName;
     const nameToChange = req.body.nameToChange;
     try {
-      const updatedCategory = await categoryService.updateCategory(
+      const editedCategory = await categoryService.setCategory(
         currentCategoryName,
         nameToChange,
         req.currentUserId,
@@ -66,7 +66,7 @@ class CategoryController {
         isSuccess: true,
         message: 'Category updated successfully',
         status: 200,
-        result: updatedCategory,
+        result: editedCategory,
       });
     } catch (err) {
       if (err instanceof ValueIsNullError) {
