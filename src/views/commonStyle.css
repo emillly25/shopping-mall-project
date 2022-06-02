@@ -1,13 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&family=Jua&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap');
+
 body {
   box-sizing: border-box;
   margin: 0;
 }
-
+.container {
+  /* height: 1800px; */
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
 .account {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  margin: 100px auto;
+  /* overflow: auto; */
+  /* height: 100%; */
+  margin-top: 50px;
+  /* margin: 100px auto; */
   /* border: 1px solid red; */
 }

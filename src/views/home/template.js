@@ -4,7 +4,7 @@ headerEl.innerHTML = `
 <nav class="navbar" role="navigation" aria-label="main navigation">
 <div class="info_header">
   <div class="info_logo">
-    <a href=""><h1>Book Store 7</h1></a>
+    <a href=""><h1>칠전팔기</h1></a>
   </div>
 </div>
 
@@ -53,23 +53,27 @@ window.addEventListener('scroll', function () {
   let y = window.pageYOffset;
   if (y > 110) {
     menu.style.position = 'fixed';
+    // menu.style.backgroundColor = 'pink';
     menu.style.zIndex = 100;
+    menu.style.width = '1344px';
+    menu.style.top = '0';
   } else {
     menu.style.position = 'relative';
+    menu.style.width = '100%';
   }
 });
 
 //dropdown menu
-const dropmenu = document.querySelector('#dropmenu');
-const dropdown = document.querySelector('.dropdown');
+// const dropmenu = document.querySelector('#dropmenu');
+// const dropdown = document.querySelector('.dropdown');
 
-dropmenu.addEventListener('mouseenter', function () {
-  dropdown.style.display = 'block';
-});
+// dropmenu.addEventListener('mouseenter', function () {
+//   dropdown.style.display = 'block';
+// });
 
-dropmenu.addEventListener('mouseleave', function () {
-  dropdown.style.display = 'none';
-});
+// dropmenu.addEventListener('mouseleave', function () {
+//   dropdown.style.display = 'none';
+// });
 
 // 로그인 상태 : '계정관리' , '로그아웃' 보여주기
 // 비로그인 상태 : '회원가입' , '로그인' 보여주기
@@ -103,32 +107,95 @@ logoutBtn.addEventListener('click', () => {
   }
 });
 
-
 // footer.js
 
 const footerEl = document.querySelector('footer');
 footerEl.innerHTML = `
-<div class="first">
-<a href="#">Index</a>
-<nav>
-  <a href="www.google.co.kr" target="_blank">구글</a>
-  <a href="https://swtrack.lms.elice.io/" target="_blank">엘리스</a>
-</nav>
-<p>
-  <span>작성자: 7조</span>
-  <span>연락처: 010-1234-5678</span>
-  <span>저작권</span>
-</p>
+<div class="footer-list notice">
+  <div class="footer-subtitle">Notice</div>
+  <div class="footer-rows">
+    <span>8주차 프로젝트 교육 만족도조사 실시</span>
+  </div>
+  <div class="footer-rows">
+    <span>협업 노하우&에티켓 페이지 안내</span>
+  </div>
+  <div class="footer-rows">
+    <span>프론트엔드 첫 오피스아워 만족도 조사</span>
+  </div>
+  <div class="footer-rows">
+    <span>백엔드 첫 오피스아워 만족도 조사</span>
+  </div>
+  <div class="footer-rows">
+    <span>7주차 교육 만족도 조사 안내 리마인드 </span>
+  </div>
 </div>
-<div class="second">
-<div>
-  <h1>FOOTER ELEMENT</h1>
-  <h2>FOOTER ELEMENT 2</h2>
-  <h3>FOOTER ELEMENT 3</h3>
-  <p>Copyright @2022 엘리스 소프트웨어</p>
+<div class="footer-list madeBy">
+  <div class="footer-subtitle">Made By</div>
+  <div class="footer-rows">
+    <span>김지환</span>
+    <span>
+      <a href="https://github.com/shinbian11" target="_blank">
+        Github
+      </a>
+    </span>
+    <span>
+      <a href="https://shinbian11.tistory.com/" target="_blank">
+        Blog
+      </a>
+    </span>
+    <span class="icon">
+      <a
+        href="http://shinbian11.kdt-gitlab.elice.io/produce-myself/"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
+  </div>
+  <div class="footer-rows">
+    <span>김범석</span>
+  </div>
+  <div class="footer-rows">
+    <span>김세희</span>
+  </div>
+  <div class="footer-rows">
+    <span>여은지</span>
+  </div>
+  <div class="footer-rows">
+    <span>정범석 </span>
+  </div>
 </div>
-<a href="#">Index</a>
-<p>Copyright @2022 Elice SWtrack - #7</p>
-<address></address>
+<div class="footer-list aboutElice">
+  <div class="footer-subtitle">About Elice</div>
+  <div class="footer-rows">
+    <span>
+      주소 : 대전광역시 유성구 문지로 193 KAIST 캠퍼스 진리관 T 201호
+    </span>
+  </div>
+  <div class="footer-rows">
+    <span>대표자 김재원</span>
+  </div>
+  <div class="footer-rows">
+    <span>이메일 contact@elice.io</span>
+  </div>
+  <div class="footer-rows">
+    <span>
+      <a
+        href="https://www.facebook.com/elice.coding/"
+        target="_blank"
+      >
+        Move to Elice Facebook
+      </a>
+    </span>
+  </div>
+  <div class="footer-rows">
+    <span>
+      <a
+        href="https://www.youtube.com/channel/UCTok20p3EzAjTJWV8SJM9Gw"
+        target="_blank"
+        >Move to Elice Youtube
+      </a>
+    </span>
+  </div>
 </div>
 `;
