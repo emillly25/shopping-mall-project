@@ -37,89 +37,13 @@ async function cartRendering(){
     items.insertAdjacentHTML('afterbegin', htmlCode);
     }
 
-
-    //수량 조절버튼 element 
-    const num =  document.querySelectorAll('.num');  //input(number)
-    
-    //각 제품별 수량과 최종 가격
-    const itemPrice = document.querySelectorAll('.itemPrice'); //제품 가격(개당)
-    const itemQuan = document.querySelectorAll('.itemQuan'); //제품 수량(span)
-    const itemTotalPrice =  document.querySelectorAll('.itemTotalPrice') //최종가격
-
-    
-    //결제 부분에 보여지는 가격(html에서 가져옴)
-    const productPrice = document.querySelector('#productPrice');
-    const deliveryPrice = document.querySelector('#deliveryPrice')
-    const finalPrice= document.querySelector('#finalPrice');
-
-    // 체크박스 관련
-    const allCheckBtn = document.querySelector('#allCheckBtn') //전체선택 버튼
-    const all = document.querySelector('#choice .all')  //전체선택 글자(div)
-    const selected = document.querySelector('#choice .selected') 
-    const checkBox = document.querySelectorAll('.checkbox')  // 제품 옆에 있는 모든 체크박스
-
-    // NodeList to Arr
-    const numArr = Array.prototype.slice.call(num); 
-    const itemQuanArr = Array.prototype.slice.call(itemQuan); 
-    const itemTotalPriceArr = Array.prototype.slice.call(itemTotalPrice); 
-    const itemPriceArr = Array.prototype.slice.call(itemPrice); 
-    const checkBoxArr = Array.prototype.slice.call(checkBox); 
-
-
-
-
-
-    //check 여부 확인해서 localStorage(checkBuy)에 업데이트하는 함수
-    function checkingBox(){
-        const checkBox = document.querySelectorAll('.checkbox') 
-        const checkBoxArr = Array.prototype.slice.call(checkBox)
-        const minus = document.querySelectorAll('.minus');  //minus Btn
-        const minusArr = Array.prototype.slice.call(minus); 
-        const plus =  document.querySelectorAll('.plus');   //plus Btn
-        const plusArr = Array.prototype.slice.call(plus); 
-        const tempArr = []
-        checkBoxArr.forEach(el=>{
-            el.addEventListener('click',(e)=>{
-                if(e.target.checked === true){
-                    //체크되있을때 하고픈거
-                    const dataId = e.target.dataset.id
-                    const dataQuan = itemQuanArr.find(el=> el.dataset.id === dataId)
-                    const dataPrice = itemTotalPriceArr.find(el=> el.dataset.id === dataId)
-                    const obj = {}
-                    obj._id = dataId
-                    obj.quantity = Number(dataQuan.textContent) 
-                    obj.price = Number(dataPrice.textContent)
-                    tempArr.push(obj)
-                    //체크된 버튼만 막아야지
-                    const plusBtn = plusArr.find(el=>el.dataset.id === dataId)
-                    const minusBtn = minusArr.find(el=>el.dataset.id === dataId)
-                    plusBtn.removeEventListener('click',handleUpdateQuantity)
-                    minusBtn.removeEventListener('click',handleUpdateQuantity)
-                }else{
-                    //체크해지되면 하고픈거
-                    const i = tempArr.findIndex(el=>{
-                        return el._id === e.target.dataset.id
-                    })
-                    tempArr.splice(i,1)
-                    
-                }
-                console.log('최종', tempArr)
-                window.localStorage.setItem('checkBuy', JSON.stringify(tempArr))
-            })
-            
-        })
-    }
-
-    
-
-
-    //실행
     // 1. 장바구니에 담긴 각 아이템들 html 랜더링
     for(let i = 0 ; i < productId.length; i++){
         await addList(productId[i])
     }
+
     // 2. 첫화면 아이템별 가격정보 랜더링 
-    firstView()   // calcPay() 포함되어 있는디...?
+    firstView() 
 
     // 3. 수량버튼
     const minus = document.querySelectorAll('.minus');  
@@ -127,14 +51,17 @@ async function cartRendering(){
     plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
     minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
 
-    someControlAll()
-    allControlSome()
-    allCheckDelete()
-    selectedDelete()
-    // 5. 체크박스 확인
-    // checkingBox()
-}
+    // 4. 체크박스 관련
+    someControlAll()  //각 체크로 전체체크 제어
+    allControlSome()  //전체체크로 각 체크 제어
+    allCheckDelete() //전체삭제
+    selectedDelete() //선택삭제
+    checkingStatus() //체크여부에 따른 데이터 저장
 
+    function preventRepeat(){
+        
+    }
+}
 
  //함수 1. 아이템 별 가격내역 초기화 랜더링
 function firstView(){
@@ -222,11 +149,9 @@ function someControlAll(){
     checkBoxArr.forEach(el=>{
         el.addEventListener('change',()=>{
             if(checkBoxArr.every(el=>el.checked === true)){
-                console.log('모두선택됨')
                 allCheckBtn.checked = true;
                 all.innerText = '전체삭제'
             }else{
-                console.log('체크해제된거 있네')
                 allCheckBtn.checked = false;
                 all.innerText = '전체선택'
             }
@@ -311,11 +236,46 @@ function selectedDelete(){
     })
 }
 
+// 함수 8. 체크박스 체킹여부에 따라 임시localStorage에 저장했다 뺐다 하는 함수
+function checkingStatus(){
+    const checkBox = document.querySelectorAll('.checkbox')
+    const checkBoxArr = Array.prototype.slice.call(checkBox)
+    const tempArr = []
+    checkBoxArr.forEach(el=>{
+        el.addEventListener('change',function(e){
+            if(e.target.checked === true){
+                const result = makingObj(e)
+                tempArr.push(result)
+            }else{
+                const idx = tempArr.findIndex(i=>{
+                    return i._id === e.target.dataset.id
+                })
+                tempArr.splice(idx,1)
+            }
+            window.localStorage.setItem('tempCart', JSON.stringify(tempArr))
+            console.log(tempArr)
+        })
+    })
+}
+
+// 함수 9. localStorage에 업데이트할 obj만드는 함수
+function makingObj(e){
+    const num =  document.querySelectorAll('.num')
+    const numArr = Array.prototype.slice.call(num)
+    const n = numArr.find(q=>q.dataset.id === e.target.dataset.id)
+    const itemPrice = document.querySelectorAll('.itemPrice')
+    const itemPriceArr = Array.prototype.slice.call(itemPrice)
+    const p = itemPriceArr.find(q=>q.dataset.id === e.target.dataset.id)
+    const obj = {}
+    obj._id = e.target.dataset.id
+    obj.quantity = Number(n.value)
+    obj.price = Number(n.value) * Number(p.textContent)
+    return obj
+}
 
 
 
-
-//함수 8. 주문정보 넘기기
+//함수 10. 주문정보 넘기기
 function order(){
     const buyBtn = document.querySelector('#buyBtn')
     const allCheckBtn = document.querySelector('#allCheckBtn') 
@@ -327,10 +287,6 @@ function order(){
         }
     })
 }
-
-
-
-
 
 
 //최종 랜더링 및 주문
