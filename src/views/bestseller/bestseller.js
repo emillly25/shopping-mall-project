@@ -4,10 +4,10 @@ async function booksRendering(){
     //0. 화면 랜더링 함수
     async function getBestSeller(){
         const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/')
+        const res = await Api.get('/api/product/categoryName','소설')
         const data = res.result
         const bestSeller = data.filter(el=>{
-            return  el.category.name === '베스트 셀러'
+            return  el.category.name === '소설'
         })
         bestSeller.map(({_id, name, price, author,information, imgUrl })=>{
             const htmlInfo = `<div class="bookList">

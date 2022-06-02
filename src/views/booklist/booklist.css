@@ -5,7 +5,7 @@ body{
 
 .book_container{
     width: 1270px;
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
 }
 
 .book_container h1{

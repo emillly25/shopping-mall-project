@@ -4,10 +4,10 @@ async function booksRendering(){
     //0. 화면 랜더링 함수
     async function getPoet(){
         const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/')
+        const res = await Api.get('/api/product/categoryName', '시&에세이')
         const data = res.result
         const poet = data.filter(el=>{
-            return  el.category.name === '시/에세이'
+            return  el.category.name === '시&에세이'
         })
         poet.map(({_id, name, price, author,information, imgUrl })=>{
             const htmlInfo = `<div class="bookList">

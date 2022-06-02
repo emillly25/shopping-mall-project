@@ -4,10 +4,10 @@ async function booksRendering(){
     //0. 화면 랜더링 함수
     async function getEconomy(){
         const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/')
+        const res = await Api.get('/api/product/categoryName', '경영&경제')
         const data = res.result
         const economy = data.filter(el=>{
-            return  el.category.name === '경영/경제'
+            return  el.category.name === '경영&경제'
         })
         economy.map(({_id, name, price, author,information, imgUrl })=>{
             const htmlInfo = `<div class="bookList">

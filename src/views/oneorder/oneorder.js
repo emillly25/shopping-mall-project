@@ -154,12 +154,16 @@ const deliveryData = {
 console.log(deliveryData)
 
 const res = await Api.post('/api/order', deliveryData)
-// window.localStorage.remove()
 
-}   
+}  
+
+
 
 //배송지 주소 검색
 btn.addEventListener('click', addressSearch);
 
 //최종 구매버튼 post 요청
 payBtn.addEventListener('click', orderHandler );
+payBtn.addEventListener('click', function(){
+  window.location.href = '/order-complete'
+});

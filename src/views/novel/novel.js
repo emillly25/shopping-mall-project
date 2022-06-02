@@ -4,7 +4,7 @@ async function booksRendering(){
     //0. 화면 랜더링 함수
     async function getNovel(){
         const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/')
+        const res = await Api.get('/api/product/categoryName', '소설')
         const data = res.result
         const novel = data.filter(el=>{
             return  el.category.name === '소설'

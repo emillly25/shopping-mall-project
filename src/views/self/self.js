@@ -4,7 +4,7 @@ async function booksRendering(){
     //0. 화면 랜더링 함수
     async function getSelf(){
         const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/')
+        const res = await Api.get('/api/product/categoryName', '자기계발')
         const data = res.result
         const self = data.filter(el=>{
             return  el.category.name === '자기계발'

@@ -9,7 +9,7 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
-viewsRouter.use('/booklist', serveStatic('booklist'));
+// viewsRouter.use('/booklist', serveStatic('booklist'));
 viewsRouter.use('/bestseller', serveStatic('bestseller'));
 viewsRouter.use('/novel', serveStatic('novel'));
 viewsRouter.use('/poet', serveStatic('poet'));
