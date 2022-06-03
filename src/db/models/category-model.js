@@ -1,7 +1,7 @@
-import { model } from "mongoose";
-import { CategorySchema } from "../schemas/category-schema";
+import { model } from 'mongoose';
+import { CategorySchema } from '../schemas/category-schema';
 
-const Category = model("Category", CategorySchema);
+const Category = model('Category', CategorySchema);
 
 export class CategoryModel {
   async findByUserId(userId) {
@@ -28,13 +28,13 @@ export class CategoryModel {
   async update(currentCategoryName, nameToChange) {
     await Category.findOneAndUpdate(
       { name: currentCategoryName },
-      { name: nameToChange }
+      { name: nameToChange },
     );
     return;
   }
 
   async delete(currentCategoryName) {
-    await Category.deleteOne({ name: currentCategoryName });
+    await Category.findOneAndDelete({ name: currentCategoryName });
     return;
   }
 }

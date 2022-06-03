@@ -1,0 +1,157 @@
+/* .container {
+  width: 1000px;
+  height: 1300px;
+} */
+
+.crud {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 50px;
+  /* border: 1px solid red; */
+  gap: 80px;
+}
+.cate,
+.order,
+.product {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  /* border: 1px solid blue; */
+  padding: 20px;
+  /* justify-content: center;
+  align-items: center; */
+}
+.category-CRUD,
+/* .order-CRUD, */
+.product-CRUD {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  /* grid-template-rows: 50% 50%; */
+}
+.CRUD-item {
+  /* width: 50%; */
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.input.is-normal {
+  width: 150px;
+}
+
+.button.is-normal {
+  width: 100px;
+}
+
+#testForm,
+#updateForm {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-row-gap: 10px;
+  /* grid-template-rows: 25% 25% 25% 25%; */
+}
+#testForm .input.is-normal,
+#updateForm .input.is-normal {
+  /* width: 100px; */
+}
+#testForm .button.is-normal,
+#updateForm .button.is-normal {
+  width: 80px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 50px 0;
+  padding: 20px;
+}
+
+.subtitle {
+  font-size: 25px;
+  font-weight: 600;
+  /* text-decoration: underline; */
+}
+
+.o_display {
+  width: 100%;
+  height: 400px;
+  overflow: scroll;
+  /* background-color: red; */
+}
+
+.account-page-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.account-page-body .body-list {
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  text-align: center;
+  border-radius: 8px;
+  border-bottom: 1px solid #ddd;
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.body-list .createdAt,
+.body-list .phoneNumber {
+  width: 10%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .fullName,
+.body-list .price,
+.body-list .cancel {
+  width: 7%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .email {
+  width: 13%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .request {
+  width: 16%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .order_data {
+  width: 30%;
+  padding: 0 5px;
+  overflow: auto;
+}
+
+.body-th {
+  background-color: #b8c5f5;
+}
+.body-tr {
+  background-color: #e1e6fa;
+}
+/*
+.category-list,
+.orders,
+.product {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border-bottom: 1px solid red;
+}
+.o_insert_inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.o_insert_inputs input {
+  width: 200px;
+} */

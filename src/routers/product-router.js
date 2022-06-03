@@ -1,19 +1,24 @@
 import { Router } from 'express';
 import { productController } from '../controllers/product-controller.js';
-import { loginRequired } from '../middlewares';
+import { adminRequired } from '../middlewares';
 const productRouter = Router();
 const upload = require('../middlewares/imageUploader');
 
-productRouter.get('/:productName*?', productController.getProduct);
+productRouter.get(
+  '/categoryName/:name*?',
+  productController.getProductsByCategoryName,
+);
+productRouter.get('/:productId*?', productController.getProduct);
+
 productRouter.post(
   '/',
-  [loginRequired, upload.single('img')],
-  productController.insertProduct,
+  [adminRequired, upload.single('img')],
+  productController.addProduct,
 );
 productRouter.patch(
   '/',
-  [loginRequired, upload.single('img')],
-  productController.updateProduct,
+  [adminRequired, upload.single('img')],
+  productController.editProduct,
 );
-productRouter.delete('/', loginRequired, productController.deleteProduct);
+productRouter.delete('/', adminRequired, productController.deleteProduct);
 export { productRouter };

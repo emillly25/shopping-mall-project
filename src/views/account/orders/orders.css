@@ -1,4 +1,4 @@
-.container {
+/* .container  {
   width: 1000px;
   height: 700px;
   background-color: white;
@@ -6,51 +6,67 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
-.container .account-page-title {
+.account-page-title {
   border-bottom: 1px solid #ddd;
   /* background-color: red; */
   font-size: 30px;
   /* margin-bottom: 100px; */
 }
 
-.container .account-page-body {
+.account-page-body {
   width: 100%;
-  margin-top: 40px;
+  height: 400px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
-.container .account-page-body .body-list {
-  width: 80%;
-  padding: 15px 0;
+.account-page-body .body-list {
+  width: 100%;
+  padding: 5px 0;
   display: flex;
   text-align: center;
   border-radius: 8px;
   border-bottom: 1px solid #ddd;
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 14px;
 }
-.container .account-page-body .body-list .date {
-  width: 15%;
-  padding: 0 10px;
+.body-list .createdAt,
+.body-list .phoneNumber {
+  width: 10%;
+  padding: 0 5px;
+  overflow: auto;
 }
-.container .account-page-body .body-list .product {
-  width: 50%;
-  padding: 0 10px;
+.body-list .fullName,
+.body-list .price,
+.body-list .cancel {
+  width: 7%;
+  padding: 0 5px;
+  overflow: auto;
 }
-.container .account-page-body .body-list .state {
-  width: 20%;
-  padding: 0 10px;
+.body-list .email {
+  width: 13%;
+  padding: 0 5px;
+  overflow: auto;
 }
-.container .account-page-body .body-list .apply {
-  width: 15%;
-  padding: 0 10px;
+.body-list .request {
+  width: 16%;
+  padding: 0 5px;
+  overflow: auto;
+}
+.body-list .order_data {
+  width: 30%;
+  padding: 0 5px;
+  overflow: auto;
 }
 
 .body-th {
-  background-color: #d2daf7;
+  background-color: #b8c5f5;
 }
 .body-tr {
-  /* background-color: whitesmoke; */
+  background-color: #e1e6fa;
 }

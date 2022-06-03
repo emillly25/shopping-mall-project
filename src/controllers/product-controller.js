@@ -1,127 +1,101 @@
+import is from '@sindresorhus/is';
 const { productService } = require('../services/product-service');
-const { categoryService } = require('../services/category-service');
 
 class ProductController {
-  async getProduct(req, res) {
-    let { productName } = req.params;
+  async getProduct(req, res, next) {
+    const { productId } = req.params;
 
     try {
-      let product;
-      if (!productName) {
-        product = await productService.getAllProduct();
-      } else {
-        product = await productService.getProduct(productName);
-      }
-      return res.json(product);
+      const product = await productService.getProduct(productId);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product loaded successfully',
+        status: 200,
+        result: product,
+      });
     } catch (err) {
-      return res.status(500).json(err);
-    }
-  }
-  // upload.single('img');
-  // const imgUrl = `https://eliceteam7-s3-bucket.s3.ap-northeast-2.amazonaws.com/archive/${req.file.filename}`;
-  // console.log(imgUrl);
-  async insertProduct(req, res) {
-    try {
-      const categoryName = req.body.categoryName;
-      const name = req.body.name;
-      const price = req.body.price;
-      const imgUrl = req.file.location;
-      const information = req.body.information;
-      const author = req.body.author;
-      const publisher = req.body.publisher;
-      const publishedDate = req.body.publishedDate;
-      const orderCount = req.body.orderCount;
-
-      const category = await categoryService.getCategory(categoryName);
-      if (!category) {
-        throw new Error("CategoryName doesn't exist in Category Schema");
-      }
-
-      const productInfo = [
-        category._id,
-        name,
-        price,
-        imgUrl,
-        information,
-        author,
-        publisher,
-        publishedDate,
-        orderCount,
-      ];
-
-      const result = await productService.insertProduct(
-        productInfo,
-        req.currentUserId,
-      );
-      if (result) {
-        res.status(200).json({
-          result,
-          message: 'Product created',
-        });
-      }
-      return;
-    } catch (err) {
-      return res.status(500).json(err);
+      next(err);
     }
   }
 
-  async updateProduct(req, res) {
+  async getProductsByCategoryName(req, res, next) {
+    const { name } = req.params;
+
     try {
+      const products = await productService.getProductsByCategoryName(name);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Products loaded successfully',
+        status: 200,
+        result: products,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async addProduct(req, res, next) {
+    try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      let imgUrl = null;
+      if (req.file) {
+        imgUrl = req.file.location;
+      }
+      const addedProduct = await productService.addProduct(req.body, imgUrl);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product inserted successfully',
+        status: 200,
+        result: addedProduct,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async editProduct(req, res, next) {
+    try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      let imgUrl = null;
+      if (req.file) {
+        imgUrl = req.file.location;
+      }
+      const editedProduct = await productService.setProduct(req.body, imgUrl);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product updated successfully',
+        status: 200,
+        result: editedProduct,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+  async deleteProduct(req, res, next) {
+    try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const productId = req.body.productId;
-
-      const categoryName = req.body.categoryName;
-      const name = req.body.name;
-      const price = req.body.price;
-      const imgUrl = req.file.location;
-      const information = req.body.information;
-      const author = req.body.author;
-      const publisher = req.body.publisher;
-      const publishedDate = req.body.publishedDate;
-
-      const category = await categoryService.getCategory(categoryName);
-      if (!category) {
-        throw new Error("CategoryName doesn't exist in Category Schema");
-      }
-
-      const productInfo = [
-        category._id,
-        name,
-        price,
-        imgUrl,
-        information,
-        author,
-        publisher,
-        publishedDate,
-      ];
-
-      const result = await productService.updateProduct(
-        productInfo,
-        productId,
-        req.currentUserId,
-      );
-      res.status(200).json({
-        result,
-        message: 'product updated',
+      const deletedProduct = await productService.deleteProduct(productId);
+      return res.status(200).json({
+        isSuccess: true,
+        message: 'Product deleted successfully',
+        status: 200,
+        result: deletedProduct,
       });
-      return;
     } catch (err) {
-      return res.status(500).json(err);
-    }
-  }
-
-  async deleteProduct(req, res) {
-    try {
-      const result = await productService.deleteProduct(
-        req.body.productId,
-        req.currentUserId,
-      );
-      res.status(200).json({
-        result,
-        message: 'product deleted',
-      });
-      return;
-    } catch (err) {
-      return res.status(500).json(err);
+      next(err);
     }
   }
 }

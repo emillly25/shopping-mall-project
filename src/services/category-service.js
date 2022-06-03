@@ -1,82 +1,64 @@
-const mongoose = require('mongoose');
-const { categoryModel, userModel } = require('../db');
+const { categoryModel, productModel } = require('../db');
 
 class CategoryService {
-  constructor(categoryModel, userModel) {
+  constructor(categoryModel, productModel) {
     this.categoryModel = categoryModel;
-    this.userModel = userModel;
+    this.productModel = productModel;
   }
 
   async getAllCategory() {
-    try {
-      const category = await this.categoryModel.findAll();
-      return category;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
-    }
+    return await this.categoryModel.findAll();
   }
+  async getCategoryOne(name) {
+    return await this.categoryModel.findByName(name);
+  }
+
   async getCategory(name) {
-    try {
-      const category = await this.categoryModel.findByName(name);
-      return category;
-    } catch (err) {
-      console.log(err);
-      throw new Error(err);
+    if (!name) {
+      return this.getAllCategory();
     }
+    return this.getCategoryOne(name);
   }
 
-  async insertCategory(name, userId) {
-    try {
-      const isExist = await this.categoryModel.findByName(name);
-      if (isExist) {
-        throw new Error('name is already exist.');
-      }
-      await this.checkIsAdministrator(userId);
-
-      const result = this.categoryModel.create(name);
-      return result;
-    } catch (error) {
-      console.log(error);
-      next(error);
+  async addCategory(name) {
+    const isExist = await this.categoryModel.findByName(name);
+    if (isExist) {
+      throw new Error('name is already exist.');
     }
+
+    if (!name) {
+      throw new Error('required value is not allowed to be null');
+    }
+
+    const result = this.categoryModel.create(name);
+    return result;
   }
 
-  async updateCategory(currentCategoryName, nameToChange, userId) {
-    try {
-      this.checkIsAdministrator(userId);
-
-      const result = await this.categoryModel.update(
-        currentCategoryName,
-        nameToChange,
-      );
-      return result;
-    } catch (error) {
-      console.log(error);
-      next(error);
+  async setCategory(currentCategoryName, nameToChange) {
+    if (!currentCategoryName || !nameToChange) {
+      throw new Error('required value is not allowed to be null');
     }
+
+    const result = await this.categoryModel.update(
+      currentCategoryName,
+      nameToChange,
+    );
+    return result;
   }
 
-  async deleteCategory(name, userId) {
-    try {
-      this.checkIsAdministrator(userId);
-      await this.categoryModel.delete(name);
-      return;
-    } catch (error) {
-      console.log(error);
-      next(error);
+  async deleteCategory(name) {
+    if (!name) {
+      throw new Error('required value is not allowed to be null');
     }
-  }
-
-  async checkIsAdministrator(userId) {
-    const ObjectId = require('mongodb').ObjectId;
-    const user = await this.userModel.findById(ObjectId(userId));
-    if (user.role !== 'admin') {
-      throw new Error('Request is not allowed. The user is not administrator.');
+    const category = await this.getCategoryOne(name);
+    if (!category) {
+      throw new Error("CategoryName doesn't exist in Category Schema");
     }
+    await this.categoryModel.delete(name);
+    return await this.productModel.deleteMany(category);
   }
 }
 
-const categoryService = new CategoryService(categoryModel, userModel);
+const categoryService = new CategoryService(categoryModel, productModel);
 
 export { categoryService };
