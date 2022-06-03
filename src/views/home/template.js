@@ -157,12 +157,48 @@ footerEl.innerHTML = `
   </div>
   <div class="footer-rows">
     <span>김세희</span>
+    <span>
+      <a href="https://github.com/emillly25" target="_blank">
+        Github
+      </a>
+    </span>
+    
+    <span class="icon">
+      <a
+        href="http://sehee.kdt-gitlab.elice.io/produce-myself"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
   <div class="footer-rows">
     <span>여은지</span>
+    <span>
+      <a href="https://github.com/eunnj" target="_blank">
+        Github
+      </a>
+    </span>
+    
+    <span class="icon">
+      <a
+        href="http://eunnj.kdt-gitlab.elice.io/produce-myself/"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
   <div class="footer-rows">
-    <span>정범석 </span>
+    <span>정덕준 </span>
+    <span class="icon">
+      <a
+        href="http://jungdukjoon.kdt-gitlab.elice.io/dukjoon-jung-introduction/"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
 </div>
 <div class="footer-list aboutElice">
