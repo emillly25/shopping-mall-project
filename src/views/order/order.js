@@ -166,7 +166,7 @@ async function orderHandler(){
         const id = data[i]._id
         const res = await Api.get('/api/product', id)
         const title = res.result.name
-        const result = `${title}/${data[i].quantity}개`
+        const result = `${title}/${data[i].quantity}권`
         order_data.push(result)
         sum += Number(data[i].price)
     }

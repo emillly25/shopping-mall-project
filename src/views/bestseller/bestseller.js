@@ -100,8 +100,8 @@ function preventCart(e){
             const p = bookPriceArr.find(el => el.dataset.id === id);
             const obj = {};
             obj._id = id;
-            obj.quantity = Number(q.value);
-            obj.price = Number(q.value) * Number(p.textContent);
+            obj.quantity = Number(q.value)
+            obj.price = Number(q.value) * Number(p.textContent)
             saveBooks.push(obj);
             window.localStorage.setItem('productId', JSON.stringify(saveBooks));
             moveCart();
@@ -124,8 +124,8 @@ function preventCart(e){
             const p = bookPriceArr.find(el => el.dataset.id === id);
             const obj = {};
             obj._id = id;
-            obj.quantity = Number(q.value);
-            obj.price = Number(q.value) * Number(p.textContent);
+            obj.quantity = Number(q.value)
+            obj.price = Number(q.value) * Number(p.textContent)
             saveBooks.push(obj);
             const newBooks = saveBooks.concat(JSON.parse(localCart));
             window.localStorage.setItem('productId', JSON.stringify(newBooks));
@@ -157,8 +157,8 @@ async function buyNow() {
         const p = bookPriceArr.find(el => el.dataset.id === id);
         const obj = {};
         obj._id = id;
-        obj.quantity = Number(q.value);
-        obj.price = Number(q.value) * Number(p.textContent);
+        obj.quantity = Number(q.value)
+        obj.price = Number(q.value) * Number(p.textContent)
         buyArr.push(obj);
         window.localStorage.setItem('buyProductId', JSON.stringify(buyArr));
         window.location.href = '/oneorder';
@@ -180,8 +180,8 @@ async function updateProductId(e) {
         return;
     } else {
         const idx = localItems.findIndex(el => el._id === id);
-        localItems[idx].quantity = Number(q.value);
-        localItems[idx].price = Number(q.value) * Number(p.textContent);
+        localItems[idx].quantity = Number(q.value)
+        localItems[idx].price = Number(q.value) * Number(p.textContent)
         window.localStorage.setItem('productId', JSON.stringify(localItems));
     }
 }

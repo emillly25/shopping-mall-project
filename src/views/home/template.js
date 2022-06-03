@@ -34,7 +34,7 @@ headerEl.innerHTML = `
       </li>
       <li>
         <div id="cart">
-          <div id="cart_badge">0</div>
+          <div id="cart_badge"></div>
           <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
       </li>
@@ -62,6 +62,7 @@ window.addEventListener('scroll', function () {
     menu.style.width = '100%';
   }
 });
+
 
 //dropdown menu
 // const dropmenu = document.querySelector('#dropmenu');
@@ -235,3 +236,15 @@ footerEl.innerHTML = `
   </div>
 </div>
 `;
+
+
+//cart_badge
+const cartBadge = document.querySelector('#cart_badge')
+const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+
+
+if(productIdArr === null){
+  cartBadge.innerText = 0
+}else{
+  cartBadge.innerText = productIdArr.length
+}
