@@ -17,7 +17,7 @@ headerEl.innerHTML = `
     <li><a href="/economy" id="li_hover">경영/경제</a></li>
   </ul>
   <div class="search_bar_info_menu">
-    <div class="search_bar">
+    <div class="search_bar" style="display : none;" >
       <input class="searchInput" type="search" placeholder="검색" />
       <div id="searching">
         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
