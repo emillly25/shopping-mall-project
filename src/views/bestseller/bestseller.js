@@ -1,24 +1,21 @@
 import * as Api from '/api.js';
 
-async function booksRendering(){
-    //0. 화면 랜더링 함수
-    async function getBestSeller(){
-        const items = document.querySelector('.items')
-        const res = await Api.get('/api/product/categoryName','베스트셀러')
-        const data = res.result
-        const bestSeller = data.filter(el=>{
-            return  el.category.name === '베스트셀러'
-        })
-        bestSeller.map(({_id, name, price, author,information, imgUrl })=>{
-            const htmlInfo = `<div class="bookList">
-            <div class="bookImg" id="url"><a href="/bookdetail/?productId=${_id}"><img src="${imgUrl}"></a></div>
-            <div class="bookInfo"> 
-                <div class="bookName"><span><a href="/bookdetail/?productId=${_id}">${name}</a></span></div>
-                <div class="bookAuthor"><span>${author}</span></div>
-                <div class="qty">
-                <input data-id="${_id}" class="minus" type="button" value="-">
-                <input data-id="${_id}" class="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
-                <input data-id="${_id}" class="plus" type="button" value="+">
+async function booksRendering() {
+  //0. 화면 랜더링 함수
+  async function getBestSeller() {
+    const items = document.querySelector('.account-page-body');
+    const res = await Api.get('/api/product/categoryName', '베스트셀러');
+    const data = res.result;
+    const bestSeller = data.filter(el => {
+      return el.category.name === '베스트셀러';
+    });
+    bestSeller.map(({ _id, name, price, author, information, imgUrl }) => {
+      const htmlInfo = `
+      <div class="bookList">
+            <div class="bookImg" id="url">
+                <a href="/bookdetail/?productId=${_id}">
+                    <img src="${imgUrl}">
+                </a>
             </div>
             <div class="bookInfo">
                 <div class="bookName">
@@ -46,7 +43,8 @@ async function booksRendering(){
                 <div class="buyBtn"><input data-id="${_id}" id="buyBtn" type="button" value="바로구매"></div>
                 <div class="cartBtn"><input data-id="${_id}" id="cartBtn" type="button" value="장바구니"></div>
             </div>
-        </div>`;
+        </div>
+      `;
       items.innerHTML += htmlInfo;
     });
   }
