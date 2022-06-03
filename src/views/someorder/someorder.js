@@ -188,14 +188,30 @@ async function orderHandler(){
     await Api.post('/api/order', deliveryData)
 
 
-// //작업중
-//     console.log('data',data) //2개
-//     const productIdArr = JSON.parse(window.localStorage.getItem('productId')) //3개
-//     const arr = []
-    // window.localStorage.setItem('productId',survival)
-    
+// //localStorage Update
+    const dataId = []
+    const productId = []
+    const productIdArr = JSON.parse(window.localStorage.getItem('productId')) 
+    data.map(el=>{
+        dataId.push(el._id)
+    })
+    productIdArr.map(el=>{
+        productId.push(el._id)
+    })
+
+    const final = productId.filter(x=> !dataId.includes(x))
+    console.log('미구매된', final)
+
+    let buyYet = []
+    for(let i = 0; i< final.length; i++){
+        const y = productIdArr.filter(el=>el._id === final[i])[0]
+        buyYet.push(y)
+    }
     window.localStorage.removeItem('checkedBuy')
+    await window.localStorage.removeItem('productId')
+    window.localStorage.setItem('productId', JSON.stringify(buyYet))
     location.href = '/order-complete'
+
 }  
 
 
