@@ -20,7 +20,7 @@ class OrderService {
   // 상품 주문
   async addOrder(orderInfo) {
     const {
-      userId, 
+      userId,
       fullName,
       email,
       address,
@@ -37,7 +37,7 @@ class OrderService {
       !address ||
       !phoneNumber ||
       !order_data ||
-      !price ||
+      price === null ||
       !request
     ) {
       throw new Error('required value is not allowed to be null');
