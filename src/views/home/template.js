@@ -4,7 +4,7 @@ headerEl.innerHTML = `
 <nav class="navbar" role="navigation" aria-label="main navigation">
 <div class="info_header">
   <div class="info_logo">
-    <a href=""><h1>칠전팔기</h1></a>
+    <a href="/"><h1>칠전팔기</h1></a>
   </div>
 </div>
 
@@ -28,7 +28,7 @@ headerEl.innerHTML = `
       <li class="show"><a href="/register">회원가입</a></li>
       <li class="show"><a href="/login">로그인</a></li>
       <li class="none"><a href="/account">계정관리</a></li>
-      <li class="none"><a href="" id="logout">로그아웃</a></li>
+      <li class="none"><a href="/" id="logout">로그아웃</a></li>
       <li>
         <a href=""><i class="fa-solid fa-user"></i></a>
       </li>
@@ -103,7 +103,7 @@ logoutBtn.addEventListener('click', () => {
   if (confirm('로그아웃 하시겠습니까?')) {
     alert('로그아웃 되었습니다.');
     sessionStorage.removeItem('token');
-    window.location.href = '/';
+    // window.location.href = '/';
   }
 });
 
@@ -157,12 +157,48 @@ footerEl.innerHTML = `
   </div>
   <div class="footer-rows">
     <span>김세희</span>
+    <span>
+      <a href="https://github.com/emillly25" target="_blank">
+        Github
+      </a>
+    </span>
+    
+    <span class="icon">
+      <a
+        href="http://sehee.kdt-gitlab.elice.io/produce-myself"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
   <div class="footer-rows">
     <span>여은지</span>
+    <span>
+      <a href="https://github.com/eunnj" target="_blank">
+        Github
+      </a>
+    </span>
+    
+    <span class="icon">
+      <a
+        href="http://eunnj.kdt-gitlab.elice.io/produce-myself/"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
   <div class="footer-rows">
-    <span>정범석 </span>
+    <span>정덕준 </span>
+    <span class="icon">
+      <a
+        href="http://jungdukjoon.kdt-gitlab.elice.io/dukjoon-jung-introduction/"
+        target="_blank"
+      >
+        Info
+      </a>
+    </span>
   </div>
 </div>
 <div class="footer-list aboutElice">

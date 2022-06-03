@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="../../commonStyle.css" />
     <link rel="stylesheet" href="./accountInfo.css" />
     <script defer src="./accountInfo.js" type="module"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <script defer src="../../home/template.js" type="module"></script>
     <link rel="stylesheet" href="../../home/template.css" />
@@ -86,6 +87,9 @@
                 id="postcode"
                 placeholder="우편번호를 입력하세요"
               />
+              <button class="button is-info" id="searchAddressButton">
+                주소찾기
+              </button>
               <input
                 type="text"
                 name="mainAddress"

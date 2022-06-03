@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>쇼핑-n팀</title>
     <!-- 아이콘 -->
     <link
@@ -24,62 +24,88 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="bookdetail.css" />
-    <script src="bookdetail.js" type="module" defer></script>
+    <link rel="stylesheet" href="../../commonStyle.css" />
+    <link rel="stylesheet" href="./bookdetail.css" />
+    <script src="./bookdetail.js" type="module" defer></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-</head>
-<body>
-    <div class="book_container">
-        <div class="book_head">
+
+    <script defer src="../../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../../home/template.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+      <div class="account">
+        <div class="account-page-title">
+          <div class="book_head">
             <div class="bookName"></div>
             <div class="book_info">
-                <span id="author"></span>
-                <span id="publish"></span>
-                <span id="pubDate"></span>
+              <span id="author"></span>
+              <span id="publish"></span>
+              <span id="pubDate"></span>
             </div>
+          </div>
         </div>
+        <div class="account-page-body">
+          <div class="book_body">
+            <div class="bookImg"><img /></div>
 
-        <div class="book_body">
-            <div class="bookImg"><img></div>
+            <div class="book_details">
+              <div class="book-keys">
+                <div class="key">정가</div>
+                <div class="key">판매가</div>
+                <div class="key">배송료</div>
+                <div class="key">수량</div>
+                <div class="key">책 소개</div>
+              </div>
+              <div class="book-values">
+                <div class="value" id="fixedPrice"><span></span> 원</div>
 
-            <ul class="book_details">
-                <li>
-                    <div class="Litem">정가</div>
-                    <div id="fixedPrice" class="Ritem"><span></span> 원</div>    
-                </li>
-                <li>
-                    <div class="Litem">판매가</div>
-                    <div class="Ritem"><span id="nowPrice"></span> 원 (10%, 1,780원 할인)</div>  
-                </li>
-                <li>
-                    <div class="Litem">배송료</div>
-                    <div class="Ritem"><span id="deliveryPrice"></span>원 (12,000원 이상 무료배송) </div> 
-                </li>
-                <li class="quan">
-                    <div class="Litem">수량</div>
-                    
-    <div class="qty">
-        <input class="minus" type="button" value="-">
-        <input id ="num" type="number" value="1" min="1" step="1" style="width: 30px; height:30px; text-align:center;">
-        <input class="plus" type="button" value="+">
-    </div>
-                    <div class="Ritem total_price">총 상품금액 <span id="total"></span>원</div>
-                </li>
-                <li>
-                    <div class="Litem">책 소개</div>
-                    <div class="bookInformation" class="Ritem">책 설명입니다 자세한건 </div>  
-                </li>
-                <li class="btn">
-                    <div class="cartBtn"><input id="cartBtn" type="button" value="장바구니"></div>
-                    <div class="buyBtn"><input id="buyBtn" type="button" value="바로구매"></div> 
-                </li>
-            </ul>
+                <div class="value" id="nowPrice">
+                  <span></span>원 (10% 할인)
+                </div>
+                <div class="value" id="deliveryPrice">
+                  원 (12,000원 이상 무료배송)
+                </div>
+                <div class="value" id="quantity">
+                  <div class="qty">
+                    <input class="minus" type="button" value="-" />
+                    <input
+                      id="num"
+                      type="number"
+                      value="1"
+                      min="1"
+                      step="1"
+                      style="width: 30px; height: 30px; text-align: center"
+                    />
+                    <input class="plus" type="button" value="+" />
+                  </div>
+                  <div class="Ritem total_price">
+                    총 상품금액 <span id="total"></span>원
+                  </div>
+                </div>
+                <div class="value" id="bookInformation">
+                  책 설명입니다 자세한건
+                </div>
+              </div>
+            </div>
+            <div class="btn">
+              <div class="cartBtn">
+                <input id="cartBtn" type="button" value="장바구니" />
+              </div>
+              <div class="buyBtn">
+                <input id="buyBtn" type="button" value="바로구매" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
     </div>
-
-   
-
-
-
-</body>
+  </body>
 </html>
