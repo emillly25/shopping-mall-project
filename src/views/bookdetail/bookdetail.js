@@ -18,7 +18,7 @@ const totalPrice = document.querySelector('#total'); //총 결제금액
 const cartBtn = document.querySelector('#cartBtn');
 const buyBtn = document.querySelector('#buyBtn');
 
-// DB데이터 불러와서 랜더링
+// 함수 1. DB데이터 불러와서 랜더링
 const getBookInfo = async function () {
   const productId = window.location.href.split('=')[1];
   const res = await Api.get('/api/product', productId);
@@ -31,6 +31,7 @@ const getBookInfo = async function () {
   bookInformation.innerText = book.information;
 };
 
+// 함수 2. 가격정보 업데이트 
 const getPrice = async function () {
   const productId = window.location.href.split('=')[1];
   const res = await Api.get('/api/product', productId);
@@ -50,10 +51,8 @@ const getPrice = async function () {
   fixedPrice.innerText = Math.floor(Math.round(book.price / 0.9) / 100) * 100;
 };
 
-getBookInfo();
-getPrice();
 
-//수량조절 버튼
+//함수 3.수량조절 버튼
 function handleUpdateQuantity(e) {
   if (e.target.classList.contains('minus')) {
     num.stepDown();
@@ -71,46 +70,64 @@ function handleUpdateQuantity(e) {
   }
 }
 
-plus.addEventListener('click', handleUpdateQuantity);
-minus.addEventListener('click', handleUpdateQuantity);
 
-async function addToCart() {
-  const productId = window.location.href.split('=')[1];
-  const obj = {};
-  obj._id = productId;
-  obj.quantity = Number(num.value);
-  obj.price = Number(totalPrice.textContent);
-  const localCart = JSON.parse(window.localStorage.getItem('productId'));
-  if (localCart === null) {
-    let saveBooks = [];
-    saveBooks.push(obj);
-    window.localStorage.setItem('productId', JSON.stringify(saveBooks));
-  } else {
-    localCart.push(obj);
-    window.localStorage.setItem('productId', JSON.stringify(localCart));
-  }
-  //중복제거
-  const getBooksList = JSON.parse(window.localStorage.getItem('productId'));
-  console.log('책 다고름 이제 중복 제거 ㄱㄱ', getBooksList);
-  const newArr = getBooksList.filter(
-    (arr, idx, callback) => idx === callback.findIndex(t => t._id === arr._id),
-  );
-  window.localStorage.setItem('productId', JSON.stringify(newArr));
-  console.log('중복제거됨', window.localStorage.getItem('prductId'));
-  moveCart();
+
+// 4. 장바구니 중복방지하면서 담기
+function addToCart(){
+  const saveBooks = [];
+  const localCart = window.localStorage.getItem('productId')
+      if(localCart === null){
+          const num = document.querySelector('#num');
+          const bookPrice = document.querySelector('#nowPrice span');
+          const q = num
+          const p =  bookPrice
+          const obj = {};
+          obj._id = id;
+          obj.quantity = Number(q.value);
+          obj.price = Number(q.value) * Number(p.textContent);
+          saveBooks.push(obj);
+          window.localStorage.setItem('productId', JSON.stringify(saveBooks));
+          moveCart();
+      }else{
+          const testArr = JSON.parse(window.localStorage.getItem('productId'))
+          const idx = testArr.findIndex(el=> el._id === id)
+          if(idx !== -1){
+          alert('이미 장바구니에 담긴 상품입니다.')
+          if(confirm('장바구니로 이동하시겠습니까?')){
+              location.href = '/cart'
+          }
+          return
+          }else{
+          console.log('주문 계속 진행해')
+          const num = document.querySelector('#num');
+          const bookPrice = document.querySelector('#nowPrice span');
+          const q = num
+          const p = bookPrice
+          const obj = {};
+          obj._id = id;
+          obj.quantity = Number(q.value);
+          obj.price = Number(q.value) * Number(p.textContent);
+          saveBooks.push(obj);
+          const newBooks = saveBooks.concat(JSON.parse(localCart));
+          window.localStorage.setItem('productId', JSON.stringify(newBooks));
+          moveCart();
+          }
+      }
 }
 
-cartBtn.addEventListener('click', addToCart);
 
-function moveCart() {
+//4-1. 장바구니 이동여부 체크 함수
+async function moveCart() {
   if (confirm(`장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까? `)) {
-    location.href = '/cart';
+      location.href = '/cart';
   }
 }
 
-//바로 구매하기
-const buyArr = [];
+
+
+// 함수 5. 바로 구매하기
 async function buyNow() {
+  const buyArr = [];
   buyBtn.addEventListener('click', function (e) {
     // 해당 제품의 아이디, 가격, 수량을 로컬스토리지에 저장하고 구매페이지로 이동
     const id = window.location.href.split('=')[1];
@@ -125,4 +142,15 @@ async function buyNow() {
     window.location.href = '/oneorder';
   });
 }
+
+
+//함수 실행
+getBookInfo();
+getPrice();
 buyNow();
+addToCart()
+
+plus.addEventListener('click', handleUpdateQuantity);
+minus.addEventListener('click', handleUpdateQuantity);
+cartBtn.addEventListener('click', addToCart);
+
