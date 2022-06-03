@@ -188,7 +188,7 @@ async function orderHandler(){
     await Api.post('/api/order', deliveryData)
 
 
-// //작업중
+// //localStorage Update
     const dataId = []
     const productId = []
     const productIdArr = JSON.parse(window.localStorage.getItem('productId')) 

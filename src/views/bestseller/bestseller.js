@@ -105,6 +105,17 @@ async function addToCart(){
 }
 
 
+async function preventCart(e){
+    const id = e.target.dataset.id
+    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+    const idx = productIdArr.findIndex(e._id === id)
+    if(idx !== -1){
+        alert('이미 장바구니에 담긴 상품입니다.')
+    }
+
+}
+
+
 
 //3. 장바구니 이동여부 체크 함수
 async function moveCart(){
