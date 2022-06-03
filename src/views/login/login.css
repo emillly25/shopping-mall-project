@@ -13,7 +13,7 @@
 .login_container #loginForm {
   width: 450px;
   height: 450px;
-  background-color: black;
+  background-color: #e1e6fa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@
 
 .login_container h1 {
   font-size: 36px;
-  color: #fff;
+  /* color: #fff; */
   text-align: center;
   /* margin: 20px 0; */
   padding-bottom: 45px;
@@ -48,7 +48,7 @@
 }
 
 .info_id {
-  color: #fff;
+  /* color: #fff; */
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -61,7 +61,7 @@
 
 .info_id div a {
   cursor: pointer;
-  color: #fff;
+  /* color: #fff; */
 }
 .info_id div a:hover {
   opacity: 0.7;
@@ -83,24 +83,26 @@
   margin-bottom: 30px;
 }
 .social_login i {
-  color: #fff;
+  /* color: #fff; */
   font-size: 20px;
   margin: 0 12px;
 }
 
 .recSignup {
   text-align: center;
-  color: #fff;
+  /* color: #fff; */
   font-size: 16px;
 }
 
 .recSignup span {
   cursor: pointer;
 }
-
+a {
+  color: black;
+}
 .recSignup span a {
   text-decoration: none;
-  color: pink;
+  color: red;
 }
 
 .recSignup span a:hover {
