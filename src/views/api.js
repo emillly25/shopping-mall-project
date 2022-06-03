@@ -81,7 +81,9 @@ async function postFormData(endpoint, data) {
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
   if (!res.ok) {
     const errorContent = await res.json();
-    throw new Error(errorContent.message);
+    const { reason } = errorContent;
+
+    throw new Error(reason);
     // const { reason } = errorContent;
     // throw new Error(reason);
   }
@@ -147,10 +149,9 @@ async function patchFormData(endpoint, data) {
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
   if (!res.ok) {
     const errorContent = await res.json();
-    console.log('patchFormData의 errorContent : ', errorContent);
-    // throw new Error(errorContent);
-    const { message } = errorContent;
-    throw new Error(message);
+    const { reason } = errorContent;
+
+    throw new Error(reason);
   }
 
   const result = await res.json();
