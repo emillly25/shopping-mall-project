@@ -23,19 +23,28 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="../../commonStyle.css" />
     <link rel="stylesheet" href="../booklist/booklist.css" />
-    <script src="poet.js" type="module" defer></script>
+    <script src="./poet.js" type="module" defer></script>
+    <script defer src="../../home/template.js" type="module"></script>
+    <link rel="stylesheet" href="../../home/template.css" />
   </head>
   <body>
-<!-- booklist -->
-
-<div class="book_container">
-    <h1>시/에세이</h1>
-    <div class="items">
-      <!--poet.js에서 랜더링-->>
+    <!-- booklist -->
+    <!--poet.js에서 랜더링-->
+    <div class="container">
+      <header>
+        <!-- 여기에 header 삽입됨 -->
+      </header>
+      <div class="account">
+        <div class="account-page-title">
+          <h1><strong>시/에세이</strong></h1>
+        </div>
+        <div class="account-page-body"></div>
+      </div>
+      <footer>
+        <!-- 여기에 footer 삽입됨 -->
+      </footer>
     </div>
-</div>
-
-
-</body>
+  </body>
 </html>
