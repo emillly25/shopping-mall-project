@@ -10,6 +10,7 @@ const postcode = document.getElementById('postcode');
 const mainAddress = document.getElementById('mainAddress');
 const subAddress = document.getElementById('subAddress');
 const userPhoneNo = document.getElementById('userPhoneNo');
+const searchAddressButton = document.getElementById('searchAddressButton');
 
 const res = await Api.get('/api/user');
 console.log(res);
@@ -27,6 +28,40 @@ if (res.result.address) {
   if (res.result.address.address2)
     subAddress.placeholder = res.result.address.address2;
   if (res.result.phoneNumber) userPhoneNo.placeholder = res.result.phoneNumber;
+}
+
+// 주소찾기 API
+async function addressSearch(e) {
+  e.preventDefault();
+  // alert('?');
+  new daum.Postcode({
+    oncomplete: function (data) {
+      let addr = '';
+      let extraAddr = '';
+      if (data.userSelectedType === 'R') {
+        addr = data.roadAddress;
+      } else {
+        addr = data.jibunAddress;
+      }
+      if (data.userSelectedType === 'R') {
+        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+          extraAddr += data.bname;
+        }
+        if (data.buildingName !== '' && data.apartment === 'Y') {
+          extraAddr +=
+            extraAddr !== '' ? ', ' + data.buildingName : data.buildingName;
+        }
+        if (extraAddr !== '') {
+          extraAddr = ' (' + extraAddr + ')';
+        }
+      } else {
+      }
+      postcode.value = data.zonecode;
+      mainAddress.value = `${addr} ${extraAddr}`;
+      subAddress.placeholder = '상세 주소를 입력해 주세요.';
+      subAddress.focus();
+    },
+  }).open();
 }
 
 // patch : 회원정보 수정
@@ -82,3 +117,5 @@ async function updateUserData(e) {
 
 let deleteBtn = document.getElementById('deleteBtn');
 deleteBtn.addEventListener('click', updateUserData);
+
+searchAddressButton.addEventListener('click', addressSearch);

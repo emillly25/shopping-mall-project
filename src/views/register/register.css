@@ -13,7 +13,7 @@
 .register_container #registerForm {
   width: 450px;
   height: 650px;
-  background-color: black;
+  background-color: #e1e6fa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@
 
 .register_container h1 {
   font-size: 36px;
-  color: #fff;
+  /* color: #fff; */
   text-align: center;
   /* margin: 20px 0; */
   padding-bottom: 15px;
@@ -52,11 +52,11 @@
 }
 
 #submitBtn:hover {
-  background: pink;
+  background: red;
 }
 
 .label {
-  color: #fff;
+  /* color: #fff; */
   font-weight: 200;
   width: 350px;
 }
