@@ -110,6 +110,7 @@ function calcPay(){
     finalPrice.innerText = Number(productPrice.textContent) + Number(deliveryPrice.textContent)
 }
 
+
 //함수 3. 수량버튼에 따른 결과 랜더링
 function handleUpdateQuantity(e) {
     const num =  document.querySelectorAll('.num') 

@@ -185,6 +185,7 @@ async function orderHandler(){
     console.log(deliveryData)
     await Api.post('/api/order', deliveryData)
     location.href = '/order-complete'
+    window.localStorage.removeItem('productId')
 }  
 
 
