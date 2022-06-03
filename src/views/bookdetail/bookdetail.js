@@ -113,12 +113,11 @@ function updateCalc(){
   if (price >= 12000) {
     deliveryPrice.innerText = 0;
     totalPrice.innerText = Number(deliveryPrice.textContent) + price
-  } else {
+  } else{
     deliveryPrice.innerText = 3000;
     totalPrice.innerText = Number(deliveryPrice.textContent) + price
   }
 }
-
 
 //함수 3. 수량버튼결과에 따른 localStorage 업데이트 함수
 function updateLocalStorage(e, localArr){
