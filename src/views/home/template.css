@@ -71,10 +71,17 @@ nav {
 
 .category li a {
   text-decoration: none;
-  color: #ff9995;
+  /* color: #ff9995; */
+  color: white;
   font-weight: 600;
 }
-
+.category li a:hover {
+  text-decoration: none;
+  /* color: #ff9995; */
+  opacity: 0.6;
+  /* color: white; */
+  font-weight: 600;
+}
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -135,9 +142,10 @@ nav {
   height: 60px;
   display: flex;
   flex-grow: 1;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   font-size: 15px;
+  padding-right: 50px;
 }
 
 .info_menu li {
@@ -302,6 +310,7 @@ footer {
   font-size: 11px;
   padding: 20px;
   margin: 40px 0;
+  border-top: 1px solid #dedede;
 }
 .footer-list {
   display: flex;

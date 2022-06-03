@@ -98,6 +98,26 @@ body {
   background-color: #e1e6fa;
   cursor: pointer;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.qty {
+  width: 150px;
+  transform: translateX(20px);
+}
+
+.qty span {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.qty .minus,
+.qty .plus {
+  width: 30px;
+  height: 30px;
+}
 /* .book_details li {
   border: 1px solid red;
   padding: 35px 20px;
