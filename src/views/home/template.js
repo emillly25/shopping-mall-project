@@ -63,7 +63,6 @@ window.addEventListener('scroll', function () {
   }
 });
 
-
 //dropdown menu
 // const dropmenu = document.querySelector('#dropmenu');
 // const dropdown = document.querySelector('.dropdown');
@@ -155,6 +154,16 @@ footerEl.innerHTML = `
   </div>
   <div class="footer-rows">
     <span>김범석</span>
+    <span>
+      <a href="https://github.com/xfrnk2" target="_blank">
+        Github
+      </a>
+    </span>
+    <span>
+      <a href="https://xfrnk2.github.io/" target="_blank">
+        Blog
+      </a>
+    </span>
   </div>
   <div class="footer-rows">
     <span>김세희</span>
@@ -237,14 +246,12 @@ footerEl.innerHTML = `
 </div>
 `;
 
-
 //cart_badge
-const cartBadge = document.querySelector('#cart_badge')
-const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+const cartBadge = document.querySelector('#cart_badge');
+const productIdArr = JSON.parse(window.localStorage.getItem('productId'));
 
-
-if(productIdArr === null){
-  cartBadge.innerText = 0
-}else{
-  cartBadge.innerText = productIdArr.length
+if (productIdArr === null) {
+  cartBadge.innerText = 0;
+} else {
+  cartBadge.innerText = productIdArr.length;
 }
