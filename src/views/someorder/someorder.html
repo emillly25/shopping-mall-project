@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="../order/order.css" />
+    <script src="someorder.js" type="module" defer></script>
+
+</head>
+
+<body>
+<!--헤더-->
+<div class="container">
+    <h1>주문</h1>
+    <div class="orderContainer">
+        <div class="orderList">
+
+            <div class="produtList">
+                <ul class="tableHead">
+                    <li></li>
+                    <li>상품이름</li>
+                    <li>수량</li>
+                    <li>가격</li>
+                </ul>
+                <ul class="tableBody">
+                    <!--order.js-->
+                </ul>
+            </div>
+
+            <div class="box delivery-info">
+                <!-- 배송지 정보 -->
+                <p class="subtitle is-4">배송지입력</p>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="receiverName">이름</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="receiverName" type="text" placeholder="받는 분 이름을 입력해 주세요."
+                                    autocomplete="on" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="receiverPhoneNumber">연락처</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="receiverPhoneNumber" type="text" placeholder="- 없이 입력해 주세요."
+                                    autocomplete="on" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="receiverEmail">이메일</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="receiverEmail" type="text" placeholder="abc@gmail.com"
+                                    autocomplete="on" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="address2">주소</label>
+                    </div>
+                    <div class="field-body search">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="postalCode" type="text" placeholder="주소찾기를 클릭해 주세요."
+                                    readonly />
+                            </p>
+                        </div>
+                        <div>
+                            <button class="button is-light is-hovered" id="searchAddressButton">
+                                주소찾기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal no-label"></div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="address1" type="text" placeholder="" autocomplete="on"
+                                    readonly />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal no-label"></div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" id="address2" type="text" placeholder="" autocomplete="on" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label" for="requestSelectBox">요청사항</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="select">
+                            <select id="requestSelectBox">
+                                <option value="배송시 요청사항을 선택해 주세요.">
+                                    배송시 요청사항을 선택해 주세요.
+                                </option>
+                                <option value="직접 수령하겠습니다." class="select-option">
+                                    직접 수령하겠습니다.
+                                </option>
+                                <option value="배송 전 연락바랍니다." class="select-option">
+                                    배송 전 연락바랍니다.
+                                </option>
+                                <option value="부재 시 경비실에 맡겨주세요." class="select-option">
+                                    부재 시 경비실에 맡겨주세요.
+                                </option>
+                                <option value="부재 시 문 앞에 놓아주세요." class="select-option">
+                                    부재 시 문 앞에 놓아주세요.
+                                </option>
+                                <option value="부재 시 택배함에 넣어주세요." class="select-option">
+                                    부재 시 택배함에 넣어주세요.
+                                </option>
+                                <option value="직접 입력" class="select-option">직접 입력</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cartPay">
+            <h2><span>결제상세</span></h2>
+            <div class="cartPrice">
+                <div>상품금액 <span id="productPrice"></span> 원</div>
+                <div>배송비 <span id="deliveryPrice"></span> 원</div>
+            </div>
+            <div class="cartTotalPrice">총 결제금액 <span id="finalPrice"></span>원</div>
+            <div class="cartBuyBtn buttons"><input id="payBtn" class="button is-primary" type="button" value="결제하기"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

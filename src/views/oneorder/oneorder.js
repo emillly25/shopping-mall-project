@@ -2,11 +2,8 @@ import * as Api from '/api.js';
 
 const pId = JSON.parse(window.localStorage.getItem('buyProductId'))[0]
 const dataId = pId._id
-console.log(pId)
-
 const res = await Api.get('/api/product', dataId)
 const data = res.result
-console.log(data)
 const items = document.querySelector('#items')
 const htmlCode = `<table border="1">
 <th colspan="2" width="400px" style="text-align:center">상품이름</th>
@@ -50,7 +47,6 @@ function calcPay(){
 function controlQuantity(){
   const minus = document.querySelectorAll('.minus');  
   const plus =  document.querySelectorAll('.plus'); 
-  const num =  document.querySelectorAll('.num');
   plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
   minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
 }
@@ -153,8 +149,9 @@ const deliveryData = {
 
 console.log(deliveryData)
 
-const res = await Api.post('/api/order', deliveryData)
-
+await Api.post('/api/order', deliveryData)
+window.location.href = '/order-complete'
+window.localStorage.removeItem('buyProductId')
 }  
 
 
@@ -164,6 +161,3 @@ btn.addEventListener('click', addressSearch);
 
 //최종 구매버튼 post 요청
 payBtn.addEventListener('click', orderHandler );
-payBtn.addEventListener('click', function(){
-  window.location.href = '/order-complete'
-});

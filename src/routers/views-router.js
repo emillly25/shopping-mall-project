@@ -17,6 +17,7 @@ viewsRouter.use('/self', serveStatic('self'));
 viewsRouter.use('/economy', serveStatic('economy'));
 viewsRouter.use('/bookdetail', serveStatic('bookdetail'));
 viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/someorder', serveStatic('someorder'));
 viewsRouter.use('/oneorder', serveStatic('oneorder'));
 viewsRouter.use('/order-complete', serveStatic('order-complete'));
 viewsRouter.use('/cart', serveStatic('cart'));

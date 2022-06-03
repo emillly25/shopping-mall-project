@@ -6,6 +6,8 @@ body{
 .order_complete_container{
     /* border: 1px solid red; */
     width: 800px;
+    margin: 0 auto;
+    margin-top: 200px;
 }
 
 .order_complete_container h1{

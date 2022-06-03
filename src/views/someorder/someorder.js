@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 
-const pId = JSON.parse(window.localStorage.getItem('productId'))
+const pId = JSON.parse(window.localStorage.getItem('checkedBuy'))
 
 async function orderRendering(){
     async function getOrders(id){
@@ -31,6 +31,10 @@ async function orderRendering(){
     const plus = document.querySelectorAll('.plus');  
     plus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
     minus.forEach(el=> el.addEventListener('click', handleUpdateQuantity))
+
+    
+
+
 }
 
 
@@ -38,7 +42,7 @@ async function orderRendering(){
 function firstView(){
     const num =  document.querySelectorAll('.num')
     const numArr = Array.prototype.slice.call(num)
-    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+    const productIdArr = JSON.parse(window.localStorage.getItem('checkedBuy'))
     const itemPrice = document.querySelectorAll('.itemPrice')
     const itemPriceArr = Array.prototype.slice.call(itemPrice)
     
@@ -97,12 +101,12 @@ function updateProductId(e){
     const num =  document.querySelectorAll('.num') 
     const numArr = Array.prototype.slice.call(num)
     const n = numArr.find(el=> el.dataset.id === id)
-    const productIdArr = JSON.parse(window.localStorage.getItem('productId'))
+    const productIdArr = JSON.parse(window.localStorage.getItem('checkedBuy'))
     const idx = productIdArr.findIndex(el=> el._id === id)
     const firstPrice = Number(productIdArr[idx].price)/ Number(productIdArr[idx].quantity)
     productIdArr[idx].quantity = Number(n.value)
     productIdArr[idx].price = Number(firstPrice) * Number(n.value)
-    window.localStorage.setItem('productId', JSON.stringify(productIdArr))
+    window.localStorage.setItem('checkedBuy', JSON.stringify(productIdArr))
 }
 
 
@@ -160,8 +164,8 @@ async function orderHandler(){
     const address = { postalCode , address1 , address2 }
     const order_data = []
     let sum = 0
-    const data = JSON.parse(window.localStorage.getItem('productId'))
-
+    const data = JSON.parse(window.localStorage.getItem('checkedBuy'))
+    
     for(let i = 0; i < data.length; i++){
         const id = data[i]._id
         const res = await Api.get('/api/product', id)
@@ -170,9 +174,7 @@ async function orderHandler(){
         order_data.push(result)
         sum += Number(data[i].price)
     }
-    const price = sum
-    
-
+    const price = sum 
     
     
     if (!fullName || !phoneNumber|| !email || !postalCode || !address2) {
@@ -180,22 +182,27 @@ async function orderHandler(){
     }
 
     const deliveryData = {
-        fullName, email, address , phoneNumber, order_data, price,  request
+        fullName, email, address , phoneNumber, order_data, price, request
     }
     console.log(deliveryData)
     await Api.post('/api/order', deliveryData)
+
+
+// //작업중
+//     console.log('data',data) //2개
+//     const productIdArr = JSON.parse(window.localStorage.getItem('productId')) //3개
+//     const arr = []
+    // window.localStorage.setItem('productId',survival)
+    
+    window.localStorage.removeItem('checkedBuy')
     location.href = '/order-complete'
-    window.localStorage.removeItem('productId')
 }  
 
 
 
 //배송지 주소 검색
 btn.addEventListener('click', addressSearch);
-
 //최종 구매버튼 post 요청
 payBtn.addEventListener('click', orderHandler);
-
-
 //최초 화면 랜더링
 orderRendering()
