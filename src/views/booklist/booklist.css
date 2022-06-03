@@ -88,6 +88,27 @@
   background-color: #e1e6fa;
   cursor: pointer;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.qty {
+  width: 150px;
+  /* border: 1px solid red; */
+}
+
+.qty span {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.qty .minus,
+.qty .plus {
+  width: 30px;
+  height: 30px;
+}
 /* 
 .book_container h1 {
   font-weight: bold;
