@@ -20,8 +20,7 @@ insertBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     window.location.href = '/admin';
   } catch (err) {
-    alert(err);
-    // name is already exist 메세지 어떻게 따오지?
+    alert(err.message);
   }
 });
 
@@ -45,7 +44,7 @@ readBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    alert(err);
+    alert(err.message);
   }
 });
 
@@ -69,8 +68,7 @@ updateBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     window.location.href = '/admin';
   } catch (err) {
-    alert(err);
-    // error 메세지 어떻게 따오지?
+    alert(err.message);
   }
 });
 
@@ -91,8 +89,7 @@ deleteBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     window.location.href = '/admin';
   } catch (err) {
-    alert(err);
-    // error 메세지 어떻게 따오지?
+    alert(err.message);
   }
 });
 
@@ -138,7 +135,7 @@ insertOrderBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    alert(err);
+    alert(err.message);
   }
 });
 
@@ -188,8 +185,7 @@ try {
           // 로그인 페이지 이동
           window.location.href = '/admin';
         } catch (err) {
-          alert(err);
-          // error 메세지 어떻게 따오지?
+          alert(err.message);
         }
       }
     });
@@ -217,8 +213,7 @@ deleteOrderBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     window.location.href = '/admin';
   } catch (err) {
-    alert(err);
-    // error 메세지 어떻게 따오지?
+    alert(err.message);
   }
 });
 
@@ -271,13 +266,14 @@ insertProductBtn.addEventListener('click', async e => {
 
     const res = await Api.postFormData('/api/product', formData);
 
-    alert(res.message);
-    console.log(res.data);
+    alert(`${res.message}`);
+    // console.log(res.data);
 
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
     alert(err.message);
+    console.log(err);
   }
 });
 
@@ -296,11 +292,11 @@ readProductsBtn.addEventListener('click', async () => {
     if (!params && !res) alert('제품이 없습니다.');
     else if (params && !res) alert(`${params} 라는 제품은 없습니다.`);
     else alert(res.message);
-    console.log('res : ', res);
+    // console.log('res : ', res);
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    alert(err);
+    alert(err.message);
   }
 });
 
@@ -358,7 +354,7 @@ updateProductBtn.addEventListener('click', async e => {
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    alert(err);
+    alert(err.message);
   }
 });
 
@@ -384,6 +380,6 @@ deleteProductBtn.addEventListener('click', async () => {
     // 로그인 페이지 이동
     // window.location.href = '/admin';
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 });
