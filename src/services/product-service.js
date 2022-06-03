@@ -45,7 +45,13 @@ class ProductService {
     const publishedDate = productInfo.publishedDate;
     const orderCount = productInfo.orderCount;
 
-    if (!categoryName || !name || !price || !information || !publisher) {
+    if (
+      !categoryName ||
+      !name ||
+      price === null ||
+      !information ||
+      !publisher
+    ) {
       throw new Error('required value is not allowed to be null');
     }
 
@@ -85,7 +91,7 @@ class ProductService {
       !productId ||
       !categoryName ||
       !name ||
-      !price ||
+      price === null ||
       !information ||
       !publisher
     ) {
